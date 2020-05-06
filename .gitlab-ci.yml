@@ -1,0 +1,19 @@
+# custom ci options
+  .build:local-deploy-var:
+    variables:
+      NONE: NONE
+
+  .deploy:staging-deploy-var:
+    extends: .build:local-deploy-var
+
+  .deploy:production-deploy-var:
+    extends: .build:local-deploy-var
+
+  .deploy:local-deploy-var:
+    extends: .build:local-deploy-var
+
+  # https://code.hzmantu.com/mainto-tech-internal/ci-template/tree/master/fed
+  include:
+    - project: 'mainto-tech-internal/ci-template'
+      ref: master
+      file: '/fed/root.yaml'

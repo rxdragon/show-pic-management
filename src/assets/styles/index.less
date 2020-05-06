@@ -1,0 +1,521 @@
+@import './variables.less';
+@import './transition.less';
+@import './sidebar.less';
+
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+  font-weight: 400;
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+#App {
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.padding-content {
+  padding: 4px 0;
+}
+
+a,
+a:focus,
+a:hover {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.fr {
+  float: right;
+}
+
+.fl {
+  float: left;
+}
+
+.pr-5 {
+  padding-right: 5px;
+}
+
+.pl-5 {
+  padding-left: 5px;
+}
+
+.block {
+  display: block;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.inlineBlock {
+  display: block;
+}
+
+.clearfix {
+  &::after {
+    display: block;
+    height: 0;
+    clear: both;
+    font-size: 0;
+    visibility: hidden;
+    content: " ";
+  }
+}
+
+aside {
+  display: block;
+  padding: 8px 24px;
+  margin-bottom: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  line-height: 32px;
+  color: #2c3e50;
+  background: #eef1f6;
+  border-radius: 2px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  a {
+    color: #337ab7;
+    cursor: pointer;
+
+    &:hover {
+      color: rgb(32, 160, 255);
+    }
+  }
+}
+
+//main-container全局样式
+.app-container {
+  padding: 20px;
+}
+
+.components-container {
+  position: relative;
+  margin: 30px 50px;
+}
+
+.pagination-container {
+  margin-top: 30px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.sub-navbar {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  padding-right: 20px;
+  line-height: 50px;
+  text-align: right;
+  background: linear-gradient(90deg, rgba(32, 182, 249, 1) 0%, rgba(32, 182, 249, 1) 0%, rgba(33, 120, 241, 1) 100%, rgba(33, 120, 241, 1) 100%);
+  transition: 600ms ease position;
+
+  .subtitle {
+    font-size: 20px;
+    color: #fff;
+  }
+
+  &.draft {
+    background: #d0d0d0;
+  }
+
+  &.deleted {
+    background: #d0d0d0;
+  }
+}
+
+.link-type,
+.link-type:focus {
+  color: #337ab7;
+  cursor: pointer;
+
+  &:hover {
+    color: rgb(32, 160, 255);
+  }
+}
+
+.filter-container {
+  padding-bottom: 10px;
+
+  .filter-item {
+    display: inline-block;
+    margin-bottom: 10px;
+    vertical-align: middle;
+  }
+}
+
+//refine vue-multiselect plugin
+.multiselect {
+  line-height: 16px;
+}
+
+.multiselect--active {
+  z-index: 1000 !important;
+}
+
+.label {
+  padding: 3px 8px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(90deg, rgba(79, 136, 255, 1) 0%, rgba(70, 105, 251, 1) 100%);
+  border-radius: 4px;
+}
+
+// 颜色相关
+.warning-color {
+  font-weight: 500;
+  color: @orange;
+}
+
+.danger-color {
+  font-weight: 500;
+  color: @red;
+}
+
+.plant-color {
+  color: @panGreen !important;
+}
+
+.pull-color {
+  color: @red !important;
+}
+
+.el-tag {
+  font-weight: 400;
+}
+
+// 弹出框样式
+.el-dialog {
+  border-radius: 4px;
+}
+
+// tabs 相关
+.el-tabs--bottom .el-tabs__item.is-bottom:nth-child(2),
+.el-tabs--bottom .el-tabs__item.is-top:nth-child(2),
+.el-tabs--top .el-tabs__item.is-bottom:nth-child(2),
+.el-tabs--top .el-tabs__item.is-top:nth-child(2) {
+  padding-left: 20px;
+}
+
+.el-tabs--bottom .el-tabs__item.is-bottom:last-child,
+.el-tabs--bottom .el-tabs__item.is-top:last-child,
+.el-tabs--top .el-tabs__item.is-bottom:last-child,
+.el-tabs--top .el-tabs__item.is-top:last-child {
+  padding-right: 20px;
+}
+
+.el-tabs__item.is-active {
+  background-color: #fff;
+  border-radius: 6px 6px 0 0;
+}
+
+.el-tabs__nav-wrap::after {
+  background-color: transparent;
+}
+
+.el-tabs__header {
+  margin-bottom: 0;
+  -webkit-user-select: none;
+}
+
+// table 相关
+.table-box {
+  padding: 24px;
+  margin-top: 24px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: @boxShadow;
+
+  .panel-title {
+    position: relative;
+    padding-left: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #303133;
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      display: inline-block;
+      width: 2px;
+      height: 16px;
+      content: '';
+      background-color: @blue;
+      transform: translateY(-50%);
+    }
+  }
+
+  .page-box {
+    text-align: right;
+
+    .el-pagination {
+      margin-top: 24px;
+    }
+  }
+}
+
+.no-data {
+  width: 100%;
+  padding: 24px;
+  margin-bottom: 24px;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.no-border {
+  border-top-left-radius: 0;
+  transition: all 0.3s;
+}
+
+.page-class {
+  padding-bottom: 24px;
+}
+
+// 表头颜色
+.el-table thead th {
+  font-weight: 500;
+  color: #303133;
+  background-color: #fafafa;
+}
+
+// 模块框
+.module-panel {
+  padding: 20px 24px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: @boxShadow;
+
+  .panel-title {
+    position: relative;
+    padding-left: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #303133;
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      display: inline-block;
+      width: 2px;
+      height: 16px;
+      content: '';
+      background-color: @blue;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+// 照片盒子相关
+
+.photo-box {
+  padding: 6px;
+  background-color: #f5f7fa;
+  border-radius: 4px;
+
+  .lable-title {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 17px;
+    color: #606266;
+  }
+}
+
+// 搜素盒子
+.search-item {
+  display: flex;
+  align-items: center;
+  margin-right: 32px;
+
+  & > span {
+    margin-right: 12px;
+    font-size: 14px;
+    color: #303133;
+  }
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+}
+
+// button
+.el-button--danger.is-plain {
+  color: @red;
+  background: #fff;
+  border-color: @red;
+}
+
+.el-button--success.is-plain {
+  color: @panGreen;
+  background: #fff;
+  border-color: @panGreen;
+}
+
+.el-button--warning.is-plain {
+  color: @orange;
+  background: #fff;
+  border-color: @orange;
+}
+
+.el-button--primary.is-plain {
+  color: @blue;
+  background: #fff;
+  border-color: @blue;
+}
+
+.orange-button {
+  color: #fff;
+  background: @gradualOrangeButton;
+  border-color: #ffab3f;
+
+  &:focus,
+  &:hover {
+    color: #fff;
+    background: @gradualOrangeButton;
+    border-color: #ffab3f;
+  }
+}
+
+.plant-button-text {
+  color: @panGreen;
+  border-color: @panGreen;
+
+  &:focus,
+  &:hover {
+    color: #fff !important;
+    background-color: @panGreen !important;
+    border-color: @panGreen !important;
+  }
+}
+
+// 原生input
+
+.num-input {
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  outline: none;
+}
+
+.fake-el-input {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 100%;
+  height: 28px;
+  padding: 0 15px;
+  font-size: inherit;
+  line-height: 28px;
+  color: #606266;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  outline: 0;
+  -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-appearance: none;
+
+  &:focus {
+    border-color: @blue;
+    outline: 0;
+  }
+}
+
+// header 相关
+.header {
+  position: fixed;
+  top: calc(~'@{navbarHeight} + @{tagsHeight}');
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(~'100vw - @{sideBarWidth}');
+  height: @headerHeight;
+  padding: 24px 28px;
+  -webkit-user-select: none;
+  background-color: #f2f6fc;
+  box-shadow: var(--boxShadow);
+
+  h3 {
+    font-size: 24px;
+  }
+}
+
+.download-popover {
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.content-main {
+  height: @appMainHeight;
+  overflow-y: overlay;
+}
+
+.standard-icon {
+  display: inline-block;
+  width: 16px;
+  height: 17px;
+  margin-left: 5px;
+  vertical-align: text-top;
+}
+
+.standard-box {
+  display: flex;
+  align-items: center;
+}
