@@ -18,13 +18,9 @@ module.exports = {
       resolve: {
         alias: {
           '@': resolve('src'),
-          '@assetsDir': resolve('src/assets')
+          '@assetsDir': resolve('src/assets'),
+          '@selectBox': resolve('src/components/SelectBox'),
         }
-      },
-      externals: {
-        'electron': 'require("electron")',
-        'fs': 'require("fs")',
-        'original-fs': 'require("original-fs")'
       }
     }
     return config

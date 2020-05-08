@@ -5,8 +5,14 @@
     class="app-main"
     :class="{'overhidden':isLoading}"
   >
+    <transition name="breadcrumb-box" mode="out-in">
+      <div class="header-title" v-show="$route.name !== 'Home'">
+        <Breadcrumb />
+        <div class="page-title">{{ $route.meta.title }}</div>
+      </div>
+    </transition>
     <transition :name="transitionName" mode="out-in">
-      <keep-alive :include="cachedViews" :max="4">
+      <keep-alive :max="4">
         <router-view :key="key" />
       </keep-alive>
     </transition>
@@ -14,17 +20,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import Breadcrumb from '@/components/Breadcrumb'
+
 export default {
   name: 'AppMain',
+  components: { Breadcrumb },
   computed: {
-    // ...mapGetters(['loadRoutes']),
-    isLoading () {
-      // return this.loadRoutes.includes(this.$route.name)
-    },
-    cachedViews () {
-      // return this.$store.state.tagsView.cachedViews
-    },
     key () {
       return this.$route.path
     },
@@ -58,10 +59,25 @@ export default {
   min-width: @minWidth;
   height: @appMainHeight;
   padding: @appMainPadding;
-  margin-top: @headerHeight;
   overflow-x: hidden;
   overflow-y: overlay;
   scroll-behavior: smooth;
+
+  .header-title {
+    width: calc(~'100vw - @{sideBarWidth}');
+    height: 98px;
+    padding: 12px 32px;
+    margin-left: -24px;
+    background-color: #fff;
+
+    .page-title {
+      margin-top: 12px;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 28px;
+      color: #000;
+    }
+  }
 }
 
 .fixed-header + .app-main {

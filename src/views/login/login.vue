@@ -51,7 +51,6 @@ export default {
       try {
         await this.$store.dispatch('userStore/login', token)
         const info = await this.$store.dispatch('userStore/getUserInfo')
-        console.log(info)
         if (!info.name) {
           this.$router.push({ path: '/401' })
         } else {
@@ -70,7 +69,6 @@ export default {
         title: '缦图云端',
         redirect: `${window.location.origin}/login.html#/?token=`
       })
-      console.log(`${window.location.origin}/login.html#/?token=`)
       this.ssoUrl = process.env.VUE_APP_LOGIN_API + Base64.encode(query)
     },
     /**

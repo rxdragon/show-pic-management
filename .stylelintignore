@@ -1,2 +1,2 @@
-src/styles/*.less
+src/assets/styles/*.less
 src/components/PreviewPhoto/index.less

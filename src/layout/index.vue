@@ -8,6 +8,7 @@
       </el-aside>
       <!-- 内容 -->
       <el-main class="main-box">
+        <user-tab />
         <AppMain />
       </el-main>
     </el-container>
@@ -15,24 +16,15 @@
 </template>
 
 <script>
-import { AppMain, Sidebar } from './components'
+import { AppMain, Sidebar, UserTab } from './components'
 export default {
   name: 'Layout',
-  components: {
-    AppMain,
-    Sidebar
-  }
+  components: { AppMain, Sidebar, UserTab }
 }
 </script>
 
 <style lang="less">
 @import '~@assetsDir/styles/variables.less';
-
-.el-header {
-  height: @navbarHeight !important;
-  padding: 0 !important;
-  background: @gradualGray;
-}
 
 .el-aside {
   position: relative;
@@ -45,10 +37,9 @@ export default {
 
 .el-main {
   width: calc(~'100vw - @{sideBarWidth}');
-  height: calc(~'100vh - @{navbarHeight}');
+  height: 100vh;
   padding: 0 !important;
-  background-color: #f2f6fc;
-  border-radius: 20px 0 0 20px;
+  background-color: #f0f2f5;
 
   ::-webkit-scrollbar {
     width: 8px;

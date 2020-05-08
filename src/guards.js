@@ -1,10 +1,10 @@
 import router from './router'
 import store from './store'
 import NProgress from 'nprogress' // 加载进度条
-import '@/assets/styles/nprogress.less' // 进度条颜色
+import getPageTitle from '@/utils/getPageTitle' // 获取页面title
 import { getXStreamId, getStreamIdExpireTime } from '@/utils/sessionTool' // get token from cookie
 import * as User from '@/api/user.js'
-import getPageTitle from '@/utils/getPageTitle' // 获取页面title
+import '@assetsDir/styles/nprogress.less' // 进度条颜色
 
 NProgress.configure({ showSpinner: false }) // 关闭加载微调器
 

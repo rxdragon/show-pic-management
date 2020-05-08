@@ -20,7 +20,8 @@ Object.keys(filters).forEach(key => {
 })
 
 // 判断是否是生产环境
-Vue.prototype.$isDev = !process.env.VUE_APP_LOGIN_API.includes('k8s')
+// Vue.prototype.$isDev = !process.env.VUE_APP_LOGIN_API.includes('k8s')
+Vue.prototype.$isDev = false
 
 new Vue({
   router,

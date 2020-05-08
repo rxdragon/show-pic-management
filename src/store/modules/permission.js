@@ -1,7 +1,7 @@
+// TODO
+// eslint-disable-next-line no-unused-vars
 import { asyncRoutes, constantRoutes, lastBaseRoutes } from '@/router'
 import { toCapitalHump } from '@/utils/index.js'
-import store from '@/store'
-import Vue from 'vue'
 
 /**
  * @param roles // 权限
@@ -83,12 +83,6 @@ const actions = {
         }
       })
       commit('SET_ROLES', newPermissionArr)
-      // 如果有修图权限 查询在线状态
-      if (newRolesArr.includes('WaitRetoucher')) {
-        window.addEventListener('click', () => {
-          store.commit('user/SET_ACTIVE_TIME')
-        })
-      }
       newRolesArr = [...new Set(newRolesArr)]
       // TODO 调试
       accessedRoutes = asyncRoutes

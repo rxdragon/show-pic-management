@@ -4,6 +4,9 @@ import Layout from '@/layout' //
 
 Vue.use(Router)
 
+import orderManagement from './modules/orderManagement.js' // 订单管理
+import userManagement from './modules/userManagement.js' // 订单管理
+import financeCenter from './modules/financeCenter.js' // 订单管理
 
 // 基础权限路由
 export const constantRoutes = [
@@ -30,7 +33,7 @@ export const constantRoutes = [
         path: 'home',
         name: 'Home',
         component: () => import('@/views/home/home.vue'),
-        meta: { title: '概况', icon: 'iconfont iconlogo', affix: true }
+        meta: { title: '概况', icon: 'iconfont icongailan', affix: true }
       }
     ]
   }, {
@@ -43,6 +46,8 @@ export const constantRoutes = [
     hidden: true
   }
 ]
+
+
 
 // export const lastBaseRoutes = [
 //   {
@@ -59,7 +64,11 @@ export const constantRoutes = [
 //   }
 // ]
 
-export const asyncRoutes = []
+export const asyncRoutes = [
+  orderManagement,
+  userManagement,
+  financeCenter
+]
 
 const createRouter = () => new Router({
   scrollBehavior: () => ({ y: 0 }),

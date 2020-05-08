@@ -2,7 +2,7 @@
   <div class="sidebar-logo-container">
     <transition name="sidebarLogoFade">
       <router-link key="expand" class="sidebar-logo-link" to="/">
-        <div class="sidebar-logo iconmap-cloud-logo-small" />
+        <div class="sidebar-logo showpic-logo" />
       </router-link>
     </transition>
   </div>
@@ -20,6 +20,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import '~@assetsDir/styles/variables.less';
+
 .sidebarLogoFade-enter-active {
   transition: opacity 1.5s;
 }
@@ -32,7 +34,7 @@ export default {
 .sidebar-logo-container {
   position: relative;
   width: 100%;
-  height: 157px;
+  height: @logoHeight;
   overflow: hidden;
   text-align: center;
 
@@ -44,8 +46,8 @@ export default {
     height: 100%;
 
     .sidebar-logo {
-      width: 174px;
-      height: 44px;
+      width: 200px;
+      height: 68.7px;
       vertical-align: middle;
     }
 

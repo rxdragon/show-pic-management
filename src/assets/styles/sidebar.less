@@ -33,7 +33,7 @@
     }
 
     .el-scrollbar {
-      height: calc(~'100vh - 199px');
+      height: calc(~'100vh - @{logoHeight}');
     }
 
     &.has-logo {
@@ -101,7 +101,7 @@
           position: absolute;
           top: 50%;
           left: -10px;
-          display: inline-block;
+          display: none;
           width: 5px;
           height: 5px;
           margin-top: -2.5px;

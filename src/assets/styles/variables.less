@@ -8,7 +8,8 @@
 @orange:#FF8F00;
 @bgOrange: #FDF6EC;
 @moneyColor: #FF5500;
-@green: #38BC7F;
+@green: #00B1B7;
+@greenHover: #04CFD5;
 @bgGreen: #EBF8F2;
 @bdGreen: #AFE4CC;
 @panGreen: #44C27E;
@@ -41,53 +42,53 @@
 @yellow:#FEC171;
 
 // sidebar
-@menuText:#c0c4cc;
-@menuActiveText: @blue;
-@subMenuActiveText:#f4f4f5;
-@subMenuActiveBg:linear-gradient(270deg, rgba(70, 105, 251, 0) 0%,rgba(70, 105, 251, 0.2) 100%);
-@subMenuLabelActiveBg: @blue;
+@menuText:#ffffff;
+@menuActiveText: #ffcf49;
+@subMenuActiveText: #ffffff;
+@subMenuActiveBg: rgba(34, 34, 34, 0.3);
+@subMenuLabelActiveBg: #ffcf49;
 
 // 菜单配置
-@menuBg:#131923;
-@menuHover: rgba(28, 88, 209, 0.15);
+@menuBg:#00B1B7;
+@menuHover: rgba(34, 34, 34, 0.5);
 
-@subMenuBg:#000;
-@subMenuHover:rgba(28, 88, 209, 0.2);
+@subMenuBg:rgba(34, 34, 34, 0.3);
+@subMenuHover:rgba(34, 34, 34, 0.5);
 
 // dev菜单配置
 @devMenuBg: #320074;
 @devSubMenuBg: #251751;
 
-@tagsHeight: 36px;
+@tagsHeight: 0px;
 
-@sideBarWidth: 260px;
+@sideBarWidth: 256px;
 @appMainPadding: 0 24px 0 24px;
-@appMainHeight: calc(~'100vh - @{navbarHeight} - @{tagsHeight} - @{headerHeight}');
-@headerHeight: 88px;
+@headerHeight: 64px;
+@appMainHeight: calc(~'100vh - @{headerHeight}');
 
-@navbarHeight: 42px;
+@logoHeight: 120px;
 @scrollbarWidth: 10px;
 
 @minWidth: 1180px;
-@drawerHeight: calc(~'100vh - @{navbarHeight}');
-@mainScrollContainerHeight: calc(~'100vh - @{navbarHeight} - @{tagsHeight}');
-@homeHeight: calc(~'100vh - @{navbarHeight} - @{tagsHeight} - 48px * 2');
+@drawerHeight: 100vh;
+@mainScrollContainerHeight: calc(~'100vh - @{tagsHeight}');
+@homeHeight: calc(~'100vh - @{tagsHeight} - 48px * 2');
 
 @pingFang: PingFangSC-Medium, PingFangSC;
 @DINAlternate: DINAlternate-Bold, DINAlternate;
 @elementIcons: element-icons;
 
 :export {
-  menuText: @menuText;
-  menuActiveText: @menuActiveText;
-  subMenuActiveText: @subMenuActiveText;
-  menuBg: @menuBg;
-  devMenuBg: @devMenuBg;
-  menuHover: @menuHover;
-  subMenuBg: @subMenuBg;
-  devSubMenuBg: @devSubMenuBg;
-  subMenuHover: @subMenuHover;
-  sideBarWidth: @sideBarWidth;
+  menutext: @menuText;
+  menuactivetext: @menuActiveText;
+  submenuactivetext: @subMenuActiveText;
+  menubg: @menuBg;
+  devmenubg: @devMenuBg;
+  menuhover: @menuHover;
+  submenubg: @subMenuBg;
+  devsubmenubg: @devSubMenuBg;
+  submenuhover: @subMenuHover;
+  sidebarwidth: @sideBarWidth;
   blue: @blue;
   green: @green;
   orange: @orange;

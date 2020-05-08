@@ -25,8 +25,7 @@ export default {
 
 .home {
   position: relative;
-  height: @homeHeight;
-  margin-top: -88px;
+  height: 100%;
 
   .logo-tip {
     position: absolute;

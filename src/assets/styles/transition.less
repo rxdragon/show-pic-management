@@ -125,6 +125,7 @@
 /* 从右到左进入 */
 .box-right-leave-active,
 .box-right-enter-active {
+  position: absolute;
   transition: all 0.28s;
 }
 
@@ -136,4 +137,23 @@
 .box-right-leave-to {
   opacity: 0;
   transform: translateX(102px) !important;
+}
+
+.breadcrumb-box-leave-active,
+.breadcrumb-box-enter-active {
+  transition: all 0.28s;
+}
+
+.breadcrumb-box-leave-active {
+  position: absolute;
+}
+
+.breadcrumb-box-enter {
+  opacity: 0;
+  transform: translateY(-98px) !important;
+}
+
+.breadcrumb-box-leave-to {
+  opacity: 0;
+  transform: translateY(-98px) !important;
 }

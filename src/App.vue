@@ -27,7 +27,7 @@ export default {
 @import "~@assetsDir/styles/variables.less";
 
 html {
-  background-color: #f2f6fc;
+  background-color: #f0f2f5;
 }
 
 body {

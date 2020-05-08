@@ -1,6 +1,7 @@
 @import './variables.less';
 @import './transition.less';
 @import './sidebar.less';
+@import './lessmap.less';
 
 body {
   height: 100%;
@@ -9,6 +10,8 @@ body {
   text-rendering: optimizeLegibility;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
   font-weight: 400;
+
+  --textColor: #606266;
 }
 
 label {
@@ -273,7 +276,6 @@ aside {
   margin-top: 24px;
   background-color: #fff;
   border-radius: 16px;
-  box-shadow: @boxShadow;
 
   .panel-title {
     position: relative;
@@ -295,13 +297,23 @@ aside {
       transform: translateY(-50%);
     }
   }
+}
 
-  .page-box {
-    text-align: right;
+.page-box {
+  text-align: center;
 
-    .el-pagination {
-      margin-top: 24px;
-    }
+  .el-pager li,
+  .el-pagination button {
+    background-color: transparent !important;
+  }
+
+  .el-pager li:hover,
+  .el-pager li.active {
+    color: #00c7af;
+  }
+
+  .el-pagination {
+    margin-top: 20px;
   }
 }
 
@@ -331,31 +343,9 @@ aside {
 
 // 模块框
 .module-panel {
-  padding: 20px 24px;
+  padding: 24px;
   background-color: #fff;
-  border-radius: 16px;
-  box-shadow: @boxShadow;
-
-  .panel-title {
-    position: relative;
-    padding-left: 14px;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 24px;
-    color: #303133;
-
-    &::before {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      display: inline-block;
-      width: 2px;
-      height: 16px;
-      content: '';
-      background-color: @blue;
-      transform: translateY(-50%);
-    }
-  }
+  border-radius: 10px;
 }
 
 // 照片盒子相关
@@ -377,7 +367,7 @@ aside {
 .search-item {
   display: flex;
   align-items: center;
-  margin-right: 32px;
+  margin: 0 32px 20px 0;
 
   & > span {
     margin-right: 12px;
@@ -388,6 +378,7 @@ aside {
 
 .search-box {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
 
@@ -473,27 +464,6 @@ aside {
   &:focus {
     border-color: @blue;
     outline: 0;
-  }
-}
-
-// header 相关
-.header {
-  position: fixed;
-  top: calc(~'@{navbarHeight} + @{tagsHeight}');
-  right: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: calc(~'100vw - @{sideBarWidth}');
-  height: @headerHeight;
-  padding: 24px 28px;
-  -webkit-user-select: none;
-  background-color: #f2f6fc;
-  box-shadow: var(--boxShadow);
-
-  h3 {
-    font-size: 24px;
   }
 }
 
