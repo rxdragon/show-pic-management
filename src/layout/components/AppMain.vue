@@ -12,7 +12,7 @@
       </div>
     </transition>
     <transition :name="transitionName" mode="out-in">
-      <keep-alive :max="4">
+      <keep-alive :include="cachedViews" :max="4">
         <router-view :key="key" />
       </keep-alive>
     </transition>
@@ -25,6 +25,12 @@ import Breadcrumb from '@/components/Breadcrumb'
 export default {
   name: 'AppMain',
   components: { Breadcrumb },
+  data () {
+    return {
+      isLoading: false,
+      cachedViews: ['orderDetail']
+    }
+  },
   computed: {
     key () {
       return this.$route.path
@@ -65,6 +71,9 @@ export default {
 
   .header-title {
     width: calc(~'100vw - @{sideBarWidth}');
+    position: sticky;
+    top: 0;
+    z-index: 999;
     height: 98px;
     padding: 12px 32px;
     margin-left: -24px;

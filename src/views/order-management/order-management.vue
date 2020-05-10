@@ -25,8 +25,8 @@
           <order-source-select v-model="orderSource" />
         </div>
         <div class="button-box">
-          <el-button type="success" size="small">查询</el-button>
-          <el-button type="primary" size="small">导出</el-button>
+          <el-button type="primary" size="small" @click="searchData">查 询</el-button>
+          <el-button type="success" size="small">导 出</el-button>
         </div>
       </div>
       <!-- 收益信息 -->
@@ -34,28 +34,56 @@
         当前查询条件下：共5单    总计收益：¥1000.00
       </div>
       <!-- 订单列表 -->
-      <div class="table-box">
-        <el-table :data="tableData" style="width: 100%;" @sort-change="onSortChange" >
-          <el-table-column prop="orderNum" label="订单号" sortable="custom" width="180" />
-          <el-table-column prop="productList" label="下单产品" sortable="custom" width="180" />
-          <el-table-column prop="money" label="金额" />
+      <div class="table-box" v-show="tableData.length">
+        <el-table :data="tableData" style="width: 100%;">
+          <el-table-column prop="" label="订单号" width="180">
+             <template slot-scope="{ row }">
+               <el-popover
+                  placement="bottom-start"
+                  trigger="hover">
+                  <div class="order-info">
+                    <p>顾客姓名：xxxx</p>
+                    <p>手机：xxxx</p>
+                    <p>照片张数：2张</p>
+                  </div>
+                  <div slot="reference" class="order-num">{{ row.orderNum }}</div>
+                </el-popover>
+             </template>
+          </el-table-column>
+          <el-table-column prop="productList" label="下单产品" width="180">
+            <template slot-scope="{ row }">
+              {{ row.productList }}
+              <el-popover
+                  placement="bottom-start"
+                  trigger="hover">
+                  <div class="order-info">
+                    <p>顾客姓名：xxxx</p>
+                    <p>手机：xxxx</p>
+                    <p>照片张数：2张</p>
+                  </div>
+                  <i slot="reference" class="product-more el-icon-s-unfold"></i>
+                </el-popover>
+            </template>
+          </el-table-column>
+          <el-table-column prop="money" label="金额" :formatter="stringMoney"/>
           <el-table-column prop="orderState" label="状态" />
           <el-table-column prop="orderCreateTime" label="下单时间" />
           <el-table-column label="操作">
             <template>
               <el-dropdown>
-                <el-button type="success" size="small">
+                <el-button type="primary" size="small">
                   更多<i class="el-icon-arrow-down el-icon--right"></i>
                 </el-button>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>订单详情</el-dropdown-item>
-                  <el-dropdown-item>关闭订单</el-dropdown-item>
+                  <el-dropdown-item @click.native="goToDetail">订单详情</el-dropdown-item>
+                  <el-dropdown-item @click.native="closeOrder">关闭订单</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </template>
           </el-table-column>
         </el-table>
       </div>
+      <no-data v-show="!tableData.length">当前暂无订单</no-data>
     </main>
     <div class="page-box">
       <el-pagination
@@ -72,12 +100,13 @@
 
 <script>
 import DatePicker from '@/components/DatePicker'
+import NoData from '@/components/NoData'
 import OrderStateSelect from '@selectBox/OrderStateSelect'
 import OrderSourceSelect from '@selectBox/OrderSourceSelect'
 
 export default {
   name: 'orderManagement',
-  components: { DatePicker, OrderStateSelect, OrderSourceSelect },
+  components: { DatePicker, OrderStateSelect, OrderSourceSelect, NoData },
   data () {
     return {
       timeSpan: null,
@@ -90,45 +119,47 @@ export default {
         pageSize: 10,
         total: 100
       },
-      tableData: [{
-        orderNum: '2016-05-02',
-        productList: '王小虎',
-        money: '200',
-        orderState: '完成',
-        orderCreateTime: '2020-05-20'
-      }, {
-        orderNum: '2016-05-04',
-        productList: '王小虎',
-        money: '200',
-        orderState: '完成',
-        orderCreateTime: '2020-05-20'
-      }, {
-        orderNum: '2016-05-01',
-        productList: '王小虎',
-        money: '200',
-        orderState: '完成',
-        orderCreateTime: '2020-05-20'
-      }, {
-        orderNum: '2016-05-03',
-        productList: '王小虎',
-        money: '200',
-        orderState: '完成',
-        orderCreateTime: '2020-05-20'
-      }]
+      tableData: [
+        {
+          orderNum: 123
+        }
+      ]
     }
   },
   methods: {
-    goto () {
+    searchData () {
+      if (!this.timeSpan) return this.$newMessage.warning('请输入时间')
+      // const req = {
+      //   startTime: this.timeSpan[0],
+      //   endTime: this.timeSpan[1],
+      //   orderState: this.orderState,
+      //   orderSource: this.orderSource
+      // }
+    },
+    /**
+     * @description 调整到详情页面
+     */
+    goToDetail () {
       this.$router.push('/order-management/order-detail')
     },
+    /**
+     * @description 关闭订单
+     */
+    closeOrder () {
+      // TODO
+    },
+    /**
+     * @description 页数变更
+     */
     handleCurrentChange () {
       // TODO
     },
     /**
-     * @description 监听排序变化
+     * @description 格式化金钱
      */
-    onSortChange (e) {
-      // TODO
+    stringMoney (row, column, cellValue, index) {
+      const money = Number(cellValue).toFixed(2)
+      return `¥${money}`
     }
   }
 }
@@ -142,8 +173,8 @@ export default {
     margin-bottom: 0;
 
     .input-with-select {
-      & /deep/ .el-select {
-        width: 100px;
+      & /deep/ .el-input-group__prepend .el-input__inner {
+        width: 120px;
       }
 
       & /deep/ .el-input__inner {
@@ -161,6 +192,12 @@ export default {
     font-weight: 400;
     line-height: 20px;
     color: #1769ff;
+  }
+  
+  .table-box {
+    .product-more {
+      color: #909399;
+    }
   }
 }
 </style>

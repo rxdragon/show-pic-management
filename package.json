@@ -45,6 +45,7 @@
     "right-pad": "^1.0.1",
     "stylelint": "^13.3.3",
     "stylelint-config-recess-order": "^2.0.4",
+    "stylelint-config-standard": "^20.0.0",
     "vue-cli-plugin-axios": "~0.0.4",
     "vue-cli-plugin-commitlint": "~1.0.12",
     "vue-cli-plugin-element": "~1.0.1",
