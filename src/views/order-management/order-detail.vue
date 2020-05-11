@@ -8,7 +8,7 @@
        <div class="panel-title">
          照片详情
          <div class="button-box right-flow">
-           <el-button size="small" type="primary">原片下载</el-button>
+           <el-button @click="downForZip" size="small" type="primary">原片下载</el-button>
            <el-button size="small" type="primary">成片下载</el-button>
            <el-button size="small" type="primary">满意片下载</el-button>
          </div>
@@ -29,10 +29,38 @@
 import OrderInfo from "@/components/OrderInfo"
 import OrderRequire from "@/components/OrderRequire"
 import PhotoVersion from "@/components/PhotoVersion"
+import * as DownPhoto from '@/utils/DownPhoto'
 
 export default {
   name: 'orderDetail',
-  components: { OrderInfo, OrderRequire, PhotoVersion }
+  components: { OrderInfo, OrderRequire, PhotoVersion },
+  data () {
+    return {
+      photoVersion: [
+        {
+          version: '原片',
+          src: 'https://cloud.cdn-qn.hzmantu.com/compress/2020/05/01/Fh_ng-dn42IKZY5-6gBunCtzVt28.jpg'
+        },
+        {
+          version: '云端成片',
+          src: 'https://cloud.cdn-qn.hzmantu.com/compress/2020/05/01/Fsgr3VQAuzewZ3xA--Vp-GbrbYGC.jpg'
+        },
+        {
+          version: '顾客满意照片',
+          src: 'https://cloud.cdn-qn.hzmantu.com/compress/2020/05/01/Fsgr3VQAuzewZ3xA--Vp-GbrbYGC.jpg'
+        }
+      ],
+    }
+  },
+  methods: {
+    /**
+     * @description 一键下载
+     */
+    downForZip () {
+      const imgArr = this.photoVersion.map(item => item.src)
+      DownPhoto.downForZip(imgArr)
+    }
+  }
 }
 </script>
 
@@ -56,7 +84,6 @@ export default {
     .photo-version-box {
       background-color: #fafafa;
       border-radius: 4px;
-      padding: 20px;
       margin-top: 20px;
 
       &:nth-of-type(1) {
@@ -64,6 +91,7 @@ export default {
       }
 
       .photo-title {
+        margin-bottom: 10px;
         font-size: 14px;
         font-weight: 600;
         color: #303133;

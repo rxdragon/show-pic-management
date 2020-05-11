@@ -5,17 +5,27 @@
     </div>
     <div class="handle-box" @click.stop="">
       <div class="version-name">{{ version }}</div>
-      <el-button type="text">下载照片</el-button>
+      <el-button type="text" @click="downPhoto">下载照片</el-button>
     </div>
   </div>
 </template>
 
 <script>
+import * as DownPhoto from '@/utils/DownPhoto.js'
+
 export default {
   name: 'PhotoBox',
   props: {
     src: { type: String, required: true },
     version: { type: String, default: '' }
+  },
+  methods: {
+    /**
+     * @description 下载图片
+     */
+    downPhoto () {
+      DownPhoto.downOnePicture(this.src)
+    }
   }
 }
 </script>

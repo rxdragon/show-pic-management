@@ -1,12 +1,19 @@
 <template>
   <div class="user-detail module-panel">
-    用户详情
+    <user-info></user-info>
   </div>
 </template>
 
 <script>
+import UserInfo from './components/UserInfo'
+
 export default {
-  name: 'user-detail'
+  name: 'user-detail',
+  components: { UserInfo },
+  data () {
+    return {
+    }
+  }
 }
 </script>
 

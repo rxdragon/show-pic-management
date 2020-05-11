@@ -69,13 +69,13 @@
           <el-table-column prop="orderState" label="状态" />
           <el-table-column prop="orderCreateTime" label="下单时间" />
           <el-table-column label="操作">
-            <template>
+            <template slot-scope="scope">
               <el-dropdown>
                 <el-button type="primary" size="small">
                   更多<i class="el-icon-arrow-down el-icon--right"></i>
                 </el-button>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item @click.native="goToDetail">订单详情</el-dropdown-item>
+                  <el-dropdown-item @click.native="goToDetail(scope.row.id)">订单详情</el-dropdown-item>
                   <el-dropdown-item @click.native="closeOrder">关闭订单</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
@@ -193,7 +193,7 @@ export default {
     line-height: 20px;
     color: #1769ff;
   }
-  
+
   .table-box {
     .product-more {
       color: #909399;

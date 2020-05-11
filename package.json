@@ -16,6 +16,7 @@
     "element-ui": "2.11.0",
     "js-base64": "^2.5.2",
     "lodash-es": "^4.17.15",
+    "mainto-fed-utils": "^1.0.0-release.17",
     "moment": "^2.25.3",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^6.1.0",
