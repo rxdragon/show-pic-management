@@ -70,10 +70,10 @@ export default {
   scroll-behavior: smooth;
 
   .header-title {
-    width: calc(~'100vw - @{sideBarWidth}');
     position: sticky;
     top: 0;
     z-index: 999;
+    width: calc(~'100vw - @{sideBarWidth}');
     height: 98px;
     padding: 12px 32px;
     margin-left: -24px;

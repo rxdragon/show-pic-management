@@ -173,12 +173,12 @@ export default {
     margin-bottom: 0;
 
     .input-with-select {
-      & /deep/ .el-input-group__prepend .el-input__inner {
-        width: 120px;
-      }
-
       & /deep/ .el-input__inner {
         width: 240px;
+      }
+
+      & /deep/ .el-input-group__prepend .el-input__inner {
+        width: 120px;
       }
     }
 

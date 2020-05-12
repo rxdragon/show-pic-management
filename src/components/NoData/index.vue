@@ -21,12 +21,12 @@ export default {
     width: 200px;
     height: 130px;
   }
-  
+
   .desc {
     font-size: 14px;
     font-weight: 400;
-    color: #16161a;
     line-height: 20px;
+    color: #16161a;
   }
 }
 </style>

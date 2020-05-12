@@ -50,14 +50,14 @@ export default {
 <style lang="less" scoped>
 .order-require {
   .require-main {
-    background-color: #fafafa;
-    border-radius: 4px;
     padding: 0 20px;
     margin-top: 16px;
+    background-color: #fafafa;
+    border-radius: 4px;
 
     .require-row {
-      padding: 20px 0;
       display: flex;
+      padding: 20px 0;
       border-bottom: 1px solid #ebeef5;
 
       &:nth-last-of-type(1) {
@@ -65,8 +65,8 @@ export default {
       }
 
       .require-item {
-        width: 50%;
         display: flex;
+        width: 50%;
       }
 
       .require-label,

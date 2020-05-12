@@ -82,9 +82,9 @@ export default {
     }
 
     .photo-version-box {
+      margin-top: 20px;
       background-color: #fafafa;
       border-radius: 4px;
-      margin-top: 20px;
 
       &:nth-of-type(1) {
         margin-top: 24px;

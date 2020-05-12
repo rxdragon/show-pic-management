@@ -4,32 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="./loader.css">
   <title>缦图云端</title>
 </head>
-
-<style>
- html, body {
-    background-color: #fff;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-  }
-
-  #bm {
-    width: 100vw;
-    height: 100vh;
-    -webkit-app-region: drag;
-  }
-
-  #bm video {
-    width: 100%;
-    height: 100%;
-    display: none;
-  }
-</style>
 <body>
-  <div id="bm">
+  <div id="loading-bg">
+    <div class="loading-logo">
+      <img src="./logo.png" alt="Logo">
+    </div>
+    <div class="loading">
+      <div class="effect-1 effects"></div>
+      <div class="effect-2 effects"></div>
+      <div class="effect-3 effects"></div>
+    </div>
   </div>
 </body>
 <script src="./login.js"></script>
@@ -47,15 +34,8 @@
     }
   }
   getToken()
-  const animation = bodymovin.loadAnimation({
-    container: document.getElementById('bm'),
-    renderer: 'svg',
-    loop: false,
-    autoplay: true,
-    path: 'demo.json'
-  })
-  animation.onComplete = () => {
+  setTimeout(() => {
     window.parent.postMessage({type: "animation-finish", msg: 'animationFinish'}, "*")
-  }
+  }, 2000)
 </script>
 </html>
