@@ -5,43 +5,72 @@
       <div class="require-row">
         <div class="require-item">
           <div class="require-label">修图师：</div>
-          <div class="require-value">张三</div>
+          <div class="require-value">{{ requiresInfo.retoucherList }}</div>
         </div>
         <div class="require-item">
           <div class="require-label">在线看片师：</div>
-          <div class="require-value">张三</div>
+          <div class="require-value">{{ requiresInfo.onlineRetoucherName }}</div>
         </div>
       </div>
-      <div class="require-row">
-        <el-tag size="medium" type="success">中等标签</el-tag>
+      <div class="require-row tag-box">
+        <template v-for="(requiresItem, requiresIndex) in requiresInfo.baseRequires">
+          <el-tag size="medium" type="success" :key="requiresIndex" v-if="Boolean(requiresItem)">
+            {{ requiresIndex | tagFilter }}{{ requiresItem | toLabelName }}
+          </el-tag>
+        </template>
       </div>
-      <div class="require-row photo-mark">
-        <div class="require-label">修图风格：</div>
+      <div class="require-row photo-mark" v-if="requiresInfo.referenceDiagram">
+        <div class="require-label">参考图：</div>
         <div class="require-value">
           我的风格
           <el-image
-            :src="url"
-            :preview-src-list="[url]">
+            :src="requiresInfo.referenceDiagram"
+            :preview-src-list="[requiresInfo.referenceDiagram]">
           </el-image>
-          <el-link :underline="false" type="success">下载风格照片</el-link>
+          <el-link :underline="false" type="success" @click="downPhoto">下载风格照片</el-link>
         </div>
       </div>
       <div class="require-row">
         <div class="require-label">备注信息：</div>
-        <div class="require-value require-note">
-          我想要变好看  我要变好看我要变好看 再变好看我要变好看 再变好看我要变好看 再变好看我要变好看 再变好看我要变好看 再变好看我要变好看 再变好看我要变好看 再变好看我要变好看 再变好看我要变好看 再变好看我要变好看 再变好看我要变好看 再变好看我要变好看 再变好看我要变好看 再变好看我要变好看 再变好看
-        </div>
+        <div class="require-value require-note">{{ requiresInfo.retouchRemark }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import * as DownPhoto from '@/utils/DownPhoto.js'
+
 export default {
   name: 'OrderRequire',
+  props: {
+    orderInfo: { type: Object, required: true }
+  },
+  computed: {
+    requiresInfo () {
+      return this.orderInfo.requiresData || {}
+    }
+  },
   data () {
     return {
-      url: 'https://cloud.cdn-qn.hzmantu.com/compress/2020/05/01/Fsgr3VQAuzewZ3xA--Vp-GbrbYGC.jpg',
+    }
+  },
+  methods: {
+    /**
+     * @description 下载照片
+     */
+    downPhoto () {
+      DownPhoto.downOnePicture(this.requiresInfo.referenceDiagram)
+    }
+  },
+  filters: {
+    tagFilter (val) {
+      const tagCN = {
+        eye: '眼睛增大幅度',
+        face: '瘦脸幅度',
+        pimples: '祛痣'
+      }
+      return tagCN[val]
     }
   }
 }
@@ -93,6 +122,12 @@ export default {
 
       .require-note {
         max-width: 632px;
+      }
+    }
+
+    .tag-box {
+      .el-tag {
+        margin-right: 20px;
       }
     }
 

@@ -1,8 +1,8 @@
 <template>
   <div class="order-detail">
     <div class="order-data module-panel">
-      <order-info />
-      <order-require class="order-require" />
+      <order-info :order-info="orderData" />
+      <order-require class="order-require" :order-info="orderData" />
     </div>
     <div class="photo-data module-panel">
        <div class="panel-title">
@@ -17,10 +17,6 @@
          <div class="photo-title">照片1</div>
          <photo-version />
        </div>
-       <div class="photo-version-box">
-         <div class="photo-title">照片1</div>
-         <photo-version />
-       </div>
     </div>
   </div>
 </template>
@@ -30,29 +26,36 @@ import OrderInfo from "@/components/OrderInfo"
 import OrderRequire from "@/components/OrderRequire"
 import PhotoVersion from "@/components/PhotoVersion"
 import * as DownPhoto from '@/utils/DownPhoto'
+import * as Order from '@/api/order.js'
 
 export default {
   name: 'orderDetail',
   components: { OrderInfo, OrderRequire, PhotoVersion },
   data () {
     return {
-      photoVersion: [
-        {
-          version: '原片',
-          src: 'https://cloud.cdn-qn.hzmantu.com/compress/2020/05/01/Fh_ng-dn42IKZY5-6gBunCtzVt28.jpg'
-        },
-        {
-          version: '云端成片',
-          src: 'https://cloud.cdn-qn.hzmantu.com/compress/2020/05/01/Fsgr3VQAuzewZ3xA--Vp-GbrbYGC.jpg'
-        },
-        {
-          version: '顾客满意照片',
-          src: 'https://cloud.cdn-qn.hzmantu.com/compress/2020/05/01/Fsgr3VQAuzewZ3xA--Vp-GbrbYGC.jpg'
-        }
-      ],
+      orderData: {},
+      photoVersion: [],
     }
   },
+  created () {
+    const orderId = this.$route.query.orderId
+    this.getOrderDetail(orderId)
+  },
   methods: {
+    /**
+     * @description 获取订单详情
+     */
+    async getOrderDetail (id) {
+      try {
+        this.$loading()
+        const req = { id }
+        this.orderData = await Order.getOrderDetail(req)
+      } catch (error) {
+        throw new Error(error)
+      } finally {
+        this.$loadingClose()
+      }
+    },
     /**
      * @description 一键下载
      */
@@ -82,6 +85,7 @@ export default {
     }
 
     .photo-version-box {
+      padding: 20px;
       margin-top: 20px;
       background-color: #fafafa;
       border-radius: 4px;

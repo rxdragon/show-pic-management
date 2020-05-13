@@ -1,6 +1,6 @@
 <template>
   <div class="order-source-select">
-    <el-select v-bind="$attrs" :popper-append-to-body="false" placeholder="请选择" v-on="$listeners">
+    <el-select v-bind="$attrs" :popper-append-to-body="false" clearable placeholder="请选择" v-on="$listeners">
       <el-option
         v-for="(optionItem, optionIndex) in options"
         :key="optionIndex"
@@ -12,20 +12,24 @@
 </template>
 
 <script>
+import { ORDER_FROM, OrderFromToCN } from '@/model/Enumerate.js'
+
+const seachState = [
+  ORDER_FROM.USER,
+  ORDER_FROM.HIMO
+]
+
 export default {
   name: 'OrderSourceSelect',
   data () {
+    const stateOption = seachState.map(item => {
+      return {
+        label: OrderFromToCN[item],
+        value: item
+      }
+    })
     return {
-      options: [{
-        label: '全部',
-        value: 0
-      }, {
-        label: '种草',
-        value: 'plant'
-      }, {
-        label: '拔草',
-        value: 'pull'
-      }]
+      options: stateOption
     }
   }
 }

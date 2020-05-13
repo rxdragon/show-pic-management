@@ -12,12 +12,12 @@
           <th>用户姓名</th>
         </tr>
         <tr class="order-data">
-          <th>C2019070514006861</th>
-          <th>2020-02-02 13:00:00</th>
-          <th>海马体大师-女神照-月光</th>
-          <th>¥200.00</th>
-          <th>13329822102</th>
-          <th>张三</th>
+          <th>{{ orderData.orderNum }}</th>
+          <th>{{ orderData.paidAt }}</th>
+          <th>{{ orderData.productShow }}</th>
+          <th>¥{{ orderData.totalFee }}</th>
+          <th>{{ orderData.clientAccount }}</th>
+          <th>{{ orderData.clientName }}</th>
         </tr>
         <tr class="title">
           <th>联系电话</th>
@@ -26,10 +26,10 @@
           <th colspan="3">关闭原因</th>
         </tr>
         <tr class="order-data">
-          <th>13327899876</th>
-          <th>已关闭</th>
-          <th>班纳</th>
-          <th colspan="3">撒打算打算打算打算打算打算打算打算打算打</th>
+          <th>{{ orderData.clientPhone }}</th>
+          <th>{{ orderData.stateCN }}</th>
+          <th>{{ orderData.closeOperator }}</th>
+          <th class="close-reason" colspan="3">{{ orderData.closeReason }}</th>
         </tr>
       </table>
     </div>
@@ -37,8 +37,17 @@
 </template>
 
 <script>
+
 export default {
   name: 'OrderInfo',
+  props: {
+    orderInfo: { type: Object, required: true }
+  },
+  computed: {
+    orderData () {
+      return this.orderInfo.orderInfo || {}
+    }
+  },
   data () {
     return {
     }
@@ -78,6 +87,10 @@ export default {
           font-size: 14px;
           font-weight: 400;
           color: #606266;
+        }
+
+        .close-reason {
+          max-width: 400px;
         }
       }
     }

@@ -133,3 +133,16 @@ export function waitTime (time, passTime) {
   differ = (differ / 1000 / 60).toFixed(0) + 'min'
   return differ
 }
+
+/**
+ * toFixedNoRound 不四舍五入，保留小数点
+ * @param {*} number
+ * @param {Number} point
+ */
+export function toFixedNoRound (number, point = 2) {
+  // 截取当前数据到小数点后三位
+  const transformVal = Number(number).toFixed(point + 1)
+  const realVal = transformVal.substring(0, transformVal.length - 1)
+  // num.toFixed(3) 获取的是字符串
+  return realVal
+}

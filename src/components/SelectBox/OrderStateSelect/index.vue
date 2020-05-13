@@ -1,6 +1,6 @@
 <template>
   <div class="order-state-select">
-    <el-select v-bind="$attrs" :popper-append-to-body="false" placeholder="请选择" v-on="$listeners">
+    <el-select v-bind="$attrs" :popper-append-to-body="false" clearable multiple collapse-tags placeholder="请选择" v-on="$listeners">
       <el-option
         v-for="(optionItem, optionIndex) in options"
         :key="optionIndex"
@@ -12,20 +12,32 @@
 </template>
 
 <script>
+import { ORDER_STATE, STREAM_STATE, SECOND_RETOUCH_STATE, orderStateToCN, streamToCN, secondRetouchStateToCN } from '@/model/Enumerate.js'
+const filterToCN = {
+  ...orderStateToCN,
+  ...streamToCN,
+  ...secondRetouchStateToCN
+}
 export default {
   name: 'OrderStateSelect',
   data () {
+    const seachState = [
+      ORDER_STATE.WAIT_PAIED,
+      STREAM_STATE.RETOUCHING,
+      STREAM_STATE.COMPLETE,
+      ORDER_STATE.CANCELLED,
+      STREAM_STATE.WAIT_RETOUCH,
+      SECOND_RETOUCH_STATE.ADJUSTING,
+      ORDER_STATE.COMPLETE
+    ]
+    const stateOption = seachState.map(item => {
+      return {
+        label: filterToCN[item],
+        value: item
+      }
+    })
     return {
-      options: [{
-        label: '全部',
-        value: 0
-      }, {
-        label: '种草',
-        value: 'plant'
-      }, {
-        label: '拔草',
-        value: 'pull'
-      }]
+      options: stateOption
     }
   }
 }
@@ -33,6 +45,6 @@ export default {
 
 <style lang="less" scoped>
 .order-state-select {
-  width: 164px;
+  min-width: 164px;
 }
 </style>

@@ -15,15 +15,18 @@ export function toThousandFilter (num) {
 export function toLabelName (value) {
   switch (value) {
     case 'big':
-      return '大'
+      return '：大'
     case 'middle':
-      return '中'
+      return '：中'
     case 'small':
-      return '小'
+      return '：小'
+    case 1:
+    case '1':
+      return ''
     case 'not_required':
-      return '不要求'
+      return '：不要求'
     default:
-      return '异常'
+      return '：异常'
   }
 }
 
