@@ -17,9 +17,8 @@ export function login (params) {
  * @description 获取用户信息
  */
 export function info () {
-  // TODO 更改服务
   return axios({
-    url: '/project_cloud/common/getSelfInfo',
+    url: '/project_show_pic/admin/common/getSelfInfo',
     method: 'GET'
   })
 }

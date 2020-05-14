@@ -38,7 +38,6 @@ const mutations = {
     state.id = info.id
     state.name = info.name
     state.nickname = info.nickname
-    state.departmentName = info.department.name
     state.avatarImg = info.avatar
   },
   SET_LINE_STATE: (state, condition) => {
