@@ -18,7 +18,7 @@
           <th>{{ userData.sex }}</th>
           <th>{{ userData.userConsumeNum }}次</th>
           <th>¥{{ userData.consumeTotal }}</th>
-          <th>{{ userData.createdAt }}</th>
+          <th>{{ userData.recentlyConsume }}</th>
           <th :class="`${userData.from}-color`">{{ userData.from | toOrderFromToCN }}</th>
         </tr>
       </table>

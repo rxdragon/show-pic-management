@@ -14,7 +14,19 @@
         <tr class="order-data">
           <th>{{ orderData.orderNum }}</th>
           <th>{{ orderData.paidAt }}</th>
-          <th>{{ orderData.productShow }}</th>
+          <th>
+            {{ orderData.productShow || '-' }}
+            <el-popover
+              v-if="orderData.productShow"
+              placement="bottom-start"
+              trigger="hover">
+              <div class="order-info">
+                <p v-for="(productItem, productIndex) in orderData.productList" :key="productIndex">{{ productItem }}</p>
+                <p>照片张数：{{ orderData.photoNum }}张</p>
+              </div>
+              <i slot="reference" class="product-more el-icon-s-unfold"></i>
+            </el-popover>
+          </th>
           <th>¥{{ orderData.totalFee }}</th>
           <th>{{ orderData.clientAccount }}</th>
           <th>{{ orderData.clientName }}</th>

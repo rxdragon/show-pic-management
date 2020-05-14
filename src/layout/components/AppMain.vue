@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       isLoading: false,
-      cachedViews: ['userDetail', 'orderManagement']
+      cachedViews: ['userManage', 'userDetail', 'orderManagement']
     }
   },
   computed: {

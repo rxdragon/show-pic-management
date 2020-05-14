@@ -19,6 +19,7 @@ export default class UserModel {
   createdAt = '' // 创建时间
   consumeTotal = 0 // 下单金额
   userConsumeNum = 0 // 下单次数
+  recentlyConsume = '' // 最近消费时间
 
   constructor (userData) {
     this.base = userData
@@ -28,8 +29,10 @@ export default class UserModel {
     this.wxname = userData.wxname || '-'
     this.sex = sexToCN[userData.sex] || '-'
     this.phone = userData.phone
-    this.createdAt = userData.created_at
+    this.createdAt = userData.created_at || '-'
     this.consumeTotal = Number(userData.consume_total)
     this.userConsumeNum = Number(userData.user_consume_num)
+    // TODO
+    this.recentlyConsume = '-'
   }
 }

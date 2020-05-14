@@ -67,7 +67,7 @@ import { getSeachTime } from '@/utils/timeUtil.js'
 import * as Clients from '@/api/clients'
 
 export default {
-  name: 'UserManagement',
+  name: 'userManage',
   components: { DatePicker, AccountSourceSelect, NoData },
   data () {
     return {
@@ -153,7 +153,7 @@ export default {
      * @description 页数变更
      */
     handleCurrentChange () {
-      // TODO
+      this.searchData()
     },
     /**
      * @description 格式化金钱

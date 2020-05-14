@@ -39,7 +39,6 @@
         <el-table :data="tableData" style="width: 100%;">
           <el-table-column label="订单号" width="180">
              <template slot-scope="{ row }">
-               <!-- TODO 缺少字段 -->
                <el-popover
                   placement="bottom-start"
                   trigger="hover">
@@ -340,6 +339,8 @@ export default {
   }
 
   .table-box {
+    margin-top: 24px;
+
     .product-more {
       color: #909399;
     }
