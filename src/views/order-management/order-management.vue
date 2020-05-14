@@ -1,5 +1,5 @@
 <template>
-  <div class="order-management">
+  <div class="order-management module-page-box">
     <main class="module-panel">
       <!-- 查询按钮 -->
       <div class="search-box">
@@ -25,13 +25,14 @@
           <order-source-select v-model="orderSource" />
         </div>
         <div class="button-box">
-          <el-button type="primary" size="small" @click="initPage(0)">查 询</el-button>
-          <el-button type="success" size="small">导 出</el-button>
+          <el-button type="primary" size="small" @click="initPage(1)">查 询</el-button>
+          <el-button type="success" size="small" @click="outExecl">导 出</el-button>
         </div>
       </div>
       <!-- 收益信息 -->
       <div class="earnings-info">
-        当前查询条件下：共{{ earningsInfo.totalCount }}单    总计收益：¥{{ earningsInfo.incomeMoney }}
+        <span class="total-count">当前查询条件下：共{{ earningsInfo.totalCount }}单</span>
+        <span>总计收益：¥{{ earningsInfo.incomeMoney }}</span>
       </div>
       <!-- 订单列表 -->
       <div class="table-box" v-show="tableData.length">
@@ -43,11 +44,11 @@
                   placement="bottom-start"
                   trigger="hover">
                   <div class="order-info">
-                    <p>顾客姓名：{{ row.orderInfo.clientName }}</p>
-                    <p>手机：{{ row.orderInfo.clientPhone }}</p>
-                    <p>照片张数：{{ row.orderInfo.photoNum }}张</p>
+                    <p>顾客姓名：{{ row.clientName }}</p>
+                    <p>手机：{{ row.clientPhone }}</p>
+                    <p>照片张数：{{ row.photoNum }}张</p>
                   </div>
-                  <div slot="reference" class="order-num">{{ row.orderInfo.orderNum }}</div>
+                  <div slot="reference" class="order-num">{{ row.orderNum }}</div>
                 </el-popover>
              </template>
           </el-table-column>
@@ -59,25 +60,30 @@
                   placement="bottom-start"
                   trigger="hover">
                   <div class="order-info">
-                    <p v-for="(productItem, productIndex) in row.orderInfo.productList" :key="productIndex">{{ productItem }}</p>
-                    <p>照片张数：{{ row.orderInfo.photoNum }}张</p>
+                    <p v-for="(productItem, productIndex) in row.productList" :key="productIndex">{{ productItem }}</p>
+                    <p>照片张数：{{ row.photoNum }}张</p>
                   </div>
                   <i slot="reference" class="product-more el-icon-s-unfold"></i>
                 </el-popover>
             </template>
           </el-table-column>
-          <el-table-column prop="orderInfo.totalFee" label="金额" min-width="100" :formatter="stringMoney"/>
-          <el-table-column prop="orderInfo.stateCN" label="状态" min-width="100" />
-          <el-table-column prop="orderInfo.paidAt" label="下单时间" width="180" />
+          <el-table-column prop="totalFee" label="金额" width="150" :formatter="stringMoney"/>
+          <el-table-column prop="stateCN" label="状态" width="100" />
+          <el-table-column label="订单来源" width="80">
+            <template slot-scope="{ row }">
+              <div :class="`${row.orderFrom}-color`">{{ row.orderFrom | toOrderFromToCN }}</div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="paidAt" label="下单时间" width="180" />
           <el-table-column label="操作" align="right" width="100">
             <template slot-scope="{ row }">
-              <el-dropdown>
+              <el-dropdown trigger="click">
                 <el-button type="primary" size="small">
                   更多<i class="el-icon-arrow-down el-icon--right"></i>
                 </el-button>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item @click.native="goToDetail(row.orderInfo.id)">订单详情</el-dropdown-item>
-                  <el-dropdown-item v-if="row.orderInfo.orderState !== ORDER_STATE.CLOSED" @click.native="closeOrder(row.orderInfo.id)">关闭订单</el-dropdown-item>
+                  <el-dropdown-item @click.native="goToDetail(row.id)">订单详情</el-dropdown-item>
+                  <el-dropdown-item v-if="row.orderState !== ORDER_STATE.CLOSED" @click.native="closeOrder(row.id)">关闭订单</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </template>
@@ -124,11 +130,11 @@ import DatePicker from '@/components/DatePicker'
 import NoData from '@/components/NoData'
 import OrderStateSelect from '@selectBox/OrderStateSelect'
 import OrderSourceSelect from '@selectBox/OrderSourceSelect'
-import moment from 'moment'
-import * as Order from '@/api/order.js'
 import { toFixedNoRound } from '@/utils/validate.js'
 import { ORDER_STATE } from '@/model/Enumerate.js'
-
+import { getSeachTime } from '@/utils/timeUtil.js'
+import { Excel } from 'mainto-fed-utils'
+import * as Order from '@/api/order.js'
 
 export default {
   name: 'orderManagement',
@@ -157,10 +163,7 @@ export default {
     }
   },
   created () {
-    const startAt = moment().locale('zh-cn').format('YYYY-MM-DD')
-    const endAt = moment().locale('zh-cn').format('YYYY-MM-DD')
-    this.timeSpan = [startAt, endAt]
-    this.initPage(0)
+    this.initPage(1)
   },
   methods: {
     /**
@@ -180,24 +183,24 @@ export default {
      * @description 订单搜索
      */
     async searchData (page) {
-      if (!this.timeSpan) return this.$newMessage.warning('请输入时间')
-      this.pager.page = page === 0 ? page : this.pager.page
+      this.pager.page = page === 1 ? page : this.pager.page
       const req = {
-        cond: {
-          startTime: this.timeSpan[0],
-          endTime: this.timeSpan[1],
-        },
+        cond: {},
         page: this.pager.page,
         pageSize: this.pager.pageSize
       }
+      if (this.timeSpan) { req.cond.createdAtRange = getSeachTime(this.timeSpan) }
       if (this.orderSearchValue) { req.cond[this.orderSeachType] = this.orderSearchValue }
-      if (this.orderState) ( req.cond.state = this.orderState )
-      // TODO 拆分字段
-      if (this.orderSource) ( req.cond.state = this.orderSource )
+      if (this.orderState) {
+        const [key, value] = this.orderState.split(',')
+        req.cond[key] = value
+      }
+      if (this.orderSource) { req.cond.from = this.orderSource }
       const data = await Order.getOrderList(req)
       this.tableData = data.list
       this.pager.total = data.total
       this.earningsInfo.totalCount = data.total
+      this.earningsInfo.incomeMoney = data.sumIncome
     },
     /**
      * @description 调整到详情页面
@@ -222,7 +225,7 @@ export default {
         this.submitCloseLoading = true
         const req = {
           id: this.closeOrderId,
-          message: this.closeMessage
+          reason: this.closeMessage
         }
         await Order.closeOrder(req)
         this.resetCloseInfo()
@@ -258,6 +261,46 @@ export default {
     stringMoney (row, column, cellValue, index) {
       const money = toFixedNoRound(cellValue)
       return `¥${money}`
+    },
+    /**
+     * @description 导出表格
+     */
+    async outExecl () {
+      try {
+        this.$loading()
+        const req = { cond: {} }
+        if (this.timeSpan) { req.cond.createdAtRange = getSeachTime(this.timeSpan) }
+        if (this.orderSearchValue) { req.cond[this.orderSeachType] = this.orderSearchValue }
+        if (this.orderState) {
+          const [key, value] = this.orderState.split(',')
+          req.cond[key] = value
+        }
+        if (this.orderSource) { req.cond.from = this.orderSource }
+        const timeString = this.timeSpan ? this.timeSpan.join('~') : '全部'
+        const data = await Order.exportExcel(req)
+        const excelName = timeString + '修修兽订单'
+        const headerCellName = ['订单号', '下单时间', '照片数量', '金额', '状态', '用户账号', '用户姓名', '联系电话', '下单产品', '产品数量']
+        const minWidth = 50
+        const maxWidth = 200
+        const colWidth = [{ wpx: maxWidth }, { wpx: maxWidth }, { wpx: minWidth }, { wpx: minWidth }, { wpx: minWidth }, { wpx: minWidth }, { wpx: minWidth }, { wpx: minWidth }, { wpx: maxWidth }, { wpx: minWidth }]
+        const option = {
+          header: [
+            { 0: excelName },
+            [...headerCellName]
+          ],
+          colWidth,
+          font: { sz: 24, name: '微软雅黑' },
+          alignment: { wrapText: true, vertical: 'center' },
+          keys: ['orderNum', 'paidAt', 'photoNum', 'totalFee', 'stateCN', 'clientAccount', 'clientName', 'clientPhone', 'productListString', 'productNum'],
+          columnLength: headerCellName.length
+        }
+        const excel = new Excel(data, option)
+        excel.save().down(excelName)
+      } catch (error) {
+        throw new Error(error)
+      } finally {
+        this.$loadingClose()
+      }
     }
   }
 }
@@ -290,6 +333,10 @@ export default {
     font-weight: 400;
     line-height: 20px;
     color: #1769ff;
+
+    .total-count {
+      margin-right: 20px;
+    }
   }
 
   .table-box {

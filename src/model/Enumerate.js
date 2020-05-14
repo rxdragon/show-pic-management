@@ -59,11 +59,26 @@ export const secondRetouchStateToCN = {
  */
 export const ORDER_FROM = {
   USER: 'user',
+  SHOW_PIC: 'show_pic',
   HIMO: 'himo'
 }
 
 export const OrderFromToCN = {
   [ORDER_FROM.USER]: '修修兽',
+  [ORDER_FROM.SHOW_PIC]: '修修兽',
+  [ORDER_FROM.HIMO]: '海马体'
+}
+
+/**
+ * @description 订单来源
+ */
+export const USER_FROM = {
+  SHOW_PIC: 'show_pic',
+  HIMO: 'himo'
+}
+
+export const userFromToCN = {
+  [ORDER_FROM.SHOW_PIC]: '修修兽',
   [ORDER_FROM.HIMO]: '海马体'
 }
 

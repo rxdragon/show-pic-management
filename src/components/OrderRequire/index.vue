@@ -24,8 +24,8 @@
         <div class="require-value">
           我的风格
           <el-image
-            :src="requiresInfo.referenceDiagram"
-            :preview-src-list="[requiresInfo.referenceDiagram]">
+            :src="requiresInfo.referenceDiagramCompress"
+            :preview-src-list="[requiresInfo.referenceDiagramOriginal]">
           </el-image>
           <el-link :underline="false" type="success" @click="downPhoto">下载风格照片</el-link>
         </div>
@@ -111,6 +111,7 @@ export default {
 
       .require-value {
         .el-image {
+          margin: 0 10px;
           width: 54px;
           height: 54px;
         }

@@ -2,9 +2,17 @@
  * @description 订单model
  */
 
-import { ORDER_STATE, STREAM_STATE, SECOND_RETOUCH_STATE, orderStateToCN, streamToCN, secondRetouchStateToCN } from '@/model/Enumerate.js'
+import {
+  ORDER_STATE,
+  STREAM_STATE,
+  SECOND_RETOUCH_STATE,
+  orderStateToCN,
+  streamToCN,
+  secondRetouchStateToCN,
+} from '@/model/Enumerate.js'
 
 export default class OrderModel {
+  base = {}
   id = '' // 订单id
   orderNum = '' // 订单号
   state = '' // 订单状态
@@ -21,9 +29,11 @@ export default class OrderModel {
   clientName = '-' // 顾客姓名
   clientAccount = '-' // 顾客账号
   clientPhone = '-' // 顾客手机号
+  orderFrom = '-' // 订单来源
 
   constructor (orderData) {
     if (!orderData) return
+    this.base = orderData
     this.id = orderData.id
     this.orderNum = orderData.order_num || '-'
     this.totalFee = Number(orderData.total_fee) || 0
@@ -32,16 +42,12 @@ export default class OrderModel {
     this.getProduct(orderData)
     this.orderState = orderData.state
     this.stateCN = this.getOrderState(orderData)
-    // TODO 
-    this.closeOperator = '-'
-    // TODO 
-    this.closeReason = '好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好'
-    // TODO 
-    this.clientName = '-'
-    // TODO 
-    this.clientAccount = '-'
-    // TODO 
-    this.clientPhone = '-'
+    this.orderFrom = orderData.from
+    this.closeOperator = _.get(orderData, 'extend.closeInfo.userInfo.nickname') || _.get(orderData, 'extend.closeInfo.userInfo.name') || '-'
+    this.closeReason = _.get(orderData, 'extend.closeInfo.reason') || '-'
+    this.clientName = _.get(orderData, 'userInfo.name') || '-'
+    this.clientAccount = _.get(orderData, 'userInfo.phone') || '-'
+    this.clientPhone = _.get(orderData, 'userInfo.phone') || '-'
     
   }
 

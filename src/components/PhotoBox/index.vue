@@ -1,16 +1,17 @@
 <template>
   <div class="photo-box">
     <div class="image-box">
-      <el-image :src="src" fit="cover"></el-image>
+      <el-image :src="this.imgCompressDomain + src" fit="cover"></el-image>
     </div>
     <div class="handle-box" @click.stop="">
-      <div class="version-name">{{ version }}</div>
+      <div class="version-name">{{ version | toVersionCN }}</div>
       <el-button type="text" @click="downPhoto">下载照片</el-button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import * as DownPhoto from '@/utils/DownPhoto.js'
 
 export default {
@@ -18,6 +19,9 @@ export default {
   props: {
     src: { type: String, required: true },
     version: { type: String, default: '' }
+  },
+  computed: {
+    ...mapGetters(['imgDomain', 'imgCompressDomain'])
   },
   methods: {
     /**

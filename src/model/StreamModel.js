@@ -21,6 +21,7 @@ export default class StreamModel {
   photoList = []
 
   constructor (streamData) {
+    this.base = streamData
     this.id = streamData.id
     this.retouchRemark = streamData.note
     this.getPhotoList(streamData)
@@ -30,14 +31,15 @@ export default class StreamModel {
     this.onlineRetoucherName = '-'
   }
 
-  getRequires (streamData) {
+  getRequires () {
+    const streamData = this.base
     const findRequire = (id) => {
       return streamData.requires.find(item => item.product_require_set_id === id) || {}
     }
     this.baseRequires.eye = findRequire(REQUIRE.EYE).value || ''
     this.baseRequires.face = findRequire(REQUIRE.FACE).value || ''
     this.baseRequires.pimples = findRequire(REQUIRE.PIMPLES).value || ''
-    this.referenceDiagram = findRequire(REQUIRE.PIMPLES).value || ''
+    this.referenceDiagram = findRequire(REQUIRE.REFERENCE_IMG).value || ''
   }
 
   getPhotoList (streamData) {

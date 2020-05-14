@@ -1,4 +1,5 @@
 import { timeFormat, formatTime } from '@/utils/timeUtil.js'
+import { photoVersionToCN, OrderFromToCN } from '@/model/Enumerate.js'
 
 /**
  * 10000 => "10,000"
@@ -6,6 +7,22 @@ import { timeFormat, formatTime } from '@/utils/timeUtil.js'
  */
 export function toThousandFilter (num) {
   return (+num || 0).toString().replace(/^-?\d+/g, m => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
+}
+
+/**
+ * 10000 => "10,000"
+ * @param {number} num
+ */
+export function toVersionCN (versionName) {
+  return photoVersionToCN[versionName]
+}
+
+/**
+ * @description 装扮版本
+ * @param {*} from 
+ */
+export function toOrderFromToCN (from) {
+  return OrderFromToCN[from] || '异常'
 }
 
 /**

@@ -13,13 +13,13 @@
           <th>账号来源</th>
         </tr>
         <tr class="order-data">
-          <th>付小小</th>
-          <th>18100000000</th>
-          <th>女</th>
-          <th>2次</th>
-          <th>¥200.00</th>
-          <th>2019-09-09 13:00:00</th>
-          <th>海马体</th>
+          <th>{{ userData.name }}</th>
+          <th>{{ userData.phone }}</th>
+          <th>{{ userData.sex }}</th>
+          <th>{{ userData.userConsumeNum }}次</th>
+          <th>¥{{ userData.consumeTotal }}</th>
+          <th>{{ userData.createdAt }}</th>
+          <th :class="`${userData.from}-color`">{{ userData.from | toOrderFromToCN }}</th>
         </tr>
       </table>
     </div>
@@ -29,10 +29,10 @@
 <script>
 export default {
   name: 'UserInfo',
-  data () {
-    return {
-    }
+  props: {
+    userData: { type: Object, required: true }
   }
+  
 }
 </script>
 

@@ -1,7 +1,9 @@
 <template>
   <div class="photo-version">
-    <div class="photo-module" v-for="(photoItem, photoIndex) in photoVersion" :key="photoIndex">
-      <photo-box :src="photoItem.src" :version="photoItem.version" @click.native="showImageView(photoIndex)" />
+    <div class="photo-module" v-for="(photoItem, photoIndex) in photosData" :key="photoIndex">
+      <template v-if="photoItem.src">
+        <photo-box :src="photoItem.src" :version="photoItem.version" @click.native="showImageView(photoIndex)" />
+      </template>
     </div>
     <image-view :z-index="zIndex" :photo-index="showPhotoIndex" v-if="showViewer" :show-viewer.sync="showViewer" :url-list="previewSrcList" />
   </div>
@@ -10,30 +12,26 @@
 <script>
 import PhotoBox from "@/components/PhotoBox"
 import ImageView from "@/components/ImageView"
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'PhotoVersion',
   components: { PhotoBox, ImageView },
+  props: {
+    photoVersion: { type: Array, required: true }
+  },
   data () {
     return {
-      photoVersion: [
-        {
-          version: '原片',
-          src: 'https://cloud.cdn-qn.hzmantu.com/compress/2020/05/01/Fh_ng-dn42IKZY5-6gBunCtzVt28.jpg'
-        },
-        {
-          version: '云端成片',
-          src: 'https://cloud.cdn-qn.hzmantu.com/compress/2020/05/01/Fsgr3VQAuzewZ3xA--Vp-GbrbYGC.jpg'
-        },
-        {
-          version: '顾客满意照片',
-          src: 'https://cloud.cdn-qn.hzmantu.com/compress/2020/05/01/Fsgr3VQAuzewZ3xA--Vp-GbrbYGC.jpg'
-        }
-      ],
       zIndex: 1000,
       showViewer: false, // 显示加载组件
       previewSrcList: [],
       showPhotoIndex: 0
+    }
+  },
+  computed: {
+    ...mapGetters(['imgDomain']),
+    photosData () {
+      return this.photoVersion
     }
   },
   created () {
@@ -44,7 +42,7 @@ export default {
      * @description 初始化预览组件
      */
     initPreviewList () {
-      this.previewSrcList = this.photoVersion.map(item => item.src)
+      this.previewSrcList = this.photoVersion.map(item => this.imgDomain + item.src)
     },
     /**
      * @description 显示图片预览

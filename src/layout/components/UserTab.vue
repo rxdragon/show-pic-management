@@ -22,8 +22,8 @@ export default {
     /**
      * @description 退出登录
      */
-    async logout () {
-      await User.logout()
+    logout () {
+      User.logout()
       this.$router.push('/login')
     }
   }
@@ -35,7 +35,7 @@ export default {
 
 .user-tab {
   position: relative;
-  z-index: 1;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: flex-end;

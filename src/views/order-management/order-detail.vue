@@ -1,5 +1,5 @@
 <template>
-  <div class="order-detail">
+  <div class="order-detail module-page-box">
     <div class="order-data module-panel">
       <order-info :order-info="orderData" />
       <order-require class="order-require" :order-info="orderData" />
@@ -8,14 +8,14 @@
        <div class="panel-title">
          照片详情
          <div class="button-box right-flow">
-           <el-button @click="downForZip" size="small" type="primary">原片下载</el-button>
+           <el-button @click="downForZip('originalPath')" size="small" type="primary">原片下载</el-button>
            <el-button size="small" type="primary">成片下载</el-button>
-           <el-button size="small" type="primary">满意片下载</el-button>
+           <el-button @click="downForZip('finalPath')" size="small" type="primary">满意片下载</el-button>
          </div>
        </div>
-       <div class="photo-version-box">
-         <div class="photo-title">照片1</div>
-         <photo-version />
+       <div class="photo-version-box" v-for="(photoItem, photoIndex) in orderData.orderPhotoList" :key="photoIndex">
+         <div class="photo-title">{{ photoItem.streamlabel }} - 照片{{ photoIndex + 1 }}</div>
+         <photo-version :photo-version="photoItem.photoVersion" />
        </div>
     </div>
   </div>
@@ -25,6 +25,7 @@
 import OrderInfo from "@/components/OrderInfo"
 import OrderRequire from "@/components/OrderRequire"
 import PhotoVersion from "@/components/PhotoVersion"
+import { mapGetters } from 'vuex'
 import * as DownPhoto from '@/utils/DownPhoto'
 import * as Order from '@/api/order.js'
 
@@ -36,6 +37,9 @@ export default {
       orderData: {},
       photoVersion: [],
     }
+  },
+  computed: {
+    ...mapGetters(['imgDomain']),
   },
   created () {
     const orderId = this.$route.query.orderId
@@ -59,9 +63,16 @@ export default {
     /**
      * @description 一键下载
      */
-    downForZip () {
-      const imgArr = this.photoVersion.map(item => item.src)
-      DownPhoto.downForZip(imgArr)
+    downForZip (version) {
+      const versionCN = {
+        originalPath: '原片',
+        finalPath: '原片',
+      }
+      const imgArr = this.orderData.orderPhotoList.map(item => {
+        return this.imgDomain + item[version]
+      })
+      const zipName = this.orderData.orderNum + '-' + versionCN[version]
+      DownPhoto.downForZip(imgArr, zipName)
     }
   }
 }

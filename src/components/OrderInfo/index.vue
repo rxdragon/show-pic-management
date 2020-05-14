@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     orderData () {
-      return this.orderInfo.orderInfo || {}
+      return this.orderInfo || {}
     }
   },
   data () {

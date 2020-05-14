@@ -24,25 +24,13 @@ export function info () {
   })
 }
 
-/**
- * @description 获取伙伴权限
- */
-export function getStaffPermission (params) {
-  // TODO 更改服务
-  return axios({
-    url: '/project_cloud/staff/getStaffPermission',
-    method: 'GET',
-    params
-  })
-}
 
 /**
  * @description 获取个人权限
  */
 export function getAuthority () {
-  // TODO 更改服务
   return axios({
-    url: '/project_cloud/common/getAuthority',
+    url: '/project_show_pic/admin/common/getSelfPermission',
     method: 'GET'
   })
 }

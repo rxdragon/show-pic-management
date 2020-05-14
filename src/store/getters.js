@@ -1,6 +1,8 @@
 const defaultGetters = {
   permission_routes: state => state.permission.routes,
   personage_routers: state => state.permission.personageRouters, // 个人有的路由
+  imgDomain: state => state.setting.imgDomain, // 上传后的照片域名
+  imgCompressDomain: state => state.setting.imgCompressDomain // 上传后自动压缩图域名
 }
 
 const userGetters = {

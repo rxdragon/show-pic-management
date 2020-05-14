@@ -71,7 +71,6 @@ var Zip = /*#__PURE__*/function () {
     key: "_addStream",
     value: async function _addStream(url, ctrl) {
       var res = await fetch(url);
-      console.log(res)
       var stream = function stream() {
         return res.body;
       };
@@ -79,7 +78,6 @@ var Zip = /*#__PURE__*/function () {
       var fileName = this._getFileName(url);
 
       var name = "/".concat(this._name, "/") + fileName;
-      console.log(name, 'name')
       ctrl.enqueue({
         name: name,
         stream: stream

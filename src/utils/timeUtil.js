@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { isArray } from '@/utils/validate.js'
 
 /**
  * @description 时间格式化
@@ -44,6 +45,35 @@ export function joinTimeSpan (time, addDay) {
   }
 
   return date.format('YYYY-MM-DD 08:00:00')
+}
+
+/**
+ * @description 开始
+ * @param {*} time 
+ */
+export function startDayTime (time) {
+  const date = moment(time)
+  return date.format('YYYY-MM-DD 00:00:00')
+}
+
+/**
+ * @description 结束时间
+ * @param {*} time 
+ */
+export function endDayTime (time) {
+  const date = moment(time)
+  return date.format('YYYY-MM-DD 23:59:59')
+}
+
+/**
+ * @description 获取搜索时间
+ * @param {*} timeSpan 
+ */
+export function getSeachTime (timeSpan) {
+  if (!timeSpan || !isArray(timeSpan) || timeSpan.length !== 2) {
+    throw new Error('输入时间异常')
+  }
+  return [startDayTime(timeSpan[0]), endDayTime(timeSpan[1])]
 }
 
 export function revertTimeSpan (time, subtractDay) {

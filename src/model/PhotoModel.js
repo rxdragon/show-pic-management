@@ -1,12 +1,14 @@
 import { PHOTO_VERSION } from '@/model/Enumerate.js'
 
 export default class PhotoModel {
+  base = {}
   id = ''
   originalPath = ''
   finalPath = ''
   photoVersion = []
 
   constructor (photoData) {
+    this.base = photoData
     this.id = photoData.id
     this.originalPath = photoData.original_path
     this.finalPath = photoData.final_path

@@ -9,7 +9,7 @@ export function downOnePicture (src) {
  * @description 下载zip
  * @param {*} imgArr 照片列表
  */
-export function downForZip (imgArr, zipName = "asdas") {
+export function downForZip (imgArr, zipName = "照片") {
   const zipclass = new Zip()
   zipclass.downZip(imgArr, zipName, ()=> {
     newMessage.success('已添加下载，请勿关闭该浏览器标签')
