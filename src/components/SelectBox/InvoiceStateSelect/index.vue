@@ -12,20 +12,25 @@
 </template>
 
 <script>
+import { INVOICE_STATE, invalidToCN } from '@/model/Enumerate.js'
+
 export default {
   name: 'InvoiceStateSelect',
   data () {
+    const searchEunm = [
+      INVOICE_STATE.PENDING,
+      INVOICE_STATE.COMPLETE,
+      INVOICE_STATE.FAIL,
+      INVOICE_STATE.INVALID
+    ]
+    const optionSearch = searchEunm.map(item => {
+      return {
+        label: invalidToCN[item],
+        value: item
+      }
+    })
     return {
-      options: [{
-        label: '开具完成',
-        value: 'plant'
-      }, {
-        label: '开具中',
-        value: 'pull'
-      }, {
-        label: '已作废',
-        value: 'fail'
-      }]
+      options: optionSearch
     }
   }
 }

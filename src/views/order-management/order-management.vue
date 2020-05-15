@@ -279,22 +279,26 @@ export default {
         const data = await Order.exportExcel(req)
         const excelName = timeString + '修修兽订单'
         const headerCellName = ['订单号', '下单时间', '照片数量', '金额', '状态', '用户账号', '用户姓名', '联系电话', '下单产品', '产品数量']
-        const minWidth = 50
-        const maxWidth = 200
-        const colWidth = [{ wpx: maxWidth }, { wpx: maxWidth }, { wpx: minWidth }, { wpx: minWidth }, { wpx: minWidth }, { wpx: minWidth }, { wpx: minWidth }, { wpx: minWidth }, { wpx: maxWidth }, { wpx: minWidth }]
         const option = {
           header: [
             { 0: excelName },
             [...headerCellName]
           ],
-          colWidth,
-          font: { sz: 24, name: '微软雅黑' },
+          headerStyle: {
+            font: { sz: 24, name: '微软雅黑' }
+          },
           alignment: { wrapText: true, vertical: 'center' },
-          keys: ['orderNum', 'paidAt', 'photoNum', 'totalFee', 'stateCN', 'clientAccount', 'clientName', 'clientPhone', 'productListString', 'productNum'],
-          columnLength: headerCellName.length
+          keys: ['orderNum', 'paidAt', 'photoNum', 'totalFee', 'stateCN', 'clientAccount', 'clientName', 'clientPhone', 'productListString', 'productNum']
         }
         const excel = new Excel(data, option)
-        excel.save().down(excelName)
+        const excelSave = excel.save()
+        excelSave.tmpWB.Sheets.sheet['A1'].s = {
+          font: { sz: 24, name: '微软雅黑' },
+          alignment: {
+            horizontal: 'center'
+          }
+        }
+        excelSave.down(excelName)
       } catch (error) {
         throw new Error(error)
       } finally {
