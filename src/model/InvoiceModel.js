@@ -42,17 +42,16 @@ export default class InvoiceModel {
     this.invoiceTitle = invoiceData.name || '-'
     this.titleType = _.get(invoiceData, 'info.extend.title_type') || '-'
     this.titleTypeCN = changeMap[this.titleType]
-    this.proposerAccount = _.get(invoiceData, 'info.phone') || '-'
+    // TODO 没有账号信息
+    this.proposerAccount = '-'
     this.saleaddress = _.get(invoiceData, 'info.saleaddress') || '-'
     this.salephone = _.get(this.base, 'info.salephone') || '-'
     const saleaccount = _.get(invoiceData, 'info.saleaccount') || '- -'
     this.taxnum = invoiceData.taxnum || '-'
     this.bankName = saleaccount.split(' ')[0]
     this.bankaccount = saleaccount.split(' ')[1]
-    // TODO
-    this.ticketPhone = ''
-    // TODO
-    this.ticketEmail = ''
+    this.ticketPhone = _.get(invoiceData, 'info.phone') || '-'
+    this.ticketEmail = _.get(invoiceData, 'info.email') || '-'
     this.electronicInvoice = _.get(invoiceData, 'info.result.pdf_url') || ''
     this.getInvoiceInfo()
     this.getTicketInfo()

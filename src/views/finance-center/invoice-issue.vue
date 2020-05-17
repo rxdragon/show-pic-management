@@ -349,13 +349,9 @@ export default {
 
 .invoice-issue {
   margin-top: 24px;
-  position: relative;
 
   .search-box {
     margin-bottom: 0;
-    position: sticky;
-    top: 98px;
-    z-index: 1000;
     background-color: #fff;
 
     .input-with-select {

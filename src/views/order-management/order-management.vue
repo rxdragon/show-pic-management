@@ -132,7 +132,7 @@ import OrderSourceSelect from '@selectBox/OrderSourceSelect'
 import { toFixedNoRound } from '@/utils/validate.js'
 import { ORDER_STATE } from '@/model/Enumerate.js'
 import { getSeachTime } from '@/utils/timeUtil.js'
-import { Excel } from 'mainto-fed-utils'
+import { exportExcel } from '@/utils/exportExcelUtil.js'
 import * as Order from '@/api/order.js'
 
 export default {
@@ -248,8 +248,9 @@ export default {
     handleCurrentChange () {
       try {
         this.$loading()
-      } catch (error) {
         this.searchData()
+      } catch (error) {
+        throw new Error(error)
       } finally {
         this.$loadingClose()
       }
@@ -279,26 +280,8 @@ export default {
         const data = await Order.exportExcel(req)
         const excelName = timeString + '修修兽订单'
         const headerCellName = ['订单号', '下单时间', '照片数量', '金额', '状态', '用户账号', '用户姓名', '联系电话', '下单产品', '产品数量']
-        const option = {
-          header: [
-            { 0: excelName },
-            [...headerCellName]
-          ],
-          headerStyle: {
-            font: { sz: 24, name: '微软雅黑' }
-          },
-          alignment: { wrapText: true, vertical: 'center' },
-          keys: ['orderNum', 'paidAt', 'photoNum', 'totalFee', 'stateCN', 'clientAccount', 'clientName', 'clientPhone', 'productListString', 'productNum']
-        }
-        const excel = new Excel(data, option)
-        const excelSave = excel.save()
-        excelSave.tmpWB.Sheets.sheet['A1'].s = {
-          font: { sz: 24, name: '微软雅黑' },
-          alignment: {
-            horizontal: 'center'
-          }
-        }
-        excelSave.down(excelName)
+        const headerCellkeys = ['orderNum', 'paidAt', 'photoNum', 'totalFee', 'stateCN', 'clientAccount', 'clientName', 'clientPhone', 'productListString', 'productNum']
+        exportExcel(data, excelName, headerCellName, headerCellkeys)
       } catch (error) {
         throw new Error(error)
       } finally {

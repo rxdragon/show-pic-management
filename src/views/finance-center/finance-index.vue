@@ -74,7 +74,7 @@ import InvoiceStateSelect from '@selectBox/InvoiceStateSelect'
 import InvoiceInfo from './components/InvoiceInfo'
 import { getSeachTime } from '@/utils/timeUtil.js'
 import { toFixedNoRound } from '@/utils/validate.js'
-import { Excel } from 'mainto-fed-utils'
+import { exportExcel } from '@/utils/exportExcelUtil.js'
 import * as Invoice from '@/api/invoice.js'
 
 export default {
@@ -178,23 +178,8 @@ export default {
         if (data.total > 1000) { this.$newMessage.warning('当前只能导出1000条数据') }
         const excelName = timeString + '修修兽发票开具记录'
         const headerCellName = ['开票时间', '申请人账号', '抬头类型', '发票抬头', '发票金额', '单位税号', '注册地址', '注册电话', '开户银行', '银行账号', '发票状态']
-        const option = {
-          header: [
-            { 0: excelName },
-            [...headerCellName]
-          ],
-          keys: ['invoicedate', 'proposerAccount', 'titleTypeCN', 'invoiceTitle', 'price', 'taxnum', 'saleaddress', 'salephone', 'bankName', 'bankaccount', 'stateToCN'],
-          autoWidth: true
-        }
-        const excel = new Excel(data.list, option)
-        const excelSave = excel.save()
-        excelSave.tmpWB.Sheets.sheet['A1'].s = {
-          font: { sz: 24, name: '微软雅黑' },
-          alignment: {
-            horizontal: 'center'
-          }
-        }
-        excelSave.down(excelName)
+        const headerCellkeys = ['invoicedate', 'proposerAccount', 'titleTypeCN', 'invoiceTitle', 'price', 'taxnum', 'saleaddress', 'salephone', 'bankName', 'bankaccount', 'stateToCN']
+        exportExcel(data.list, excelName, headerCellName, headerCellkeys)
       } catch (error) {
         throw new Error(error)
       } finally {

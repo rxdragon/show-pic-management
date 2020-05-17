@@ -25,10 +25,8 @@ export default class StreamModel {
     this.id = streamData.id
     this.retouchRemark = streamData.note
     this.getPhotoList(streamData)
-    // TODO 
-    this.retoucherName = '-'
-    // TODO 
-    this.onlineRetoucherName = '-'
+    this.retoucherName = _.get(streamData, 'extend.retoucherInfo.nickname') || _.get(streamData, 'extend.retoucherInfo.name') || '-'
+    this.onlineRetoucherName = _.get(streamData, 'extend.secondRetoucher.nickname') || _.get(streamData, 'extend.secondRetoucher.name') || '-'
   }
 
   getRequires () {

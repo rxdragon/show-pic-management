@@ -144,12 +144,6 @@ export default {
       })
     },
     /**
-     * @description 关闭订单
-     */
-    closeOrder () {
-      // TODO
-    },
-    /**
      * @description 页数变更
      */
     handleCurrentChange () {
