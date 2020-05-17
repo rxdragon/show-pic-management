@@ -119,7 +119,7 @@ export default {
           req.startTime = filterTimeSpan[0]
           req.endTime = filterTimeSpan[1]
         }
-        if (this.invoiceState) { req.invoiceState = this.invoiceState }
+        if (this.invoiceState) { req.status = this.invoiceState }
         if (this.invoiceTitle) { req.title = this.invoiceTitle }
         const data = await Invoice.getInvoiceList(req)
         this.tableData = data.list
