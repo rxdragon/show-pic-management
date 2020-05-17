@@ -21,7 +21,7 @@
       </div>
       <!-- 订单列表 -->
       <div class="table-box" v-loading="orderListLoading">
-        <el-table :data="tableData" style="width: 100%;" height="250">
+        <el-table :data="tableData" style="width: 100%;" height="250" :row-class-name="tableRowClassName">
           <el-table-column prop="orderNum" label="订单号" />
           <el-table-column label="产品">
             <template slot-scope="{ row }">
@@ -330,6 +330,15 @@ export default {
       this.$refs['form'].resetFields()
     },
     /**
+     * @description 行样式
+     */
+    tableRowClassName ({ row, rowIndex }) {
+      if (row.invoiceState === 'complete') {
+        return 'disabled-row'
+      }
+      return ''
+    },
+    /**
      * @description 模拟输入
      */
     devInput () {
@@ -420,5 +429,11 @@ export default {
       width: 124px;
     }
   }
+}
+</style>
+
+<style lang="less">
+.el-table .disabled-row {
+  background: #eee;
 }
 </style>
