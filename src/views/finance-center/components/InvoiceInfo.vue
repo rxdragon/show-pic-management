@@ -5,75 +5,60 @@
       <div class="panel-title">
         发票详情
         <div class="right-flow state-box">
-          <div class="point point--success"></div>
-          <span class="state-text">开具完成</span>
+          <div class="point" :class="`point--${invoiceData.state}`"></div>
+          <span class="state-text">{{ invoiceData.stateToCN }}</span>
         </div>
       </div>
-      <div class="pancel-content" v-for="(invoiceItem, invoiceIndex) in invoiceInfo" :key="invoiceIndex">
+      <div class="pancel-content" v-for="(invoiceItem, invoiceIndex) in invoiceData.invoiceInfo" :key="invoiceIndex">
         <div class="label-class">{{ invoiceItem.label }}</div>
-        <div class="value">{{ invoiceItem.value }}</div>
+        <div class="value" :class="invoiceItem.value === '电子普通发票' && 'red'">{{ invoiceItem.value }}</div>
       </div>
     </div>
     <div class="ticket-info-module">
       <div class="panel-title">收票信息</div>
-      <div class="pancel-content" v-for="(ticketItem, ticketIndex) in ticketInfo" :key="ticketIndex">
-        <div class="label-class">{{ ticketItem.label }}</div>
-        <div class="value">{{ ticketItem.value }}</div>
+      <div class="pancel-content" v-for="(ticketItem, ticketIndex) in invoiceData.ticketInfo" :key="ticketIndex">
+        <div class="label-class">{{ ticketItem.label || '-' }}</div>
+        <div class="value">{{ ticketItem.value || '-' }}</div>
       </div>
-      <div class="ticket-image">
-        <el-image :src="ticketImage" @click="showTicketImage" />
+      <div class="ticket-image" v-if="invoiceData.electronicInvoice">
+        <embed :src="ticketImage" @click="showTicketImage" />
       </div>
     </div>
     <div class="button-box">
-      <el-button type="danger" @click="cancellationTicket">作废</el-button>
-      <el-button type="primary" @click="showTicketImage">查看电子发票</el-button>
+      <el-button v-if="invoiceData.state === INVOICE_STATE.COMPLETE" type="danger" :loading="cancellLoading" @click="cancellationTicket">作废</el-button>
+      <el-button v-if="invoiceData.electronicInvoice" type="primary" @click="showTicketImage">查看电子发票</el-button>
     </div>
     <el-dialog
       title="查看电子发票" :modal="false" custom-class="ticket-show"
       :visible.sync="showViewer" center width="860px">
-      <el-image class="ticket-image-box" :src="ticketImage" />
+      <iframe class="ticket-image-box" :src="ticketImage" />
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="centerDialogVisible = false">重新发送</el-button>
+        <el-button :loading="resendLoading" type="primary" @click="resendInvoice">重新发送</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import * as Invoice from '@/api/invoice.js'
+import { INVOICE_STATE, invalidToCN } from '@/model/Enumerate.js'
+
 export default {
   name: 'InvoiceInfo',
   data () {
     return {
+      INVOICE_STATE,
       showViewer: false,
-      invoiceInfo: [
-        {
-          label: '发票类型：',
-          value: '电子普通发票'
-        },
-        {
-          label: '抬头类型：',
-          value: '单位'
-        },
-        {
-          label: '发票抬头：',
-          value: '杭州缦图摄影有限公司'
-        },
-        {
-          label: '注册地址：',
-          value: '浙江省杭州市江干区白杨街道XXXXXXX'
-        }
-      ],
-      ticketInfo: [
-        {
-          label: '手机号：',
-          value: '13325811273'
-        },
-        {
-          label: '邮箱：',
-          value: '13325811273@163.com'
-        }
-      ],
-      ticketImage: 'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg'
+      cancellLoading: false,
+      resendLoading: false
+    }
+  },
+  props: {
+    invoiceData: { type: Object, required: true }
+  },
+  computed: {
+    ticketImage () {
+      return this.invoiceData.electronicInvoice
     }
   },
   methods: {
@@ -86,14 +71,45 @@ export default {
     /**
      * @description 作废
      */
-    cancellationTicket () {
-      // TODO
+    async cancellationTicket () {
+      try {
+        this.cancellLoading = true
+        const req = { id: this.invoiceData.id }
+        await Invoice.voidInvoice(req)
+        this.invoiceData.state = INVOICE_STATE.INVALID
+        this.invoiceData.stateToCN = invalidToCN[INVOICE_STATE.INVALID]
+      } catch (error) {
+        throw new Error(error)
+      } finally {
+        this.cancellLoading = false
+      }
+    },
+    /**
+     * @description 重新发送
+     */
+    async resendInvoice () {
+      try {
+        if (!this.invoiceData.ticketPhone && !this.invoiceData.ticketPhone) return this.$newMessage.warning('获取收票信息失败')
+        this.resendLoading = true
+        const req = {
+          invoiceId: this.invoiceData.id,
+          phone: this.invoiceData.ticketPhone,
+          email: this.invoiceData.ticketEmail
+        }
+        await Invoice.resendInvoice(req)
+      } catch (error) {
+        throw new Error(error)
+      } finally {
+        this.resendLoading = false
+      }
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
+@import '~@assetsDir/styles/variables.less';
+
 .invoice-info {
   padding: 0 24px;
 
@@ -112,15 +128,17 @@ export default {
         background-color: #eee;
         border-radius: 50%;
 
-        &--success {
+        &--complete {
           background-color: #52c41a;
         }
 
-        &--warning {
+        &--wait_write,
+        &--pending {
           background-color: #fbd211;
         }
 
-        &--danger {
+        &--invalid,
+        &--fail {
           background-color: #e64049;
         }
       }
@@ -138,9 +156,14 @@ export default {
     font-size: 14px;
     font-weight: 400;
     color: #303133;
+    margin-bottom: 10px;
 
     .label-class {
       width: 70px;
+    }
+
+    .red {
+      color: @red;
     }
   }
 
@@ -155,9 +178,11 @@ export default {
       margin-top: 24px;
       border: 1px solid #e8e8e8;
       border-radius: 4px;
+      height: 260px;
 
-      .el-image {
-        display: block;
+      embed {
+        width: 100%;
+        height: 100%;
       }
     }
   }
@@ -191,6 +216,8 @@ export default {
   .ticket-image-box {
     display: block;
     margin: auto;
+    width: 100%;
+    height: 642px;
   }
 }
 </style>

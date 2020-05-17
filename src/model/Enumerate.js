@@ -105,10 +105,33 @@ export const requireToCN = {
  */
 export const PHOTO_VERSION = {
   ORIGINAL_PATH: 'original_path',
+  CLOUD_FINISH_PATH: 'cloud_finish_path',
   FINAL_PATH: 'final_path',
 }
 
 export const photoVersionToCN = {
   [PHOTO_VERSION.ORIGINAL_PATH]: '原片',
+  [PHOTO_VERSION.CLOUD_FINISH_PATH]: '云端成片',
   [PHOTO_VERSION.FINAL_PATH]: '顾客满意照片',
+}
+
+/**
+ * @description 发票管理
+ */
+export const INVOICE_STATE = {
+  MANUAL: 'manual',
+  PENDING: 'pending',
+  WAIT_WRITE: 'wait_write',
+  COMPLETE: 'complete',
+  FAIL: 'fail',
+  INVALID: 'invalid',
+}
+
+export const invalidToCN = {
+  [INVOICE_STATE.MANUAL]: '手动开具',
+  [INVOICE_STATE.PENDING]: '开具中',
+  [INVOICE_STATE.WAIT_WRITE]: '等待发票写入税盘',
+  [INVOICE_STATE.COMPLETE]: '开具完成',
+  [INVOICE_STATE.FAIL]: '开具失败',
+  [INVOICE_STATE.INVALID]: '作废发票'
 }

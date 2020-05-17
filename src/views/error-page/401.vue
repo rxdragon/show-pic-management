@@ -22,6 +22,7 @@
 
 <script>
 import * as User from '@/api/user.js'
+import * as SessionTool from '@/utils/sessionTool.js'
 import errGif from '@/assets/401_images/401.gif'
 
 export default {
@@ -37,9 +38,8 @@ export default {
      */
     logout () {
       User.logout()
-        .then(() => {
-          this.$router.push('/login')
-        })
+      this.$router.push('/login')
+      SessionTool.removeSession()
     }
   }
 }

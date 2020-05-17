@@ -1,10 +1,10 @@
 <template>
   <div class="photo-version">
-    <div class="photo-module" v-for="(photoItem, photoIndex) in photosData" :key="photoIndex">
-      <template v-if="photoItem.src">
+    <template  v-for="(photoItem, photoIndex) in photosData">
+      <div class="photo-module" v-if="photoItem.src" :key="photoIndex">
         <photo-box :src="photoItem.src" :version="photoItem.version" @click.native="showImageView(photoIndex)" />
-      </template>
-    </div>
+      </div>
+    </template>
     <image-view :z-index="zIndex" :photo-index="showPhotoIndex" v-if="showViewer" :show-viewer.sync="showViewer" :url-list="previewSrcList" />
   </div>
 </template>

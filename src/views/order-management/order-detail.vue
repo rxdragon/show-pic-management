@@ -66,7 +66,7 @@ export default {
     downForZip (version) {
       const versionCN = {
         originalPath: '原片',
-        finalPath: '原片',
+        finalPath: '顾客满意片',
       }
       const imgArr = this.orderData.orderPhotoList.map(item => {
         return this.imgDomain + item[version]

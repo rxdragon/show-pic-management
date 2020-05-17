@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --mode development",
+    "serve": "vue-cli-service serve --mode staging",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "cz": "yarn log && git add . && git cz",
@@ -16,7 +16,7 @@
     "element-ui": "2.11.0",
     "js-base64": "^2.5.2",
     "lodash-es": "^4.17.15",
-    "mainto-fed-utils": "^1.0.0-release.17",
+    "mainto-fed-utils": "^1.0.1-release.0",
     "moment": "^2.25.3",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^6.1.0",
