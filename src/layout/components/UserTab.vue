@@ -12,6 +12,7 @@
 
 <script>
 import * as User from '@/api/user.js'
+import * as SessionTool from '@/utils/sessionTool.js'
 import { mapGetters } from 'vuex'
 export default {
   name: 'UserTab',
@@ -23,8 +24,9 @@ export default {
      * @description 退出登录
      */
     logout () {
-      User.logout()
+      SessionTool.removeSession()
       this.$router.push('/login')
+      User.logout()
     }
   }
 }

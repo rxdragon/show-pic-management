@@ -20,7 +20,7 @@
                 </div>
                 <i slot="reference" class="product-more el-icon-s-unfold"></i>
               </el-popover>
-          </template>
+            </template>
           </el-table-column>
           <el-table-column prop="totalFee" label="消费金额" :formatter="stringMoney" />
           <el-table-column prop="photoNum" label="照片数量" />

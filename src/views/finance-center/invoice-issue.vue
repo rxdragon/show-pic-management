@@ -4,37 +4,58 @@
       <!-- 查询按钮 -->
       <div class="search-box">
         <div class="date-search search-item">
-          <el-input v-model.trim="orderSearchValue" placeholder="请输入内容" class="input-with-select">
+          <el-input v-model.trim="orderSearchValue" placeholder="请输入内容" @keyup.native.enter="searchData" class="input-with-select">
             <el-select slot="prepend" v-model="orderSeachType" placeholder="请选择">
-              <el-option label="订单号" :value="1" />
-              <el-option label="顾客姓名" :value="2" />
+              <el-option label="顾客手机号" value="phone" />
+              <el-option label="订单号" value="orderNum" />
             </el-select>
           </el-input>
         </div>
         <div class="button-box">
           <el-button type="primary" size="small" @click="searchData">查 询</el-button>
         </div>
+        <div class="max-invoice-money button-box">
+          本次最大可开票金额：¥{{ maxInvoiceMoney | filtermoney }}
+          本次最小可开票金额：¥{{ minInvoiceMoney | filtermoney }}
+        </div>
       </div>
       <!-- 订单列表 -->
-      <div class="table-box">
-        <el-table :data="tableData" style="width: 100%;">
-          <el-table-column prop="date" label="订单号" />
-          <el-table-column prop="date" label="产品" />
-          <el-table-column prop="date" label="可开票金额" />
-          <el-table-column prop="date" label="开票状态" />
+      <div class="table-box" v-loading="orderListLoading">
+        <el-table :data="tableData" style="width: 100%;" height="250">
+          <el-table-column prop="orderNum" label="订单号" />
+          <el-table-column label="产品">
+            <template slot-scope="{ row }">
+              {{ row.productList[0] || '-' }}
+              <el-popover
+                  v-if="row.productList[0]"
+                  placement="bottom-start"
+                  trigger="hover">
+                  <div class="order-info">
+                    <p v-for="(productItem, productIndex) in row.productList" :key="productIndex">{{ productItem }}</p>
+                    <p>照片张数：{{ row.photoNum }}张</p>
+                  </div>
+                  <i slot="reference" class="product-more el-icon-s-unfold"></i>
+                </el-popover>
+            </template>
+          </el-table-column>
+          <el-table-column prop="canInvoiceMoney" label="可开票金额" :formatter="stringMoney"/>
+          <el-table-column prop="invoiceStateCN" label="开票状态" />
           <el-table-column prop="date" label="操控" align="right" width="100">
             <template slot="header" slot-scope="{ row }">
-              <span class="table-header">操作</span><el-checkbox v-model="isAllCheck" :class="row" :indeterminate="hasSomeCheck"></el-checkbox>
+              <span class="table-header">操作</span>
+              <el-checkbox v-model="isAllCheck" :indeterminate="hasSomeCheck" @change="onCheckChange" :class="row" :disabled="!Boolean(tableData.length)" ></el-checkbox>
             </template>
-            <template slot-scope="{ row }">
-              <el-checkbox v-model="row.isCheck"></el-checkbox>
+            <template slot-scope="{ row }" v-if="row.canCheck">
+              <el-checkbox @change="onCheckChange" v-model="row.isCheck"></el-checkbox>
             </template>
           </el-table-column>
         </el-table>
       </div>
     </div>
     <div class="issue-info-form module-panel">
-      <div class="panel-title">发票信息填写</div>
+      <div class="panel-title">发票信息填写
+        <el-button v-if="$isDev" class="right-flow" @click="devInput">mock</el-button>
+      </div>
       <el-form :model="form" :rules="rules" ref="form" label-width="80px" class="form-box" label-position="left">
         <el-form-item label="抬头类型" prop="titleType">
           <el-select v-model="form.titleType" placeholder="请选择抬头类型">
@@ -64,8 +85,9 @@
           </el-form-item>
         </template>
         <el-form-item label="开票金额" prop="money" class="max-money-box">
-          <el-input v-model.trim="form.money" type="Number" v-numberOnly :max="maxInvoiceMoney" placeholder="请输入开票金额"></el-input>
-          <div class="max-money">本次最大可开票金额：¥500.00</div>
+          <el-input v-model.trim="form.money" type="Number" v-numberOnly :min="minInvoiceMoney" :max="maxInvoiceMoney" placeholder="请输入开票金额"></el-input>
+          <div class="max-money">本次最大可开票金额：¥{{ maxInvoiceMoney | filtermoney }}</div>
+          <div class="max-money">本次最小可开票金额：¥{{ minInvoiceMoney | filtermoney }}</div>
         </el-form-item>
         <div class="panel-title">收票信息填写(选其一填写)</div>
         <el-form-item label="手机号" prop="phone">
@@ -85,6 +107,11 @@
 
 <script>
 import * as validator from '@/utils/validator'
+import * as Invoice from '@/api/invoice.js'
+import { toFixedNoRound } from '@/utils/validate.js'
+import { invoiceMock } from './invoiceMock.js'
+
+
 export default {
   name: 'invoice-issue',
   data () {
@@ -112,30 +139,32 @@ export default {
         callback()
       }
     }
+    const moneyRules = (rule, moneyValue, callback) => {
+      const reg = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(moneyValue)
+      if (!moneyValue) callback(new Error('请输入开票金额'))
+      if (!reg) {
+        callback(new Error('请填写正确的金额'))
+      } else {
+        callback()
+      }
+    }
     return {
       rules: {
         titleType: [{ required: true, message: '请选择抬头类型', trigger: 'change' }],
         title: [{ required: true, message: '请输入发票抬头', trigger: 'blur' }],
         taxNum: [{ required: true, validator: validator.taxNumValidator, messageNull: '请填写单位税号', messageError: '请填写正确单位税号', trigger: 'blur' }],
-        money: [{ required: true, validator: validator.positiveValidator, messageNull: '请输入开票金额', messageError: '请填写正确的金额', trigger: 'blur' }],
+        money: [{ required: true, validator: moneyRules, trigger: 'blur' }],
         telephone: [{ validator: validator.telValidator, message: '请填写正确的手机号或固定电话', trigger: 'blur' }],
         phone: [{ validator: validateElectronicPhone, trigger: ['blur', 'change'] }],
         email: [{ validator: validateElectronicEmail, trigger: ['blur', 'change'] }]
       },
-      orderSeachType: 1,
+      orderSeachType: 'phone', // phone 顾客手机号 orderNum 订单号
       orderSearchValue: '',
-      tableData: [
-        {
-          date: 'asdas',
-          isCheck: false
-        },
-        {
-          date: 'dsadas',
-          isCheck: false
-        }
-      ],
+      tableData: [],
+      orderListLoading: false,
       form: {
-        type: 'electronic', // 发票类型
+        invoiceType: 'electronic', // 发票类型
+        type: 'normal', // 普票
         titleType: '', // 抬头类型
         title: '', // 抬头
         taxNum: '', // 单位税号
@@ -148,58 +177,116 @@ export default {
         bankName: '', // 开户银行
         bankAccount: '' // 银行账号
       },
-      maxInvoiceMoney: 500 // 最大金额
-    }
-  },
-  computed: {
-    hasSomeCheck () {
-      if (this.isAllCheck) return false
-      return this.tableData.some(item => item.isCheck)
-    },
-    isAllCheck: {
-      get () {
-        return this.tableData.every(item => item.isCheck)
-      },
-      set () {
-        const isAllCheck = this.isAllCheck
-        this.tableData.forEach(item => item.isCheck = !isAllCheck)
+      pager: {
+        page: 1,
+        pageSize: 999,
+        total: 100
       }
     }
   },
+  computed: {
+    // 是否存在选中
+    hasSomeCheck () {
+      if (this.isAllCheck) return false
+      return this.tableData.some(item => item.isCheck && item.canCheck)
+    },
+    isAllCheck: {
+      get () {
+        if (!this.tableData.length) return false
+        return this.tableData.every(item => {
+          if (!item.canCheck) return true
+          return item.isCheck
+        })
+      },
+      set () {
+        const isAllCheck = this.isAllCheck
+        this.tableData.forEach(item => {
+          if (item.canCheck) { item.isCheck = !isAllCheck }
+        })
+      }
+    },
+    // 选中订单
+    checkOrder () {
+      const filteCheckOrder = this.tableData.filter(item => item.isCheck && item.canCheck)
+      return filteCheckOrder
+    },
+    // 最大金额
+    maxInvoiceMoney () {
+      const max = this.checkOrder.reduce(( acc, cur ) => acc + cur.canInvoiceMoney, 0)
+      return max
+    },
+    minInvoiceMoney () {
+      if (this.checkOrder.length > 1) {
+        const createData = _.sortBy(this.checkOrder, (a) => a.canInvoiceMoney)
+        return createData[0].canInvoiceMoney + 1
+      }
+      return 1
+    }
+  },
   methods: {
-    searchData () {
-      // TODO
+    /**
+     * @description 搜索页面
+     */
+    async searchData () {
+      try {
+        this.orderListLoading = true
+        await this.getCanInvoiceOrderList()
+      } catch (error) {
+        throw new Error(error)
+      } finally {
+        this.orderListLoading = false
+      }
+    },
+    /**
+     * @description 搜索
+     */
+    async getCanInvoiceOrderList () {
+      if (!this.orderSearchValue) return this.$newMessage.warning('请输入相关信息')
+      const req = {
+        page: this.pager.page,
+        pageSize: this.pager.pageSize,
+        [this.orderSeachType]: this.orderSearchValue
+      }
+      const data = await Invoice.getCanInvoiceOrderList(req)
+      this.tableData = data.list
     },
     /**
      * @description 开具
      */
     async submitForm () {
       try {
+        this.$loading()
         await this.$refs.form.validate()
         const receiveInfo = ['phone', 'email']
         const otherInfo = ['address', 'telephone', 'bankName', 'bankAccount']
-        const req = {}
+        const orderNums = this.checkOrder.map(item => item.orderNum)
+        if (!orderNums.length) return this.$newMessage.warning('请选中单号')
+        const req = { order_nums: orderNums }
         for (const key in this.form) {
           const value = this.form[key]
           if (!value) continue
           if (receiveInfo.includes(key)) {
             if (!req.receiveInfo) req.receiveInfo = {}
             req.receiveInfo[key] = value
-          } else if (otherInfo.includes(key)) {
+          } else if (otherInfo.includes(key) && this.form.titleType === 'company') {
             if (!req.otherInfo) req.otherInfo = {}
             req.otherInfo[key] = value
           } else {
-            if (key === 'money' && value > this.maxInvoiceMoney) return this.$newMessage.waring('输入开票金额大于本次最大可开票金额')
+            if (key === 'money' && value > this.maxInvoiceMoney) return this.$newMessage.warning('输入开票金额大于本次最大可开票金额')
             req[key] = value
           }
         }
-        // TODO 开票成功清除form数据
+        await Invoice.applyInvoice(req)
+        await this.getCanInvoiceOrderList()
+        this.resetData()
       } catch (error) {
         if (typeof error === 'boolean') {
           console.error('开具失败' + error)
         } else {
           throw new Error(`开具失败${error}`)
         }
+      } finally {
+        this.$loadingClose()
       }
     },
     /**
@@ -222,6 +309,36 @@ export default {
     // 邮箱验证
     onInputEmail (type, len) {
       this.$refs.form.validateField('phone')
+    },
+    /**
+     * @description 选中变化
+     */
+    onCheckChange () {
+      this.form.money = ''
+    },
+    /**
+     * @description 格式化金钱
+     */
+    stringMoney (row, column, cellValue, index) {
+      const money = toFixedNoRound(cellValue)
+      return `¥${money}`
+    },
+    /**
+     * @description 清空数据
+     */
+    resetData () {
+      this.$refs['form'].resetFields()
+    },
+    /**
+     * @description 模拟输入
+     */
+    devInput () {
+      this.form = JSON.parse(JSON.stringify(invoiceMock))
+    }
+  },
+  filters: {
+    filtermoney (val) {
+      return val.toFixed(2)
     }
   }
 }
@@ -235,6 +352,7 @@ export default {
 
   .search-box {
     margin-bottom: 0;
+    background-color: #fff;
 
     .input-with-select {
       & /deep/ .el-input__inner {
@@ -248,6 +366,12 @@ export default {
 
     .button-box {
       margin-bottom: 20px;
+    }
+
+    .max-invoice-money {
+      margin-left: auto;
+      font-size: 12px;
+      color: @red;
     }
   }
 
@@ -275,7 +399,6 @@ export default {
           font-size: 14px;
           font-weight: 400;
           color: @red;
-          color: rgba(230, 64, 73, 1);
         }
       }
 

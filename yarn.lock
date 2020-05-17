@@ -2154,8 +2154,8 @@ browserslist@^4.0.0, browserslist@^4.11.1, browserslist@^4.8.5:
 
 buffer-from@^1.0.0:
   version "1.1.1"
-  resolved "https://registry.npm.taobao.org/buffer-from/download/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
-  integrity sha1-MnE7wCj3XAL9txDXx7zsHyxgcO8=
+  resolved "https://npm.code.hzmantu.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
+  integrity sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==
 
 buffer-indexof@^1.0.0:
   version "1.1.1"
@@ -6500,10 +6500,10 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-mainto-fed-utils@^1.0.0-release.17:
-  version "1.0.0-release.17"
-  resolved "https://npm.code.hzmantu.com/mainto-fed-utils/-/mainto-fed-utils-1.0.0-release.17.tgz#860799f2e4216cce4352acd5514792b53dd8f500"
-  integrity sha512-ptjWI4VVFn5SHoNqyPtBvIvDiqvpJsgOgPfWJZwuwuAf21u5UzmEvOlAMk9NWo8wAL9581i6wUTNWi5UkkfHtQ==
+mainto-fed-utils@^1.0.1-release.0:
+  version "1.0.1-release.0"
+  resolved "https://npm.code.hzmantu.com/mainto-fed-utils/-/mainto-fed-utils-1.0.1-release.0.tgz#47deccb30730bc005b357fdf225df01314a4701a"
+  integrity sha512-XnvJySmX+F414qKu5vqXJQGmzgnHN5vo/KUVm0KO3Q3QyYy5G4ENsAhzD/Zq7XuWpMzYtY9Vi+MqXh44Ircsnw==
   dependencies:
     core-js "^3.6.5"
     file-saver "^2.0.2"
@@ -8928,10 +8928,15 @@ safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   resolved "https://registry.npm.taobao.org/safe-buffer/download/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
   integrity sha1-mR7GnSluAxN0fVm9/St0XDX4go0=
 
-safe-buffer@>=5.1.0, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@^5.2.0, safe-buffer@~5.2.0:
+safe-buffer@>=5.1.0, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@^5.2.0:
   version "5.2.0"
   resolved "https://registry.npm.taobao.org/safe-buffer/download/safe-buffer-5.2.0.tgz#b74daec49b1148f88c64b68d49b1e815c1f2f519"
   integrity sha1-t02uxJsRSPiMZLaNSbHoFcHy9Rk=
+
+safe-buffer@~5.2.0:
+  version "5.2.1"
+  resolved "https://npm.code.hzmantu.com/safe-buffer/-/safe-buffer-5.2.1.tgz#1eaf9fa9bdb1fdd4ec75f58f9cdb4e6b7827eec6"
+  integrity sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==
 
 safe-regex@^1.1.0:
   version "1.1.0"
@@ -10144,7 +10149,7 @@ typedarray-to-buffer@^3.1.5:
 
 typedarray@^0.0.6:
   version "0.0.6"
-  resolved "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+  resolved "https://npm.code.hzmantu.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
 uglify-js@3.4.x:

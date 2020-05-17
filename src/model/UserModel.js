@@ -31,8 +31,9 @@ export default class UserModel {
     this.phone = userData.phone
     this.createdAt = userData.created_at || '-'
     this.consumeTotal = Number(userData.consume_total)
+    // TODO 缺少消费次数
     this.userConsumeNum = Number(userData.user_consume_num)
     // TODO
-    this.recentlyConsume = '-'
+    this.recentlyConsume = userData.last_buy_time || '-'
   }
 }

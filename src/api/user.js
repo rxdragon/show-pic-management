@@ -58,6 +58,5 @@ export function logout () {
     for (const key in window.polling) {
       clearTimeout(window.polling[key])
     }
-    SessionTool.removeSession()
   })
 }
