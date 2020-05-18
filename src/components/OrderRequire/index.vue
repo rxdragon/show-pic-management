@@ -22,7 +22,6 @@
       <div class="require-row photo-mark" v-if="requiresInfo.referenceDiagram">
         <div class="require-label">参考图：</div>
         <div class="require-value">
-          我的风格
           <el-image
             :src="requiresInfo.referenceDiagramCompress"
             :preview-src-list="[requiresInfo.referenceDiagramOriginal]">
@@ -39,6 +38,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import * as DownPhoto from '@/utils/DownPhoto.js'
 
 export default {
@@ -47,6 +47,7 @@ export default {
     orderInfo: { type: Object, required: true }
   },
   computed: {
+    ...mapGetters(['imgDomain']),
     requiresInfo () {
       return this.orderInfo.requiresData || {}
     }
@@ -60,7 +61,7 @@ export default {
      * @description 下载照片
      */
     downPhoto () {
-      DownPhoto.downOnePicture(this.requiresInfo.referenceDiagram)
+      DownPhoto.downOnePicture(this.imgDomain + this.requiresInfo.referenceDiagram)
     }
   },
   filters: {

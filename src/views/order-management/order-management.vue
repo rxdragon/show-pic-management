@@ -26,7 +26,7 @@
         </div>
         <div class="button-box">
           <el-button type="primary" size="small" @click="initPage(1)">查 询</el-button>
-          <el-button type="success" size="small" @click="outExecl">导 出</el-button>
+          <el-button type="blue" size="small" @click="outExecl">导 出</el-button>
         </div>
       </div>
       <!-- 收益信息 -->

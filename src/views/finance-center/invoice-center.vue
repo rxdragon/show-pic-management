@@ -20,7 +20,7 @@
         </div>
         <div class="button-box">
           <el-button type="primary" size="small" @click="searchData(1)">查 询</el-button>
-          <el-button type="success" size="small" @click="outExcel">导 出</el-button>
+          <el-button type="blue" size="small" @click="outExcel">导 出</el-button>
         </div>
       </div>
       <!-- 订单列表 -->

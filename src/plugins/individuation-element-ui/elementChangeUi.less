@@ -4,6 +4,30 @@
   &--small {
     border-radius: 4px;
   }
+
+  &--blue {
+    color: #fff;
+    background-color: @blue;
+    border-color: @blue;
+
+    &:focus,
+    &:hover {
+      color: #fff;
+      background: @bluehover;
+      border-color: @bluehover;
+    }
+
+    &.is-plain {
+      color: #4669fb;
+      background: #edf0ff;
+      border-color: #b5c3fd;
+
+      &:focus,
+      &:hover {
+        color: @blue !important;
+      }
+    }
+  }
 }
 
 .el-submenu__title i,

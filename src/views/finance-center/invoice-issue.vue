@@ -40,7 +40,10 @@
           </el-table-column>
           <el-table-column prop="canInvoiceMoney" label="可开票金额" :formatter="stringMoney"/>
           <el-table-column prop="invoiceStateCN" label="开票状态" />
-          <el-table-column prop="date" label="操作" align="right" width="100">
+          <el-table-column align="right" width="100" >
+            <template slot="header" slot-scope="{ row }">
+              <span class="table-header" :id="row">操作</span>
+            </template>
             <template slot-scope="{ row }" v-if="row.canCheck">
               <el-checkbox @change="onCheckChange" v-model="row.isCheck"></el-checkbox>
             </template>
@@ -256,6 +259,7 @@ export default {
           }
         }
         await Invoice.applyInvoice(req)
+        this.$newMessage.success('开票成功')
         await this.getCanInvoiceOrderList()
         this.resetData()
       } catch (error) {
@@ -367,11 +371,11 @@ export default {
     margin-top: 0;
 
     .table-header {
-      margin-right: 8px;
+      padding-right: 16px;
     }
 
     .el-checkbox {
-      margin-right: 7px;
+      margin-right: 16px;
     }
 
     /deep/ .el-checkbox__inner {

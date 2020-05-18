@@ -22,6 +22,12 @@
  - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
 
 
+### 🎨 代码样式
+范围|描述|commitId
+--|--|--
+ - | 更改样式 | [9483937](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9483937)
+
+
 ### 🐛 Bug 修复
 范围|描述|commitId
 --|--|--
