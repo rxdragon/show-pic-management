@@ -1,4 +1,4 @@
-# 0.1.0 (2020-05-17)
+# 0.1.0 (2020-05-18)
 
 范围|描述|commitId
 --|--|--
@@ -20,6 +20,12 @@
  - | 更新用户获取信息 | [a7a8bbd](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a7a8bbd)
  - | 用户管理 | [cd016f5](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/cd016f5)
  - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
+
+
+### 🐛 Bug 修复
+范围|描述|commitId
+--|--|--
+ - | 修图查询显示 | [85c5083](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/85c5083)
 
 
 ### 🚀 性能优化

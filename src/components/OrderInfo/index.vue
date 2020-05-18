@@ -24,7 +24,7 @@
                 <p v-for="(productItem, productIndex) in orderData.productList" :key="productIndex">{{ productItem }}</p>
                 <p>照片张数：{{ orderData.photoNum }}张</p>
               </div>
-              <i slot="reference" class="product-more el-icon-s-unfold"></i>
+              <i slot="reference" class="product-more iconfont icongengduo"></i>
             </el-popover>
           </th>
           <th>¥{{ orderData.totalFee }}</th>

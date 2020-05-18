@@ -34,17 +34,13 @@
                     <p v-for="(productItem, productIndex) in row.productList" :key="productIndex">{{ productItem }}</p>
                     <p>照片张数：{{ row.photoNum }}张</p>
                   </div>
-                  <i slot="reference" class="product-more el-icon-s-unfold"></i>
+                  <i slot="reference" class="product-more iconfont icongengduo"></i>
                 </el-popover>
             </template>
           </el-table-column>
           <el-table-column prop="canInvoiceMoney" label="可开票金额" :formatter="stringMoney"/>
           <el-table-column prop="invoiceStateCN" label="开票状态" />
-          <el-table-column prop="date" label="操控" align="right" width="100">
-            <template slot="header" slot-scope="{ row }">
-              <span class="table-header">操作</span>
-              <el-checkbox v-model="isAllCheck" :indeterminate="hasSomeCheck" @change="onCheckChange" :class="row" :disabled="!Boolean(tableData.length)" ></el-checkbox>
-            </template>
+          <el-table-column prop="date" label="操作" align="right" width="100">
             <template slot-scope="{ row }" v-if="row.canCheck">
               <el-checkbox @change="onCheckChange" v-model="row.isCheck"></el-checkbox>
             </template>
@@ -52,56 +48,58 @@
         </el-table>
       </div>
     </div>
-    <div class="issue-info-form module-panel">
-      <div class="panel-title">发票信息填写
-        <el-button v-if="$isDev" class="right-flow" @click="devInput">mock</el-button>
+    <template v-if="this.checkOrder.length">
+      <div class="issue-info-form module-panel">
+        <div class="panel-title">发票信息填写
+          <el-button v-if="$isDev" class="right-flow" @click="devInput">mock</el-button>
+        </div>
+        <el-form :model="form" :rules="rules" ref="form" label-width="80px" class="form-box" label-position="left">
+          <el-form-item label="抬头类型" prop="titleType">
+            <el-select v-model="form.titleType" placeholder="请选择抬头类型">
+              <el-option label="个人" value="person"></el-option>
+              <el-option label="单位" value="company"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="发票抬头" prop="title">
+            <el-input v-model="form.title" placeholder="请输入发票抬头"></el-input>
+          </el-form-item>
+          <el-form-item v-if="form.titleType === 'company'" label="单位税号" prop="taxNum">
+            <el-input v-model="form.taxNum" placeholder="请输入单位税号"></el-input>
+          </el-form-item>
+          <!--当抬头类型为单位时显示 -->
+          <template v-if="form.titleType === 'company'">
+            <el-form-item label="注册地址" prop="address">
+              <el-input v-model.trim="form.address" placeholder="请输入注册地址"></el-input>
+            </el-form-item>
+            <el-form-item label="注册电话" prop="telephone">
+              <el-input v-model.trim="form.telephone" placeholder="请输入注册电话"></el-input>
+            </el-form-item>
+            <el-form-item label="开户银行" prop="bankName">
+              <el-input v-model.trim="form.bankName" placeholder="请输入开户银行"></el-input>
+            </el-form-item>
+            <el-form-item label="银行账号" prop="bankAccount">
+              <el-input v-model.trim="form.bankAccount" placeholder="请输入银行账号"></el-input>
+            </el-form-item>
+          </template>
+          <el-form-item label="开票金额" prop="money" class="max-money-box">
+            <el-input v-model.trim="form.money" type="Number" v-numberOnly :min="minInvoiceMoney" :max="maxInvoiceMoney" placeholder="请输入开票金额"></el-input>
+            <div class="max-money">本次最大可开票金额：¥{{ maxInvoiceMoney | filtermoney }}</div>
+            <div class="max-money">本次最小可开票金额：¥{{ minInvoiceMoney | filtermoney }}</div>
+          </el-form-item>
+          <div class="panel-title">收票信息填写(选其一填写)</div>
+          <el-form-item label="手机号" prop="phone">
+            <el-input v-model.trim="form.phone" maxlength="11" placeholder="请输入手机号"></el-input>
+          </el-form-item>
+          <el-form-item label="邮箱地址" prop="email">
+            <el-input v-model.trim="form.email" placeholder="请输入邮箱地址"></el-input>
+          </el-form-item>
+        </el-form>
       </div>
-      <el-form :model="form" :rules="rules" ref="form" label-width="80px" class="form-box" label-position="left">
-        <el-form-item label="抬头类型" prop="titleType">
-          <el-select v-model="form.titleType" placeholder="请选择抬头类型">
-            <el-option label="个人" value="person"></el-option>
-            <el-option label="单位" value="company"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="发票抬头" prop="title">
-          <el-input v-model="form.title" placeholder="请输入发票抬头"></el-input>
-        </el-form-item>
-        <el-form-item label="单位税号" prop="taxNum">
-          <el-input v-model="form.taxNum" placeholder="请输入单位税号"></el-input>
-        </el-form-item>
-        <!--当抬头类型为单位时显示 -->
-        <template v-if="form.titleType === 'company'">
-          <el-form-item label="注册地址" prop="address">
-            <el-input v-model.trim="form.address" placeholder="请输入注册地址"></el-input>
-          </el-form-item>
-          <el-form-item label="注册电话" prop="telephone">
-            <el-input v-model.trim="form.telephone" placeholder="请输入注册电话"></el-input>
-          </el-form-item>
-          <el-form-item label="开户银行" prop="bankName">
-            <el-input v-model.trim="form.bankName" placeholder="请输入开户银行"></el-input>
-          </el-form-item>
-          <el-form-item label="银行账号" prop="bankAccount">
-            <el-input v-model.trim="form.bankAccount" placeholder="请输入银行账号"></el-input>
-          </el-form-item>
-        </template>
-        <el-form-item label="开票金额" prop="money" class="max-money-box">
-          <el-input v-model.trim="form.money" type="Number" v-numberOnly :min="minInvoiceMoney" :max="maxInvoiceMoney" placeholder="请输入开票金额"></el-input>
-          <div class="max-money">本次最大可开票金额：¥{{ maxInvoiceMoney | filtermoney }}</div>
-          <div class="max-money">本次最小可开票金额：¥{{ minInvoiceMoney | filtermoney }}</div>
-        </el-form-item>
-        <div class="panel-title">收票信息填写(选其一填写)</div>
-        <el-form-item label="手机号" prop="phone">
-          <el-input v-model.trim="form.phone" maxlength="11" placeholder="请输入手机号"></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱地址" prop="email">
-          <el-input v-model.trim="form.email" placeholder="请输入邮箱地址"></el-input>
-        </el-form-item>
-      </el-form>
-    </div>
-    <div class="submit-box">
-      <el-button type="info" @click="backToSubmit">返回</el-button>
-      <el-button type="primary" @click="submitForm">提交</el-button>
-    </div>
+      <div class="submit-box">
+        <el-button type="info" @click="backToSubmit">返回</el-button>
+        <el-button type="primary" @click="submitForm">提交</el-button>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -159,7 +157,7 @@ export default {
         email: [{ validator: validateElectronicEmail, trigger: ['blur', 'change'] }]
       },
       orderSeachType: 'phone', // phone 顾客手机号 orderNum 订单号
-      orderSearchValue: '',
+      orderSearchValue: '15726818166',
       tableData: [],
       orderListLoading: false,
       form: {
@@ -185,26 +183,6 @@ export default {
     }
   },
   computed: {
-    // 是否存在选中
-    hasSomeCheck () {
-      if (this.isAllCheck) return false
-      return this.tableData.some(item => item.isCheck && item.canCheck)
-    },
-    isAllCheck: {
-      get () {
-        if (!this.tableData.length) return false
-        return this.tableData.every(item => {
-          if (!item.canCheck) return true
-          return item.isCheck
-        })
-      },
-      set () {
-        const isAllCheck = this.isAllCheck
-        this.tableData.forEach(item => {
-          if (item.canCheck) { item.isCheck = !isAllCheck }
-        })
-      }
-    },
     // 选中订单
     checkOrder () {
       const filteCheckOrder = this.tableData.filter(item => item.isCheck && item.canCheck)
@@ -215,6 +193,7 @@ export default {
       const max = this.checkOrder.reduce(( acc, cur ) => acc + cur.canInvoiceMoney, 0)
       return max
     },
+    // 最小金额
     minInvoiceMoney () {
       if (this.checkOrder.length > 1) {
         const createData = _.sortBy(this.checkOrder, (a) => a.canInvoiceMoney)
@@ -389,6 +368,14 @@ export default {
 
     .table-header {
       margin-right: 8px;
+    }
+
+    .el-checkbox {
+      margin-right: 7px;
+    }
+
+    /deep/ .el-checkbox__inner {
+      border-radius: 50%;
     }
   }
 

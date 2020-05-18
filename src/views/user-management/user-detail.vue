@@ -18,7 +18,7 @@
                   <p v-for="(productItem, productIndex) in row.productList" :key="productIndex">{{ productItem }}</p>
                   <p>照片张数：{{ row.photoNum }}张</p>
                 </div>
-                <i slot="reference" class="product-more el-icon-s-unfold"></i>
+                <i slot="reference" class="product-more iconfont icongengduo"></i>
               </el-popover>
             </template>
           </el-table-column>

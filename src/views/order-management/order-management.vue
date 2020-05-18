@@ -62,7 +62,7 @@
                     <p v-for="(productItem, productIndex) in row.productList" :key="productIndex">{{ productItem }}</p>
                     <p>照片张数：{{ row.photoNum }}张</p>
                   </div>
-                  <i slot="reference" class="product-more el-icon-s-unfold"></i>
+                  <i slot="reference" class="product-more iconfont icongengduo"></i>
                 </el-popover>
             </template>
           </el-table-column>
@@ -105,7 +105,7 @@
     <el-dialog
       title="订单关闭原因"
       :visible="Boolean(closeOrderId)"
-      :show-close="false"
+      :show-close="false" top="50vh"
       custom-class="close-dialog" width="30%" center>
       <div class="close-desc">
         <el-input
@@ -337,6 +337,8 @@ export default {
 
 <style lang="less">
 .close-dialog {
+  transform: translateY(-50%);
+
   .el-dialog__body {
     padding: 20px;
   }

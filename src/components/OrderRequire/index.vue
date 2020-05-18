@@ -128,7 +128,7 @@ export default {
 
     .tag-box {
       .el-tag {
-        margin-right: 20px;
+        margin-right: 12px;
       }
     }
 

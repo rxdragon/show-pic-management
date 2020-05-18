@@ -31,7 +31,7 @@
           <i class="el-image-viewer__actions__divider"></i>
           <i class="el-icon-refresh-left" @click="handleActions('anticlocelise')"></i>
           <i class="el-icon-refresh-right" @click="handleActions('clocelise')"></i>
-          <el-button type="primary" size="small" @click="downPhoto">点击下载</el-button>
+          <el-button class="down-btn" type="primary" size="small" @click="downPhoto">点击下载</el-button>
         </div>
       </div>
       <!-- CANVAS -->
@@ -286,3 +286,22 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+/deep/ .el-icon-circle-close {
+  color: #fff !important;
+}
+
+.el-image-viewer__btn {
+  background-color: rgba(96, 98, 102, 0.8);
+  opacity: 1;
+
+  i {
+    opacity: 0.8;
+  }
+
+  .down-btn {
+    margin-left: 10px;
+  }
+}
+</style>

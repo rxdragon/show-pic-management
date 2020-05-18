@@ -6,7 +6,7 @@ Vue.use(Router)
 
 import orderManagement from './modules/orderManagement.js' // 订单管理
 import userManagement from './modules/userManagement.js' // 订单管理
-import financeCenter from './modules/financeCenter.js' // 订单管理
+import financeCenter from './modules/financeCenter.js' // 财务中心
 
 // 基础权限路由
 export const constantRoutes = [
@@ -46,23 +46,6 @@ export const constantRoutes = [
     hidden: true
   }
 ]
-
-
-
-// export const lastBaseRoutes = [
-//   {
-//     path: '/update-notes',
-//     component: Layout,
-//     children: [
-//       {
-//         path: 'updateNotes',
-//         name: 'updateNotes',
-//         component: () => import('@/views/update-notes/index.vue'),
-//         meta: { title: '关于', icon: 'el-icon-s-order' }
-//       }
-//     ]
-//   }
-// ]
 
 export const asyncRoutes = [
   orderManagement,
