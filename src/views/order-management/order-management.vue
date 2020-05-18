@@ -221,12 +221,14 @@ export default {
      */
     async submitCloseOrder () {
       try {
+        if (!this.closeMessage) return this.$newMessage.warning('请填写订单关闭原因!')
         this.submitCloseLoading = true
         const req = {
           id: this.closeOrderId,
           reason: this.closeMessage
         }
         await Order.closeOrder(req)
+        this.$newMessage.success('关单成功')
         this.resetCloseInfo()
         this.initPage()
       } catch (error) {
