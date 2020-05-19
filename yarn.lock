@@ -4008,6 +4008,14 @@ eslint-module-utils@^2.4.1:
     debug "^2.6.9"
     pkg-dir "^2.0.0"
 
+eslint-plugin-attributes@^1.1.8:
+  version "1.1.8"
+  resolved "https://npm.code.hzmantu.com/eslint-plugin-attributes/-/eslint-plugin-attributes-1.1.8.tgz#87cb7e8cc8382b3fd86345dc23c1fc499315cb4a"
+  integrity sha512-s1kx8mC7IhX6kxrIwqxkcGn+TeR7w+1yoXu+tXmasc1n/ApeBad2zybk32SfyEOeJHEmp/0yNm9lak3rsBgU8w==
+  dependencies:
+    requireindex "~1.1.0"
+    vue-eslint-parser "^7.0.0"
+
 eslint-plugin-import@^2.18.2, eslint-plugin-import@^2.20.2:
   version "2.20.2"
   resolved "https://registry.npm.taobao.org/eslint-plugin-import/download/eslint-plugin-import-2.20.2.tgz?cache=0&sync_timestamp=1585455648129&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-plugin-import%2Fdownload%2Feslint-plugin-import-2.20.2.tgz#91fc3807ce08be4837141272c8b99073906e588d"
@@ -8764,6 +8772,11 @@ require-main-filename@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/require-main-filename/download/require-main-filename-2.0.0.tgz#d0b329ecc7cc0f61649f62215be69af54aa8989b"
   integrity sha1-0LMp7MfMD2Fkn2IhW+aa9UqomJs=
+
+requireindex@~1.1.0:
+  version "1.1.0"
+  resolved "https://npm.code.hzmantu.com/requireindex/-/requireindex-1.1.0.tgz#e5404b81557ef75db6e49c5a72004893fe03e162"
+  integrity sha1-5UBLgVV+91225JxacgBIk/4D4WI=
 
 requires-port@^1.0.0:
   version "1.0.0"

@@ -38,35 +38,40 @@
       <div class="table-box" v-show="tableData.length">
         <el-table :data="tableData" style="width: 100%;">
           <el-table-column label="订单号" width="180">
-             <template slot-scope="{ row }">
-               <el-popover
-                  placement="bottom-start"
-                  trigger="hover">
-                  <div class="order-info">
-                    <p>顾客姓名：{{ row.clientName }}</p>
-                    <p>手机：{{ row.clientPhone }}</p>
-                    <p>照片张数：{{ row.photoNum }}张</p>
-                  </div>
-                  <div slot="reference" class="order-num">{{ row.orderNum }}</div>
-                </el-popover>
-             </template>
+            <template slot-scope="{ row }">
+              <el-popover placement="bottom-start" trigger="hover">
+                <div class="order-info">
+                  <p>顾客姓名：{{ row.clientName }}</p>
+                  <p>手机：{{ row.clientPhone }}</p>
+                  <p>照片张数：{{ row.photoNum }}张</p>
+                </div>
+                <div slot="reference" class="order-num">{{ row.orderNum }}</div>
+              </el-popover>
+            </template>
           </el-table-column>
           <el-table-column label="下单产品">
             <template slot-scope="{ row }">
               {{ row.productShow || '-' }}
-              <el-popover
-                  v-if="row.productShow"
-                  placement="bottom-start"
-                  trigger="hover">
-                  <div class="order-info">
-                    <p v-for="(productItem, productIndex) in row.productList" :key="productIndex">{{ productItem }}</p>
-                    <p>照片张数：{{ row.photoNum }}张</p>
-                  </div>
-                  <i slot="reference" class="product-more iconfont icongengduo"></i>
-                </el-popover>
+              <el-popover v-if="row.productShow" placement="bottom-start" trigger="hover">
+                <div class="order-info">
+                  <p
+                    v-for="(productItem, productIndex) in row.productList"
+                    :key="productIndex"
+                  >
+                    {{ productItem }}
+                  </p>
+                  <p>照片张数：{{ row.photoNum }}张</p>
+                </div>
+                <i slot="reference" class="product-more iconfont icongengduo"></i>
+              </el-popover>
             </template>
           </el-table-column>
-          <el-table-column prop="totalFee" label="金额" width="150" :formatter="stringMoney"/>
+          <el-table-column
+            prop="totalFee"
+            label="金额"
+            width="150"
+            :formatter="stringMoney"
+          />
           <el-table-column prop="stateCN" label="状态" width="100" />
           <el-table-column label="订单来源" width="80">
             <template slot-scope="{ row }">
@@ -105,8 +110,12 @@
     <el-dialog
       title="订单关闭原因"
       :visible="Boolean(closeOrderId)"
-      :show-close="false" top="50vh"
-      custom-class="close-dialog" width="30%" center>
+      :show-close="false"
+      top="50vh"
+      custom-class="close-dialog"
+      width="30%"
+      center
+    >
       <div class="close-desc">
         <el-input
           type="textarea"
@@ -114,11 +123,17 @@
           v-model="closeMessage"
           rows="6"
           maxlength="100"
-          show-word-limit />
+          show-word-limit
+        />
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button type="info" size="small" @click="resetCloseInfo">取 消</el-button>
-        <el-button type="primary" size="small" :loading="submitCloseLoading" @click="submitCloseOrder">确 定</el-button>
+        <el-button
+          type="primary"
+          size="small"
+          :loading="submitCloseLoading"
+          @click="submitCloseOrder"
+        >确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -188,13 +203,19 @@ export default {
         page: this.pager.page,
         pageSize: this.pager.pageSize
       }
-      if (this.timeSpan) { req.cond.createdAtRange = getSeachTime(this.timeSpan) }
-      if (this.orderSearchValue) { req.cond[this.orderSeachType] = this.orderSearchValue }
+      if (this.timeSpan) {
+        req.cond.createdAtRange = getSeachTime(this.timeSpan)
+      }
+      if (this.orderSearchValue) {
+        req.cond[this.orderSeachType] = this.orderSearchValue
+      }
       if (this.orderState) {
         const [key, value] = this.orderState.split(',')
         req.cond[key] = value
       }
-      if (this.orderSource) { req.cond.from = this.orderSource }
+      if (this.orderSource) {
+        req.cond.from = this.orderSource
+      }
       const data = await Order.getOrderList(req)
       this.tableData = data.list
       this.pager.total = data.total
@@ -271,13 +292,19 @@ export default {
       try {
         this.$loading()
         const req = { cond: {} }
-        if (this.timeSpan) { req.cond.createdAtRange = getSeachTime(this.timeSpan) }
-        if (this.orderSearchValue) { req.cond[this.orderSeachType] = this.orderSearchValue }
+        if (this.timeSpan) {
+          req.cond.createdAtRange = getSeachTime(this.timeSpan)
+        }
+        if (this.orderSearchValue) {
+          req.cond[this.orderSeachType] = this.orderSearchValue
+        }
         if (this.orderState) {
           const [key, value] = this.orderState.split(',')
           req.cond[key] = value
         }
-        if (this.orderSource) { req.cond.from = this.orderSource }
+        if (this.orderSource) {
+          req.cond.from = this.orderSource
+        }
         const timeString = this.timeSpan ? this.timeSpan.join('~') : '全部'
         const data = await Order.exportExcel(req)
         const excelName = timeString + '修修兽订单'

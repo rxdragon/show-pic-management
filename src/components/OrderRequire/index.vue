@@ -14,7 +14,12 @@
       </div>
       <div class="require-row tag-box">
         <template v-for="(requiresItem, requiresIndex) in requiresInfo.baseRequires">
-          <el-tag size="medium" type="success" :key="requiresIndex" v-if="Boolean(requiresItem)">
+          <el-tag
+            size="medium"
+            type="success"
+            :key="requiresIndex"
+            v-if="Boolean(requiresItem)"
+          >
             {{ requiresIndex | tagFilter }}{{ requiresItem | toLabelName }}
           </el-tag>
         </template>
@@ -24,7 +29,8 @@
         <div class="require-value">
           <el-image
             :src="requiresInfo.referenceDiagramCompress"
-            :preview-src-list="[requiresInfo.referenceDiagramOriginal]">
+            :preview-src-list="[requiresInfo.referenceDiagramOriginal]"
+          >
           </el-image>
           <el-link :underline="false" type="success" @click="downPhoto">下载风格照片</el-link>
         </div>
@@ -43,27 +49,6 @@ import * as DownPhoto from '@/utils/DownPhoto.js'
 
 export default {
   name: 'OrderRequire',
-  props: {
-    orderInfo: { type: Object, required: true }
-  },
-  computed: {
-    ...mapGetters(['imgDomain']),
-    requiresInfo () {
-      return this.orderInfo.requiresData || {}
-    }
-  },
-  data () {
-    return {
-    }
-  },
-  methods: {
-    /**
-     * @description 下载照片
-     */
-    downPhoto () {
-      DownPhoto.downOnePicture(this.imgDomain + this.requiresInfo.referenceDiagram)
-    }
-  },
   filters: {
     tagFilter (val) {
       const tagCN = {
@@ -72,6 +57,27 @@ export default {
         pimples: '祛痣'
       }
       return tagCN[val]
+    }
+  },
+  props: {
+    orderInfo: { type: Object, required: true }
+  },
+  data () {
+    return {
+    }
+  },
+  computed: {
+    ...mapGetters(['imgDomain']),
+    requiresInfo () {
+      return this.orderInfo.requiresData || {}
+    }
+  },
+  methods: {
+    /**
+     * @description 下载照片
+     */
+    downPhoto () {
+      DownPhoto.downOnePicture(this.imgDomain + this.requiresInfo.referenceDiagram)
     }
   }
 }

@@ -5,7 +5,13 @@
         <photo-box :src="photoItem.src" :version="photoItem.version" @click.native="showImageView(photoIndex)" />
       </div>
     </template>
-    <image-view :z-index="zIndex" :photo-index="showPhotoIndex" v-if="showViewer" :show-viewer.sync="showViewer" :url-list="previewSrcList" />
+    <image-view
+      :z-index="zIndex"
+      :photo-index="showPhotoIndex"
+      v-if="showViewer"
+      :show-viewer.sync="showViewer"
+      :url-list="previewSrcList"
+    />
   </div>
 </template>
 

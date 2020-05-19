@@ -5,23 +5,31 @@
       <order-require class="order-require" :order-info="orderData" />
     </div>
     <div class="photo-data module-panel">
-       <div class="panel-title">
-         照片详情
-         <div class="button-box right-flow">
-           <template v-for="buttonItem in downPhotoVersion">
+      <div class="panel-title">
+        照片详情
+        <div class="button-box right-flow">
+          <template v-for="buttonItem in downPhotoVersion">
             <el-button
               v-if="buttonItem.hasPath"
-              :key="buttonItem.version" :loading="buttonItem.loading"
-              @click="downForZip(buttonItem.version)" size="small" type="primary">
+              :key="buttonItem.version"
+              :loading="buttonItem.loading"
+              @click="downForZip(buttonItem.version)"
+              size="small"
+              type="primary"
+            >
               {{ buttonItem.version | versionCN }}下载
             </el-button>
-           </template>
-         </div>
-       </div>
-       <div class="photo-version-box" v-for="(photoItem, photoIndex) in orderData.orderPhotoList" :key="photoIndex">
-         <div class="photo-title">{{ photoItem.streamlabel }} - 照片{{ photoIndex + 1 }}</div>
-         <photo-version :photo-version="photoItem.photoVersion" />
-       </div>
+          </template>
+        </div>
+      </div>
+      <div
+        class="photo-version-box"
+        v-for="(photoItem, photoIndex) in orderData.orderPhotoList"
+        :key="photoIndex"
+      >
+        <div class="photo-title">{{ photoItem.streamlabel }} - 照片{{ photoIndex + 1 }}</div>
+        <photo-version :photo-version="photoItem.photoVersion" />
+      </div>
     </div>
   </div>
 </template>
@@ -37,6 +45,16 @@ import * as Order from '@/api/order.js'
 export default {
   name: 'orderDetail',
   components: { OrderInfo, OrderRequire, PhotoVersion },
+  filters: {
+    versionCN (val) {
+      const CN = {
+        originalPath: '原片',
+        finalPath: '顾客满意片',
+        cloudFinishPath: '云端成片'
+      }
+      return CN[val]
+    }
+  },
   data () {
     return {
       orderData: {},
@@ -104,16 +122,6 @@ export default {
       DownPhoto.downForZip(imgArr, zipName, () => {
         findVersionButton.loading = false
       })
-    }
-  },
-  filters: {
-    versionCN (val) {
-      const CN = {
-        originalPath: '原片',
-        finalPath: '顾客满意片',
-        cloudFinishPath: '云端成片'
-      }
-      return CN[val]
     }
   }
 }

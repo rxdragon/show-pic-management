@@ -16,12 +16,14 @@
           <th>{{ orderData.paidAt }}</th>
           <th>
             {{ orderData.productShow || '-' }}
-            <el-popover
-              v-if="orderData.productShow"
-              placement="bottom-start"
-              trigger="hover">
+            <el-popover v-if="orderData.productShow" placement="bottom-start" trigger="hover">
               <div class="order-info">
-                <p v-for="(productItem, productIndex) in orderData.productList" :key="productIndex">{{ productItem }}</p>
+                <p
+                  v-for="(productItem, productIndex) in orderData.productList"
+                  :key="productIndex"
+                >
+                  {{ productItem }}
+                </p>
                 <p>照片张数：{{ orderData.photoNum }}张</p>
               </div>
               <i slot="reference" class="product-more iconfont icongengduo"></i>
@@ -55,13 +57,13 @@ export default {
   props: {
     orderInfo: { type: Object, required: true }
   },
+  data () {
+    return {
+    }
+  },
   computed: {
     orderData () {
       return this.orderInfo || {}
-    }
-  },
-  data () {
-    return {
     }
   }
 }

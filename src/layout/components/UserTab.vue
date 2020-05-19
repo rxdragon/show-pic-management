@@ -1,6 +1,6 @@
 <template>
   <div class="user-tab">
-    <div v-if="$isDev" class="release-version">更新时间：2020-05-19 11:53</div>
+    <div v-if="$isDev" class="release-version">更新时间：{{ updateTime }}</div>
     <div class="user-avatar">
       <el-avatar :size="24" :src="avatarImg">
         <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
@@ -14,9 +14,16 @@
 <script>
 import * as User from '@/api/user.js'
 import * as SessionTool from '@/utils/sessionTool.js'
+import * as TimeUtil from '@/utils/timeUtil.js'
 import { mapGetters } from 'vuex'
 export default {
   name: 'UserTab',
+  data () {
+    const time = TimeUtil.formatTime(BUILD_TIME)
+    return {
+      updateTime: time
+    }
+  },
   computed: {
     ...mapGetters(['avatarImg', 'nickname', 'name'])
   },

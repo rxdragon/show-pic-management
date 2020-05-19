@@ -12,7 +12,12 @@
         </div>
         <div class="date-search search-item">
           <span>发票抬头</span>
-          <el-input v-model.trim="invoiceTitle" @keyup.native.enter="searchData(1)" placeholder="请输入" class="input-with-select"></el-input>
+          <el-input
+            v-model.trim="invoiceTitle"
+            @keyup.native.enter="searchData(1)"
+            placeholder="请输入"
+            class="input-with-select"
+          ></el-input>
         </div>
         <div class="date-search search-item">
           <span>开票状态</span>
@@ -58,10 +63,7 @@
         @current-change="handleCurrentChange"
       />
     </div>
-    <el-drawer
-      title="发票详情"
-      custom-class="invoice-class"
-      :visible.sync="drawer">
+    <el-drawer title="发票详情" custom-class="invoice-class" :visible.sync="drawer">
       <invoice-info :invoice-data="invoiceData" />
     </el-drawer>
   </div>
@@ -122,8 +124,12 @@ export default {
           req.startTime = filterTimeSpan[0]
           req.endTime = filterTimeSpan[1]
         }
-        if (this.invoiceState) { req.status = this.invoiceState }
-        if (this.invoiceTitle) { req.title = this.invoiceTitle }
+        if (this.invoiceState) {
+          req.status = this.invoiceState
+        }
+        if (this.invoiceTitle) {
+          req.title = this.invoiceTitle
+        }
         const data = await Invoice.getInvoiceList(req)
         this.tableData = data.list
         this.pager.total = data.total
@@ -177,11 +183,17 @@ export default {
           page: 1,
           pageSize: 1000
         }
-        if (this.invoiceState) { req.status = this.invoiceState }
-        if (this.invoiceTitle) { req.title = this.invoiceTitle }
+        if (this.invoiceState) {
+          req.status = this.invoiceState
+        }
+        if (this.invoiceTitle) {
+          req.title = this.invoiceTitle
+        }
         const timeString = this.timeSpan ? this.timeSpan.join('~') : '全部'
         const data = await Invoice.getInvoiceList(req)
-        if (data.total > 1000) { this.$newMessage.warning('当前只能导出1000条数据') }
+        if (data.total > 1000) {
+          this.$newMessage.warning('当前只能导出1000条数据')
+        }
         const excelName = timeString + '修修兽发票开具记录'
         const headerCellName = ['开票时间', '申请人账号', '抬头类型', '发票抬头', '发票金额', '单位税号', '注册地址', '注册电话', '开户银行', '银行账号', '发票状态']
         const headerCellkeys = ['invoicedate', 'proposerAccount', 'titleTypeCN', 'invoiceTitle', 'price', 'taxnum', 'address', 'telephone', 'bankName', 'bankaccount', 'stateToCN']

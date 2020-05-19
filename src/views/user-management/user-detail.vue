@@ -10,12 +10,14 @@
           <el-table-column label="产品名称" min-width="200">
             <template slot-scope="{ row }">
               {{ row.productShow || '-' }}
-              <el-popover
-                v-if="row.productShow"
-                placement="bottom-start"
-                trigger="hover">
+              <el-popover v-if="row.productShow" placement="bottom-start" trigger="hover">
                 <div class="order-info">
-                  <p v-for="(productItem, productIndex) in row.productList" :key="productIndex">{{ productItem }}</p>
+                  <p
+                    v-for="(productItem, productIndex) in row.productList"
+                    :key="productIndex"
+                  >
+                    {{ productItem }}
+                  </p>
                   <p>照片张数：{{ row.photoNum }}张</p>
                 </div>
                 <i slot="reference" class="product-more iconfont icongengduo"></i>

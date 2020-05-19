@@ -9,14 +9,22 @@
           <span class="state-text">{{ invoiceData.stateToCN }}</span>
         </div>
       </div>
-      <div class="pancel-content" v-for="(invoiceItem, invoiceIndex) in invoiceData.invoiceInfo" :key="invoiceIndex">
+      <div
+        class="pancel-content"
+        v-for="(invoiceItem, invoiceIndex) in invoiceData.invoiceInfo"
+        :key="invoiceIndex"
+      >
         <div class="label-class">{{ invoiceItem.label }}</div>
         <div class="value" :class="invoiceItem.value === '电子普通发票' && 'red'">{{ invoiceItem.value }}</div>
       </div>
     </div>
     <div class="ticket-info-module">
       <div class="panel-title">收票信息</div>
-      <div class="pancel-content" v-for="(ticketItem, ticketIndex) in invoiceData.ticketInfo" :key="ticketIndex">
+      <div
+        class="pancel-content"
+        v-for="(ticketItem, ticketIndex) in invoiceData.ticketInfo"
+        :key="ticketIndex"
+      >
         <div class="label-class">{{ ticketItem.label || '-' }}</div>
         <div class="value">{{ ticketItem.value || '-' }}</div>
       </div>
@@ -25,12 +33,24 @@
       </div>
     </div>
     <div class="button-box">
-      <el-button v-if="invoiceData.state === INVOICE_STATE.COMPLETE" type="danger" :loading="cancellLoading" @click="cancellationTicket">作废</el-button>
+      <el-button
+        v-if="invoiceData.state === INVOICE_STATE.COMPLETE"
+        type="danger"
+        :loading="cancellLoading"
+        @click="cancellationTicket"
+      >
+        作废
+      </el-button>
       <el-button v-if="invoiceData.electronicInvoice" type="primary" @click="showTicketImage">查看电子发票</el-button>
     </div>
     <el-dialog
-      title="查看电子发票" :modal="false" custom-class="ticket-show"
-      :visible.sync="showViewer" center width="860px">
+      title="查看电子发票"
+      :modal="false"
+      custom-class="ticket-show"
+      :visible.sync="showViewer"
+      center
+      width="860px"
+    >
       <iframe class="ticket-image-box" :src="ticketImage" />
       <span slot="footer" class="dialog-footer">
         <el-button :loading="resendLoading" type="primary" @click="resendInvoice">重新发送</el-button>
@@ -45,6 +65,9 @@ import { INVOICE_STATE, invalidToCN } from '@/model/Enumerate.js'
 
 export default {
   name: 'InvoiceInfo',
+  props: {
+    invoiceData: { type: Object, required: true }
+  },
   data () {
     return {
       INVOICE_STATE,
@@ -52,9 +75,6 @@ export default {
       cancellLoading: false,
       resendLoading: false
     }
-  },
-  props: {
-    invoiceData: { type: Object, required: true }
   },
   computed: {
     ticketImage () {

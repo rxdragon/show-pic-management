@@ -29,6 +29,12 @@ module.exports = {
     if (config.plugins.has('progress') && process.env.CI_RUNNER_ID) {
       config.plugins.delete('progress')
     }
+    config.plugin('define')
+      .tap(args => {
+        args[0].BUILD_TIME = +Date.now()
+        return args
+        // args[0].BUILD_TIME = '1111'
+      })
   },
   css: {
   }

@@ -4,7 +4,12 @@
       <!-- 查询按钮 -->
       <div class="search-box">
         <div class="date-search search-item">
-          <el-input v-model.trim="orderSearchValue" placeholder="请输入内容" @keyup.native.enter="searchData" class="input-with-select">
+          <el-input
+            v-model.trim="orderSearchValue"
+            placeholder="请输入内容"
+            @keyup.native.enter="searchData"
+            class="input-with-select"
+          >
             <el-select slot="prepend" v-model="orderSeachType" placeholder="请选择">
               <el-option label="顾客手机号" value="phone" />
               <el-option label="订单号" value="orderNum" />
@@ -21,21 +26,28 @@
       </div>
       <!-- 订单列表 -->
       <div class="table-box" v-loading="orderListLoading">
-        <el-table :data="tableData" style="width: 100%;" height="250" :row-class-name="tableRowClassName">
+        <el-table
+          :data="tableData"
+          style="width: 100%;"
+          height="250"
+          :row-class-name="tableRowClassName"
+        >
           <el-table-column prop="orderNum" label="订单号" />
           <el-table-column label="产品">
             <template slot-scope="{ row }">
               {{ row.productList[0] || '-' }}
-              <el-popover
-                  v-if="row.productList[0]"
-                  placement="bottom-start"
-                  trigger="hover">
-                  <div class="order-info">
-                    <p v-for="(productItem, productIndex) in row.productList" :key="productIndex">{{ productItem }}</p>
-                    <p>照片张数：{{ row.photoNum }}张</p>
-                  </div>
-                  <i slot="reference" class="product-more iconfont icongengduo"></i>
-                </el-popover>
+              <el-popover v-if="row.productList[0]" placement="bottom-start" trigger="hover">
+                <div class="order-info">
+                  <p
+                    v-for="(productItem, productIndex) in row.productList"
+                    :key="productIndex"
+                  >
+                    {{ productItem }}
+                  </p>
+                  <p>照片张数：{{ row.photoNum }}张</p>
+                </div>
+                <i slot="reference" class="product-more iconfont icongengduo"></i>
+              </el-popover>
             </template>
           </el-table-column>
           <el-table-column prop="canInvoiceMoney" label="可开票金额" :formatter="stringMoney"/>
@@ -53,10 +65,18 @@
     </div>
     <template v-if="this.checkOrder.length">
       <div class="issue-info-form module-panel">
-        <div class="panel-title">发票信息填写
+        <div class="panel-title">
+          发票信息填写
           <el-button v-if="$isDev" class="right-flow" @click="devInput">mock</el-button>
         </div>
-        <el-form :model="form" :rules="rules" ref="form" label-width="80px" class="form-box" label-position="left">
+        <el-form
+          :model="form"
+          :rules="rules"
+          ref="form"
+          label-width="80px"
+          class="form-box"
+          label-position="left"
+        >
           <el-form-item label="抬头类型" prop="titleType">
             <el-select v-model="form.titleType" placeholder="请选择抬头类型">
               <el-option label="个人" value="person"></el-option>
@@ -85,7 +105,13 @@
             </el-form-item>
           </template>
           <el-form-item label="开票金额" prop="money" class="max-money-box">
-            <el-input v-model.trim="form.money" type="Number" v-numberOnly :max="maxInvoiceMoney" placeholder="请输入开票金额"></el-input>
+            <el-input
+              v-model.trim="form.money"
+              type="Number"
+              v-numberOnly
+              :max="maxInvoiceMoney"
+              placeholder="请输入开票金额"
+            ></el-input>
             <div class="max-money">本次最大可开票金额：¥{{ maxInvoiceMoney | filtermoney }}</div>
             <div class="max-money">本次最小可开票金额：¥{{ minInvoiceMoney | filtermoney }}</div>
           </el-form-item>
@@ -115,6 +141,11 @@ import { invoiceMock } from './invoiceMock.js'
 
 export default {
   name: 'invoice-issue',
+  filters: {
+    filtermoney (val) {
+      return val.toFixed(2)
+    }
+  },
   data () {
     const validateElectronicPhone = (rule, telValue, callback) => {
       // 验证手机号码
@@ -327,11 +358,6 @@ export default {
      */
     devInput () {
       this.form = JSON.parse(JSON.stringify(invoiceMock))
-    }
-  },
-  filters: {
-    filtermoney (val) {
-      return val.toFixed(2)
     }
   }
 }

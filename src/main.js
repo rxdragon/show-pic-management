@@ -13,6 +13,9 @@ import '@assetsDir/styles/variables.less' // 全局样式
 import './guards' // 路由守护
 import '@/directive'
 
+const version = '1.0.0'
+console.warn(version)
+
 window._ = { get, sortBy }
 Vue.config.productionTip = false
 

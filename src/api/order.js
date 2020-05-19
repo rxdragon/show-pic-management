@@ -87,7 +87,9 @@ export function getOrderDetail (params) {
     // 获取全部照片
     let orderPhotoList = []
     orderItems.forEach((streamItem, streamIndex) => {
-      streamItem.photoList.forEach(photoItem => photoItem.streamlabel = `流水${streamIndex + 1}`)
+      streamItem.photoList.forEach(photoItem => {
+        photoItem.streamlabel = `流水${streamIndex + 1}`
+      })
       orderPhotoList = [...orderPhotoList, ...streamItem.photoList]
     })
     const createData = {
