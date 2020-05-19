@@ -29,7 +29,7 @@
         <div class="value">{{ ticketItem.value || '-' }}</div>
       </div>
       <div class="ticket-image" v-if="invoiceData.electronicInvoice">
-        <embed :src="ticketImage" @click="showTicketImage" />
+        <iframe :src="ticketImage" @click="showTicketImage" />
       </div>
     </div>
     <div class="button-box">
@@ -200,7 +200,7 @@ export default {
       border: 1px solid #e8e8e8;
       border-radius: 4px;
 
-      embed {
+      iframe {
         width: 100%;
         height: 100%;
       }
