@@ -173,10 +173,10 @@ export default {
 
   .pancel-content {
     display: flex;
+    margin-bottom: 10px;
     font-size: 14px;
     font-weight: 400;
     color: #303133;
-    margin-bottom: 10px;
 
     .label-class {
       width: 70px;
@@ -195,10 +195,10 @@ export default {
     margin-bottom: 40px;
 
     .ticket-image {
+      height: 260px;
       margin-top: 24px;
       border: 1px solid #e8e8e8;
       border-radius: 4px;
-      height: 260px;
 
       embed {
         width: 100%;
@@ -235,9 +235,9 @@ export default {
 
   .ticket-image-box {
     display: block;
-    margin: auto;
     width: 100%;
     height: 642px;
+    margin: auto;
   }
 }
 </style>

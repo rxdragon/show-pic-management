@@ -118,9 +118,9 @@ export default {
 
       .require-value {
         .el-image {
-          margin: 0 10px;
           width: 54px;
           height: 54px;
+          margin: 0 10px;
         }
 
         .el-link {

@@ -43,7 +43,7 @@
     "husky": "^4.2.5",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
-    "lint-staged": "^10.2.2",
+    "lint-staged": "^10.2.4",
     "right-pad": "^1.0.1",
     "stylelint": "^13.3.3",
     "stylelint-config-recess-order": "^2.0.4",
@@ -60,6 +60,7 @@
   ],
   "config": {
     "commitizen": {
+      "pre-commit": "yarn lint && lint-staged",
       "path": "./node_modules/vue-cli-plugin-commitlint/lib/cz"
     }
   },
@@ -67,5 +68,11 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "lint-staged": {
+    "src/**/*.{less,vue}": [
+      "yarn slint",
+      "git add ."
+    ]
   }
 }

@@ -33,9 +33,6 @@ module.exports = {
       .tap(args => {
         args[0].BUILD_TIME = +Date.now()
         return args
-        // args[0].BUILD_TIME = '1111'
       })
-  },
-  css: {
   }
 }
