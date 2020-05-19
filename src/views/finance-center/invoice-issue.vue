@@ -85,7 +85,7 @@
             </el-form-item>
           </template>
           <el-form-item label="开票金额" prop="money" class="max-money-box">
-            <el-input v-model.trim="form.money" type="Number" v-numberOnly :min="minInvoiceMoney" :max="maxInvoiceMoney" placeholder="请输入开票金额"></el-input>
+            <el-input v-model.trim="form.money" type="Number" v-numberOnly :max="maxInvoiceMoney" placeholder="请输入开票金额"></el-input>
             <div class="max-money">本次最大可开票金额：¥{{ maxInvoiceMoney | filtermoney }}</div>
             <div class="max-money">本次最小可开票金额：¥{{ minInvoiceMoney | filtermoney }}</div>
           </el-form-item>
@@ -254,6 +254,7 @@ export default {
             if (!req.otherInfo) req.otherInfo = {}
             req.otherInfo[key] = value
           } else {
+            if (key === 'money' && value < this.minInvoiceMoney) return this.$newMessage.warning('输入开票金额小于本次最小可开票金额')
             if (key === 'money' && value > this.maxInvoiceMoney) return this.$newMessage.warning('输入开票金额大于本次最大可开票金额')
             req[key] = value
           }
