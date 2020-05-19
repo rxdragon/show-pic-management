@@ -174,7 +174,7 @@ export default {
           page: 1,
           pageSize: 1000
         }
-        if (this.invoiceState) { req.invoiceState = this.invoiceState }
+        if (this.invoiceState) { req.status = this.invoiceState }
         if (this.invoiceTitle) { req.title = this.invoiceTitle }
         const timeString = this.timeSpan ? this.timeSpan.join('~') : '全部'
         const data = await Invoice.getInvoiceList(req)
