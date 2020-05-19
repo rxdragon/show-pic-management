@@ -41,6 +41,12 @@
  - | 更新错误码 | [5ffa4a9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5ffa4a9)
 
 
+### 🔨 代码重构
+范围|描述|commitId
+--|--|--
+ - | 更改提交钩子 | [0e88b7d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0e88b7d)
+
+
 ### 🚀 性能优化
 范围|描述|commitId
 --|--|--

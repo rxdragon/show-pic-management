@@ -32,11 +32,12 @@
     "@vue/cli-plugin-vuex": "~4.3.0",
     "@vue/cli-service": "~4.3.0",
     "@vue/eslint-config-airbnb": "^5.0.2",
+    "add": "^2.0.6",
     "axios": "^0.18.0",
     "babel-eslint": "^10.1.0",
     "commitizen": "^4.1.2",
     "commitlint": "^8.3.5",
-    "conventional-changelog-cli": "^2.0.31",
+    "conventional-changelog-cli": "^2.0.34",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^6.2.2",
@@ -49,9 +50,10 @@
     "stylelint-config-recess-order": "^2.0.4",
     "stylelint-config-standard": "^20.0.0",
     "vue-cli-plugin-axios": "~0.0.4",
-    "vue-cli-plugin-commitlint": "~1.0.12",
+    "vue-cli-plugin-commitlint": "^1.0.12",
     "vue-cli-plugin-element": "~1.0.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "yarn": "^1.22.4"
   },
   "browserslist": [
     "> 1%",
@@ -60,12 +62,12 @@
   ],
   "config": {
     "commitizen": {
-      "pre-commit": "yarn lint && lint-staged",
       "path": "./node_modules/vue-cli-plugin-commitlint/lib/cz"
     }
   },
   "husky": {
     "hooks": {
+      "pre-commit": "yarn lint && lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
