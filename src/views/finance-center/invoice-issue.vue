@@ -160,7 +160,7 @@ export default {
         email: [{ validator: validateElectronicEmail, trigger: ['blur', 'change'] }]
       },
       orderSeachType: 'phone', // phone 顾客手机号 orderNum 订单号
-      orderSearchValue: '15726818166',
+      orderSearchValue: '',
       tableData: [],
       orderListLoading: false,
       form: {

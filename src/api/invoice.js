@@ -17,11 +17,6 @@ export function getInvoiceList (params) {
       return new InvoiceModel(listItem)
     })
     return res
-  }).catch(() => {
-    return {
-      total: 0,
-      list: []
-    }
   })
 }
 

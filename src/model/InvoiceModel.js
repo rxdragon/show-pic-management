@@ -38,7 +38,8 @@ export default class InvoiceModel {
     this.state = invoiceData.status || '-'
     this.stateToCN = invalidToCN[this.state]
     this.invoicedate = invoiceData.created_at || '-'
-    this.price = _.get(invoiceData, 'info.detail.price') || 0
+    this.price = _.get(invoiceData, 'info.detail[0].price') || 0
+    this.price = Number(this.price)
     this.invoiceTitle = invoiceData.name || '-'
     this.titleType = _.get(invoiceData, 'info.extend.title_type') || '-'
     this.titleTypeCN = changeMap[this.titleType]
