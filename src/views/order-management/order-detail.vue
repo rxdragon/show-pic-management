@@ -8,9 +8,14 @@
        <div class="panel-title">
          照片详情
          <div class="button-box right-flow">
-           <el-button @click="downForZip('originalPath')" size="small" type="primary">原片下载</el-button>
-           <el-button size="small" type="primary">成片下载</el-button>
-           <el-button @click="downForZip('finalPath')" size="small" type="primary">满意片下载</el-button>
+           <template v-for="buttonItem in downPhotoVersion">
+            <el-button
+              v-if="buttonItem.hasPath"
+              :key="buttonItem.version" :loading="buttonItem.loading"
+              @click="downForZip(buttonItem.version)" size="small" type="primary">
+              {{ buttonItem.version | versionCN }}下载
+            </el-button>
+           </template>
          </div>
        </div>
        <div class="photo-version-box" v-for="(photoItem, photoIndex) in orderData.orderPhotoList" :key="photoIndex">
@@ -36,10 +41,27 @@ export default {
     return {
       orderData: {},
       photoVersion: [],
+      downPhotoVersion: [
+        {
+          version: 'originalPath',
+          loading: false,
+          hasPath: false
+        },
+        {
+          version: 'cloudFinishPath',
+          loading: false,
+          hasPath: false
+        },
+        {
+          version: 'finalPath',
+          loading: false,
+          hasPath: false
+        }
+      ]
     }
   },
   computed: {
-    ...mapGetters(['imgDomain']),
+    ...mapGetters(['imgDomain'])
   },
   created () {
     const orderId = this.$route.query.orderId
@@ -54,6 +76,10 @@ export default {
         this.$loading()
         const req = { id }
         this.orderData = await Order.getOrderDetail(req)
+        this.downPhotoVersion.forEach(versionItem => {
+          const orderPhotoList = this.orderData.orderPhotoList
+          versionItem.hasPath = orderPhotoList.filter(item => item[versionItem.version]).length
+        })
       } catch (error) {
         throw new Error(error)
       } finally {
@@ -67,12 +93,27 @@ export default {
       const versionCN = {
         originalPath: '原片',
         finalPath: '顾客满意片',
+        cloudFinishPath: '云端成片'
       }
-      const imgArr = this.orderData.orderPhotoList.map(item => {
-        return this.imgDomain + item[version]
-      })
+      const hasPhotoPath = this.orderData.orderPhotoList.filter(item => item[version])
+      const imgArr = hasPhotoPath.map(item => this.imgDomain + item[version])
+      if (!imgArr.length) return this.$newMessage.warning(`没有${versionCN[version]}版本照片`)
+      const findVersionButton = this.downPhotoVersion.find(item => item.version === version)
+      findVersionButton.loading = true
       const zipName = this.orderData.orderNum + '-' + versionCN[version]
-      DownPhoto.downForZip(imgArr, zipName)
+      DownPhoto.downForZip(imgArr, zipName, () => {
+        findVersionButton.loading = false
+      })
+    }
+  },
+  filters: {
+    versionCN (val) {
+      const CN = {
+        originalPath: '原片',
+        finalPath: '顾客满意片',
+        cloudFinishPath: '云端成片'
+      }
+      return CN[val]
     }
   }
 }

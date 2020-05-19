@@ -1,5 +1,6 @@
 <template>
   <div class="user-tab">
+    <div v-if="$isDev" class="release-version">更新时间：2020-05-19 11:53</div>
     <div class="user-avatar">
       <el-avatar :size="24" :src="avatarImg">
         <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
@@ -46,6 +47,11 @@ export default {
   padding: 0 18px;
   background-color: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+
+  .release-version {
+    margin-right: auto;
+    color: deeppink;
+  }
 
   .user-avatar {
     display: flex;

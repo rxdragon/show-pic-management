@@ -50,8 +50,8 @@ export default class InvoiceModel {
     const saleaccount = _.get(invoiceData, 'info.account') || '- -'
     this.bankName = saleaccount.split(' ')[0]
     this.bankaccount = saleaccount.split(' ')[1]
-    this.ticketPhone = _.get(invoiceData, 'info.phone') || '-'
-    this.ticketEmail = _.get(invoiceData, 'info.email') || '-'
+    this.ticketPhone = _.get(invoiceData, 'info.phone') || ''
+    this.ticketEmail = _.get(invoiceData, 'info.email') || ''
     this.electronicInvoice = _.get(invoiceData, 'info.result.pdf_url') || ''
     this.getInvoiceInfo()
     this.getTicketInfo()

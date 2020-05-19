@@ -133,6 +133,9 @@ export default {
         this.$loadingClose()
       }
     },
+    /**
+     * @description 页面切换
+     */
     handleCurrentChange () {
       this.searchData()
     },

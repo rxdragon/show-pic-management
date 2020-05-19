@@ -89,7 +89,7 @@ export default {
      */
     async resendInvoice () {
       try {
-        if (!this.invoiceData.ticketPhone && !this.invoiceData.ticketPhone) return this.$newMessage.warning('获取收票信息失败')
+        if (!this.invoiceData.ticketPhone && !this.invoiceData.ticketEmail) return this.$newMessage.warning('获取收票信息失败')
         this.resendLoading = true
         const req = {
           invoiceId: this.invoiceData.id,
