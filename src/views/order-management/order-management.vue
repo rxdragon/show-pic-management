@@ -51,19 +51,21 @@
           </el-table-column>
           <el-table-column label="下单产品">
             <template slot-scope="{ row }">
-              {{ row.productShow || '-' }}
-              <el-popover v-if="row.productShow" placement="bottom-start" trigger="hover">
-                <div class="order-info">
-                  <p
-                    v-for="(productItem, productIndex) in row.productList"
-                    :key="productIndex"
-                  >
-                    {{ productItem }}
-                  </p>
-                  <p>照片张数：{{ row.photoNum }}张</p>
-                </div>
-                <i slot="reference" class="product-more iconfont icongengduo"></i>
-              </el-popover>
+              <div class="product-box">
+                {{ row.productShow || '-' }}
+                <el-popover v-if="row.productShow" placement="bottom-start" trigger="hover">
+                  <div class="order-info">
+                    <p
+                      v-for="(productItem, productIndex) in row.productList"
+                      :key="productIndex"
+                    >
+                      {{ productItem }}
+                    </p>
+                    <p>照片张数：{{ row.photoNum }}张</p>
+                  </div>
+                  <i slot="reference" class="product-more iconfont icongengduo"></i>
+                </el-popover>
+              </div>
             </template>
           </el-table-column>
           <el-table-column
@@ -357,8 +359,13 @@ export default {
   .table-box {
     margin-top: 24px;
 
-    .product-more {
-      color: #909399;
+    .product-box {
+      display: flex;
+      align-items: center;
+
+      .product-more {
+        color: #909399;
+      }
     }
   }
 }

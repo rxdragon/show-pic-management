@@ -105,6 +105,7 @@ export default {
 
         .close-reason {
           max-width: 400px;
+          word-break: break-all;
         }
       }
     }

@@ -25,6 +25,7 @@ export default {
   data () {
     const searchEunm = [
       INVOICE_STATE.PENDING,
+      INVOICE_STATE.WAIT_WRITE,
       INVOICE_STATE.COMPLETE,
       INVOICE_STATE.FAIL,
       INVOICE_STATE.INVALID
