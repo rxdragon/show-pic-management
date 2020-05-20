@@ -63,7 +63,7 @@
         </el-table>
       </div>
     </div>
-    <template v-if="this.checkOrder.length">
+    <div v-show="checkOrder.length">
       <div class="issue-info-form module-panel">
         <div class="panel-title">
           发票信息填写
@@ -109,6 +109,7 @@
               v-model.trim="form.money"
               type="Number"
               v-numberOnly
+              min="1"
               :max="maxInvoiceMoney"
               placeholder="请输入开票金额"
             ></el-input>
@@ -128,7 +129,7 @@
         <el-button type="info" @click="backToSubmit">返回</el-button>
         <el-button type="primary" @click="submitForm">提交</el-button>
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -290,6 +291,7 @@ export default {
             req[key] = value
           }
         }
+        if (this.form.titleType === 'person') { delete req.taxNum }
         await Invoice.applyInvoice(req)
         this.$newMessage.success('开票成功')
         await this.getCanInvoiceOrderList()
