@@ -54,7 +54,7 @@
           </el-table-column>
         </el-table>
       </div>
-      <no-data v-show="!tableData.length">当前暂无订单</no-data>
+      <no-data v-show="!tableData.length">当前暂无用户</no-data>
     </main>
     <div class="page-box">
       <el-pagination
