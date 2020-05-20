@@ -18,6 +18,7 @@
  - | 提交代码 | [0050ff1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0050ff1)
  - | 更改环境变量 | [b2cff3f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b2cff3f)
  - | 更新用户获取信息 | [a7a8bbd](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a7a8bbd)
+ - | 添加前端配置环境 | [1a29ab7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1a29ab7)
  - | 用户管理 | [cd016f5](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/cd016f5)
  - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
 
