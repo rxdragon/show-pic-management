@@ -23,7 +23,7 @@ export default class UserModel {
 
   constructor (userData) {
     this.base = userData
-    this.id = userData.id || 0
+    this.id = userData.user_id || 0
     this.from = userData.source || '-'
     this.name = userData.name || '-'
     this.wxname = userData.wxname || '-'

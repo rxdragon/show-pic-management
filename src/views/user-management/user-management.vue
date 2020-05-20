@@ -143,7 +143,7 @@ export default {
         ascending: 'asc' // 升序
       }
       const orderSortKey = {
-        userConsumeNum: 'user_consume_num',
+        userConsumeNum: 'consume_num',
         consumeTotal: 'consume_total'
       }
       this.orderBy = {
