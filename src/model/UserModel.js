@@ -24,16 +24,14 @@ export default class UserModel {
   constructor (userData) {
     this.base = userData
     this.id = userData.id || 0
-    this.from = userData.from
+    this.from = userData.source || '-'
     this.name = userData.name || '-'
     this.wxname = userData.wxname || '-'
     this.sex = sexToCN[userData.sex] || '-'
     this.phone = userData.phone
     this.createdAt = userData.created_at || '-'
     this.consumeTotal = Number(userData.consume_total)
-    // TODO 缺少消费次数
-    this.userConsumeNum = Number(userData.user_consume_num)
-    // TODO
+    this.userConsumeNum = Number(userData.consume_num)
     this.recentlyConsume = userData.last_buy_time || '-'
   }
 }
