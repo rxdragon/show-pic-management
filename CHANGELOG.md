@@ -28,6 +28,7 @@
 范围|描述|commitId
 --|--|--
  - | 修复关闭订单理由换行 | [214b2af](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/214b2af)
+ - | 更改文案 | [df0980e](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/df0980e)
  - | 更改样式 | [6a28f8c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6a28f8c)
  - | 更改样式 | [9483937](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9483937)
  - | 样式更改 | [c5f050a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/c5f050a)
