@@ -27,6 +27,7 @@ module.exports = {
     "Vue": true,
     "VueRouter": true,
     "BUILD_TIME": true,
+    "BUILD_REDIRECT": true,
     "_": true // lodash
   },
   // 启用的规则及其各自的错误级别
