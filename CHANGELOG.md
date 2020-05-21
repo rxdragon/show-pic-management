@@ -63,6 +63,7 @@
 范围|描述|commitId
 --|--|--
  - | 更改提交钩子 | [0e88b7d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0e88b7d)
+ - | 更改配置问题 | [9303262](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9303262)
 
 
 ### 🚀 性能优化

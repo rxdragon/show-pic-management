@@ -37,7 +37,7 @@ module.exports = {
         console.log(args[0]['process.env'].NODE_ENV)
         console.log(args[0]['process.env'].NODE_ENV === '"development"')
         if (process.env.CI_RUNNER_ID && args[0]['process.env'].NODE_ENV === '"development"') {
-          args[0].BUILD_REDIRECT = "/show-pic-management/login.html"
+          args[0].BUILD_REDIRECT = '"/show-pic-management/login.html"'
         }
         return args
       })
