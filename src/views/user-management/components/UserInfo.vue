@@ -1,6 +1,6 @@
 <template>
   <div class="user-info">
-    <div class="panel-title">订单信息</div>
+    <div class="panel-title">用户信息</div>
     <div class="info-table">
       <table border="0">
         <tr class="title">
