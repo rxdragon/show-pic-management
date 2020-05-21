@@ -13,6 +13,9 @@ import '@assetsDir/styles/variables.less' // 全局样式
 import './guards' // 路由守护
 import '@/directive'
 
+const version = '1.0.0'
+console.warn(version)
+
 window._ = { get, sortBy }
 Vue.config.productionTip = false
 
@@ -22,8 +25,7 @@ Object.keys(filters).forEach(key => {
 })
 
 // 判断是否是生产环境
-// Vue.prototype.$isDev = !process.env.VUE_APP_LOGIN_API.includes('k8s')
-Vue.prototype.$isDev = false
+Vue.prototype.$isDev = !process.env.VUE_APP_LOGIN_API.includes('k8s')
 
 // 优化全局loading关闭
 Vue.prototype.$loadingClose = () => {

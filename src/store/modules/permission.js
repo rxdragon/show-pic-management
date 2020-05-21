@@ -1,6 +1,6 @@
 // TODO
 // eslint-disable-next-line no-unused-vars
-import { asyncRoutes, constantRoutes, lastBaseRoutes } from '@/router'
+import { asyncRoutes, constantRoutes } from '@/router'
 import { toCapitalHump } from '@/utils/index.js'
 
 /**
@@ -84,9 +84,7 @@ const actions = {
       })
       commit('SET_ROLES', newPermissionArr)
       newRolesArr = [...new Set(newRolesArr)]
-      // TODO 调试
-      accessedRoutes = asyncRoutes
-      // accessedRoutes = [...filterAsyncRoutes(asyncRoutes, newRolesArr), ...lastBaseRoutes]
+      accessedRoutes = [...filterAsyncRoutes(asyncRoutes, newRolesArr)]
       commit('SET_PERSONAGE_ROUTES', accessedRoutes)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)

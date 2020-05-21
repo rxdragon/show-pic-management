@@ -60,6 +60,12 @@
       width: 100% !important;
       height: 100%;
       border: none;
+
+      .el-submenu.is-active {
+        .el-menu-item {
+          background-color: @subMenuActiveBg !important;
+        }
+      }
     }
 
     // menu hover
@@ -91,6 +97,7 @@
 
     & .nest-menu .el-submenu > .el-submenu__title,
     & .el-submenu .el-menu-item {
+      padding-left: 60px !important;
       min-width: @sideBarWidth !important;
       background-color: var(--subMenuBg) !important;
 

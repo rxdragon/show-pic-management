@@ -26,7 +26,7 @@
         </div>
         <div class="button-box">
           <el-button type="primary" size="small" @click="initPage(1)">查 询</el-button>
-          <el-button type="success" size="small" @click="outExecl">导 出</el-button>
+          <el-button type="blue" size="small" @click="outExecl">导 出</el-button>
         </div>
       </div>
       <!-- 收益信息 -->
@@ -38,35 +38,42 @@
       <div class="table-box" v-show="tableData.length">
         <el-table :data="tableData" style="width: 100%;">
           <el-table-column label="订单号" width="180">
-             <template slot-scope="{ row }">
-               <el-popover
-                  placement="bottom-start"
-                  trigger="hover">
-                  <div class="order-info">
-                    <p>顾客姓名：{{ row.clientName }}</p>
-                    <p>手机：{{ row.clientPhone }}</p>
-                    <p>照片张数：{{ row.photoNum }}张</p>
-                  </div>
-                  <div slot="reference" class="order-num">{{ row.orderNum }}</div>
-                </el-popover>
-             </template>
+            <template slot-scope="{ row }">
+              <el-popover placement="bottom-start" trigger="hover">
+                <div class="order-info">
+                  <p>顾客姓名：{{ row.clientName }}</p>
+                  <p>手机：{{ row.clientPhone }}</p>
+                  <p>照片张数：{{ row.photoNum }}张</p>
+                </div>
+                <div slot="reference" class="order-num">{{ row.orderNum }}</div>
+              </el-popover>
+            </template>
           </el-table-column>
           <el-table-column label="下单产品">
             <template slot-scope="{ row }">
-              {{ row.productShow || '-' }}
-              <el-popover
-                  v-if="row.productShow"
-                  placement="bottom-start"
-                  trigger="hover">
+              <div class="product-box">
+                {{ row.productShow || '-' }}
+                <el-popover v-if="row.productShow" placement="bottom-start" trigger="hover">
                   <div class="order-info">
-                    <p v-for="(productItem, productIndex) in row.productList" :key="productIndex">{{ productItem }}</p>
+                    <p
+                      v-for="(productItem, productIndex) in row.productList"
+                      :key="productIndex"
+                    >
+                      {{ productItem }}
+                    </p>
                     <p>照片张数：{{ row.photoNum }}张</p>
                   </div>
-                  <i slot="reference" class="product-more el-icon-s-unfold"></i>
+                  <i slot="reference" class="product-more iconfont icongengduo"></i>
                 </el-popover>
+              </div>
             </template>
           </el-table-column>
-          <el-table-column prop="totalFee" label="金额" width="150" :formatter="stringMoney"/>
+          <el-table-column
+            prop="totalFee"
+            label="金额"
+            width="150"
+            :formatter="stringMoney"
+          />
           <el-table-column prop="stateCN" label="状态" width="100" />
           <el-table-column label="订单来源" width="80">
             <template slot-scope="{ row }">
@@ -106,7 +113,11 @@
       title="订单关闭原因"
       :visible="Boolean(closeOrderId)"
       :show-close="false"
-      custom-class="close-dialog" width="30%" center>
+      top="50vh"
+      custom-class="close-dialog"
+      width="30%"
+      center
+    >
       <div class="close-desc">
         <el-input
           type="textarea"
@@ -114,11 +125,17 @@
           v-model="closeMessage"
           rows="6"
           maxlength="100"
-          show-word-limit />
+          show-word-limit
+        />
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button type="info" size="small" @click="resetCloseInfo">取 消</el-button>
-        <el-button type="primary" size="small" :loading="submitCloseLoading" @click="submitCloseOrder">确 定</el-button>
+        <el-button
+          type="primary"
+          size="small"
+          :loading="submitCloseLoading"
+          @click="submitCloseOrder"
+        >确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -188,13 +205,19 @@ export default {
         page: this.pager.page,
         pageSize: this.pager.pageSize
       }
-      if (this.timeSpan) { req.cond.createdAtRange = getSeachTime(this.timeSpan) }
-      if (this.orderSearchValue) { req.cond[this.orderSeachType] = this.orderSearchValue }
+      if (this.timeSpan) {
+        req.cond.createdAtRange = getSeachTime(this.timeSpan)
+      }
+      if (this.orderSearchValue) {
+        req.cond[this.orderSeachType] = this.orderSearchValue
+      }
       if (this.orderState) {
         const [key, value] = this.orderState.split(',')
         req.cond[key] = value
       }
-      if (this.orderSource) { req.cond.from = this.orderSource }
+      if (this.orderSource) {
+        req.cond.from = this.orderSource
+      }
       const data = await Order.getOrderList(req)
       this.tableData = data.list
       this.pager.total = data.total
@@ -221,12 +244,14 @@ export default {
      */
     async submitCloseOrder () {
       try {
+        if (!this.closeMessage) return this.$newMessage.warning('请填写订单关闭原因!')
         this.submitCloseLoading = true
         const req = {
           id: this.closeOrderId,
           reason: this.closeMessage
         }
         await Order.closeOrder(req)
+        this.$newMessage.success('关单成功')
         this.resetCloseInfo()
         this.initPage()
       } catch (error) {
@@ -269,13 +294,19 @@ export default {
       try {
         this.$loading()
         const req = { cond: {} }
-        if (this.timeSpan) { req.cond.createdAtRange = getSeachTime(this.timeSpan) }
-        if (this.orderSearchValue) { req.cond[this.orderSeachType] = this.orderSearchValue }
+        if (this.timeSpan) {
+          req.cond.createdAtRange = getSeachTime(this.timeSpan)
+        }
+        if (this.orderSearchValue) {
+          req.cond[this.orderSeachType] = this.orderSearchValue
+        }
         if (this.orderState) {
           const [key, value] = this.orderState.split(',')
           req.cond[key] = value
         }
-        if (this.orderSource) { req.cond.from = this.orderSource }
+        if (this.orderSource) {
+          req.cond.from = this.orderSource
+        }
         const timeString = this.timeSpan ? this.timeSpan.join('~') : '全部'
         const data = await Order.exportExcel(req)
         const excelName = timeString + '修修兽订单'
@@ -328,8 +359,13 @@ export default {
   .table-box {
     margin-top: 24px;
 
-    .product-more {
-      color: #909399;
+    .product-box {
+      display: flex;
+      align-items: center;
+
+      .product-more {
+        color: #909399;
+      }
     }
   }
 }
@@ -337,6 +373,8 @@ export default {
 
 <style lang="less">
 .close-dialog {
+  transform: translateY(-50%);
+
   .el-dialog__body {
     padding: 20px;
   }

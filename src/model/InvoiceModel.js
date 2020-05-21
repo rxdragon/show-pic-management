@@ -38,7 +38,8 @@ export default class InvoiceModel {
     this.state = invoiceData.status || '-'
     this.stateToCN = invalidToCN[this.state]
     this.invoicedate = invoiceData.created_at || '-'
-    this.price = _.get(invoiceData, 'info.detail.price') || 0
+    this.price = _.get(invoiceData, 'info.detail[0].price') || 0
+    this.price = Number(this.price)
     this.invoiceTitle = invoiceData.name || '-'
     this.titleType = _.get(invoiceData, 'info.extend.title_type') || '-'
     this.titleTypeCN = changeMap[this.titleType]
@@ -49,8 +50,8 @@ export default class InvoiceModel {
     const saleaccount = _.get(invoiceData, 'info.account') || '- -'
     this.bankName = saleaccount.split(' ')[0]
     this.bankaccount = saleaccount.split(' ')[1]
-    this.ticketPhone = _.get(invoiceData, 'info.phone') || '-'
-    this.ticketEmail = _.get(invoiceData, 'info.email') || '-'
+    this.ticketPhone = _.get(invoiceData, 'info.phone') || ''
+    this.ticketEmail = _.get(invoiceData, 'info.email') || ''
     this.electronicInvoice = _.get(invoiceData, 'info.result.pdf_url') || ''
     this.getInvoiceInfo()
     this.getTicketInfo()

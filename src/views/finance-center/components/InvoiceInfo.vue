@@ -9,28 +9,48 @@
           <span class="state-text">{{ invoiceData.stateToCN }}</span>
         </div>
       </div>
-      <div class="pancel-content" v-for="(invoiceItem, invoiceIndex) in invoiceData.invoiceInfo" :key="invoiceIndex">
+      <div
+        class="pancel-content"
+        v-for="(invoiceItem, invoiceIndex) in invoiceData.invoiceInfo"
+        :key="invoiceIndex"
+      >
         <div class="label-class">{{ invoiceItem.label }}</div>
         <div class="value" :class="invoiceItem.value === '电子普通发票' && 'red'">{{ invoiceItem.value }}</div>
       </div>
     </div>
     <div class="ticket-info-module">
       <div class="panel-title">收票信息</div>
-      <div class="pancel-content" v-for="(ticketItem, ticketIndex) in invoiceData.ticketInfo" :key="ticketIndex">
+      <div
+        class="pancel-content"
+        v-for="(ticketItem, ticketIndex) in invoiceData.ticketInfo"
+        :key="ticketIndex"
+      >
         <div class="label-class">{{ ticketItem.label || '-' }}</div>
         <div class="value">{{ ticketItem.value || '-' }}</div>
       </div>
       <div class="ticket-image" v-if="invoiceData.electronicInvoice">
-        <embed :src="ticketImage" @click="showTicketImage" />
+        <iframe :src="ticketImage" @click="showTicketImage" />
       </div>
     </div>
     <div class="button-box">
-      <el-button v-if="invoiceData.state === INVOICE_STATE.COMPLETE" type="danger" :loading="cancellLoading" @click="cancellationTicket">作废</el-button>
+      <el-button
+        v-if="invoiceData.state === INVOICE_STATE.COMPLETE"
+        type="danger"
+        :loading="cancellLoading"
+        @click="cancellationTicket"
+      >
+        作废
+      </el-button>
       <el-button v-if="invoiceData.electronicInvoice" type="primary" @click="showTicketImage">查看电子发票</el-button>
     </div>
     <el-dialog
-      title="查看电子发票" :modal="false" custom-class="ticket-show"
-      :visible.sync="showViewer" center width="860px">
+      title="查看电子发票"
+      :modal="false"
+      custom-class="ticket-show"
+      :visible.sync="showViewer"
+      center
+      width="860px"
+    >
       <iframe class="ticket-image-box" :src="ticketImage" />
       <span slot="footer" class="dialog-footer">
         <el-button :loading="resendLoading" type="primary" @click="resendInvoice">重新发送</el-button>
@@ -45,6 +65,9 @@ import { INVOICE_STATE, invalidToCN } from '@/model/Enumerate.js'
 
 export default {
   name: 'InvoiceInfo',
+  props: {
+    invoiceData: { type: Object, required: true }
+  },
   data () {
     return {
       INVOICE_STATE,
@@ -52,9 +75,6 @@ export default {
       cancellLoading: false,
       resendLoading: false
     }
-  },
-  props: {
-    invoiceData: { type: Object, required: true }
   },
   computed: {
     ticketImage () {
@@ -89,7 +109,7 @@ export default {
      */
     async resendInvoice () {
       try {
-        if (!this.invoiceData.ticketPhone && !this.invoiceData.ticketPhone) return this.$newMessage.warning('获取收票信息失败')
+        if (!this.invoiceData.ticketPhone && !this.invoiceData.ticketEmail) return this.$newMessage.warning('获取收票信息失败')
         this.resendLoading = true
         const req = {
           invoiceId: this.invoiceData.id,
@@ -153,10 +173,10 @@ export default {
 
   .pancel-content {
     display: flex;
+    margin-bottom: 10px;
     font-size: 14px;
     font-weight: 400;
     color: #303133;
-    margin-bottom: 10px;
 
     .label-class {
       width: 70px;
@@ -175,12 +195,12 @@ export default {
     margin-bottom: 40px;
 
     .ticket-image {
+      height: 260px;
       margin-top: 24px;
       border: 1px solid #e8e8e8;
       border-radius: 4px;
-      height: 260px;
 
-      embed {
+      iframe {
         width: 100%;
         height: 100%;
       }
@@ -215,9 +235,9 @@ export default {
 
   .ticket-image-box {
     display: block;
-    margin: auto;
     width: 100%;
     height: 642px;
+    margin: auto;
   }
 }
 </style>

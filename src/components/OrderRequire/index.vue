@@ -14,7 +14,12 @@
       </div>
       <div class="require-row tag-box">
         <template v-for="(requiresItem, requiresIndex) in requiresInfo.baseRequires">
-          <el-tag size="medium" type="success" :key="requiresIndex" v-if="Boolean(requiresItem)">
+          <el-tag
+            size="medium"
+            type="success"
+            :key="requiresIndex"
+            v-if="Boolean(requiresItem)"
+          >
             {{ requiresIndex | tagFilter }}{{ requiresItem | toLabelName }}
           </el-tag>
         </template>
@@ -22,10 +27,10 @@
       <div class="require-row photo-mark" v-if="requiresInfo.referenceDiagram">
         <div class="require-label">参考图：</div>
         <div class="require-value">
-          我的风格
           <el-image
             :src="requiresInfo.referenceDiagramCompress"
-            :preview-src-list="[requiresInfo.referenceDiagramOriginal]">
+            :preview-src-list="[requiresInfo.referenceDiagramOriginal]"
+          >
           </el-image>
           <el-link :underline="false" type="success" @click="downPhoto">下载风格照片</el-link>
         </div>
@@ -39,30 +44,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import * as DownPhoto from '@/utils/DownPhoto.js'
 
 export default {
   name: 'OrderRequire',
-  props: {
-    orderInfo: { type: Object, required: true }
-  },
-  computed: {
-    requiresInfo () {
-      return this.orderInfo.requiresData || {}
-    }
-  },
-  data () {
-    return {
-    }
-  },
-  methods: {
-    /**
-     * @description 下载照片
-     */
-    downPhoto () {
-      DownPhoto.downOnePicture(this.requiresInfo.referenceDiagram)
-    }
-  },
   filters: {
     tagFilter (val) {
       const tagCN = {
@@ -71,6 +57,27 @@ export default {
         pimples: '祛痣'
       }
       return tagCN[val]
+    }
+  },
+  props: {
+    orderInfo: { type: Object, required: true }
+  },
+  data () {
+    return {
+    }
+  },
+  computed: {
+    ...mapGetters(['imgDomain']),
+    requiresInfo () {
+      return this.orderInfo.requiresData || {}
+    }
+  },
+  methods: {
+    /**
+     * @description 下载照片
+     */
+    downPhoto () {
+      DownPhoto.downOnePicture(this.imgDomain + this.requiresInfo.referenceDiagram)
     }
   }
 }
@@ -111,9 +118,9 @@ export default {
 
       .require-value {
         .el-image {
-          margin: 0 10px;
           width: 54px;
           height: 54px;
+          margin: 0 10px;
         }
 
         .el-link {
@@ -128,7 +135,7 @@ export default {
 
     .tag-box {
       .el-tag {
-        margin-right: 20px;
+        margin-right: 12px;
       }
     }
 

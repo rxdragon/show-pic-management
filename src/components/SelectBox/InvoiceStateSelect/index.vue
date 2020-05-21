@@ -1,6 +1,12 @@
 <template>
   <div class="invoice-state-select">
-    <el-select v-bind="$attrs" :popper-append-to-body="false" placeholder="请选择" clearable v-on="$listeners">
+    <el-select
+      v-bind="$attrs"
+      :popper-append-to-body="false"
+      placeholder="请选择"
+      clearable
+      v-on="$listeners"
+    >
       <el-option
         v-for="(optionItem, optionIndex) in options"
         :key="optionIndex"
@@ -19,6 +25,7 @@ export default {
   data () {
     const searchEunm = [
       INVOICE_STATE.PENDING,
+      INVOICE_STATE.WAIT_WRITE,
       INVOICE_STATE.COMPLETE,
       INVOICE_STATE.FAIL,
       INVOICE_STATE.INVALID

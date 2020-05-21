@@ -4,9 +4,43 @@
   &--small {
     border-radius: 4px;
   }
+
+  &--blue {
+    color: #fff;
+    background-color: @blue;
+    border-color: @blue;
+
+    &:focus,
+    &:hover {
+      color: #fff;
+      background: @bluehover;
+      border-color: @bluehover;
+    }
+
+    &.is-plain {
+      color: #4669fb;
+      background: #edf0ff;
+      border-color: #b5c3fd;
+
+      &:focus,
+      &:hover {
+        color: @blue !important;
+      }
+    }
+  }
 }
 
 .el-submenu__title i,
 .el-menu-item i {
   color: #fff;
+}
+
+.el-dropdown-menu__item:focus,
+.el-dropdown-menu__item:not(.is-disabled):hover {
+  color: #606266;
+  background-color: #f5f7fa;
+}
+
+.el-table .cell {
+  line-height: normal;
 }
