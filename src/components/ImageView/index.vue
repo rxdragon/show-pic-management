@@ -3,21 +3,18 @@
     <div class="el-image-viewer__wrapper" :style="{ 'z-index': zIndex }">
       <div class="el-image-viewer__mask"></div>
       <!-- CLOSE -->
-      <span class="el-image-viewer__btn el-image-viewer__close" @click="hide">
+      <span
+        class="el-image-viewer__btn el-image-viewer__close"
+        @click="hide"
+      >
         <i class="el-icon-circle-close"></i>
       </span>
       <!-- ARROW -->
       <template v-if="!isSingle">
-        <span
-          class="el-image-viewer__btn el-image-viewer__prev"
-          :class="{ 'is-disabled': !infinite && isFirst }"
-          @click="prev">
+        <span class="el-image-viewer__btn el-image-viewer__prev" :class="{ 'is-disabled': !infinite && isFirst }" @click="prev">
           <i class="el-icon-arrow-left"/>
         </span>
-        <span
-          class="el-image-viewer__btn el-image-viewer__next"
-          :class="{ 'is-disabled': !infinite && isLast }"
-          @click="next">
+        <span class="el-image-viewer__btn el-image-viewer__next" :class="{ 'is-disabled': !infinite && isLast }" @click="next">
           <i class="el-icon-arrow-right"/>
         </span>
       </template>
@@ -31,7 +28,14 @@
           <i class="el-image-viewer__actions__divider"></i>
           <i class="el-icon-refresh-left" @click="handleActions('anticlocelise')"></i>
           <i class="el-icon-refresh-right" @click="handleActions('clocelise')"></i>
-          <el-button type="primary" size="small" @click="downPhoto">点击下载</el-button>
+          <el-button
+            class="down-btn"
+            type="primary"
+            size="small"
+            @click="downPhoto"
+          >
+            点击下载
+          </el-button>
         </div>
       </div>
       <!-- CANVAS -->
@@ -46,7 +50,8 @@
             :style="imgStyle"
             @load="handleImgLoad"
             @error="handleImgError"
-            @mousedown="handleMouseDown">
+            @mousedown="handleMouseDown"
+          >
         </template>
       </div>
     </div>
@@ -140,6 +145,9 @@ export default {
         }
       })
     }
+  },
+  mounted () {
+    this.deviceSupportInstall()
   },
   methods: {
     hide () {
@@ -280,9 +288,25 @@ export default {
     downPhoto () {
       DownPhoto.downOnePicture(this.currentImg)
     }
-  },
-  mounted () {
-    this.deviceSupportInstall()
   }
 }
 </script>
+
+<style lang="less" scoped>
+/deep/ .el-icon-circle-close {
+  color: #fff !important;
+}
+
+.el-image-viewer__btn {
+  background-color: rgba(96, 98, 102, 0.8);
+  opacity: 1;
+
+  i {
+    opacity: 0.8;
+  }
+
+  .down-btn {
+    margin-left: 10px;
+  }
+}
+</style>

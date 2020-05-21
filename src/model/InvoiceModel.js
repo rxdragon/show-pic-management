@@ -19,8 +19,8 @@ export default class InvoiceModel {
   titleType = '' // 抬头类型
   titleTypeCN = '' // 抬头类型中文
   proposerAccount = '' // 申请人账号
-  saleaddress = '-' // 注册地址
-  salephone = '' // 注册电话
+  address = '-' // 注册地址
+  telephone = '' // 注册电话
   bankName = '' // 开户银行
   bankaccount = '' // 银行账号
   ticketPhone = '' // 收票手机
@@ -38,20 +38,20 @@ export default class InvoiceModel {
     this.state = invoiceData.status || '-'
     this.stateToCN = invalidToCN[this.state]
     this.invoicedate = invoiceData.created_at || '-'
-    this.price = _.get(invoiceData, 'info.detail.price') || 0
+    this.price = _.get(invoiceData, 'info.detail[0].price') || 0
+    this.price = Number(this.price)
     this.invoiceTitle = invoiceData.name || '-'
     this.titleType = _.get(invoiceData, 'info.extend.title_type') || '-'
     this.titleTypeCN = changeMap[this.titleType]
-    // TODO 没有账号信息
-    this.proposerAccount = '-'
-    this.saleaddress = _.get(invoiceData, 'info.saleaddress') || '-'
-    this.salephone = _.get(this.base, 'info.salephone') || '-'
-    const saleaccount = _.get(invoiceData, 'info.saleaccount') || '- -'
+    this.proposerAccount = _.get(invoiceData, 'userInfo.phone') || '-'
+    this.address = _.get(invoiceData, 'info.address') || '-'
+    this.telephone = _.get(invoiceData, 'info.telephone') || '-'
     this.taxnum = invoiceData.taxnum || '-'
+    const saleaccount = _.get(invoiceData, 'info.account') || '- -'
     this.bankName = saleaccount.split(' ')[0]
     this.bankaccount = saleaccount.split(' ')[1]
-    this.ticketPhone = _.get(invoiceData, 'info.phone') || '-'
-    this.ticketEmail = _.get(invoiceData, 'info.email') || '-'
+    this.ticketPhone = _.get(invoiceData, 'info.phone') || ''
+    this.ticketEmail = _.get(invoiceData, 'info.email') || ''
     this.electronicInvoice = _.get(invoiceData, 'info.result.pdf_url') || ''
     this.getInvoiceInfo()
     this.getTicketInfo()
@@ -74,7 +74,7 @@ export default class InvoiceModel {
       },
       {
         label: '注册地址：',
-        value: this.saleaddress
+        value: this.address
       },
 
       {
@@ -91,7 +91,7 @@ export default class InvoiceModel {
       },
       {
         label: '注册电话：',
-        value: _.get(this.base, 'info.salephone')
+        value: this.telephone
       },
       {
         label: '银行账号：',

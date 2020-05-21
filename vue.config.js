@@ -29,7 +29,17 @@ module.exports = {
     if (config.plugins.has('progress') && process.env.CI_RUNNER_ID) {
       config.plugins.delete('progress')
     }
-  },
-  css: {
+    config.plugin('define')
+      .tap(args => {
+        args[0].BUILD_TIME = +Date.now()
+        args[0].BUILD_REDIRECT = '"/login.html"'
+        console.log(process.env.CI_RUNNER_ID)
+        console.log(args[0]['process.env'].NODE_ENV)
+        console.log(args[0]['process.env'].NODE_ENV === '"development"')
+        if (process.env.CI_RUNNER_ID && args[0]['process.env'].NODE_ENV === '"development"') {
+          args[0].BUILD_REDIRECT = '"/show-pic-management/login.html"'
+        }
+        return args
+      })
   }
 }

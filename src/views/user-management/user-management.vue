@@ -8,7 +8,12 @@
           <date-picker v-model="timeSpan" />
         </div>
         <div class="date-search search-item">
-          <el-input v-model.trim="searchValue" placeholder="请输入内容" class="input-with-select" @keyup.native.enter="searchData(1)">
+          <el-input
+            v-model.trim="searchValue"
+            placeholder="请输入内容"
+            class="input-with-select"
+            @keyup.native.enter="searchData(1)"
+          >
             <el-select slot="prepend" v-model="seachType" placeholder="请选择">
               <el-option label="顾客姓名" value="userName" />
               <el-option label="顾客手机号" value="phone" />
@@ -30,7 +35,12 @@
           <el-table-column prop="name" label="用户姓名" width="180" />
           <el-table-column prop="sex" label="用户性别" />
           <el-table-column prop="userConsumeNum" label="消费次数" sortable="custom" />
-          <el-table-column prop="consumeTotal" label="消费金额" sortable="custom" :formatter="stringMoney"/>
+          <el-table-column
+            prop="consumeTotal"
+            label="消费金额"
+            sortable="custom"
+            :formatter="stringMoney"
+          />
           <el-table-column label="账号来源">
             <template slot-scope="{ row }">
               <div :class="`${row.from}-color`">{{ row.from | toOrderFromToCN }}</div>
@@ -44,7 +54,7 @@
           </el-table-column>
         </el-table>
       </div>
-      <no-data v-show="!tableData.length">当前暂无订单</no-data>
+      <no-data v-show="!tableData.length">当前暂无用户</no-data>
     </main>
     <div class="page-box">
       <el-pagination
@@ -103,10 +113,18 @@ export default {
           page: this.pager.page,
           pageSize: this.pager.pageSize
         }
-        if (this.timeSpan) { req.cond.createdAtRange = getSeachTime(this.timeSpan) }
-        if (this.searchValue) { req.cond[this.seachType] = this.searchValue }
-        if (this.accountSource) { req.cond.from = this.accountSource }
-        if (this.orderBy.key) { req.orderBy = this.orderBy }
+        if (this.timeSpan) {
+          req.cond.createdAtRange = getSeachTime(this.timeSpan)
+        }
+        if (this.searchValue) {
+          req.cond[this.seachType] = this.searchValue
+        }
+        if (this.accountSource) {
+          req.cond.from = this.accountSource
+        }
+        if (this.orderBy.key) {
+          req.orderBy = this.orderBy
+        }
         const data = await Clients.getOrderList(req)
         this.tableData = data.list
         this.pager.total = data.total
@@ -125,7 +143,7 @@ export default {
         ascending: 'asc' // 升序
       }
       const orderSortKey = {
-        userConsumeNum: 'user_consume_num',
+        userConsumeNum: 'consume_num',
         consumeTotal: 'consume_total'
       }
       this.orderBy = {

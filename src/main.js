@@ -3,7 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import * as filters from './filters' // 全局过滤器
-import { get, sortBy } from 'lodash-es'
+import get from 'lodash/get'
+import sortBy from 'lodash/sortBy'
 import './plugins/axios'
 import './plugins/element.js' // ui布局
 import './plugins/icon-font/iconfont.css' // 字体
@@ -12,6 +13,9 @@ import './assets/styles/index.less' // 字体
 import '@assetsDir/styles/variables.less' // 全局样式
 import './guards' // 路由守护
 import '@/directive'
+
+const version = '1.0.0'
+console.warn(version)
 
 window._ = { get, sortBy }
 Vue.config.productionTip = false

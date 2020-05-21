@@ -16,15 +16,17 @@
           <th>{{ orderData.paidAt }}</th>
           <th>
             {{ orderData.productShow || '-' }}
-            <el-popover
-              v-if="orderData.productShow"
-              placement="bottom-start"
-              trigger="hover">
+            <el-popover v-if="orderData.productShow" placement="bottom-start" trigger="hover">
               <div class="order-info">
-                <p v-for="(productItem, productIndex) in orderData.productList" :key="productIndex">{{ productItem }}</p>
+                <p
+                  v-for="(productItem, productIndex) in orderData.productList"
+                  :key="productIndex"
+                >
+                  {{ productItem }}
+                </p>
                 <p>照片张数：{{ orderData.photoNum }}张</p>
               </div>
-              <i slot="reference" class="product-more el-icon-s-unfold"></i>
+              <i slot="reference" class="product-more iconfont icongengduo"></i>
             </el-popover>
           </th>
           <th>¥{{ orderData.totalFee }}</th>
@@ -55,13 +57,13 @@ export default {
   props: {
     orderInfo: { type: Object, required: true }
   },
+  data () {
+    return {
+    }
+  },
   computed: {
     orderData () {
       return this.orderInfo || {}
-    }
-  },
-  data () {
-    return {
     }
   }
 }
@@ -103,6 +105,7 @@ export default {
 
         .close-reason {
           max-width: 400px;
+          word-break: break-all;
         }
       }
     }

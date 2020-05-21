@@ -17,11 +17,6 @@ export function getInvoiceList (params) {
       return new InvoiceModel(listItem)
     })
     return res
-  }).catch(() => {
-    return {
-      total: 0,
-      list: []
-    }
   })
 }
 
@@ -63,7 +58,6 @@ export function getCanInvoiceOrderList (params) {
     params
   }).then(res => {
     res.list = res.list.map(listItem => {
-      // TODO 缺少发票状态
       const invoiceId = _.get(listItem, 'order_extend.invoice_id') || ''
       const invoiceState = Boolean(invoiceId) ? 'complete' : 'fail'
       const invoiceStateCN = invoiceState === 'complete' ? '已开票' : '未开票'
@@ -71,6 +65,7 @@ export function getCanInvoiceOrderList (params) {
       const canInvoiceMoney = Number(listItem.total_fee)
       return {
         ...new OrderModel(listItem),
+        invoiceState,
         invoiceStateCN,
         canCheck: !Boolean(invoiceId),
         isCheck,
