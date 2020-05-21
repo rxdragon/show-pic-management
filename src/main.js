@@ -3,7 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import * as filters from './filters' // 全局过滤器
-import { get, sortBy } from 'lodash-es'
+import get from 'lodash/get'
+import sortBy from 'lodash/sortBy'
 import './plugins/axios'
 import './plugins/element.js' // ui布局
 import './plugins/icon-font/iconfont.css' // 字体

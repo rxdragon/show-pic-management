@@ -62,6 +62,7 @@
 ### 🔨 代码重构
 范围|描述|commitId
 --|--|--
+ - | 更改入口文件 | [84d034c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/84d034c)
  - | 更改提交钩子 | [0e88b7d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0e88b7d)
  - | 更改配置问题 | [9303262](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9303262)
 
