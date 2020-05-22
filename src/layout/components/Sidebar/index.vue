@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import { experimentRoutes } from '@/router/index.js'
 import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem'
 import variables from '@assetsDir/styles/variables.less'
@@ -64,8 +63,7 @@ export default {
         if (nowTime < this.expireTime) {
           const hasExperiment = this.permission_routes.find(item => item.path.includes('experiment-view'))
           if (hasExperiment) return
-          this.$store.commit('permission/SET_ROUTES', [...this.personage_routers, ...experimentRoutes])
-          this.$router.addRoutes(experimentRoutes)
+          this.$store.commit('permission/SET_ROUTES', [...this.personage_routers])
           this.experimentCounts = 0
           this.expireTime = 0
         } else {

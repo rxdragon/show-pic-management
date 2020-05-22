@@ -83,13 +83,15 @@
           <el-table-column prop="paidAt" label="下单时间" width="180" />
           <el-table-column label="操作" align="right" width="100">
             <template slot-scope="{ row }">
-              <el-dropdown trigger="click">
+              <el-dropdown trigger="click" v-if="row.orderState !== ORDER_STATE.CANCELLED">
                 <el-button type="primary" size="small">
                   更多<i class="el-icon-arrow-down el-icon--right"></i>
                 </el-button>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item @click.native="goToDetail(row.id)">订单详情</el-dropdown-item>
-                  <el-dropdown-item v-if="row.orderState !== ORDER_STATE.CLOSED" @click.native="closeOrder(row.id)">关闭订单</el-dropdown-item>
+                  <el-dropdown-item v-if="row.orderState !== ORDER_STATE.CLOSED" @click.native="closeOrder(row.id)">
+                    关闭订单
+                  </el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </template>

@@ -59,6 +59,7 @@
 ### 📝 文档
 范围|描述|commitId
 --|--|--
+ - | 更改打包跳转露肩 | [1be062b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1be062b)
  - | 更新产品文档 | [ed4467f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ed4467f)
 
 
