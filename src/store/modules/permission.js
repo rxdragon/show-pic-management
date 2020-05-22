@@ -1,4 +1,3 @@
-// TODO
 // eslint-disable-next-line no-unused-vars
 import { asyncRoutes, constantRoutes } from '@/router'
 import { toCapitalHump } from '@/utils/index.js'
