@@ -35,7 +35,14 @@
           <el-table-column prop="paidAt" label="下单时间" width="180" />
           <el-table-column label="操作" align="right" width="100">
             <template slot-scope="{ row }">
-              <el-button type="primary" size="small" @click="goToDetail(row.id)">订单详情</el-button>
+              <el-button
+                v-if="row.orderState !== ORDER_STATE.CANCELLED"
+                type="primary"
+                size="small"
+                @click="goToDetail(row.id)"
+              >
+                订单详情
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -58,6 +65,7 @@
 <script>
 import UserInfo from './components/UserInfo'
 import { toFixedNoRound } from '@/utils/validate.js'
+import { ORDER_STATE } from '@/model/Enumerate.js'
 import * as Clients from '@/api/clients'
 import * as Order from '@/api/order.js'
 
@@ -66,6 +74,7 @@ export default {
   components: { UserInfo },
   data () {
     return {
+      ORDER_STATE,
       tableData: [],
       userData: {},
       userId: '',
