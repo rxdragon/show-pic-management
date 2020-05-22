@@ -91,7 +91,7 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      if (from.name === 'userManage') {
+      if (from.name === 'UserManage') {
         vm.userId = vm.$route.query.userId
         vm.initPage()
       }
