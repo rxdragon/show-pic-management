@@ -1,4 +1,4 @@
-# 1.0.0 (2020-05-21)
+# 1.0.0 (2020-05-22)
 
 范围|描述|commitId
 --|--|--
@@ -16,6 +16,7 @@
  - | 增加消费次数显示 | [9756960](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9756960)
  - | 处理部分版本mock数据 | [da1f5e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/da1f5e2)
  - | 完成大部分功能链条 | [5faa281](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5faa281)
+ 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 完成订单页面 | [89f50c6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/89f50c6)
  - | 提交代码 | [0050ff1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0050ff1)
  - | 更改打包配置 | [4b126f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4b126f6)
@@ -45,12 +46,13 @@
  - | 修复发票导出问题 | [a34c1a7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a34c1a7)
  - | 修复发票管理不显示正确的预览图 | [bb1364b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bb1364b)
  - | 修复文案问题 | [6714e3c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6714e3c)
+ - | 修复路由权限验证问题 | [bc3b5cf](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bc3b5cf)
+ 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
  - | 修复跳转用户详情问题 | [823e0a0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/823e0a0)
  - | 修复部分bug | [8b45b0e](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8b45b0e)
  - | 修复金额不正确和默认手机号问题 | [08d8264](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/08d8264)
  - | 修复错误吗报错 | [e6da9b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e6da9b0)
  - | 更新错误码 | [5ffa4a9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5ffa4a9)
- 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
 
 
 ### 📝 文档
@@ -71,6 +73,8 @@
 范围|描述|commitId
 --|--|--
  - | yangshi | [ecb14ea](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ecb14ea)
+ - | 优化lodash | [d0d041d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d0d041d)
+ - | 优化没有权限跳转到首页 | [cbc2040](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/cbc2040)
  - | 更改部分字段显示错误问题 | [d2b1bb4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d2b1bb4)
  - | 自动更改更新时间 | [b5f84ce](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b5f84ce)
 

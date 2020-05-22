@@ -3,6 +3,9 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import { errorCode } from './errorCode'
+import * as User from '@/api/user.js'
+import * as SessionTool from '@/utils/sessionTool.js'
+import router from '@/router'
 
 // axios 配置
 axios.defaults.timeout = 10000
@@ -74,6 +77,12 @@ axios.interceptors.response.use(
       const message = '网络错误，请稍后再试！'
       errorMessage(message)
       return Promise.reject(message)
+    }
+    // 没有权限
+    if (data.error_code === 401) {
+      SessionTool.removeSession()
+      router.push('/login')
+      User.logout()
     }
 
     // 请求成功 但是报错
