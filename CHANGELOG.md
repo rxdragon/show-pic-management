@@ -1,4 +1,4 @@
-# 1.0.0 (2020-05-21)
+# 1.0.0 (2020-05-22)
 
 范围|描述|commitId
 --|--|--
@@ -71,6 +71,7 @@
 范围|描述|commitId
 --|--|--
  - | yangshi | [ecb14ea](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ecb14ea)
+ - | 优化lodash | [d0d041d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d0d041d)
  - | 更改部分字段显示错误问题 | [d2b1bb4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d2b1bb4)
  - | 自动更改更新时间 | [b5f84ce](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b5f84ce)
 
