@@ -43,6 +43,7 @@
 --|--|--
  - | 修图查询显示 | [85c5083](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/85c5083)
  - | 修复最小开票金额判断错误问题 | [7f210c9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7f210c9)
+ - | 修复单张照片下载问题 | [004717a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/004717a)
  - | 修复发票导出问题 | [a34c1a7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a34c1a7)
  - | 修复发票管理不显示正确的预览图 | [bb1364b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bb1364b)
  - | 修复文案问题 | [6714e3c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6714e3c)
