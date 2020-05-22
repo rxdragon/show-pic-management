@@ -41,8 +41,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@assetsDir/styles/variables.less';
-
 .user-tab {
   position: relative;
   z-index: 1000;

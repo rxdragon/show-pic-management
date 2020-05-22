@@ -24,8 +24,6 @@ export default {
 </script>
 
 <style lang="less">
-@import '~@assetsDir/styles/variables.less';
-
 .el-aside {
   position: relative;
   width: @sideBarWidth !important;

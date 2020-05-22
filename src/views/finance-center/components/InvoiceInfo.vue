@@ -128,8 +128,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@assetsDir/styles/variables.less';
-
 .invoice-info {
   padding: 0 24px;
 

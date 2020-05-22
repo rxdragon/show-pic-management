@@ -32,6 +32,7 @@
 范围|描述|commitId
 --|--|--
  - | 修复关闭订单理由换行 | [214b2af](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/214b2af)
+ - | 更改全局less变量 | [03d1942](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03d1942)
  - | 更改文案 | [df0980e](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/df0980e)
  - | 更改样式 | [6a28f8c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6a28f8c)
  - | 更改样式 | [9483937](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9483937)
@@ -46,19 +47,21 @@
  - | 修复单张照片下载问题 | [004717a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/004717a)
  - | 修复发票导出问题 | [a34c1a7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a34c1a7)
  - | 修复发票管理不显示正确的预览图 | [bb1364b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bb1364b)
+ - | 修复取消订单不能查看详情 | [7afae71](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7afae71)
  - | 修复文案问题 | [6714e3c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6714e3c)
  - | 修复路由权限验证问题 | [bc3b5cf](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bc3b5cf)
- 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
  - | 修复跳转用户详情问题 | [823e0a0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/823e0a0)
  - | 修复部分bug | [8b45b0e](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8b45b0e)
  - | 修复金额不正确和默认手机号问题 | [08d8264](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/08d8264)
  - | 修复错误吗报错 | [e6da9b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e6da9b0)
  - | 更新错误码 | [5ffa4a9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5ffa4a9)
+ 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
 
 
 ### 📝 文档
 范围|描述|commitId
 --|--|--
+ - | 更改打包跳转露肩 | [1be062b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1be062b)
  - | 更新产品文档 | [ed4467f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ed4467f)
 
 
