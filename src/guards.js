@@ -63,5 +63,9 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.afterEach(() => {
+  const appLoading = document.getElementById('loading-bg')
+  if (appLoading) {
+    appLoading.style.display = "none"
+  }
   NProgress.done() // 读取完成
 })
