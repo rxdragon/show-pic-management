@@ -366,8 +366,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@assetsDir/styles/variables.less';
-
 .invoice-issue {
   margin-top: 24px;
 

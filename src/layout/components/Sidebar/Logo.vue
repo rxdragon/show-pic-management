@@ -20,8 +20,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@assetsDir/styles/variables.less';
-
 .sidebarLogoFade-enter-active {
   transition: opacity 1.5s;
 }
