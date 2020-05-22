@@ -28,6 +28,7 @@ export default {
   data () {
     return {
       isLoading: false,
+      // 根据组件名字
       cachedViews: ['userManage', 'userDetail', 'orderManagement', 'financeIndex']
     }
   },
