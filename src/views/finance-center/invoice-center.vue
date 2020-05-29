@@ -212,13 +212,6 @@ export default {
 .finance-index {
   margin-top: 24px;
 
-  .header-plugin {
-    .el-button {
-      float: right;
-      margin: 40px 24px 0 0;
-    }
-  }
-
   .search-box {
     margin-bottom: 0;
 

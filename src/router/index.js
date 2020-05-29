@@ -7,6 +7,7 @@ Vue.use(Router)
 import orderManagement from './modules/orderManagement.js' // 订单管理
 import userManagement from './modules/userManagement.js' // 订单管理
 import financeCenter from './modules/financeCenter.js' // 财务中心
+import marketingCenter from './modules/marketingCenter.js' // 财务中心
 
 // 基础权限路由
 export const constantRoutes = [
@@ -50,7 +51,8 @@ export const constantRoutes = [
 export const asyncRoutes = [
   orderManagement,
   userManagement,
-  financeCenter
+  financeCenter,
+  marketingCenter
 ]
 
 const createRouter = () => new Router({
