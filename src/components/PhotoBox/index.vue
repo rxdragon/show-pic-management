@@ -3,7 +3,7 @@
     <div class="image-box">
       <el-image :src="this.imgCompressDomain + src" fit="cover"></el-image>
     </div>
-    <div class="handle-box" @click.stop="">
+    <div class="handle-box" v-if="downing" @click.stop="">
       <div class="version-name">{{ version | toVersionCN }}</div>
       <el-button type="text" @click="downPhoto">下载照片</el-button>
     </div>
@@ -18,7 +18,8 @@ export default {
   name: 'PhotoBox',
   props: {
     src: { type: String, required: true },
-    version: { type: String, default: '' }
+    version: { type: String, default: '' },
+    downing: { type: Boolean, default: true }
   },
   computed: {
     ...mapGetters(['imgDomain', 'imgCompressDomain'])

@@ -10,15 +10,39 @@
         >
           <el-button slot="append" icon="el-icon-search"></el-button>
         </el-input>
-        <div class="search-data">
-          <p>劵码编号：12HJ89SU09</p>
-          <p>优惠劵名称：asda</p>
-          <p>状态：已使用</p>
-          <p>生成时间：2019-09-08 13:00:00</p>
-          <p>激活时间：2019-09-08 13:00:00</p>
-          <p>使用时间：2019-09-08 13:00:00</p>
-          <p>绑定账号：12287655120</p>
-          <p>使用订单号：X202005211234</p>
+        <div class="coupon-search-data">
+          <p>
+            <span class="label">劵码编号：</span>
+            {{ couponCode }}
+          </p>
+          <p>
+            <span class="label">优惠劵名称：</span>
+            {{ couponName }}
+          </p>
+          <p>
+            <span class="label">状态：</span>
+            {{ couponState }}
+          </p>
+          <p>
+            <span class="label">生成时间：</span>
+            {{ createTime }}
+          </p>
+          <p>
+            <span class="label">激活时间：</span>
+            {{ activeTime }}
+          </p>
+          <p>
+            <span class="label">使用时间：</span>
+            {{ usedTime }}
+          </p>
+          <p>
+            <span class="label">绑定账号：</span>
+            {{ couponUser }}
+          </p>
+          <p>
+            <span class="label">使用订单号：</span>
+            {{ activeOrder }}
+          </p>
         </div>
       </div>
       <el-button slot="reference" type="primary" size="small">劵码查询工具</el-button>
@@ -31,7 +55,15 @@ export default {
   name: 'CouponCodeSearch',
   data () {
     return {
-      couponMark: ''
+      couponMark: '',
+      couponCode: '12HJ89SU09', // 劵码
+      couponName: 'xxx活动优惠', // 优惠劵名称
+      couponState: '已使用', // 劵码
+      createTime: '2019-09-08 13:00:00', // 劵码
+      activeTime: '2019-09-08 13:00:00', // 劵码
+      usedTime: '2019-09-08 13:00:00', // 劵码
+      couponUser: '18268882513', // 劵码
+      activeOrder: 'X202005211234' // 劵码
     }
   },
   methods: {
@@ -44,3 +76,19 @@ export default {
   }
 }
 </script>
+
+<style lang="less">
+.coupon-search-data {
+  margin-top: 12px;
+
+  p {
+    margin: 8px 0;
+
+    .label {
+      display: inline-block;
+      width: 100px;
+      text-align: right;
+    }
+  }
+}
+</style>

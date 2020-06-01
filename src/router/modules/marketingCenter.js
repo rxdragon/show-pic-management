@@ -36,6 +36,28 @@ const financeCenter = {
           hidden: true
         }
       ]
+    },
+    {
+      path: 'activity-management',
+      name: 'ActivityManagement',
+      redirect: '/marketing-center/activity-management/activity-list',
+      component: () => import('@/views/marketing-center/activity-management.vue'),
+      meta: { title: '活动管理', icon: '' },
+      children: [
+        {
+          path: 'activity-list',
+          name: 'ActivityList',
+          meta: { title: '活动管理', icon: '', breadcrumb: false },
+          component: () => import('@/views/marketing-center/activity-list.vue'),
+        },
+        {
+          path: 'edit-activity',
+          name: 'EditActivity',
+          component: () => import('@/views/marketing-center/edit-activity.vue'),
+          meta: { title: '编辑活动', icon: '', activeMenu: '/marketing-center/activity-management/activity-list' },
+          hidden: true
+        }
+      ]
     }
   ]
 }

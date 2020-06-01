@@ -168,6 +168,10 @@ export default {
 }
 
 .cancellation-box {
+  .el-popover__title {
+    font-weight: 500;
+  }
+
   .cancellation-tip {
     margin-top: 4px;
     font-size: 12px;
