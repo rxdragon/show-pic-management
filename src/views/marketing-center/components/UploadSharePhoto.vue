@@ -3,9 +3,11 @@
     <div v-for="(photoItem, photoIndex) in uploadPhoto" :key="photoItem.uid" class="list-photo-item">
       <transition name="el-zoom-in-center" mode="out-in">
         <photo-box
-          v-if="photoItem.status === 'success' && finishPhoto[photoItem.uid]"
+          v-if="photoItem.status === 'success' && photoItem.path"
+          original-photo
+          preview
           :downing="false"
-          :src="finishPhoto[photoItem.uid].path"
+          :src="photoItem.path"
         />
         <div v-else-if="photoItem.status !== 'fail'" class="progress">
           <el-progress
@@ -41,6 +43,10 @@
         <i class="el-icon-plus" />
       </div>
     </el-upload>
+    <div class="upload-tips">
+      <div class="tip">提示：分享图不上传默认显示修修兽logo</div>
+      <div class="tip">只能上传100px x 100px的照片</div>
+    </div>
   </div>
 </template>
 
@@ -48,6 +54,7 @@
 import PhotoBox from "@/components/PhotoBox"
 import variables from '@/assets/styles/variables.less'
 import { mapGetters } from 'vuex'
+import { getImagePx } from '@/utils/photoExif.js'
 import * as Commonality from '@/api/commonality'
 import * as PhotoTool from '@/utils/photoTool'
 
@@ -71,16 +78,15 @@ export default {
     }
   },
   model: {
-    prop: 'finishPhoto',
+    prop: 'uploadPhoto',
     event: 'change'
   },
   props: {
-    finishPhoto: { type: Object, required: true }
+    uploadPhoto: { type: Array, required: true }
   },
   data () {
     return {
-      upyunConfig: {},
-      uploadPhoto: []
+      upyunConfig: {}
     }
   },
   computed: {
@@ -99,30 +105,37 @@ export default {
     /**
      * @description 上传前回调
      */
-    beforeUpload (file) {
-      // TODO 验证上传
+    async beforeUpload (file) {
+      try {
+        const data = await getImagePx(file)
+        if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
+        if (data.width !== 100 || data.height !== 100) throw new Error('请上传100px * 100px 的图片')
+        return Promise.resolve()
+      } catch (error) {
+        this.$newMessage({
+          dangerouslyUseHTMLString: true,
+          message: error.message || error,
+          type: 'warning',
+          duration: 3000
+        })
+        return Promise.reject()
+      }
     },
     /**
      * @description 上传中
      */
     handleProgress (event, file, fileList) {
-      this.uploadPhoto = fileList
+      this.$emit('change', fileList)
     },
     /**
      * @description 上传成功
      */
     handleSuccess (response, file, fileList) {
-      this.uploadPhoto = fileList
-      const filePath = file.response ? PhotoTool.handlePicPath(file.response.url) : ''
+      const path = file.response ? PhotoTool.handlePicPath(file.response.url) : ''
       const uploadedName = PhotoTool.fileNameFormat(file.name)
-      const newPhoto = {
-        path: filePath,
-        orginPhotoName: uploadedName,
-        file
-      }
-      const uid = file.uid
-      this.$set(this.finishPhoto, uid, newPhoto)
-      this.$emit('change', this.finishPhoto)
+      this.$set(fileList[0], 'path', path)
+      this.$set(fileList[0], 'uploadedName', uploadedName)
+      this.$emit('change', fileList)
     },
     /**
      * @description 移除文件
@@ -130,10 +143,7 @@ export default {
     deleteUploadPhoto (photoItem, index) {
       const isPending = !photoItem.response
       if (isPending) { this.$refs.uploadButton.abort(this.uploadPhoto[index]) }
-      this.uploadPhoto.splice(index, 1)
-      const uid = photoItem.uid
-      this.$delete(this.finishPhoto, uid)
-      this.$emit('change', this.finishPhoto)
+      this.$emit('change', [])
     }
   }
 }
@@ -189,6 +199,19 @@ export default {
       .delete-button {
         display: block;
       }
+    }
+  }
+
+  .upload-tips {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-left: 16px;
+
+    .tip {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #909399;
     }
   }
 }

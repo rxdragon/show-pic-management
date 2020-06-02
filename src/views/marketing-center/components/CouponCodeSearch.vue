@@ -2,12 +2,7 @@
   <div class="coupon-code-search">
     <el-popover width="300" trigger="click">
       <div>
-        <el-input
-          placeholder="请输入10位劵码编号"
-          maxlength="11"
-          v-model.trim="couponMark"
-          @click="searchCouponMark"
-        >
+        <el-input placeholder="请输入10位劵码编号" maxlength="11" v-model.trim="couponMark" @click="searchCouponMark">
           <el-button slot="append" icon="el-icon-search"></el-button>
         </el-input>
         <div class="coupon-search-data">

@@ -13,12 +13,7 @@
         </div>
         <div class="date-search search-item">
           <span>优惠劵名称</span>
-          <el-input
-            v-model.trim="couponName"
-            @keyup.native.enter="searchData(1)"
-            placeholder="请输入"
-            class="input-with-select"
-          ></el-input>
+          <el-input v-model.trim="couponName" @keyup.native.enter="searchData(1)" placeholder="请输入" class="input-with-select"></el-input>
         </div>
         <div class="date-search search-item">
           <span>优惠劵状态</span>
@@ -55,12 +50,7 @@
                 </div>
                 <el-button slot="reference" type="danger" size="small">作废</el-button>
               </el-popover>
-              <el-button
-                class="detail-button"
-                type="primary"
-                size="small"
-                @click="linkToDetail(row)"
-              >
+              <el-button class="detail-button" type="primary" size="small" @click="linkToDetail(row)">
                 详情
               </el-button>
             </template>

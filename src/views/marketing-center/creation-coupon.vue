@@ -1,12 +1,7 @@
 <template>
   <div class="creation-coupon">
     <main class="module-panel">
-      <el-form
-        ref="form"
-        :model="couponForm"
-        :rules="rules"
-        label-width="110px"
-      >
+      <el-form ref="form" :model="couponForm" :rules="rules" label-width="110px">
         <el-form-item label="优惠劵名称：" prop="name">
           <el-input v-model="couponForm.name" placeholder="请输入优惠劵名称" />
         </el-form-item>
@@ -19,73 +14,38 @@
         <!-- 立减券 -->
         <template v-if="couponForm.type === 'money'">
           <el-form-item label="面额：" prop="erectMoney">
-            <el-input
-              v-numberOnly
-              min="1"
-              class="min-input"
-              v-model="couponForm.erectMoney"
-            /> 元
+            <el-input v-numberOnly min="1" class="min-input" v-model="couponForm.erectMoney"/> 元
           </el-form-item>
         </template>
         <!-- 折扣卷 -->
         <template v-if="couponForm.type === 'discount'">
           <el-form-item label="折扣力度：" prop="discountRange">
-            <el-input
-              v-numberOnly
-              min="1"
-              class="min-input"
-              v-model="couponForm.discountRange"
-            /> 折
+            <el-input v-numberOnly min="1" class="min-input" v-model="couponForm.discountRange"/> 折
           </el-form-item>
           <el-form-item label="减免上限：" prop="discountMaxMoney">
-            <el-input
-              v-numberOnly
-              min="1"
-              class="min-input"
-              v-model="couponForm.discountMaxMoney"
-            /> 元
+            <el-input v-numberOnly min="1" class="min-input" v-model="couponForm.discountMaxMoney"/> 元
           </el-form-item>
         </template>
         <el-form-item label="使用门槛：" prop="useLimit">
           <el-radio-group v-model="couponForm.useLimit.usetype">
             <el-radio :label="0">无限制</el-radio>
             <el-radio :label="1">
-              满 <el-input
-                v-numberOnly
-                min="1"
-                class="min-input"
-                v-model="couponForm.useLimit.maxMoney"
-              /> 元可用
+              满 <el-input v-numberOnly min="1" class="min-input" v-model="couponForm.useLimit.maxMoney"/> 元可用
             </el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="总发行量：" prop="circulation">
-          <el-input
-            v-numberOnly
-            min="1"
-            v-model="couponForm.circulation"
-            placeholder="请输入总发行量"
-          /> 张
+          <el-input v-numberOnly min="1" v-model="couponForm.circulation" placeholder="请输入总发行量"/> 张
         </el-form-item>
         <el-form-item label="有效时间：" prop="effectivity">
           <el-radio-group v-model="couponForm.effectivity.effectivityType">
             <el-radio :label="0">无限制</el-radio>
             <el-radio :label="1">
-              自激活后 <el-input
-                class="min-input"
-                v-numberOnly
-                min="1"
-                v-model="couponForm.effectivity.autoExceed"
-              /> 天有效
+              自激活后 <el-input class="min-input" v-numberOnly min="1" v-model="couponForm.effectivity.autoExceed"/> 天有效
             </el-radio>
             <el-radio :label="2">
               固定截止日期
-              <el-date-picker
-                v-model="couponForm.effectivity.abortTime"
-                type="datetime"
-                placeholder="选择截止日期时间"
-                default-time="12:00:00"
-              />
+              <el-date-picker v-model="couponForm.effectivity.abortTime" type="datetime" placeholder="选择截止日期时间" default-time="12:00:00"/>
             </el-radio>
           </el-radio-group>
         </el-form-item>
@@ -108,36 +68,12 @@
 
 <script>
 import CouponCodeList from './components/CouponCodeList'
+import { validateUseLimit, validateEffectivity } from '@/utils/validator.js'
 
 export default {
   name: 'CreationCoupon',
   components: { CouponCodeList },
   data () {
-    // 门槛规则
-    const validateUseLimit = (rule, value, callback) => {
-      if (value.usetype === '') {
-        callback(new Error('请选择使用门槛'))
-      }
-      if (+value.usetype === 1 && value.maxMoney === '') {
-        callback(new Error('请输入门槛规则'))
-      }
-      callback()
-    }
-    /**
-     * @description 激活时间
-     */
-    const validateEffectivity = (rule, value, callback) => {
-      if (value.effectivityType === '') {
-        callback(new Error('请选择有效时间类型'))
-      }
-      if (+value.effectivityType === 1 && (!Number(value.autoExceed) || Number(value.autoExceed) <= 0)) {
-        callback(new Error('请输入激活时效'))
-      }
-      if (+value.effectivityType === 2 && !value.abortTime) {
-        callback(new Error('请输入固定截止日期'))
-      }
-      callback()
-    }
     return {
       rules: {
         name: [{ required: true, message: '请输入优惠劵名称', trigger: 'blur' }],
@@ -146,8 +82,8 @@ export default {
         discountRange: [{ required: true, message: '请输入折扣力度', trigger: 'blur' }],
         discountMaxMoney: [{ required: true, message: '请输入减免上限', trigger: 'blur' }],
         useLimit: [{ validator: validateUseLimit, trigger: 'blur' }],
-        circulation: [{required: true, message: '请输入总发行量', trigger: 'blur' }],
-        effectivity: [{validator: validateEffectivity, trigger: 'blur' }]
+        circulation: [{ required: true, message: '请输入总发行量', trigger: 'blur' }],
+        effectivity: [{ required: true, validator: validateEffectivity, trigger: 'blur' }]
       },
       couponForm: {
         name: '', // 优惠劵名称

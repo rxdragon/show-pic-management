@@ -35,12 +35,7 @@
           <el-table-column prop="paidAt" label="下单时间" width="180" />
           <el-table-column label="操作" align="right" width="100">
             <template slot-scope="{ row }">
-              <el-button
-                v-if="row.orderState !== ORDER_STATE.CANCELLED"
-                type="primary"
-                size="small"
-                @click="goToDetail(row.id)"
-              >
+              <el-button v-if="row.orderState !== ORDER_STATE.CANCELLED" type="primary" size="small" @click="goToDetail(row.id)">
                 订单详情
               </el-button>
             </template>

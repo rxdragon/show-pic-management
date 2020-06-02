@@ -136,3 +136,45 @@ export const urlValidator = (rule, value, callback) => {
   const reg = /^(http|https):\/\/([\w.]+\/?)\S*/.test(value)
   _validator(reg, rule, value, callback)
 }
+
+/**
+ * @description 每人限领张数
+ */
+export const validateLimitCount = (rule, value, callback) => {
+  if (value.limitType === '') {
+    callback(new Error('请选择每人限领张数'))
+  }
+  if (+value.limitType === 1 && !value.count) {
+    callback(new Error('请输入每人限领张数'))
+  }
+  callback()
+}
+
+/**
+ * @description 有效时间
+ */
+export const validateEffectivity = (rule, value, callback) => {
+  if (value.effectivityType === '') {
+    callback(new Error('请选择有效时间类型'))
+  }
+  if (+value.effectivityType === 1 && (!Number(value.autoExceed) || Number(value.autoExceed) <= 0)) {
+    callback(new Error('请输入激活时效'))
+  }
+  if (+value.effectivityType === 2 && !value.abortTime) {
+    callback(new Error('请输入固定截止日期'))
+  }
+  callback()
+}
+
+/**
+ * @description 门槛规则
+ */
+export const validateUseLimit = (rule, value, callback) => {
+  if (value.usetype === '') {
+    callback(new Error('请选择使用门槛'))
+  }
+  if (+value.usetype === 1 && value.maxMoney === '') {
+    callback(new Error('请输入门槛规则'))
+  }
+  callback()
+}

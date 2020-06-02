@@ -1,10 +1,5 @@
 <template>
-  <section
-    v-loading.lock="isLoading"
-    element-loading-custom-class="main-loading"
-    class="app-main"
-    :class="{'overhidden':isLoading}"
-  >
+  <section v-loading.lock="isLoading" element-loading-custom-class="main-loading" class="app-main" :class="{'overhidden':isLoading}">
     <transition name="breadcrumb-box" mode="out-in">
       <div class="header-title" v-show="$route.name !== 'Home'">
         <Breadcrumb />

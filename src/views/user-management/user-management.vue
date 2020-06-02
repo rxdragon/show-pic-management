@@ -8,12 +8,7 @@
           <date-picker v-model="timeSpan" />
         </div>
         <div class="date-search search-item">
-          <el-input
-            v-model.trim="searchValue"
-            placeholder="请输入内容"
-            class="input-with-select"
-            @keyup.native.enter="searchData(1)"
-          >
+          <el-input v-model.trim="searchValue" placeholder="请输入内容" class="input-with-select" @keyup.native.enter="searchData(1)">
             <el-select slot="prepend" v-model="seachType" placeholder="请选择">
               <el-option label="顾客姓名" value="userName" />
               <el-option label="顾客手机号" value="phone" />
@@ -35,12 +30,7 @@
           <el-table-column prop="name" label="用户姓名" width="180" />
           <el-table-column prop="sex" label="用户性别" />
           <el-table-column prop="userConsumeNum" label="消费次数" sortable="custom" />
-          <el-table-column
-            prop="consumeTotal"
-            label="消费金额"
-            sortable="custom"
-            :formatter="stringMoney"
-          />
+          <el-table-column prop="consumeTotal" label="消费金额" sortable="custom" :formatter="stringMoney"/>
           <el-table-column label="账号来源">
             <template slot-scope="{ row }">
               <div :class="`${row.from}-color`">{{ row.from | toOrderFromToCN }}</div>

@@ -1,7 +1,7 @@
 <template>
   <div class="photo-box">
     <div class="image-box">
-      <el-image :src="this.imgCompressDomain + src" fit="cover"></el-image>
+      <el-image :src="photoSrc" fit="cover" :preview-src-list="previewPhoto"></el-image>
     </div>
     <div class="handle-box" v-if="downing" @click.stop="">
       <div class="version-name">{{ version | toVersionCN }}</div>
@@ -19,10 +19,18 @@ export default {
   props: {
     src: { type: String, required: true },
     version: { type: String, default: '' },
-    downing: { type: Boolean, default: true }
+    downing: { type: Boolean, default: true },
+    originalPhoto: { type: Boolean },
+    preview: { type: Boolean }
   },
   computed: {
-    ...mapGetters(['imgDomain', 'imgCompressDomain'])
+    ...mapGetters(['imgDomain', 'imgCompressDomain']),
+    photoSrc () {
+      return this.originalPhoto ? this.imgDomain + this.src : this.imgCompressDomain + this.src
+    },
+    previewPhoto () {
+      return this.preview ? [this.imgDomain + this.src] : []
+    }
   },
   methods: {
     /**

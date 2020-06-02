@@ -113,9 +113,9 @@ module.exports = {
     }],
     "vue/html-quotes": [ "error", "double" ], // HTML属性的双引号样式
     "vue/max-attributes-per-line": ["error", {
-      "singleline": 3, // 单行超过3个属性，则换行
+      "singleline": 5, // 单行超过3个属性，则换行
       "multiline": {
-        "max": 1 // 多行最多只允许1个属性
+        "max": 2 // 多行最多只允许1个属性
       }
     }],
     "vue/multiline-html-element-content-newline": ["error", { // 多行元素的内容之前和之后执行换行
@@ -151,7 +151,7 @@ module.exports = {
     "vue/space-infix-ops": ["error", { "int32Hint": false }], // 缀操作符之间的间距
     "no-console": ["error", { allow: ["warn", "error"] }],
     // 最多允许的属性数量，单个属性的字符串最大长度
-    "attributes/max-attributes": [2, { "max": 3, "attrStrLimit": 50 }],
+    "attributes/max-attributes": [2, { "max": 4, "attrStrLimit": 50 }],
     // 属性上'||'和'&&'出现的次数限制
     "attributes/max-attribute-value-logical": [2, { "max": 2 }],
   }

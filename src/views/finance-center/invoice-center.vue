@@ -12,12 +12,7 @@
         </div>
         <div class="date-search search-item">
           <span>发票抬头</span>
-          <el-input
-            v-model.trim="invoiceTitle"
-            @keyup.native.enter="searchData(1)"
-            placeholder="请输入"
-            class="input-with-select"
-          ></el-input>
+          <el-input v-model.trim="invoiceTitle" @keyup.native.enter="searchData(1)" placeholder="请输入" class="input-with-select"></el-input>
         </div>
         <div class="date-search search-item">
           <span>开票状态</span>

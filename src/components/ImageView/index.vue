@@ -28,12 +28,7 @@
           <i class="el-image-viewer__actions__divider"></i>
           <i class="el-icon-refresh-left" @click="handleActions('anticlocelise')"></i>
           <i class="el-icon-refresh-right" @click="handleActions('clocelise')"></i>
-          <el-button
-            class="down-btn"
-            type="primary"
-            size="small"
-            @click="downPhoto"
-          >
+          <el-button class="down-btn" type="primary" size="small" @click="downPhoto">
             点击下载
           </el-button>
         </div>

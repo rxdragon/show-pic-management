@@ -68,12 +68,7 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="totalFee"
-            label="金额"
-            width="150"
-            :formatter="stringMoney"
-          />
+          <el-table-column prop="totalFee" label="金额" width="150" :formatter="stringMoney"/>
           <el-table-column prop="stateCN" label="状态" width="100" />
           <el-table-column label="订单来源" width="80">
             <template slot-scope="{ row }">
@@ -132,12 +127,7 @@
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button type="info" size="small" @click="resetCloseInfo">取 消</el-button>
-        <el-button
-          type="primary"
-          size="small"
-          :loading="submitCloseLoading"
-          @click="submitCloseOrder"
-        >确 定</el-button>
+        <el-button type="primary" size="small" :loading="submitCloseLoading" @click="submitCloseOrder">确 定</el-button>
       </span>
     </el-dialog>
   </div>
