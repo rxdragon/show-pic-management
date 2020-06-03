@@ -166,6 +166,37 @@ export const validateEffectivity = (rule, value, callback) => {
   callback()
 }
 
+function checkIsColor (bgVal) {
+  let type = "^#[0-9a-fA-F]{6}$"
+  let re = new RegExp(type)
+  if (bgVal.match(re) == null) {
+    return false
+  } else {
+    return true
+  }
+}
+
+/**
+ * @description 验证颜色
+ */
+export const validateColor = (rule, value, callback) => {
+  if (!checkIsColor(value)) {
+    callback(new Error('请输入正确的颜色'))
+  }
+  callback()
+}
+
+/**
+ * @description 验证规则
+ */
+export const validateRules = (rule, value, callback) => {
+  if (value.every(item => item.value)) {
+    callback()
+  } else {
+    callback(new Error('请选择填写完整的规则'))
+  }
+}
+
 /**
  * @description 门槛规则
  */

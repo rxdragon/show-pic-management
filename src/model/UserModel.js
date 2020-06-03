@@ -20,6 +20,7 @@ export default class UserModel {
   consumeTotal = 0 // 下单金额
   userConsumeNum = 0 // 下单次数
   recentlyConsume = '' // 最近消费时间
+  couponCount = 0 // 未使用优惠券
 
   constructor (userData) {
     this.base = userData

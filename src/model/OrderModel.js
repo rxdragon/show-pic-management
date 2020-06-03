@@ -17,7 +17,12 @@ export default class OrderModel {
   orderNum = '' // 订单号
   state = '' // 订单状态
   stateCN = '' // 订单状态中文
-  totalFee = 0 // 订单总金额
+
+  allPrice = 0 // 订单实付金额 TODO
+  discountsPrice = 0 // 订单优惠金额 TODO
+  totalFee = 0 // 订单实付金额 TODO
+  couponCode = '-' // 优惠券 TODO
+
   photoNum = 0 // 照片数量
   productList = [] // 产品列表
   createdAt = '-' // 创建时间

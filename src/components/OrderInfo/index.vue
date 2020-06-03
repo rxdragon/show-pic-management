@@ -8,8 +8,8 @@
           <th>下单时间</th>
           <th>下单产品</th>
           <th>实付金额</th>
-          <th>用户账号</th>
-          <th>用户姓名</th>
+          <th>优惠金额</th>
+          <th>券码信息</th>
         </tr>
         <tr class="order-data">
           <th>{{ orderData.orderNum }}</th>
@@ -29,19 +29,27 @@
               <i slot="reference" class="product-more iconfont icongengduo"></i>
             </el-popover>
           </th>
-          <th>¥{{ orderData.totalFee }}</th>
-          <th>{{ orderData.clientAccount }}</th>
-          <th>{{ orderData.clientName }}</th>
+          <th>{{ orderData.allPrice | stringMoney }}</th>
+          <th>{{ orderData.discountsPrice | stringMoney }}</th>
+          <th>{{ orderData.couponCode }}</th>
         </tr>
         <tr class="title">
+          <th>用户账号</th>
+          <th>用户姓名</th>
           <th>联系电话</th>
-          <th>订单状态</th>
-          <th>操作人</th>
-          <th colspan="3">关闭原因</th>
+          <th colspan="3">订单状态</th>
         </tr>
         <tr class="order-data">
+          <th>{{ orderData.clientAccount }}</th>
+          <th>{{ orderData.clientName }}</th>
           <th>{{ orderData.clientPhone }}</th>
           <th>{{ orderData.stateCN }}</th>
+        </tr>
+        <tr class="title">
+          <th>操作人</th>
+          <th colspan="5">关闭原因</th>
+        </tr>
+        <tr class="order-data">
           <th>{{ orderData.closeOperator }}</th>
           <th class="close-reason" colspan="3">{{ orderData.closeReason }}</th>
         </tr>
@@ -51,9 +59,17 @@
 </template>
 
 <script>
+import { toFixedNoRound } from '@/utils/validate.js'
 
 export default {
   name: 'OrderInfo',
+  filters: {
+    // 格式化金钱
+    stringMoney (value) {
+      const money = toFixedNoRound(value)
+      return `¥ ${money}`
+    }
+  },
   props: {
     orderInfo: { type: Object, required: true }
   },

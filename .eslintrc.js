@@ -118,6 +118,7 @@ module.exports = {
         "max": 2 // 多行最多只允许1个属性
       }
     }],
+    'semi': [2, 'never'],
     "vue/multiline-html-element-content-newline": ["error", { // 多行元素的内容之前和之后执行换行
       "ignoreWhenEmpty": true,
       "allowEmptyLines": false

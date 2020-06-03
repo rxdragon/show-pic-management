@@ -1,4 +1,4 @@
-# 1.0.0 (2020-06-02)
+# 1.0.0 (2020-06-03)
 
 范围|描述|commitId
 --|--|--
@@ -19,14 +19,15 @@
  - | 完成大部分功能链条 | [5faa281](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5faa281)
  - | 完成订单页面 | [89f50c6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/89f50c6)
  - | 提交代码 | [0050ff1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0050ff1)
+ - | 新增预览页面布局 | [462dd94](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/462dd94)
  - | 更改打包配置 | [4b126f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4b126f6)
  - | 更改环境变量 | [b2cff3f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b2cff3f)
+ 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 更改配置 | [e632631](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e632631)
  - | 更新活动管理和活动框架的ui | [0b5b712](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0b5b712)
  - | 更新用户获取信息 | [a7a8bbd](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a7a8bbd)
  - | 添加前端配置环境 | [1a29ab7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1a29ab7)
  - | 用户管理 | [cd016f5](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/cd016f5)
- 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
 
 
