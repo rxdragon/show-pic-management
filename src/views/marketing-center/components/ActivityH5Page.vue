@@ -68,7 +68,7 @@
       </div>
       <div class="preview">
         <iphone-model :config="pageForm" />
-      </div>con
+      </div>
     </div>
   </div>
 </template>

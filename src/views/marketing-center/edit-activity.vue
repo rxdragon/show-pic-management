@@ -15,17 +15,24 @@
     <!-- 分享链接配置 -->
     <div class="module-panel base-form">
       <div class="panel-title">分享链接配置</div>
-      <el-form ref="shareForm" :model="shareForm" :rules="shareRules" label-width="140px">
-        <el-form-item label="活动分享图(可选)：">
-          <upload-share-photo v-model="shareForm.fileList" />
-        </el-form-item>
-        <el-form-item label="活动分享标题：" prop="activityShareTitle">
-          <el-input v-model.trim="shareForm.activityShareTitle" placeholder="请输入活动分享标题" />
-        </el-form-item>
-        <el-form-item label="活动分享描述：" prop="activityShareDesc">
-          <el-input type="textarea" v-model.trim="shareForm.activityShareDesc" placeholder="请输入活动分享描述" />
-        </el-form-item>
-      </el-form>
+      <div class="share-main">
+        <div class="share-form">
+          <el-form ref="shareForm" :model="shareForm" :rules="shareRules" label-width="140px">
+            <el-form-item label="活动分享图(可选)：">
+              <upload-share-photo v-model="shareForm.fileList" />
+            </el-form-item>
+            <el-form-item label="活动分享标题：" prop="activityShareTitle">
+              <el-input v-model.trim="shareForm.activityShareTitle" placeholder="请输入活动分享标题" />
+            </el-form-item>
+            <el-form-item label="活动分享描述：" prop="activityShareDesc">
+              <el-input type="textarea" v-model.trim="shareForm.activityShareDesc" placeholder="请输入活动分享描述" />
+            </el-form-item>
+          </el-form>
+        </div>
+        <div class="share-model">
+          <share-message-model :config="shareForm" />
+        </div>
+      </div>
     </div>
     <activity-h5-page />
     <!-- 活动优惠券配置 -->
@@ -95,6 +102,7 @@
 import DatePicker from '@/components/DatePicker'
 import UploadSharePhoto from './components/UploadSharePhoto'
 import ActivityH5Page from './components/ActivityH5Page'
+import ShareMessageModel from './components/ShareMessageModel'
 import { validateLimitCount, validateEffectivity } from '@/utils/validator.js'
 // 基础配置
 const baseRules = {
@@ -121,7 +129,7 @@ const couponRules = {
 
 export default {
   name: 'EditActivity',
-  components: { DatePicker, UploadSharePhoto, ActivityH5Page },
+  components: { DatePicker, UploadSharePhoto, ActivityH5Page, ShareMessageModel },
   data () {
     return {
       baseRules,
@@ -209,6 +217,16 @@ export default {
 
     .panel-title {
       margin-bottom: 20px;
+    }
+
+    .share-main {
+      display: flex;
+
+      .share-form {
+        flex-shrink: 0;
+        width: 600px;
+        margin-right: 40px;
+      }
     }
   }
 

@@ -13,21 +13,23 @@
 </template>
 
 <script>
+import { COUPON_BATCH_STATE, couponBatchToCN } from '@/model/Enumerate.js'
 
+const seachState = [
+  COUPON_BATCH_STATE.NORMAL,
+  COUPON_BATCH_STATE.VOID
+]
 export default {
   name: 'CouponStateSelect',
   data () {
+    const stateOption = seachState.map(item => {
+      return {
+        label: couponBatchToCN[item],
+        value: item
+      }
+    })
     return {
-      options: [
-        {
-          label: '完成',
-          value: 'complete'
-        },
-        {
-          label: '作废',
-          value: 'fail'
-        }
-      ]
+      options: stateOption
     }
   }
 }

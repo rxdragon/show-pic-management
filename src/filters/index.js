@@ -16,6 +16,13 @@ export function toThousandFilter (num) {
 export function toVersionCN (versionName) {
   return photoVersionToCN[versionName]
 }
+/**
+ * @description 格式化金钱
+ */
+export function stringMoney (value) {
+  const money = Number(value).toFixed(2)
+  return `¥${money}`
+}
 
 /**
  * @description 装扮版本

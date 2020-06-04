@@ -38,7 +38,7 @@
                 </el-button>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item>下线活动</el-dropdown-item>
-                  <el-dropdown-item @click.native="copyAcactivityLink(row)">复制活动链接</el-dropdown-item>
+                  <el-dropdown-item @click.native="copyAcactivityLink(row, $event)">复制活动链接</el-dropdown-item>
                   <el-dropdown-item>删除活动</el-dropdown-item>
                   <el-dropdown-item>编辑活动</el-dropdown-item>
                   <el-dropdown-item>查询活动</el-dropdown-item>
@@ -65,6 +65,7 @@
 <script>
 import DatePicker from '@/components/DatePicker'
 import AccountSourceSelect from '@selectBox/AccountSourceSelect'
+import handleClipboard from '@/utils/clipboard.js'
 
 export default {
   name: 'ActivityList',
@@ -115,8 +116,10 @@ export default {
     /**
      * @description 拷贝链接
      */
-    copyAcactivityLink () {
-      // TODO 拷贝链接
+    copyAcactivityLink (row, event) {
+      // TODO 更改链接
+      const text = ''
+      handleClipboard(text, event)
     }
   }
 }

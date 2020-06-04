@@ -26,13 +26,13 @@
       <!-- 优惠劵列表 -->
       <div class="table-box">
         <el-table :data="tableData" style="width: 100%;">
-          <el-table-column prop="couponName" label="优惠劵名称" />
-          <el-table-column prop="couponAllCount" label="总发型数量" />
-          <el-table-column prop="activeCount" label="激活数量" />
-          <el-table-column prop="usedCount" label="使用数量" />
-          <el-table-column prop="couponState" label="状态" />
-          <el-table-column prop="createTime" label="创建时间" width="100"/>
-          <el-table-column prop="createPeople" label="创建人" />
+          <el-table-column prop="title" label="优惠劵名称" />
+          <el-table-column prop="total" label="总发型数量" />
+          <el-table-column prop="activeNum" label="激活数量" />
+          <el-table-column prop="useNum" label="使用数量" />
+          <el-table-column prop="stateToCn" label="状态" />
+          <el-table-column prop="createdAt" label="创建时间" width="100"/>
+          <el-table-column prop="createdStaff" label="创建人" />
           <el-table-column label="操作"  align="right" width="150">
             <template slot-scope="{ row }">
               <el-popover
@@ -42,7 +42,7 @@
                 v-model="row.showPopover"
                 popper-class="cancellation-box"
               >
-                <p>{{ `确定是否作废【${row.couponName}】下的所有优惠券？` }}</p>
+                <p>{{ `确定是否作废【${row.title}】下的所有优惠券？` }}</p>
                 <p class="cancellation-tip">提示：已经使用的优惠券将无法作废</p>
                 <div class="cancellation-button">
                   <el-button type="info" size="mini" @click="cancelPop(row)">取消</el-button>
@@ -50,7 +50,7 @@
                 </div>
                 <el-button slot="reference" type="danger" size="small">作废</el-button>
               </el-popover>
-              <el-button class="detail-button" type="primary" size="small" @click="linkToDetail(row)">
+              <el-button class="detail-button" type="primary" size="small" @click="linkToDetail(row.id)">
                 详情
               </el-button>
             </template>
@@ -75,6 +75,8 @@
 import DatePicker from '@/components/DatePicker'
 import CouponStateSelect from '@selectBox/CouponStateSelect'
 import CouponCodeSearch from './components/CouponCodeSearch'
+import { getSeachTime } from '@/utils/timeUtil.js'
+import * as Coupon from '@/api/coupon.js'
 
 export default {
   name: 'CouponList',
@@ -84,16 +86,7 @@ export default {
       timeSpan: null,
       couponName: '', // 优惠劵名称
       couponState: '', // 优惠劵状态
-      tableData: [{
-        couponName: '优惠劵名称',
-        couponAllCount: '10',
-        activeCount: '10',
-        usedCount: 8,
-        couponState: '完成',
-        createTime: '2019-09-09 13:00:00',
-        createPeople: '张三',
-        showPopover: false
-      }],
+      tableData: [],
       pager: {
         page: 1,
         pageSize: 10,
@@ -101,14 +94,24 @@ export default {
       }
     }
   },
+  created () {
+    this.searchData(1)
+  },
   methods: {
     /**
      * @description 确认作废
      */
-    showCancellation (listItem) {
-      // TODO 确认作废
-      listItem.showPopover = false
-      this.searchData()
+    async showCancellation (listItem) {
+      try {
+        this.$loading()
+        const req = { id: listItem.id }
+        await Coupon.voidCouponBatch(req)
+        listItem.showPopover = false
+        this.searchData()
+      } catch (error) {
+        this.$loadingClose()
+        throw new Error(error)
+      }
     },
     /**
      * @description 取消弹出框
@@ -117,12 +120,29 @@ export default {
       listItem.showPopover = false
     },
     /**
-     * @description 搜索
+     * @description 获取优惠劵批次列表
      */
-    searchData (page) {
-      this.pager.page = page ? page : this.pager.page
-      this.$loading()
-      this.$loadingClose()
+    async searchData (page) {
+      try {
+        this.$loading()
+        this.pager.page = page ? page : this.pager.page
+        const req = {
+          cond: {},
+          page: this.pager.page,
+          pageSize: this.pager.pageSize
+        }
+        if (this.timeSpan) { req.cond.createdAtRange = getSeachTime(this.timeSpan) }
+        if (this.couponName) { req.cond.title = this.couponName }
+        if (this.couponState) { req.cond.state = this.couponState }
+        if (!Object.keys(req.cond).length) delete req.cond
+        const data = await Coupon.getCouponBatchList(req)
+        this.tableData = data.list
+        this.pager.total = data.total
+      } catch (error) {
+        throw new Error(error)
+      } finally {
+        this.$loadingClose()
+      }
     },
     /**
      * @description 处理页面变化
@@ -139,8 +159,11 @@ export default {
     /**
      * @description 跳转到详情
      */
-    linkToDetail () {
-      this.$router.push('/marketing-center/coupon-management/coupon-detail')
+    linkToDetail (id) {
+      this.$router.push({
+        path: '/marketing-center/coupon-management/coupon-detail',
+        query: { id }
+      })
     }
   }
 }

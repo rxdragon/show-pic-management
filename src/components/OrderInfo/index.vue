@@ -59,17 +59,8 @@
 </template>
 
 <script>
-import { toFixedNoRound } from '@/utils/validate.js'
-
 export default {
   name: 'OrderInfo',
-  filters: {
-    // 格式化金钱
-    stringMoney (value) {
-      const money = toFixedNoRound(value)
-      return `¥ ${money}`
-    }
-  },
   props: {
     orderInfo: { type: Object, required: true }
   },

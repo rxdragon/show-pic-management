@@ -65,7 +65,6 @@
 
 <script>
 import UserInfo from './components/UserInfo'
-import { toFixedNoRound } from '@/utils/validate.js'
 import { ORDER_STATE } from '@/model/Enumerate.js'
 import * as Clients from '@/api/clients'
 import * as Order from '@/api/order.js'
@@ -73,13 +72,6 @@ import * as Order from '@/api/order.js'
 export default {
   name: 'userDetail',
   components: { UserInfo },
-  filters: {
-    // 格式化金钱
-    stringMoney (value) {
-      const money = toFixedNoRound(value)
-      return `¥ ${money}`
-    }
-  },
   data () {
     return {
       ORDER_STATE,

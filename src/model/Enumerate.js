@@ -137,3 +137,16 @@ export const invalidToCN = {
   [INVOICE_STATE.FAIL]: '开具失败',
   [INVOICE_STATE.INVALID]: '作废发票'
 }
+
+/**
+ * @description 优惠券批次状态
+ */
+export const COUPON_BATCH_STATE = {
+  NORMAL: 'normal',
+  VOID: 'void'
+}
+
+export const couponBatchToCN = {
+  [COUPON_BATCH_STATE.NORMAL]: '正常',
+  [COUPON_BATCH_STATE.VOID]: '作废'
+}

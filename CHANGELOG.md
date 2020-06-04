@@ -1,4 +1,4 @@
-# 1.0.0 (2020-06-03)
+# 1.0.0 (2020-06-04)
 
 范围|描述|commitId
 --|--|--
@@ -15,6 +15,7 @@
  - | 前端基本框架搭建完成 | [a0d38fa](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a0d38fa)
  - | 增加权限和优化代码 | [2c26dac](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2c26dac)
  - | 增加消费次数显示 | [9756960](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9756960)
+ - | 增加订单列表显示，已经订单详情显示 | [056586c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/056586c)
  - | 处理部分版本mock数据 | [da1f5e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/da1f5e2)
  - | 完成大部分功能链条 | [5faa281](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5faa281)
  - | 完成订单页面 | [89f50c6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/89f50c6)

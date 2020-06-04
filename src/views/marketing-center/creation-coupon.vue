@@ -7,18 +7,18 @@
         </el-form-item>
         <el-form-item label="优惠劵类型：" prop="type">
           <el-select v-model="couponForm.type" placeholder="请选择优惠劵类型">
-            <el-option label="立减劵" value="money"></el-option>
-            <el-option label="折扣劵" value="discount"></el-option>
+            <el-option label="立减劵" value="decrease_coupon"></el-option>
+            <el-option label="折扣劵" value="discount_coupon"></el-option>
           </el-select>
         </el-form-item>
         <!-- 立减券 -->
-        <template v-if="couponForm.type === 'money'">
+        <template v-if="couponForm.type === 'decrease_coupon'">
           <el-form-item label="面额：" prop="erectMoney">
             <el-input v-numberOnly min="1" class="min-input" v-model="couponForm.erectMoney"/> 元
           </el-form-item>
         </template>
         <!-- 折扣卷 -->
-        <template v-if="couponForm.type === 'discount'">
+        <template v-if="couponForm.type === 'discount_coupon'">
           <el-form-item label="折扣力度：" prop="discountRange">
             <el-input v-numberOnly min="1" class="min-input" v-model="couponForm.discountRange"/> 折
           </el-form-item>
@@ -39,18 +39,25 @@
         </el-form-item>
         <el-form-item label="有效时间：" prop="effectivity">
           <el-radio-group v-model="couponForm.effectivity.effectivityType">
-            <el-radio :label="0">无限制</el-radio>
-            <el-radio :label="1">
+            <el-radio label="limitless">无限制</el-radio>
+            <el-radio label="receive">
               自激活后 <el-input class="min-input" v-numberOnly min="1" v-model="couponForm.effectivity.autoExceed"/> 天有效
             </el-radio>
-            <el-radio :label="2">
+            <el-radio label="fixed">
               固定截止日期
-              <el-date-picker v-model="couponForm.effectivity.abortTime" type="datetime" placeholder="选择截止日期时间" default-time="12:00:00"/>
+              <el-date-picker
+                v-model="couponForm.effectivity.abortTime"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                :picker-options="pickerOptions"
+                placeholder="选择截止日期时间"
+                default-time="25:59:59"
+              />
             </el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="备注(可选)：">
-          <el-input type="textarea" v-model="couponForm.desc" placeholder="请输入备注" />
+          <el-input type="textarea" v-model.trim="couponForm.desc" placeholder="请输入备注" />
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item>
@@ -68,6 +75,7 @@
 
 <script>
 import CouponCodeList from './components/CouponCodeList'
+import * as Coupon from '@/api/coupon.js'
 import { validateUseLimit, validateEffectivity } from '@/utils/validator.js'
 
 export default {
@@ -75,6 +83,11 @@ export default {
   components: { CouponCodeList },
   data () {
     return {
+      pickerOptions: {
+        disabledDate (time) {
+          return time.getTime() < Date.now()
+        }
+      },
       rules: {
         name: [{ required: true, message: '请输入优惠劵名称', trigger: 'blur' }],
         type: [{ required: true, message: '请选择优惠劵类型', trigger: ['blur', 'change'] }],
@@ -87,10 +100,10 @@ export default {
       },
       couponForm: {
         name: '', // 优惠劵名称
-        type: '', // 优惠劵类型
+        type: '', // 优惠劵类型 discount_coupon 折扣 decrease_coupon 立减
         erectMoney: '', // 立减劵面额
-        discountRange: '', // 折扣上限
-        discountMaxMoney: '', // 立减劵
+        discountRange: '', // 折扣力度
+        discountMaxMoney: '', // 减免上限
         useLimit: {
           usetype: '', // 使用门槛
           maxMoney: '', // 多少元可用
@@ -119,13 +132,32 @@ export default {
       try {
         this.$loading()
         await this.$refs.form.validate()
-        this.$refs.form.resetFields()
+        const req = {
+          title: this.couponForm.name,
+          type: this.couponForm.type,
+          total: this.couponForm.circulation,
+          value: this.couponForm.type === 'decrease_coupon' ? this.couponForm.erectMoney : this.couponForm.discountRange,
+          limit: {},
+          dateType: this.couponForm.effectivity.effectivityType
+        }
+        if (this.couponForm.type === 'discount_coupon') { req.limit.reductionUpperLimit = this.couponForm.discountMaxMoney }
+        if (this.couponForm.useLimit.usetype === 1) { req.limit.orderMoneyLowerLimit = this.couponForm.useLimit.maxMoney }
+        if (this.couponForm.desc) { req.note = this.couponForm.desc }
+        if (this.couponForm.effectivity.effectivityType === 'receive') {
+          req.expireDay = this.couponForm.effectivity.autoExceed
+        }
+        if (this.couponForm.effectivity.effectivityType === 'fixed') {
+          req.stopAt = this.couponForm.effectivity.abortTime
+        }
+        await Coupon.addCouponBatch(req)
+        // const couponId = 1029
+
       } catch (error) {
         console.error(error)
       } finally {
         this.$loadingClose()
       }
-    }
+    },
   }
 }
 </script>

@@ -145,7 +145,6 @@ import DatePicker from '@/components/DatePicker'
 import NoData from '@/components/NoData'
 import OrderStateSelect from '@selectBox/OrderStateSelect'
 import OrderSourceSelect from '@selectBox/OrderSourceSelect'
-import { toFixedNoRound } from '@/utils/validate.js'
 import { ORDER_STATE } from '@/model/Enumerate.js'
 import { getSeachTime } from '@/utils/timeUtil.js'
 import { exportExcel } from '@/utils/exportExcelUtil.js'
@@ -154,13 +153,6 @@ import * as Order from '@/api/order.js'
 export default {
   name: 'orderManagement',
   components: { DatePicker, OrderStateSelect, OrderSourceSelect, NoData },
-  filters: {
-    // 格式化金钱
-    stringMoney (value) {
-      const money = toFixedNoRound(value)
-      return `¥ ${money}`
-    }
-  },
   data () {
     return {
       ORDER_STATE, // 订单状态

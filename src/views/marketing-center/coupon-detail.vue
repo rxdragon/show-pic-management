@@ -6,57 +6,67 @@
         <el-row class="info-main" :gutter="20" type="flex">
           <el-col :span="6">
             <div class="label">优惠劵名称：</div>
-            <div class="value">xxx优惠劵</div>
+            <div class="value">{{ couponBatchInfo.title }}</div>
           </el-col>
           <el-col :span="6">
+            <!-- TODO -->
             <div class="label">对应活动：</div>
             <div class="value">-</div>
           </el-col>
           <el-col :span="6">
             <div class="label">优惠劵类型：</div>
-            <div class="value">立减券</div>
+            <div class="value">{{ couponBatchInfo.couponTypeCN }}</div>
           </el-col>
           <el-col :span="6">
-            <div class="label">面额：</div>
-            <div class="value">¥50.00</div>
+            <div class="label">{{ couponBatchInfo.couponType === 'decrease_coupon' ? '面额：' : '折扣力度：' }}</div>
+            <div
+              class="value"
+              v-if="couponBatchInfo.couponType === 'decrease_coupon'"
+            >
+              {{ couponBatchInfo.discount | stringMoney }}
+            </div>
+            <div class="value" v-else>{{ couponBatchInfo.discount }}折</div>
+          </el-col>
+          <el-col
+            :span="6"
+            v-if="couponBatchInfo.couponType !== 'decrease_coupon'"
+          >
+            <div class="label">折扣上线：</div>
+            <div class="value">{{ couponBatchInfo.reductionUpperLimit | stringMoney }}</div>
           </el-col>
           <el-col :span="6">
             <div class="label">使用门槛：</div>
-            <div class="value">满20可用</div>
+            <div class="value">满{{ couponBatchInfo.orderMoneyLowerLimit | stringMoney }}可用</div>
           </el-col>
           <el-col :span="6">
             <div class="label">总发行量：</div>
-            <div class="value">1000张</div>
+            <div class="value">{{ couponBatchInfo.total || 0 }}张</div>
           </el-col>
           <el-col :span="6">
             <div class="label">有效时间：</div>
-            <div class="value">无限制</div>
+            <div class="value">{{ couponBatchInfo.effectivityTime }}</div>
           </el-col>
         </el-row>
         <div class="remark">
           <div class="label">备注：</div>
-          <div class="value">备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</div>
+          <div class="value">{{ couponBatchInfo.note }}</div>
         </div>
         <el-row class="info-main active-info" :gutter="20" type="flex">
-          <el-col :span="4">
+          <el-col :span="6">
             <div class="label">待激活：</div>
-            <div class="value">200张</div>
+            <div class="value">{{ couponBatchInfo.waitActiveNum || 0 }}张</div>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="6">
             <div class="label">已激活：</div>
-            <div class="value">200张</div>
+            <div class="value">{{ couponBatchInfo.activeNum || 0 }}张</div>
           </el-col>
-          <el-col :span="4">
-            <div class="label">已停用：</div>
-            <div class="value">200张</div>
-          </el-col>
-          <el-col :span="4">
+          <el-col :span="6">
             <div class="label">已过期：</div>
-            <div class="value">200张</div>
+            <div class="value">{{ couponBatchInfo.expireNum || 0 }}张</div>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="6">
             <div class="label">已作废：</div>
-            <div class="value">200张</div>
+            <div class="value">{{ couponBatchInfo.voidNum || 0 }}张</div>
           </el-col>
         </el-row>
       </div>
@@ -112,14 +122,17 @@
 
 <script>
 import CouponStateSelect from '@selectBox/CouponStateSelect'
+import * as Coupon from '@/api/coupon.js'
 
 export default {
   name: 'CouponDetail',
   components: { CouponStateSelect },
   data () {
     return {
+      couponBatchId: '',
       couponCode: '',
       couponState: '',
+      couponBatchInfo: {},
       tableData: [
         {
           id: '12',
@@ -134,7 +147,18 @@ export default {
       ]
     }
   },
+  created () {
+    this.couponBatchId = this.$route.query.id
+    this.getCouponBatchDetail()
+  },
   methods: {
+    /**
+     * @description 获取优惠券批次详情
+     */
+    async getCouponBatchDetail () {
+      const req = { id: this.couponBatchId }
+      this.couponBatchInfo = await Coupon.getCouponBatchDetail(req)
+    },
     /**
      * @description 取消作废选择
      */
@@ -156,6 +180,7 @@ export default {
   margin-top: 24px;
 
   .label {
+    flex-shrink: 0;
     width: 100px;
     font-size: 14px;
     font-weight: 400;
@@ -184,7 +209,7 @@ export default {
         margin-bottom: 0;
 
         .label {
-          width: 80px;
+          width: 100px;
         }
       }
     }
