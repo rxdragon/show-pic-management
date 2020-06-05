@@ -150,3 +150,22 @@ export const couponBatchToCN = {
   [COUPON_BATCH_STATE.NORMAL]: '正常',
   [COUPON_BATCH_STATE.VOID]: '作废'
 }
+
+/**
+ * @description 优惠券状态
+ */
+export const COUPON_STATE = {
+  ACTIVATED: 'activated',
+  UNUSED: 'unused',
+  USED: 'used',
+  ABOLISHED: 'abolished',
+  EXPIRED: 'expired'
+}
+
+export const couponToCN = {
+  [COUPON_STATE.ACTIVATED]: '已激活',
+  [COUPON_STATE.UNUSED]: '未使用',
+  [COUPON_STATE.USED]: '使用',
+  [COUPON_STATE.ABOLISHED]: '已作废',
+  [COUPON_STATE.EXPIRED]: '已过期'
+}

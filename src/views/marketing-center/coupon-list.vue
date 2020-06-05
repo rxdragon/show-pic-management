@@ -17,7 +17,7 @@
         </div>
         <div class="date-search search-item">
           <span>优惠劵状态</span>
-          <coupon-state-select v-model="couponState" />
+          <coupon-batch-state-select v-model="couponState" />
         </div>
         <div class="button-box search-item">
           <el-button type="primary" size="small" @click="searchData(1)">查 询</el-button>
@@ -36,6 +36,7 @@
           <el-table-column label="操作"  align="right" width="150">
             <template slot-scope="{ row }">
               <el-popover
+                v-if="row.state !== COUPON_BATCH_STATE.VOID"
                 placement="top"
                 title="作废提示"
                 width="220"
@@ -73,16 +74,18 @@
 
 <script>
 import DatePicker from '@/components/DatePicker'
-import CouponStateSelect from '@selectBox/CouponStateSelect'
+import CouponBatchStateSelect from '@selectBox/CouponBatchStateSelect'
 import CouponCodeSearch from './components/CouponCodeSearch'
 import { getSeachTime } from '@/utils/timeUtil.js'
+import { COUPON_BATCH_STATE } from '@/model/Enumerate'
 import * as Coupon from '@/api/coupon.js'
 
 export default {
   name: 'CouponList',
-  components: { DatePicker, CouponStateSelect, CouponCodeSearch },
+  components: { DatePicker, CouponBatchStateSelect, CouponCodeSearch },
   data () {
     return {
+      COUPON_BATCH_STATE,
       timeSpan: null,
       couponName: '', // 优惠劵名称
       couponState: '', // 优惠劵状态

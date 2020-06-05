@@ -8,7 +8,7 @@ import CouponModel from '@/model/CouponModel'
 export function getCouponBatchList (params) {
   return axios({
     url: '/project_show_pic/admin/marketing/coupon/getCouponBatchList',
-    method: 'PUT',
+    method: 'POST',
     data: params
   }).then(msg => {
     msg.list = msg.list.map(listItem => {
@@ -39,8 +39,8 @@ export function voidCouponBatch (params) {
 export function searchCouponCode (params) {
   return axios({
     url: '/project_show_pic/admin/marketing/coupon/getCouponBatchCodeUseList',
-    method: 'GET',
-    params
+    method: 'POST',
+    data: params
   }).then(msg => {
     const createData = new CouponModel(msg.list[0])
     return createData
@@ -72,5 +72,36 @@ export function addCouponBatch (params) {
     data: params
   }).then(msg => {
     return msg
+  })
+}
+
+/**
+ * @description 生成优惠券
+ * @param {*} params 
+ */
+export function getCouponBatchCodeUseList (params) {
+  return axios({
+    url: '/project_show_pic/admin/marketing/coupon/getCouponBatchCodeUseList',
+    method: 'POST',
+    data: params
+  }).then(msg => {
+    msg.list = msg.list.map(listItem => {
+      return {
+        ...new CouponModel(listItem),
+        showPopover: false
+      }
+    })
+    return msg
+  })
+}
+
+/**
+ * @description 券码作废
+ */
+export function voidCouponCode (params) {
+  return axios({
+    url: '/project_show_pic/admin/marketing/coupon/voidCouponCode',
+    method: 'PUT',
+    data: params
   })
 }

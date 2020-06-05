@@ -1,6 +1,6 @@
 <template>
   <div class="coupon-detail">
-    <main class="module-panel">
+    <div class="module-panel">
       <div class="coupon-base">
         <div class="panel-title">券码基础信息</div>
         <el-row class="info-main" :gutter="20" type="flex">
@@ -44,7 +44,11 @@
           </el-col>
           <el-col :span="6">
             <div class="label">有效时间：</div>
-            <div class="value">{{ couponBatchInfo.effectivityTime }}</div>
+            <div class="value">
+              <el-tooltip class="item" effect="dark" :content="couponBatchInfo.effectivityTime" placement="top-start">
+                <div class="effectivity-time">{{ couponBatchInfo.effectivityTime }}</div>
+              </el-tooltip>
+            </div>
           </el-col>
         </el-row>
         <div class="remark">
@@ -52,76 +56,92 @@
           <div class="value">{{ couponBatchInfo.note }}</div>
         </div>
         <el-row class="info-main active-info" :gutter="20" type="flex">
-          <el-col :span="6">
+          <el-col :span="4">
             <div class="label">待激活：</div>
             <div class="value">{{ couponBatchInfo.waitActiveNum || 0 }}张</div>
           </el-col>
-          <el-col :span="6">
+          <el-col :span="4">
             <div class="label">已激活：</div>
             <div class="value">{{ couponBatchInfo.activeNum || 0 }}张</div>
           </el-col>
-          <el-col :span="6">
+          <el-col :span="4">
+            <div class="label">已使用：</div>
+            <div class="value">{{ couponBatchInfo.useNum || 0 }}张</div>
+          </el-col>
+          <el-col :span="4">
             <div class="label">已过期：</div>
             <div class="value">{{ couponBatchInfo.expireNum || 0 }}张</div>
           </el-col>
-          <el-col :span="6">
+          <el-col :span="4">
             <div class="label">已作废：</div>
             <div class="value">{{ couponBatchInfo.voidNum || 0 }}张</div>
           </el-col>
         </el-row>
       </div>
-      <el-divider></el-divider>
-      <div class="coupon-tabel-search">
-        <div class="panel-title">券码编号信息</div>
-        <div class="search-box">
-          <div class="search-item">
-            <span>券码编号：</span>
-            <el-input v-model="couponCode" placeholder="请输入编号"></el-input>
-          </div>
-          <div class="search-item">
-            <span>券码状态：</span>
-            <coupon-state-select v-model="couponState" />
-          </div>
-          <div class="search-button search-item">
-            <el-button size="small" type="primary">查 询</el-button>
-            <el-button size="small" type="blue">导 出</el-button>
-          </div>
+    </div>
+    <div class="coupon-tabel-search module-panel">
+      <div class="panel-title">券码编号信息</div>
+      <div class="search-box">
+        <div class="search-item">
+          <span>券码编号：</span>
+          <el-input v-model="couponCode" clearable placeholder="请输入编号"></el-input>
         </div>
-        <!-- 优惠券列表 -->
-        <el-table :data="tableData" style="width: 100%;">
-          <el-table-column prop="couponCode" label="券码编号" width="120" />
-          <el-table-column prop="couponState" label="状态" />
-          <el-table-column prop="activeTime" label="激活时间" min-width="80" />
-          <el-table-column prop="useTime" label="使用时间" min-width="80" />
-          <el-table-column prop="usedUserAccount" label="绑定账号" min-width="100" />
-          <el-table-column prop="usedOrder" label="使用订单号" min-width="130"/>
-          <el-table-column label="操作" align="right">
-            <template slot-scope="{ row }">
-              <el-popover
-                placement="top"
-                title="作废提示"
-                width="220"
-                v-model="row.showPopover"
-                popper-class="cancellation-box"
-              >
-                <p>{{ `确定是否作废【${row.couponName}】下的所有优惠券？` }}</p>
-                <p class="cancellation-tip">提示：已经使用的优惠券将无法作废</p>
-                <div class="cancellation-button">
-                  <el-button type="info" size="mini" @click="cancelPop(row)">取消</el-button>
-                  <el-button type="danger" size="mini" @click="showCancellation(row)">确定</el-button>
-                </div>
-                <el-button slot="reference" type="danger" size="small">作废</el-button>
-              </el-popover>
-            </template>
-          </el-table-column>
-        </el-table>
+        <div class="search-item">
+          <span>券码状态：</span>
+          <coupon-state-select v-model="couponState" />
+        </div>
+        <div class="search-button search-item">
+          <el-button size="small" type="primary" @click="searchCouponList">查 询</el-button>
+          <el-button size="small" type="blue" @click="outExcel">导 出</el-button>
+        </div>
       </div>
-    </main>
+      <!-- 优惠券列表 -->
+      <el-table :data="tableData" style="width: 100%;">
+        <el-table-column prop="code" label="券码编号" width="120" />
+        <el-table-column prop="stateCN" label="状态" />
+        <el-table-column prop="activedAt" label="激活时间" min-width="80" />
+        <el-table-column prop="usedAt" label="使用时间" min-width="80" />
+        <el-table-column prop="userId" label="绑定账号" min-width="100" />
+        <el-table-column prop="userOrderNum" label="使用订单号" min-width="130"/>
+        <el-table-column label="操作" align="right">
+          <template slot-scope="{ row }">
+            <el-popover
+              v-if="row.state === COUPON_STATE.UNUSED"
+              placement="top"
+              title="作废提示"
+              width="220"
+              v-model="row.showPopover"
+              popper-class="cancellation-box"
+            >
+              <p>{{ `确定是否作废【${row.code}】券码？` }}</p>
+              <p class="cancellation-tip">提示：已经使用的优惠券将无法作废</p>
+              <div class="cancellation-button">
+                <el-button type="info" size="mini" @click="cancelPop(row)">取消</el-button>
+                <el-button type="danger" size="mini" @click="showCancellation(row)">确定</el-button>
+              </div>
+              <el-button slot="reference" type="danger" size="small">作废</el-button>
+            </el-popover>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="page-box">
+        <el-pagination
+          hide-on-single-page
+          layout="prev, pager, next, jumper"
+          :current-page.sync="pager.page"
+          :page-size="pager.pageSize"
+          :total="pager.total"
+          @current-change="handleCurrentChange"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import CouponStateSelect from '@selectBox/CouponStateSelect'
+import exportCouponExcel from './exportCouponExcel'
+import { COUPON_STATE } from '@/model/Enumerate.js'
 import * as Coupon from '@/api/coupon.js'
 
 export default {
@@ -129,35 +149,66 @@ export default {
   components: { CouponStateSelect },
   data () {
     return {
+      COUPON_STATE,
       couponBatchId: '',
       couponCode: '',
       couponState: '',
       couponBatchInfo: {},
-      tableData: [
-        {
-          id: '12',
-          couponCode: '12HJ89SU09',
-          couponState: '已激活',
-          activeTime: '2020-03-03 13:00:00',
-          useTime: '2020-03-04 13:00:00',
-          usedUserAccount: '13329877120',
-          usedOrder: 'X202003211234',
-          showPopover: false
-        }
-      ]
+      tableData: [],
+      pager: {
+        page: 1,
+        pageSize: 10,
+        total: 100
+      }
     }
   },
-  created () {
+  async created () {
     this.couponBatchId = this.$route.query.id
-    this.getCouponBatchDetail()
+    this.$loading()
+    await Promise.all([
+      this.getCouponBatchDetail(),
+      this.getCouponBatchCodeUseList(1)
+    ])
+    this.$loadingClose()
   },
   methods: {
+    /**
+     * @description 搜索券码列表
+     */
+    async searchCouponList () {
+      try {
+        this.$loading()
+        await this.getCouponBatchCodeUseList(1)
+      } catch (error) {
+        throw new Error(error)
+      } finally {
+        this.$loadingClose()
+      }
+    },
     /**
      * @description 获取优惠券批次详情
      */
     async getCouponBatchDetail () {
       const req = { id: this.couponBatchId }
       this.couponBatchInfo = await Coupon.getCouponBatchDetail(req)
+    },
+    /**
+     * @description 获取批次下列表
+     */
+    async getCouponBatchCodeUseList (page) {
+      this.pager.page = page ? page : this.pager.page
+      const req = {
+        cond: {
+          couponBatchId: this.couponBatchId
+        },
+        page: this.pager.page,
+        pageSize: this.pager.pageSize
+      }
+      if (this.couponCode) { req.cond.couponCode = this.couponCode }
+      if (this.couponState) { req.cond.couponState = this.couponState }
+      const data = await Coupon.getCouponBatchCodeUseList(req)
+      this.tableData = data.list
+      this.pager.total = data.total
     },
     /**
      * @description 取消作废选择
@@ -168,8 +219,53 @@ export default {
     /**
      * @description 确定作废
      */
-    showCancellation (listItem) {
-      listItem.showPopover = false
+    async showCancellation (listItem) {
+      try {
+        this.$loading()
+        const req = { code: listItem.code }
+        await Coupon.voidCouponCode(req)
+        listItem.showPopover = false
+        this.searchCouponList()
+      } catch (error) {
+        this.$loadingClose()
+        throw new Error(error)
+      }
+    },
+    /**
+     * @description 监听页面变化
+     */
+    handleCurrentChange () {
+      try {
+        this.$loading()
+        this.getCouponBatchCodeUseList()
+      } catch (error) {
+        throw new Error(error)
+      } finally {
+        this.$loadingClose()
+      }
+    },
+    /**
+     * @description 导出表格
+     */
+    async outExcel () {
+      try {
+        this.$loading()
+        const req = {
+          cond: {
+            couponBatchId: this.couponBatchId
+          },
+          page: 1,
+          pageSize: 1500
+        }
+        if (this.couponCode) { req.cond.couponCode = this.couponCode }
+        if (this.couponState) { req.cond.couponState = this.couponState }
+        const data = await Coupon.getCouponBatchCodeUseList(req)
+        exportCouponExcel(this.couponBatchInfo.title, data.list)
+      } catch (error) {
+        throw new Error(error)
+      } finally {
+        this.$loadingClose()
+      }
     }
   }
 }
@@ -178,6 +274,16 @@ export default {
 <style lang="less" scoped>
 .coupon-detail {
   margin-top: 24px;
+
+  .effectivity-time {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: pre-line;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
 
   .label {
     flex-shrink: 0;
@@ -209,7 +315,7 @@ export default {
         margin-bottom: 0;
 
         .label {
-          width: 100px;
+          width: 80px;
         }
       }
     }
@@ -224,8 +330,12 @@ export default {
     }
   }
 
-  .search-box {
+  .coupon-tabel-search {
     margin-top: 20px;
+
+    .search-box {
+      margin-top: 20px;
+    }
   }
 }
 </style>

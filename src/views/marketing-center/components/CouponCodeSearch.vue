@@ -2,7 +2,13 @@
   <div class="coupon-code-search">
     <el-popover width="300" trigger="click">
       <div v-loading="loading">
-        <el-input placeholder="请输入10位劵码编号" maxlength="11" v-model.trim="couponMark">
+        <el-input
+          placeholder="请输入10位劵码编号"
+          clearable
+          maxlength="10"
+          v-model.trim="couponMark"
+          @keyup.enter.native="searchCouponCode"
+        >
           <el-button slot="append" icon="el-icon-search" @click="searchCouponCode"></el-button>
         </el-input>
         <div class="coupon-search-data" v-if="infoData.code">
@@ -51,6 +57,8 @@ export default {
      */
     async searchCouponCode () {
       try {
+        if (!this.couponMark) return this.$newMessage.warning('请输入券码编号')
+        if (this.couponMark.length !== 10) return this.$newMessage.warning('请输入10位券码编号')
         this.loading = true
         const req = {
           cond: {
@@ -62,7 +70,7 @@ export default {
         const data = await Coupon.searchCouponCode(req)
         this.infoData = data
       } catch (error) {
-        console.error(error)
+        throw new Error(error)
       } finally {
         this.loading = false
       }

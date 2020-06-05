@@ -3,7 +3,7 @@
     <main class="module-panel">
       <el-form ref="form" :model="couponForm" :rules="rules" label-width="110px">
         <el-form-item label="优惠劵名称：" prop="name">
-          <el-input v-model="couponForm.name" placeholder="请输入优惠劵名称" />
+          <el-input v-model="couponForm.name" maxlength="15" placeholder="请输入优惠劵名称" />
         </el-form-item>
         <el-form-item label="优惠劵类型：" prop="type">
           <el-select v-model="couponForm.type" placeholder="请选择优惠劵类型">
@@ -57,17 +57,23 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="备注(可选)：">
-          <el-input type="textarea" v-model.trim="couponForm.desc" placeholder="请输入备注" />
+          <el-input
+            type="textarea"
+            maxlength="150"
+            show-word-limit
+            v-model.trim="couponForm.desc"
+            placeholder="请输入备注"
+          />
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item>
           <el-button type="info" @click="cancelCreate">返 回</el-button>
-          <el-button type="primary" @click="createCoupon">生 成</el-button>
+          <el-button v-if="cacheTitle !== couponForm.name" type="primary" @click="createCoupon">生 成</el-button>
         </el-form-item>
       </el-form>
       <!-- 券码编号 -->
-      <div class="coupon-box">
-        <coupon-code-list />
+      <div class="coupon-box" v-if="couponList.length">
+        <coupon-code-list :coupon-name="couponForm.name" :coupon-list="couponList" />
       </div>
     </main>
   </div>
@@ -88,6 +94,7 @@ export default {
           return time.getTime() < Date.now()
         }
       },
+      cacheTitle: '', // 缓存标题
       rules: {
         name: [{ required: true, message: '请输入优惠劵名称', trigger: 'blur' }],
         type: [{ required: true, message: '请选择优惠劵类型', trigger: ['blur', 'change'] }],
@@ -115,7 +122,8 @@ export default {
           abortTime: '' // 固定截止日期
         },
         desc: '' // 备注
-      }
+      },
+      couponList: []
     }
   },
   methods: {
@@ -132,6 +140,7 @@ export default {
       try {
         this.$loading()
         await this.$refs.form.validate()
+        if (this.cacheTitle === this.couponForm.name) return this.$newMessage.warning('请更改相关配置再生成优惠券')
         const req = {
           title: this.couponForm.name,
           type: this.couponForm.type,
@@ -141,7 +150,11 @@ export default {
           dateType: this.couponForm.effectivity.effectivityType
         }
         if (this.couponForm.type === 'discount_coupon') { req.limit.reductionUpperLimit = this.couponForm.discountMaxMoney }
-        if (this.couponForm.useLimit.usetype === 1) { req.limit.orderMoneyLowerLimit = this.couponForm.useLimit.maxMoney }
+        if (this.couponForm.useLimit.usetype === 1) {
+          req.limit.orderMoneyLowerLimit = this.couponForm.useLimit.maxMoney
+        } else {
+          req.limit.orderMoneyLowerLimit = 0
+        }
         if (this.couponForm.desc) { req.note = this.couponForm.desc }
         if (this.couponForm.effectivity.effectivityType === 'receive') {
           req.expireDay = this.couponForm.effectivity.autoExceed
@@ -149,15 +162,27 @@ export default {
         if (this.couponForm.effectivity.effectivityType === 'fixed') {
           req.stopAt = this.couponForm.effectivity.abortTime
         }
-        await Coupon.addCouponBatch(req)
-        // const couponId = 1029
-
+        const couponId = await Coupon.addCouponBatch(req)
+        this.cacheTitle = this.couponForm.name
+        await this.getCouponBatchCodeUseList(couponId)
       } catch (error) {
         console.error(error)
       } finally {
         this.$loadingClose()
       }
     },
+    /**
+     * @description 获取券码列表
+     */
+    async getCouponBatchCodeUseList (couponBatchId) {
+      const req = {
+        cond: { couponBatchId },
+        page: 1,
+        pageSize: 1500
+      }
+      const data = await Coupon.getCouponBatchCodeUseList(req)
+      this.couponList = data.list
+    }
   }
 }
 </script>

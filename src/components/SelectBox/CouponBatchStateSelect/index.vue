@@ -1,5 +1,5 @@
 <template>
-  <div class="coupon-state-select">
+  <div class="coupon-batch-state-select">
     <el-select
       v-bind="$attrs"
       :popper-append-to-body="false"
@@ -13,21 +13,18 @@
 </template>
 
 <script>
-import { COUPON_STATE, couponToCN } from '@/model/Enumerate.js'
+import { COUPON_BATCH_STATE, couponBatchToCN } from '@/model/Enumerate.js'
 
 const seachState = [
-  COUPON_STATE.ACTIVATED,
-  COUPON_STATE.UNUSED,
-  COUPON_STATE.USED,
-  COUPON_STATE.ABOLISHED,
-  COUPON_STATE.EXPIRED
+  COUPON_BATCH_STATE.NORMAL,
+  COUPON_BATCH_STATE.VOID
 ]
 export default {
-  name: 'CouponStateSelect',
+  name: 'CouponBatchStateSelect',
   data () {
     const stateOption = seachState.map(item => {
       return {
-        label: couponToCN[item],
+        label: couponBatchToCN[item],
         value: item
       }
     })
