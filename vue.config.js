@@ -43,7 +43,7 @@ module.exports = {
       .tap(args => {
         args[0].BUILD_TIME = +Date.now()
         args[0].BUILD_REDIRECT = '"/login.html"'
-        if (process.env.CI_RUNNER_ID && args[0]['process.env'].NODE_ENV !== '"release"') {
+        if (process.env.CI_RUNNER_ID && args[0]['process.env'].NODE_ENV === '"production"') {
           args[0].BUILD_REDIRECT = '"/show-pic-management/login.html"'
         }
         return args
