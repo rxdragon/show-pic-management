@@ -205,15 +205,6 @@ aside {
   z-index: 1000 !important;
 }
 
-.label {
-  padding: 3px 8px;
-  font-size: 12px;
-  color: #fff;
-  text-align: center;
-  background: linear-gradient(90deg, rgba(79, 136, 255, 1) 0%, rgba(70, 105, 251, 1) 100%);
-  border-radius: 4px;
-}
-
 // 颜色相关
 .warning-color {
   font-weight: 500;
@@ -280,6 +271,10 @@ aside {
 .table-box {
   background-color: #fff;
   border-radius: 16px;
+
+  ::-webkit-scrollbar {
+    height: 8px;
+  }
 }
 
 // 标题按钮扩展
@@ -290,6 +285,11 @@ aside {
   width: 100%;
   height: 98px;
   z-index: 1000;
+
+  .el-button {
+    float: right;
+    margin: 40px 24px 0 0;
+  }
 }
 
 // 标题
@@ -367,8 +367,8 @@ aside {
 // 模块框
 .module-panel {
   padding: 24px;
-  background-color: #fff;
   border-radius: 10px;
+  background-color: #fff;
 }
 
 // 照片盒子相关

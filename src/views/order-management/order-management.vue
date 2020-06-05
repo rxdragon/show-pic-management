@@ -32,7 +32,8 @@
       <!-- 收益信息 -->
       <div class="earnings-info">
         <span class="total-count">当前查询条件下：共{{ earningsInfo.totalCount }}单</span>
-        <span>总计收益：¥{{ earningsInfo.incomeMoney }}</span>
+        <span class="total-count">总计收益：¥{{ earningsInfo.incomeMoney }}</span>
+        <span>优惠金额：¥{{ earningsInfo.discountsMoney }}</span>
       </div>
       <!-- 订单列表 -->
       <div class="table-box" v-show="tableData.length">
@@ -68,12 +69,13 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="totalFee"
-            label="金额"
-            width="150"
-            :formatter="stringMoney"
-          />
+          <el-table-column label="金额" width="180">
+            <template slot-scope="{ row }">
+              <p class="money-desc"><span>订单总金额：</span>{{ row.allPrice | stringMoney }}</p>
+              <p class="money-desc"><span>订单优惠金额：</span>{{ row.discountsPrice | stringMoney }}</p>
+              <p class="money-desc"><span>订单实付金额：</span>{{ row.totalFee | stringMoney }}</p>
+            </template>
+          </el-table-column>
           <el-table-column prop="stateCN" label="状态" width="100" />
           <el-table-column label="订单来源" width="80">
             <template slot-scope="{ row }">
@@ -132,12 +134,7 @@
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button type="info" size="small" @click="resetCloseInfo">取 消</el-button>
-        <el-button
-          type="primary"
-          size="small"
-          :loading="submitCloseLoading"
-          @click="submitCloseOrder"
-        >确 定</el-button>
+        <el-button type="primary" size="small" :loading="submitCloseLoading" @click="submitCloseOrder">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -148,7 +145,6 @@ import DatePicker from '@/components/DatePicker'
 import NoData from '@/components/NoData'
 import OrderStateSelect from '@selectBox/OrderStateSelect'
 import OrderSourceSelect from '@selectBox/OrderSourceSelect'
-import { toFixedNoRound } from '@/utils/validate.js'
 import { ORDER_STATE } from '@/model/Enumerate.js'
 import { getSeachTime } from '@/utils/timeUtil.js'
 import { exportExcel } from '@/utils/exportExcelUtil.js'
@@ -176,7 +172,8 @@ export default {
       tableData: [], // 订单数据
       earningsInfo: { // 收益信息
         totalCount: 0,
-        incomeMoney: 0
+        incomeMoney: 0,
+        discountsMoney: 0 // 优惠金额
       }
     }
   },
@@ -225,6 +222,8 @@ export default {
       this.pager.total = data.total
       this.earningsInfo.totalCount = data.total
       this.earningsInfo.incomeMoney = data.sumIncome
+      // TODO
+      this.earningsInfo.discountsMoney = '-'
     },
     /**
      * @description 调整到详情页面
@@ -281,13 +280,6 @@ export default {
       } finally {
         this.$loadingClose()
       }
-    },
-    /**
-     * @description 格式化金钱
-     */
-    stringMoney (row, column, cellValue, index) {
-      const money = toFixedNoRound(cellValue)
-      return `¥${money}`
     },
     /**
      * @description 导出表格
@@ -360,6 +352,13 @@ export default {
 
   .table-box {
     margin-top: 24px;
+
+    .money-desc {
+      & > span {
+        display: inline-block;
+        width: 100px;
+      }
+    }
 
     .product-box {
       display: flex;

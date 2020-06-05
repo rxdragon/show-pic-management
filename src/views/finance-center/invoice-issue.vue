@@ -4,12 +4,7 @@
       <!-- 查询按钮 -->
       <div class="search-box">
         <div class="date-search search-item">
-          <el-input
-            v-model.trim="orderSearchValue"
-            placeholder="请输入内容"
-            @keyup.native.enter="searchData"
-            class="input-with-select"
-          >
+          <el-input v-model.trim="orderSearchValue" placeholder="请输入内容" @keyup.native.enter="searchData" class="input-with-select">
             <el-select slot="prepend" v-model="orderSeachType" placeholder="请选择">
               <el-option label="顾客手机号" value="phone" />
               <el-option label="订单号" value="orderNum" />
@@ -26,12 +21,7 @@
       </div>
       <!-- 订单列表 -->
       <div class="table-box" v-loading="orderListLoading">
-        <el-table
-          :data="tableData"
-          style="width: 100%;"
-          height="250"
-          :row-class-name="tableRowClassName"
-        >
+        <el-table :data="tableData" style="width: 100%;" height="250" :row-class-name="tableRowClassName">
           <el-table-column prop="orderNum" label="订单号" />
           <el-table-column label="产品">
             <template slot-scope="{ row }">

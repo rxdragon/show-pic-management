@@ -12,12 +12,7 @@
         </div>
         <div class="date-search search-item">
           <span>发票抬头</span>
-          <el-input
-            v-model.trim="invoiceTitle"
-            @keyup.native.enter="searchData(1)"
-            placeholder="请输入"
-            class="input-with-select"
-          ></el-input>
+          <el-input v-model.trim="invoiceTitle" @keyup.native.enter="searchData(1)" placeholder="请输入" class="input-with-select"></el-input>
         </div>
         <div class="date-search search-item">
           <span>开票状态</span>
@@ -211,13 +206,6 @@ export default {
 <style lang="less" scoped>
 .finance-index {
   margin-top: 24px;
-
-  .header-plugin {
-    .el-button {
-      float: right;
-      margin: 40px 24px 0 0;
-    }
-  }
 
   .search-box {
     margin-bottom: 0;

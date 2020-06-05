@@ -14,12 +14,7 @@
       </div>
       <div class="require-row tag-box">
         <template v-for="(requiresItem, requiresIndex) in requiresInfo.baseRequires">
-          <el-tag
-            size="medium"
-            type="success"
-            :key="requiresIndex"
-            v-if="Boolean(requiresItem)"
-          >
+          <el-tag size="medium" type="success" :key="requiresIndex" v-if="Boolean(requiresItem)">
             {{ requiresIndex | tagFilter }}{{ requiresItem | toLabelName }}
           </el-tag>
         </template>

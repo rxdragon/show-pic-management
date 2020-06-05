@@ -1,5 +1,3 @@
-@import "~@assetsDir/styles/variables.less";
-
 .el-button {
   &--small {
     border-radius: 4px;
@@ -25,6 +23,20 @@
       &:focus,
       &:hover {
         color: @blue !important;
+      }
+    }
+  }
+}
+
+.el-form-item {
+  margin-bottom: 22px;
+
+  .el-form-item__content {
+    .el-radio-group {
+      margin-bottom: -22px;
+
+      & > label {
+        margin-bottom: 22px;
       }
     }
   }
