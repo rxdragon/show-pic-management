@@ -33,6 +33,7 @@ export default {
     ...mapGetters(['avatarImg', 'imgDomain']),
     sharePhoto () {
       const photoSrc = _.get(this.config, 'fileList[0].path') || ''
+      if (photoSrc.includes('http')) return photoSrc
       return photoSrc ? this.imgDomain + photoSrc : ''
     }
   }

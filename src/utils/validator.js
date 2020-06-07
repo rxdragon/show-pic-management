@@ -180,7 +180,7 @@ function checkIsColor (bgVal) {
  * @description 验证颜色
  */
 export const validateColor = (rule, value, callback) => {
-  if (!checkIsColor(value)) {
+  if (!value || !checkIsColor(value)) {
     callback(new Error('请输入正确的颜色'))
   }
   callback()

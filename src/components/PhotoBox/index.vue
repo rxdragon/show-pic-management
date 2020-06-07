@@ -26,7 +26,12 @@ export default {
   computed: {
     ...mapGetters(['imgDomain', 'imgCompressDomain']),
     photoSrc () {
-      return this.originalPhoto ? this.imgDomain + this.src : this.imgCompressDomain + this.src
+      if (this.src.includes('http')) return this.src
+      if (this.originalPhoto) {
+        return this.imgDomain + this.src
+      } else {
+        return this.imgCompressDomain + this.src
+      }
     },
     previewPhoto () {
       return this.preview ? [this.imgDomain + this.src] : []

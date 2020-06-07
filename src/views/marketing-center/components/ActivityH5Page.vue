@@ -40,11 +40,40 @@
               <el-color-picker slot="append" v-model="pageForm.bkgColor"></el-color-picker>
             </el-input>
           </el-form-item>
+          <el-form-item label="验证码文字颜色：" prop="captchaTextColor">
+            <el-input v-model.trim="pageForm.captchaTextColor" placeholder="请输入验证码背景色">
+              <el-color-picker slot="append" v-model="pageForm.captchaTextColor"></el-color-picker>
+            </el-input>
+          </el-form-item>
           <el-form-item label="验证码背景色：" prop="captchaBkgColor">
             <el-input v-model.trim="pageForm.captchaBkgColor" placeholder="请输入验证码背景色">
               <el-color-picker slot="append" v-model="pageForm.captchaBkgColor"></el-color-picker>
             </el-input>
           </el-form-item>
+          <!-- 领取按钮背景色 -->
+          <template>
+            <el-form-item label="领取按钮背景色：" prop="receiveBkgStart">
+              <el-input v-model.trim="pageForm.receiveBkgStart" placeholder="请输入按钮背景色前置">
+                <el-color-picker slot="append" v-model="pageForm.receiveBkgStart" @change="setReceiveBkgColor"></el-color-picker>
+              </el-input>
+            </el-form-item>
+            <el-form-item prop="receiveBkgEnd">
+              <el-input v-model.trim="pageForm.receiveBkgEnd" placeholder="请输入按钮背景色后置">
+                <el-color-picker slot="append" v-model="pageForm.receiveBkgEnd" @change="setReceiveBkgColor"></el-color-picker>
+              </el-input>
+            </el-form-item>
+            <el-form-item prop="receiveBkgAngle">
+              <el-slider
+                v-model="pageForm.receiveBkgAngle"
+                show-stops
+                :max="360"
+                :step="45"
+                show-input
+                @change="setReceiveBkgColor"
+              />
+            </el-form-item>
+          </template>
+
           <el-form-item label="活动说明：" prop="activityDesc">
             <div class="rules-box">
               <el-form-item
@@ -82,15 +111,18 @@ import { mapGetters } from 'vuex'
 import { getImagePx } from '@/utils/photoExif.js'
 import { validateColor, validateRules } from '@/utils/validator.js'
 
-
 const pageRules = {
   title: [{ required: true, message: '请输入活动分享标题', trigger: 'blur' }],
   headerImg: [{ required: true, message: '请上传页面头图', trigger: ['blur', 'change'] }],
   bkgColor: [{ required: true, validator: validateColor, trigger: 'blur' }],
   captchaBkgColor: [{ required: true, validator: validateColor, trigger: 'blur' }],
+  captchaTextColor: [{ required: true, validator: validateColor, trigger: 'blur' }],
+  receiveBkgStart: [{ required: true, validator: validateColor, trigger: 'blur' }],
+  receiveBkgEnd: [{ required: true, validator: validateColor, trigger: 'blur' }],
   activityDesc: [{ required: true, validator: validateRules }],
   rulesFontColor: [{ required: true, validator: validateColor, trigger: 'blur' }]
 }
+
 export default {
   name: 'ActivityH5Page',
   components: { IphoneModel },
@@ -102,7 +134,12 @@ export default {
         headerImg: '', // 页面头图
         bkgColor: '#06134C', // 页面背景色
         captchaBkgColor: '#FFFFFF', // 验证码背景色
+        captchaTextColor: '#00c7af', // 验证码输入颜色
         activityDesc: [], // 活动说明
+        receiveBkgStart: '#0ee0c7', // 渐变前置颜色
+        receiveBkgEnd: '#13c2c2', // 渐变后置颜色
+        receiveBkgAngle: 270, // 渐变角度
+        receiveBkgColor: 'linear-gradient(270deg, #0ee0c7 0%, #13c2c2 100%)', // 领取按钮颜色
         rulesFontColor: '#FFFFFF' // 说明字体颜色
       },
       fileList: [],
@@ -148,6 +185,9 @@ export default {
         })
         return Promise.reject()
       }
+    },
+    setReceiveBkgColor () {
+      this.pageForm.receiveBkgColor = `linear-gradient(${this.pageForm.receiveBkgAngle}deg, ${this.pageForm.receiveBkgStart} 0%, ${this.pageForm.receiveBkgEnd} 100%)`
     },
     /**
      * @description 上传成功钩子
@@ -203,7 +243,12 @@ export default {
      * @description 校验表单
      */
     async validatePageForm () {
-      await this.$refs.pageForm.validate()
+      try {
+        await this.$refs.pageForm.validate()
+      } catch (error) {
+        console.error(error)
+        throw new Error('请填写活动优惠券配置')
+      }
     }
   }
 }

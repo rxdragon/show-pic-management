@@ -156,6 +156,7 @@ export default {
           req.limit.orderMoneyLowerLimit = 0
         }
         if (this.couponForm.desc) { req.note = this.couponForm.desc }
+        // 生效时间
         if (this.couponForm.effectivity.effectivityType === 'receive') {
           req.expireDay = this.couponForm.effectivity.autoExceed
         }
