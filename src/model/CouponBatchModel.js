@@ -55,7 +55,7 @@ export default class CouponBatchModel {
   }
 
   getCouponNum () {
-    this.limitCount = _.get(this.base, 'extend.couponInfo.extend.limitCount') || 0
+    this.limitCount = _.get(this.base, 'extend.couponInfo.extend.limitCount') || '无限制'
     this.total = this.base.total || 0
     this.activeNum = this.base.active_num || 0
     this.useNum = this.base.use_num || 0

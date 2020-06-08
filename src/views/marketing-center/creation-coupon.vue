@@ -35,7 +35,13 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="总发行量：" prop="circulation">
-          <el-input v-numberOnly min="1" v-model="couponForm.circulation" placeholder="请输入总发行量"/> 张
+          <el-input
+            v-numberOnly
+            min="1"
+            max="1500"
+            v-model="couponForm.circulation"
+            placeholder="请输入总发行量"
+          /> 张
         </el-form-item>
         <el-form-item label="有效时间：" prop="effectivity">
           <el-radio-group v-model="couponForm.effectivity.effectivityType">

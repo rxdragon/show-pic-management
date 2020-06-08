@@ -14,7 +14,7 @@
         <div class="coupon-search-data" v-if="infoData.code">
           <p><span class="label">劵码编号：</span>{{ infoData.code }}</p>
           <p><span class="label">优惠劵名称：</span>{{ infoData.couponBatchTitle }}</p>
-          <p><span class="label">状态：</span>{{ infoData.state }}</p>
+          <p><span class="label">状态：</span>{{ infoData.stateCN }}</p>
           <p><span class="label">生成时间：</span>{{ infoData.creaetdAt }}</p>
           <p><span class="label">激活时间：</span>{{ infoData.activedAt }}</p>
           <p><span class="label">使用时间：</span>{{ infoData.usedAt }}</p>
@@ -42,7 +42,7 @@ export default {
       infoData: {
         code: '', // 劵码
         couponBatchTitle: '', // 优惠劵名称
-        state: '', // 劵码
+        stateCN: '', // 劵码
         creaetdAt: '', // 劵码
         activedAt: '', // 劵码
         usedAt: '', // 劵码

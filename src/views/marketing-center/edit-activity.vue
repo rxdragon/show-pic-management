@@ -44,7 +44,13 @@
           <el-input v-model.trim="couponForm.couponName" placeholder="请输入优惠券名称" />
         </el-form-item>
         <el-form-item label="总发行张数：" prop="circulation">
-          <el-input v-model="couponForm.circulation" v-numberOnly placeholder="请输入总发行张数" /> 张
+          <el-input
+            v-model="couponForm.circulation"
+            v-numberOnly
+            min="1"
+            max="1500"
+            placeholder="请输入总发行张数"
+          /> 张
         </el-form-item>
         <el-form-item label="每人限领张数：" prop="limitCount">
           <el-radio-group v-model="couponForm.limitCount.limitType">
@@ -302,7 +308,6 @@ export default {
       } catch (error) {
         console.error(error)
         this.$newMessage.warning(error.message || error || '请输入相关配置')
-      } finally {
         this.$loadingClose()
       }
     },
@@ -322,12 +327,13 @@ export default {
           id: this.activityId,
           ...activityReq
         }
+        const mainImg = _.get(this.shareForm, 'fileList[0].path')
+        req.shareConfig.mainImg = mainImg ? this.imgDomain + mainImg : ''
         await Activity.editActivity(req)
         this.$newMessage.success('修改成功')
         this.goBack()
       } catch (error) {
         console.error(error)
-      } finally {
         this.$loadingClose()
       }
     },
@@ -367,6 +373,7 @@ export default {
       .share-form {
         flex-shrink: 0;
         width: 600px;
+        padding-top: 20px;
         margin-right: 40px;
       }
     }

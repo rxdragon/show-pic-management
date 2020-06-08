@@ -1,6 +1,7 @@
 import axios from '@/plugins/axios.js'
 import ActivityModel from '@/model/ActivityModel.js'
 import CouponBatchModel from '@/model/CouponBatchModel.js'
+import store from '@/store' // vuex
 
 /**
  * @description 获取活动列表
@@ -78,13 +79,18 @@ export function getActivityDetail (params) {
       activityName: msg.name,
       activityTime: [msg.begin_time, msg.end_time]
     }
-    createData.shareForm = {
-      fileList: [{
-        path: msg.share_config.mainImg,
+    const mainImg = msg.share_config.mainImg.replace(store.getters.imgDomain, '')
+    let fileList = []
+    if (mainImg) {
+      fileList = [{
+        path: mainImg,
         percentage: 100,
         status: 'success',
         response: msg.share_config.mainImg
-      }],
+      }]
+    }
+    createData.shareForm = {
+      fileList,
       activityShareTitle: msg.share_config.title,
       activityShareDesc: msg.share_config.desc
     }
@@ -125,7 +131,7 @@ export function getActivityDetail (params) {
       bkgColor: msg.style_config.bkgColor, // 页面背景色
       captchaBkgColor: msg.style_config.captchaBkgColor, // 验证码背景色
       captchaTextColor: msg.style_config.captchaTextColor, // 验证码输入颜色
-      activityDesc: msg.style_config.rules['*'], // TODO 返回格式不正确
+      activityDesc: msg.style_config.rules, // TODO 返回格式不正确
       receiveBkgStart, // 渐变前置颜色
       receiveBkgEnd, // 渐变后置颜色
       receiveBkgAngle,
