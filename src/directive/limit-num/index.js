@@ -32,5 +32,4 @@ function getMinMaxNumer (dom) {
     dom.value = max
     return true
   }
-  return false
 }

@@ -36,7 +36,12 @@ export default {
       headerImg: '',
       bkgColor: '#06134C',
       captchaBkgColor: '#FFFFFF',
+      captchaTextColor: '#00c7af',
       activityDesc: [],
+      receiveBkgStart: '#0ee0c7',
+      receiveBkgEnd: '#13c2c2',
+      receiveBkgAngle: '270',
+      receiveBkgColor: 'linear-gradient(270deg, #0ee0c7 0%, #13c2c2 100%)',
       rulesFontColor: '#FFFFFF'
     }) }
   },
@@ -52,7 +57,9 @@ export default {
         const phoneModelDom = document.getElementById('phoneModel')
         phoneModelDom.style.setProperty('--bkgColor', configValue.bkgColor)
         phoneModelDom.style.setProperty('--captchaBkgColor', configValue.captchaBkgColor)
+        phoneModelDom.style.setProperty('--captchaTextColor', configValue.captchaTextColor)
         phoneModelDom.style.setProperty('--rulesFontColor', configValue.rulesFontColor)
+        phoneModelDom.style.setProperty('--receiveBkgColor', configValue.receiveBkgColor)
       },
       deep: true
     }
@@ -62,7 +69,9 @@ export default {
     const phoneModelDom = document.getElementById('phoneModel')
     phoneModelDom.style.setProperty('--bkgColor', this.config.bkgColor)
     phoneModelDom.style.setProperty('--captchaBkgColor', this.config.captchaBkgColor)
+    phoneModelDom.style.setProperty('--captchaTextColor', this.config.captchaTextColor)
     phoneModelDom.style.setProperty('--rulesFontColor', this.config.rulesFontColor)
+    phoneModelDom.style.setProperty('--rulesFontColor', this.config.receiveBkgColor)
   }
 }
 </script>
@@ -72,6 +81,8 @@ export default {
   --bkgColor: #06134c;
   --captchaBkgColor: #fff;
   --rulesFontColor: #fff;
+  --captchaTextColor: #00c7af;
+  --receiveBkgColor: linear-gradient(270deg, #0ee0c7 0%, #13c2c2 100%);
 
   width: 422px;
   height: 858px;
@@ -171,7 +182,7 @@ export default {
           display: flex;
           align-items: center;
           font-size: 14px;
-          color: #00c7af;
+          color: var(--captchaTextColor);
         }
       }
 
@@ -180,7 +191,7 @@ export default {
         height: 40px;
         margin: 0 auto;
         color: #fff;
-        background: linear-gradient(270deg, rgba(14, 224, 199, 1) 0%, rgba(19, 194, 194, 1) 100%);
+        background: var(--receiveBkgColor);
         border: none;
         border-radius: 24px;
 

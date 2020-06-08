@@ -169,3 +169,20 @@ export const couponToCN = {
   [COUPON_STATE.ABOLISHED]: '已作废',
   [COUPON_STATE.EXPIRED]: '已过期'
 }
+
+/**
+ * @description 活动状态
+ */
+export const ACTIVITY_STATE = {
+  WAITING: 'wait',
+  STARTED: 'start',
+  FINISHED: 'finish',
+  END_EARLY: 'interrupt'
+}
+
+export const activityToCN = {
+  [ACTIVITY_STATE.WAITING]: '未开始',
+  [ACTIVITY_STATE.STARTED]: '进行中',
+  [ACTIVITY_STATE.FINISHED]: '已结束',
+  [ACTIVITY_STATE.END_EARLY]: '提前结束'
+}

@@ -18,6 +18,7 @@ export default class CouponBatchModel {
   expireNum = 0 // 过期数量
   voidNum = 0 // 作废数量
   waitActiveNum = 0 // 待激活
+  limitCount = 0 // 每人限量
 
   createdAt = '' // 创建时间节点
   createdStaff = '' // 创建人
@@ -31,6 +32,9 @@ export default class CouponBatchModel {
   discount = 0
 
   effectivityTime = '-' // 有效期
+  effectivityType = '' // 有效时间类型
+  autoExceed = '' // 自动自激活后多久失效
+  abortTime = '' // 固定时间生效
 
   constructor (couponBatchData) {
     this.base = couponBatchData
@@ -51,6 +55,7 @@ export default class CouponBatchModel {
   }
 
   getCouponNum () {
+    this.limitCount = _.get(this.base, 'extend.couponInfo.extend.limitCount') || '无限制'
     this.total = this.base.total || 0
     this.activeNum = this.base.active_num || 0
     this.useNum = this.base.use_num || 0
@@ -60,14 +65,20 @@ export default class CouponBatchModel {
   }
 
   getEffectivityTime () {
-    const startTime = _.get(this.base, 'extend.couponInfo.start_usage')
-    const stopTime = _.get(this.base, 'extend.couponInfo.stop_usage')
-    const expireDay = _.get(this.base, 'extend.couponInfo.extend.expireDay')
-    if (stopTime.includes('2999')) {
+    this.effectivityType = _.get(this.base, 'extend.couponInfo.extend.dateType')
+    const startTime = _.get(this.base, 'extend.couponInfo.start_usage') || '-'
+    const stopTime = _.get(this.base, 'extend.couponInfo.stop_usage') || '-'
+    const expireDay = _.get(this.base, 'extend.couponInfo.extend.expireDay') || '-'
+    if (this.effectivityType === 'limitless') {
       this.effectivityTime = '无限制'
-    } else {
+    }
+    if (this.effectivityType === 'fixed') {
+      this.abortTime = stopTime
       this.effectivityTime = `${startTime}\n${stopTime}`
     }
-    if (expireDay) { this.effectivityTime = `自激活后${expireDay}天有效` }
+    if (this.effectivityType === 'receive') {
+      this.autoExceed = expireDay
+      this.effectivityTime = `自激活后${expireDay}天有效`
+    }
   }
 }

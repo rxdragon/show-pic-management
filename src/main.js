@@ -30,6 +30,7 @@ Vue.prototype.$isDev = !process.env.VUE_APP_LOGIN_API.includes('k8s')
 
 // 优化全局loading关闭
 Vue.prototype.$loadingClose = () => {
+  if (!document.getElementsByClassName('el-loading-mask').length || !document.getElementsByClassName('is-fullscreen').length) return
   setTimeout(() => {
     Vue.prototype.$loading().close()
   }, 400)
