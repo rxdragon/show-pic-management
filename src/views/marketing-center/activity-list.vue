@@ -79,6 +79,7 @@
 import DatePicker from '@/components/DatePicker'
 import AccountSourceSelect from '@selectBox/AccountSourceSelect'
 import handleClipboard from '@/utils/clipboard.js'
+import * as TimeUtil from '@/utils/timeUtil.js'
 import * as Activity from '@/api/activity.js'
 import { ACTIVITY_STATE } from '@/model/Enumerate'
 
@@ -115,13 +116,14 @@ export default {
           pageSize: this.pager.pageSize
         }
         if (this.timeSpan) {
-          req.cond.createBeginTime = this.timeSpan[0],
-          req.cond.createEndTime = this.timeSpan[1]
+          req.cond.createBeginTime = TimeUtil.startDayTime(this.timeSpan[0]),
+          req.cond.createEndTime = TimeUtil.endDayTime(this.timeSpan[1])
         }
         if (this.acactivityState) { req.cond.status = this.acactivityState }
         if (this.acactivityName) { req.cond.name = this.acactivityName }
+        if (!Object.keys(req.cond).length) { delete req.cond }
         this.pager.page = page ? page : this.pager.page
-        const data = await Activity.getActivityList()
+        const data = await Activity.getActivityList(req)
         this.tableData = data.list
         this.pager.total = data.total
       } catch (error) {

@@ -5,8 +5,7 @@ import axios from '@/plugins/axios.js'
  */
 export function getSignature () {
   return axios({
-    // TODO
-    url: '/project_cloud/photoManager/getUploadToken',
+    url: '/project_show_pic/common/getUploadToken',
     method: 'GET'
   }).then(msg => {
     const createData = {

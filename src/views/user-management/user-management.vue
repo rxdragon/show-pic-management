@@ -29,8 +29,14 @@
           <el-table-column prop="phone" label="手机号" width="180" />
           <el-table-column prop="name" label="用户姓名" width="180" />
           <el-table-column prop="sex" label="用户性别" />
-          <el-table-column prop="userConsumeNum" label="消费次数" sortable="custom" />
-          <el-table-column prop="consumeTotal" label="消费金额" sortable="custom" :formatter="stringMoney"/>
+          <el-table-column prop="userConsumeNum" label="消费次数" sortable="custom" min-width="100" />
+          <el-table-column
+            prop="consumeTotal"
+            label="消费金额"
+            sortable="custom"
+            min-width="100"
+            :formatter="stringMoney"
+          />
           <el-table-column label="账号来源">
             <template slot-scope="{ row }">
               <div :class="`${row.from}-color`">{{ row.from | toOrderFromToCN }}</div>

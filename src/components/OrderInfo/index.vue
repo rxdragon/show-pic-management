@@ -29,7 +29,7 @@
               <i slot="reference" class="product-more iconfont icongengduo"></i>
             </el-popover>
           </th>
-          <th>{{ orderData.allPrice | stringMoney }}</th>
+          <th>{{ orderData.totalFee | stringMoney }}</th>
           <th>{{ orderData.discountsPrice | stringMoney }}</th>
           <th>{{ orderData.couponCode }}</th>
         </tr>

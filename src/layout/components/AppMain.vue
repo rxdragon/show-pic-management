@@ -68,7 +68,7 @@ export default {
   .header-title {
     position: sticky;
     top: 0;
-    z-index: 2000;
+    z-index: 1990;
     width: calc(~'100vw - @{sideBarWidth}');
     height: 98px;
     padding: 12px 32px;

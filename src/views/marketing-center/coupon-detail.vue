@@ -9,9 +9,12 @@
             <div class="value">{{ couponBatchInfo.title }}</div>
           </el-col>
           <el-col :span="6">
-            <!-- TODO -->
             <div class="label">对应活动：</div>
-            <div class="value">-</div>
+            <div class="value">
+              <el-tooltip class="item" effect="dark" :content="couponBatchInfo.activityName" placement="top-start">
+                <div class="activity-name">{{ couponBatchInfo.activityName }}</div>
+              </el-tooltip>
+            </div>
           </el-col>
           <el-col :span="6">
             <div class="label">优惠劵类型：</div>
@@ -88,7 +91,7 @@
         </div>
         <div class="search-item">
           <span>券码状态：</span>
-          <coupon-state-select v-model="couponState" />
+          <coupon-state-select multiple collapse-tags v-model="couponState" />
         </div>
         <div class="search-button search-item">
           <el-button size="small" type="primary" @click="searchCouponList">查 询</el-button>
@@ -152,7 +155,7 @@ export default {
       COUPON_STATE,
       couponBatchId: '',
       couponCode: '',
-      couponState: '',
+      couponState: [],
       couponBatchInfo: {},
       tableData: [],
       pager: {
@@ -283,6 +286,16 @@ export default {
     white-space: pre-line;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+  }
+
+  .activity-name {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: pre-line;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
   }
 
   .label {

@@ -11,16 +11,18 @@
         <div class="page-header-image">
           <img :src="config.headerImg" alt="">
         </div>
-        <div class="phone-input-box">
-          <el-input placeholder="请输入手机号"></el-input>
-          <el-input placeholder="请输入验证码"><span slot="suffix">获取验证码</span></el-input>
-          <button>领取优惠券</button>
-        </div>
-        <div class="rules-page">
-          <div class="rules-title">活动说明</div>
-          <template v-for="(ruleItem, ruleIndex) in activityDesc">
-            <div class="rules-item" :key="ruleItem.key">{{ ruleIndex + 1 }}、{{ ruleItem.value }}</div>
-          </template>
+        <div class="page-main">
+          <div class="phone-input-box">
+            <el-input placeholder="请输入手机号"></el-input>
+            <el-input placeholder="请输入验证码"><span slot="suffix">获取验证码</span></el-input>
+            <button>领取优惠券</button>
+          </div>
+          <div class="rules-page">
+            <div class="rules-title">活动说明</div>
+            <template v-for="(ruleItem, ruleIndex) in activityDesc">
+              <div class="rules-item" :key="ruleItem.key">{{ ruleIndex + 1 }}、{{ ruleItem.value }}</div>
+            </template>
+          </div>
         </div>
       </div>
     </div>
@@ -134,7 +136,7 @@ export default {
 
     .page-header-image {
       position: relative;
-      height: 371px;
+      height: 604px;
       overflow: hidden;
       background-color: #e8e8e8;
 
@@ -154,70 +156,76 @@ export default {
       }
     }
 
-    .phone-input-box {
+    .page-main {
       position: relative;
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 343px;
-      height: 220px;
-      padding: 32px 32px 24px;
-      margin: -131px auto 0;
-      background-color: var(--captchaBkgColor);
-      border-radius: 20px;
+      margin-top: -353px;
 
-      .el-input {
-        overflow: hidden;
-        border: 1px solid #ebebeb;
+      .phone-input-box {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 343px;
+        height: 220px;
+        padding: 32px 32px 24px;
+        margin: 0 auto 0;
+        background-color: var(--captchaBkgColor);
         border-radius: 20px;
 
-        & /deep/ .el-input__inner {
-          height: 38px;
+        .el-input {
+          overflow: hidden;
+          border: 1px solid #ebebeb;
+          border-radius: 20px;
+
+          & /deep/ .el-input__inner {
+            height: 38px;
+            border: none;
+          }
+
+          & /deep/ .el-input__suffix {
+            right: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: var(--captchaTextColor);
+          }
+        }
+
+        button {
+          width: 188px;
+          height: 40px;
+          margin: 0 auto;
+          color: #fff;
+          background: var(--receiveBkgColor);
           border: none;
-        }
+          border-radius: 24px;
 
-        & /deep/ .el-input__suffix {
-          right: 20px;
-          display: flex;
-          align-items: center;
-          font-size: 14px;
-          color: var(--captchaTextColor);
+          &:focus {
+            outline-color: transparent;
+          }
         }
       }
 
-      button {
-        width: 188px;
-        height: 40px;
-        margin: 0 auto;
-        color: #fff;
-        background: var(--receiveBkgColor);
-        border: none;
-        border-radius: 24px;
+      .rules-page {
+        position: relative;
+        padding: 0 16px;
+        margin-top: 40px;
+        color: var(--rulesFontColor);
 
-        &:focus {
-          outline-color: transparent;
+        .rules-title {
+          margin-bottom: 10px;
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 18px;
         }
-      }
-    }
 
-    .rules-page {
-      padding: 0 16px;
-      margin-top: 40px;
-      color: var(--rulesFontColor);
-
-      .rules-title {
-        margin-bottom: 10px;
-        font-size: 12px;
-        font-weight: 600;
-        line-height: 18px;
-      }
-
-      .rules-item {
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 22px;
-        opacity: 0.8;
+        .rules-item {
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 22px;
+          opacity: 0.8;
+        }
       }
     }
   }

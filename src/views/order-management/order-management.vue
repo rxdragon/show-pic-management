@@ -32,8 +32,8 @@
       <!-- 收益信息 -->
       <div class="earnings-info">
         <span class="total-count">当前查询条件下：共{{ earningsInfo.totalCount }}单</span>
-        <span class="total-count">总计收益：¥{{ earningsInfo.incomeMoney }}</span>
-        <span>优惠金额：¥{{ earningsInfo.discountsMoney }}</span>
+        <span class="total-count">总计金额(含优惠金额)：{{ earningsInfo.incomeMoney | stringMoney }}</span>
+        <span>优惠金额：{{ earningsInfo.discountsMoney | stringMoney }}</span>
       </div>
       <!-- 订单列表 -->
       <div class="table-box" v-show="tableData.length">
@@ -222,8 +222,7 @@ export default {
       this.pager.total = data.total
       this.earningsInfo.totalCount = data.total
       this.earningsInfo.incomeMoney = data.sumIncome
-      // TODO
-      this.earningsInfo.discountsMoney = '-'
+      this.earningsInfo.discountsMoney = data.discountIncome || 0
     },
     /**
      * @description 调整到详情页面

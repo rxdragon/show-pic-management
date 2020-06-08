@@ -163,9 +163,9 @@ export const COUPON_STATE = {
 }
 
 export const couponToCN = {
-  [COUPON_STATE.ACTIVATED]: '已激活',
-  [COUPON_STATE.UNUSED]: '未使用',
-  [COUPON_STATE.USED]: '使用',
+  [COUPON_STATE.ACTIVATED]: '未绑定',
+  [COUPON_STATE.UNUSED]: '已绑定',
+  [COUPON_STATE.USED]: '已使用',
   [COUPON_STATE.ABOLISHED]: '已作废',
   [COUPON_STATE.EXPIRED]: '已过期'
 }

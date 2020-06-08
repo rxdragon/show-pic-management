@@ -11,6 +11,7 @@ export default class CouponBatchModel {
   title = '-' // 批次标题
   state = '-' // 批次状态
   stateToCn = '-' // 批次状态
+  activityName = '-' // 绑定活动名称
 
   total = 0 // 总发行量
   activeNum = 0 // 激活数量
@@ -41,6 +42,7 @@ export default class CouponBatchModel {
     this.id = couponBatchData.id
     this.title = couponBatchData.title || '-'
     this.state = couponBatchData.state || '-'
+    this.activityName = _.get(couponBatchData, 'activity.name') || '-'
     this.stateToCn = couponBatchToCN[this.state] || ''
     this.createdAt = couponBatchData.created_at || '-'
     this.createdStaff = _.get(couponBatchData, 'extend.createdStaff.nickname') || _.get(couponBatchData, 'extend.createdStaff.name') || '-'
