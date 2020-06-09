@@ -108,7 +108,7 @@ import * as Commonality from '@/api/commonality'
 import * as PhotoTool from '@/utils/photoTool'
 import IphoneModel from './IphoneModel'
 import { mapGetters } from 'vuex'
-import { getImagePx } from '@/utils/photoExif.js'
+// import { getImagePx } from '@/utils/photoExif.js'
 import { validateColor, validateRules } from '@/utils/validator.js'
 
 const pageRules = {
