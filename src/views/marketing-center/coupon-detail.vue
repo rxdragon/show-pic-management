@@ -208,7 +208,7 @@ export default {
         pageSize: this.pager.pageSize
       }
       if (this.couponCode) { req.cond.couponCode = this.couponCode }
-      if (this.couponState) { req.cond.couponState = this.couponState }
+      if (this.couponState) { req.cond.couponStates = this.couponState }
       const data = await Coupon.getCouponBatchCodeUseList(req)
       this.tableData = data.list
       this.pager.total = data.total
