@@ -54,7 +54,7 @@
 import PhotoBox from "@/components/PhotoBox"
 import variables from '@/assets/styles/variables.less'
 import { mapGetters } from 'vuex'
-import { getImagePx } from '@/utils/photoExif.js'
+// import { getImagePx } from '@/utils/photoExif.js'
 import * as Commonality from '@/api/commonality'
 import * as PhotoTool from '@/utils/photoTool'
 
