@@ -25,9 +25,9 @@ export default {
   data () {
     return {
       pickerOptions: {
-        disabledDate (time) {
-          return time.getTime() > Date.now()
-        }
+        // disabledDate (time) {
+        //   return time.getTime() > Date.now()
+        // }
       }
     }
   },

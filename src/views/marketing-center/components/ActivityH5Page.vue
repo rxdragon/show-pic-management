@@ -171,9 +171,9 @@ export default {
      */
     async beforeUpload (file) {
       try {
-        const data = await getImagePx(file)
-        if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
-        if (data.width !== 750 || data.height !== 1208) throw new Error('请上传750px * 1208px 的图片')
+        // const data = await getImagePx(file)
+        // if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
+        // if (data.width !== 750 || data.height !== 1208) throw new Error('请上传750px * 1208px 的图片')
         return Promise.resolve()
       } catch (error) {
         this.$newMessage({
