@@ -1,4 +1,5 @@
 # 1.0.0 (2020-06-11)
+<<<<<<< HEAD
 
 ### 🐛 Bug 修复
 范围|描述|commitId
@@ -32,6 +33,8 @@
  - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
  - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
 
+=======
+>>>>>>> origin/release-1.6.0
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -74,6 +77,42 @@
  - | 样式更改 | [c5f050a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/c5f050a)
 
 
+<<<<<<< HEAD
+=======
+范围|描述|commitId
+--|--|--
+ - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
+ - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
+ - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
+ - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
+ - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
+
+
+### 🐛 Bug 修复
+范围|描述|commitId
+--|--|--
+ - | 修图查询显示 | [85c5083](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/85c5083)
+ - | 修复最小开票金额判断错误问题 | [7f210c9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7f210c9)
+ - | 修复单张照片下载问题 | [004717a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/004717a)
+ - | 修复发票导出问题 | [a34c1a7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a34c1a7)
+ - | 修复发票管理不显示正确的预览图 | [bb1364b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bb1364b)
+ - | 修复取消订单不能查看详情 | [7afae71](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7afae71)
+ - | 修复文案问题 | [6714e3c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6714e3c)
+ - | 修复查看用户详情问题 | [e93d9c7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e93d9c7)
+ - | 修复路由权限验证问题 | [bc3b5cf](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bc3b5cf)
+ - | 修复跳转用户详情问题 | [823e0a0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/823e0a0)
+ - | 修复部分bug | [8b45b0e](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8b45b0e)
+ - | 修复部分问题 | [af21495](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/af21495)
+ - | 修复金额不正确和默认手机号问题 | [08d8264](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/08d8264)
+ - | 修复错误吗报错 | [e6da9b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e6da9b0)
+ - | 入参修改 | [923ea40](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/923ea40)
+ - | 更改打包路径 | [740c1f1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/740c1f1)
+ - | 更新错误码 | [5ffa4a9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5ffa4a9)
+ - | 用户详情订单列表取消订单不显示详情操作 | [1ed4fef](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1ed4fef)
+ 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
+
+
+>>>>>>> origin/release-1.6.0
 ### 📝 文档
 范围|描述|commitId
 --|--|--

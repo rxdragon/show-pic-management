@@ -25,13 +25,14 @@ export default {
   data () {
     return {
       pickerOptions: {
-        // disabledDate (time) {
-        //   return time.getTime() > Date.now()
-        // }
+        disabledDate (time) {
+          return time.getTime() > Date.now()
+        }
       }
     }
   },
   created () {
+    const _this = this
     // 快捷方式
     if (this.shortcuts) {
       this.pickerOptions.shortcuts = [{
@@ -64,6 +65,7 @@ export default {
     if (this.future) {
       this.pickerOptions = {
         disabledDate (time) {
+          if (_this.$isDev) return
           return time.getTime() < Date.now()
         }
       }
