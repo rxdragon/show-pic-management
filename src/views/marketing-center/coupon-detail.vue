@@ -104,7 +104,7 @@
         <el-table-column prop="stateCN" label="状态" />
         <el-table-column prop="activedAt" label="激活时间" min-width="80" />
         <el-table-column prop="usedAt" label="使用时间" min-width="80" />
-        <el-table-column prop="userId" label="绑定账号" min-width="100" />
+        <el-table-column prop="userTel" label="绑定账号" min-width="100" />
         <el-table-column prop="userOrderNum" label="使用订单号" min-width="130"/>
         <el-table-column label="操作" align="right">
           <template slot-scope="{ row }">

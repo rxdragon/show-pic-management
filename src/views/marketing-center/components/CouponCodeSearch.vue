@@ -67,12 +67,13 @@ export default {
           page: 1,
           pageSize: 1
         }
-        const data = await Coupon.searchCouponCode(req)
-        this.infoData = data
+        this.infoData = await Coupon.searchCouponCode(req)
       } catch (error) {
         throw new Error(error)
       } finally {
-        this.loading = false
+        setTimeout(() => {
+          this.loading = false
+        }, 400)
       }
     }
   }

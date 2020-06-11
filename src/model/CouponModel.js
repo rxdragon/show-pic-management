@@ -12,6 +12,7 @@ export default class CouponModel {
   activedAt = '-' // 激活时间
   usedAt = '-' // 使用时间
   userId = '' // 使用者id
+  userTel = '' // 绑定用户手机号
   userOrderNum = '' // 使用订单号
 
   constructor (couponData) {
@@ -25,8 +26,8 @@ export default class CouponModel {
     this.creaetdAt = couponData.created_at || '-'
     this.activedAt = couponData.bind_at || '-'
     this.usedAt = couponData.used_at || '-'
-    // TODO 绑定用户手机号
     this.userId = couponData.user_id || '-'
+    this.userTel = _.get(couponData, 'userInfo.phone') || '-'
     this.userOrderNum = couponData.order_num || '-'
   }
 }

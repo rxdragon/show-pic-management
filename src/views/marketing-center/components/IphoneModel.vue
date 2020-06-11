@@ -209,6 +209,7 @@ export default {
 
       .rules-page {
         position: relative;
+        z-index: 3;
         padding: 0 16px;
         margin-top: 40px;
         color: var(--rulesFontColor);
