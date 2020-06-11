@@ -108,7 +108,7 @@ import * as Commonality from '@/api/commonality'
 import * as PhotoTool from '@/utils/photoTool'
 import IphoneModel from './IphoneModel'
 import { mapGetters } from 'vuex'
-// import { getImagePx } from '@/utils/photoExif.js'
+import { getImagePx } from '@/utils/photoExif.js'
 import { validateColor, validateRules } from '@/utils/validator.js'
 
 const pageRules = {
@@ -171,8 +171,8 @@ export default {
      */
     async beforeUpload (file) {
       try {
-        // const data = await getImagePx(file)
-        // if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
+        const data = await getImagePx(file)
+        if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
         // if (data.width !== 750 || data.height !== 1208) throw new Error('请上传750px * 1208px 的图片')
         return Promise.resolve()
       } catch (error) {

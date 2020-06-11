@@ -54,7 +54,7 @@
 import PhotoBox from "@/components/PhotoBox"
 import variables from '@/assets/styles/variables.less'
 import { mapGetters } from 'vuex'
-// import { getImagePx } from '@/utils/photoExif.js'
+import { getImagePx } from '@/utils/photoExif.js'
 import * as Commonality from '@/api/commonality'
 import * as PhotoTool from '@/utils/photoTool'
 
@@ -107,9 +107,10 @@ export default {
      */
     async beforeUpload (file) {
       try {
-        // const data = await getImagePx(file)
-        // if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
-        // if (data.width !== 100 || data.height !== 100) throw new Error('请上传100px * 100px 的图片')
+        const data = await getImagePx(file)
+        console.error(data)
+        if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
+        if (data.width !== 100 || data.height !== 100) throw new Error('请上传100px * 100px 的图片')
         return Promise.resolve()
       } catch (error) {
         this.$newMessage({

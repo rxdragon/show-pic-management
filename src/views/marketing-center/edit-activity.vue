@@ -8,7 +8,7 @@
           <el-input v-model.trim="baseForm.activityName" maxlength="15" placeholder="请输入活动名称" />
         </el-form-item>
         <el-form-item label="活动时间" prop="activityTime">
-          <date-picker valueFormat="yyyy-MM-dd HH:mm:ss" type="datetimerange" v-model="baseForm.activityTime" />
+          <date-picker future valueFormat="yyyy-MM-dd HH:mm:ss" type="datetimerange" v-model="baseForm.activityTime" />
         </el-form-item>
       </el-form>
     </div>
