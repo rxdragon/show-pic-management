@@ -154,13 +154,13 @@ export const validateLimitCount = (rule, value, callback) => {
  * @description 有效时间
  */
 export const validateEffectivity = (rule, value, callback) => {
-  if (value.effectivityType === '') {
+  if (!value.effectivityType) {
     callback(new Error('请选择有效时间类型'))
   }
-  if (+value.effectivityType === 1 && (!Number(value.autoExceed) || Number(value.autoExceed) <= 0)) {
-    callback(new Error('请输入激活时效'))
+  if (value.effectivityType === 'receive' && (!Number(value.autoExceed) || Number(value.autoExceed) <= 0)) {
+    callback(new Error('请输入激活有效天数'))
   }
-  if (+value.effectivityType === 2 && !value.abortTime) {
+  if (value.effectivityType === 'fixed' && !value.abortTime) {
     callback(new Error('请输入固定截止日期'))
   }
   callback()

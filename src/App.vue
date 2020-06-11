@@ -9,6 +9,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import variables from '@assetsDir/styles/variables.less'
+
 export default {
   name: 'App',
   computed: {

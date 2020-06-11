@@ -7,7 +7,7 @@
       </div>
     </transition>
     <transition :name="transitionName" mode="out-in">
-      <keep-alive :include="cachedViews" :max="4">
+      <keep-alive :include="cachedViews" exclude="" :max="4">
         <router-view :key="key" />
       </keep-alive>
     </transition>
@@ -24,7 +24,8 @@ export default {
     return {
       isLoading: false,
       // 根据组件名字
-      cachedViews: ['userManage', 'userDetail', 'orderManagement', 'financeIndex']
+      cachedViews: ['userManage', 'userDetail', 'orderManagement', 'financeIndex', 'CouponManagement'],
+      notCacheViews: ['CouponDetail']
     }
   },
   computed: {

@@ -34,5 +34,6 @@ export default class UserModel {
     this.consumeTotal = Number(userData.consume_total)
     this.userConsumeNum = Number(userData.consume_num)
     this.recentlyConsume = userData.last_buy_time || '-'
+    this.couponCount = userData.coupon_unused_count || 0
   }
 }

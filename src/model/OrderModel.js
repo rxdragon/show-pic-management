@@ -21,7 +21,7 @@ export default class OrderModel {
   allPrice = 0 // 订单总金额
   discountsPrice = 0 // 订单优惠金额
   totalFee = 0 // 订单实付金额
-  couponCode = '-' // 优惠券 TODO
+  couponCode = '-' // 优惠券
 
   photoNum = 0 // 照片数量
   productList = [] // 产品列表
@@ -53,7 +53,7 @@ export default class OrderModel {
     this.clientName = _.get(orderData, 'userInfo.name') || '-'
     this.clientAccount = _.get(orderData, 'userInfo.phone') || '-'
     this.clientPhone = _.get(orderData, 'userInfo.phone') || '-'
-    
+    this.couponCode = _.get(orderData, 'coupon.code') || '-'
   }
 
   // 订单金额

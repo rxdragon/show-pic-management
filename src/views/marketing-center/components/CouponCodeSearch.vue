@@ -16,7 +16,7 @@
           <p><span class="label">优惠劵名称：</span>{{ infoData.couponBatchTitle }}</p>
           <p><span class="label">状态：</span>{{ infoData.stateCN }}</p>
           <p><span class="label">生成时间：</span>{{ infoData.creaetdAt }}</p>
-          <p><span class="label">激活时间：</span>{{ infoData.activedAt }}</p>
+          <p><span class="label">绑定时间：</span>{{ infoData.bindAt }}</p>
           <p><span class="label">使用时间：</span>{{ infoData.usedAt }}</p>
           <p><span class="label">绑定账号：</span>{{ infoData.userId }}</p>
           <p><span class="label">使用订单号：</span>{{ infoData.userOrderNum }}</p>
@@ -44,7 +44,7 @@ export default {
         couponBatchTitle: '', // 优惠劵名称
         stateCN: '', // 劵码
         creaetdAt: '', // 劵码
-        activedAt: '', // 劵码
+        bindAt: '', // 劵码
         usedAt: '', // 劵码
         userId: '', // 劵码
         userOrderNum: '' // 劵码

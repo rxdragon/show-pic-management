@@ -44,11 +44,11 @@
           <el-input v-model.trim="couponForm.couponName" placeholder="请输入优惠券名称" />
         </el-form-item>
         <el-form-item label="总发行张数：" prop="circulation">
-          <el-input
+          <el-input-number
+            :min="1"
+            :max="1500"
             v-model="couponForm.circulation"
-            v-numberOnly
-            min="1"
-            max="1500"
+            controls-position="right"
             placeholder="请输入总发行张数"
           /> 张
         </el-form-item>
@@ -75,7 +75,13 @@
         <!-- 折扣卷 -->
         <template v-if="couponForm.type === 'discount_coupon'">
           <el-form-item label="折扣力度：" prop="discountRange">
-            <el-input v-numberOnly min="1" class="min-input" v-model="couponForm.discountRange"/> 折
+            <el-input
+              v-discountOnly
+              min="1"
+              max="9.9"
+              class="min-input"
+              v-model="couponForm.discountRange"
+            /> 折
           </el-form-item>
           <el-form-item label="减免上限：" prop="discountMaxMoney">
             <el-input v-numberOnly min="1" class="min-input" v-model="couponForm.discountMaxMoney"/> 元
@@ -85,7 +91,7 @@
           <el-radio-group v-model="couponForm.useLimit.usetype">
             <el-radio :label="0">无限制</el-radio>
             <el-radio :label="1">
-              满 <el-input v-numberOnly min="1" class="min-input" v-model="couponForm.useLimit.maxMoney"/> 元可用
+              满 <el-input-number :min="1" v-model="couponForm.useLimit.maxMoney" controls-position="right" /> 元可用
             </el-radio>
           </el-radio-group>
         </el-form-item>
@@ -93,7 +99,7 @@
           <el-radio-group v-model="couponForm.effectivity.effectivityType">
             <el-radio label="limitless">无限制</el-radio>
             <el-radio label="receive">
-              自激活后 <el-input class="min-input" v-numberOnly min="1" v-model="couponForm.effectivity.autoExceed"/> 天有效
+              自激活后 <el-input-number :min="1" v-model="couponForm.effectivity.autoExceed" controls-position="right" /> 天有效
             </el-radio>
             <el-radio label="fixed">
               固定截止日期
@@ -274,6 +280,9 @@ export default {
           this.$refs.couponForm.validate()
         ])
         const activityReq = this.getActivityConfigData()
+        if (this.couponForm.type === 'discount_coupon' && (+this.couponForm.discountRange >= 10 || +this.couponForm.discountRange <= 0)) {
+          return this.$newMessage.warning('请输入正确的折扣券')
+        }
         const req = {
           couponConfig: {
             title: this.couponForm.couponName,
@@ -288,6 +297,10 @@ export default {
         // 每人限领数量
         if (this.couponForm.limitCount.limitType === 1) {
           req.couponConfig.limitCount = this.couponForm.limitCount.count
+        }
+        // 减免上线
+        if (this.couponForm.type === 'discount_coupon') {
+          req.couponConfig.limit.reductionUpperLimit = this.couponForm.discountMaxMoney
         }
         if (this.couponForm.useLimit.usetype === 1) {
           req.couponConfig.limit.orderMoneyLowerLimit = this.couponForm.useLimit.maxMoney

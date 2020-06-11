@@ -10,11 +10,12 @@ Vue.directive('numberOnly', {
         const trueText = regArr ? regArr[0] : ''
         event.target.value = trueText
         getMinMaxNumer(event.target)
+        el.__vue__.isComposing = false
         event.target.dispatchEvent(new Event('input'))
       } else {
-        if (getMinMaxNumer(event.target)) {
-          event.target.dispatchEvent(new Event('input'))
-        }
+        getMinMaxNumer(event.target)
+        el.__vue__.isComposing = false
+        event.target.dispatchEvent(new Event('input'))
       }
     })
   }

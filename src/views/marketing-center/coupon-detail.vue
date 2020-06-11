@@ -60,11 +60,11 @@
         </div>
         <el-row class="info-main active-info" :gutter="20" type="flex">
           <el-col :span="4">
-            <div class="label">待激活：</div>
+            <div class="label">待绑定：</div>
             <div class="value">{{ couponBatchInfo.waitActiveNum || 0 }}张</div>
           </el-col>
           <el-col :span="4">
-            <div class="label">已激活：</div>
+            <div class="label">已绑定：</div>
             <div class="value">{{ couponBatchInfo.activeNum || 0 }}张</div>
           </el-col>
           <el-col :span="4">
@@ -91,7 +91,7 @@
         </div>
         <div class="search-item">
           <span>券码状态：</span>
-          <coupon-state-select multiple collapse-tags v-model="couponState" />
+          <coupon-state-select multiple collapse-tags v-model="couponStates" />
         </div>
         <div class="search-button search-item">
           <el-button size="small" type="primary" @click="searchCouponList">查 询</el-button>
@@ -102,14 +102,14 @@
       <el-table :data="tableData" style="width: 100%;">
         <el-table-column prop="code" label="券码编号" width="120" />
         <el-table-column prop="stateCN" label="状态" />
-        <el-table-column prop="activedAt" label="激活时间" min-width="80" />
+        <el-table-column prop="bindAt" label="绑定时间" min-width="80" />
         <el-table-column prop="usedAt" label="使用时间" min-width="80" />
         <el-table-column prop="userTel" label="绑定账号" min-width="100" />
         <el-table-column prop="userOrderNum" label="使用订单号" min-width="130"/>
         <el-table-column label="操作" align="right">
           <template slot-scope="{ row }">
             <el-popover
-              v-if="row.state === COUPON_STATE.UNUSED"
+              v-if="row.state === COUPON_STATE.UNUSED || row.state === COUPON_STATE.ACTIVATED"
               placement="top"
               title="作废提示"
               width="220"
@@ -155,7 +155,7 @@ export default {
       COUPON_STATE,
       couponBatchId: '',
       couponCode: '',
-      couponState: [],
+      couponStates: [],
       couponBatchInfo: {},
       tableData: [],
       pager: {
@@ -165,7 +165,7 @@ export default {
       }
     }
   },
-  async created () {
+  async activated () {
     this.couponBatchId = this.$route.query.id
     this.$loading()
     await Promise.all([
@@ -208,7 +208,7 @@ export default {
         pageSize: this.pager.pageSize
       }
       if (this.couponCode) { req.cond.couponCode = this.couponCode }
-      if (this.couponState) { req.cond.couponStates = this.couponState }
+      if (this.couponStates.length) { req.cond.couponStates = this.couponStates }
       const data = await Coupon.getCouponBatchCodeUseList(req)
       this.tableData = data.list
       this.pager.total = data.total
@@ -261,7 +261,7 @@ export default {
           pageSize: 1500
         }
         if (this.couponCode) { req.cond.couponCode = this.couponCode }
-        if (this.couponState) { req.cond.couponState = this.couponState }
+        if (this.couponStates.length) { req.cond.couponStates = this.couponStates }
         const data = await Coupon.getCouponBatchCodeUseList(req)
         exportCouponExcel(this.couponBatchInfo.title, data.list)
       } catch (error) {
