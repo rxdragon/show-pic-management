@@ -14,7 +14,8 @@ export default class CouponBatchModel {
   activityName = '-' // 绑定活动名称
 
   total = 0 // 总发行量
-  activeNum = 0 // 绑定数量
+  // TODO 带激活
+  activeNum = 0 // 激活数量
   useNum = 0 // 使用数量
   expireNum = 0 // 过期数量
   voidNum = 0 // 作废数量

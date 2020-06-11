@@ -26,7 +26,6 @@ export default class CouponModel {
     this.creaetdAt = couponData.created_at || '-'
     this.activedAt = couponData.bind_at || '-'
     this.usedAt = couponData.used_at || '-'
-    // TODO 绑定用户手机号
     this.userId = couponData.user_id || '-'
     this.userTel = _.get(couponData, 'userInfo.phone') || '-'
     this.userOrderNum = couponData.order_num || '-'

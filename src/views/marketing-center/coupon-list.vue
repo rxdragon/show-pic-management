@@ -28,7 +28,7 @@
         <el-table :data="tableData" style="width: 100%;">
           <el-table-column prop="title" label="优惠劵名称" />
           <el-table-column prop="total" label="总发型数量" />
-          <el-table-column prop="activeNum" label="绑定数量" />
+          <el-table-column prop="activeNum" label="激活数量" />
           <el-table-column prop="useNum" label="使用数量" />
           <el-table-column prop="stateToCn" label="状态" />
           <el-table-column prop="createdAt" label="创建时间" width="100"/>
