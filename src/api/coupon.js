@@ -42,7 +42,10 @@ export function searchCouponCode (params) {
     method: 'POST',
     data: params
   }).then(msg => {
-    const createData = new CouponModel(msg.list[0])
+    let createData = {}
+    if (msg.list.length > 0) {
+      createData = new CouponModel(msg.list[0])
+    }
     return createData
   })
 }

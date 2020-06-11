@@ -68,7 +68,7 @@ export default {
           pageSize: 1
         }
         const data = await Coupon.searchCouponCode(req)
-        this.infoData = data
+        data && (this.infoData = data)
       } catch (error) {
         throw new Error(error)
       } finally {
