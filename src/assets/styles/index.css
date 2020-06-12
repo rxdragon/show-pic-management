@@ -863,6 +863,40 @@ aside a:hover {
   background-color: #44C27E !important;
   border-color: #44C27E !important;
 }
+.state-box {
+  display: flex;
+  align-items: center;
+}
+.state-text {
+  font-size: 14px;
+}
+.state-text--complete {
+  color: #52c41a;
+}
+.state-text--fail {
+  color: #e64049;
+}
+.state-text--pending {
+  color: #fbd211;
+}
+.point {
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+.point--complete {
+  background-color: #52c41a;
+}
+.point--wait_write,
+.point--pending {
+  background-color: #fbd211;
+}
+.point--invalid,
+.point--fail {
+  background-color: #e64049;
+}
 .num-input {
   width: 100%;
   font-size: 14px;

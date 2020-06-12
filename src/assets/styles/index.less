@@ -458,6 +458,49 @@ aside {
     border-color: @panGreen !important;
   }
 }
+// 状态点
+.state-box {
+  display: flex;
+  align-items: center;
+}
+
+.state-text {
+  font-size: 14px;
+
+  &--complete {
+    color: #52c41a;
+  }
+
+  &--fail {
+    color: #e64049;
+  }
+  
+  &--pending {
+    color: #fbd211;
+  }
+}
+
+.point {
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  background-color: #eee;
+  border-radius: 50%;
+
+  &--complete {
+    background-color: #52c41a;
+  }
+
+  &--wait_write,
+  &--pending {
+    background-color: #fbd211;
+  }
+
+  &--invalid,
+  &--fail {
+    background-color: #e64049;
+  }
+}
 
 // 原生input
 

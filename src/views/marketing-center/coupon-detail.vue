@@ -101,7 +101,14 @@
       <!-- 优惠券列表 -->
       <el-table :data="tableData" style="width: 100%;">
         <el-table-column prop="code" label="券码编号" width="120" />
-        <el-table-column prop="stateCN" label="状态" />
+        <el-table-column prop="stateCN" label="状态">
+          <template slot-scope="{ row }">
+            <div class="state-box">
+              <div class="point" :class="stateColor(row.state)"></div>
+              <span class="state-text" :class="stateTextColor(row.state)">{{ row.stateCN }}</span>
+            </div>
+          </template>
+        </el-table-column>
         <el-table-column prop="bindAt" label="绑定时间" min-width="80" />
         <el-table-column prop="usedAt" label="使用时间" min-width="80" />
         <el-table-column prop="userTel" label="绑定账号" min-width="100" />
@@ -269,6 +276,16 @@ export default {
       } finally {
         this.$loadingClose()
       }
+    },
+    stateColor (state) {
+      if (state === this.COUPON_STATE.ACTIVATED) return 'point--pending'
+      if (state === this.COUPON_STATE.UNUSED) return 'point--complete'
+      if (state === this.COUPON_STATE.EXPIRED) return 'point--fail'
+    },
+    stateTextColor (state) {
+      if (state === this.COUPON_STATE.ACTIVATED) return 'state-text--pending'
+      if (state === this.COUPON_STATE.UNUSED) return 'state-text--complete'
+      if (state === this.COUPON_STATE.EXPIRED) return 'state-text--fail'
     }
   }
 }

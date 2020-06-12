@@ -25,7 +25,14 @@
         <el-table :data="tableData" style="width: 100%;">
           <el-table-column prop="id" label="编号" width="50" />
           <el-table-column prop="name" label="活动名称" />
-          <el-table-column prop="statusCN" label="活动状态" />
+          <el-table-column label="活动状态">
+            <template slot-scope="{ row }">
+              <div class="state-box">
+                <div class="point" :class="stateColor(row.status)"></div>
+                <span class="state-text" :class="stateTextColor(row.status)">{{ row.statusCN }}</span>
+              </div>
+            </template>
+          </el-table-column>
           <el-table-column prop="beginTime" label="开始时间" />
           <el-table-column prop="endTime" label="结束时间" />
           <el-table-column label="优惠劵(张)" width="150">
@@ -213,6 +220,20 @@ export default {
       } finally {
         this.$loadingClose()
       }
+    },
+    /**
+     * @description 格式化颜色
+     */
+    stateColor (state) {
+      if (state === this.ACTIVITY_STATE.STARTED) return 'point--pending'
+      if (state === this.ACTIVITY_STATE.FINISHED || state === this.ACTIVITY_STATE.END_EARLY) return 'point--fail'
+    },
+    /**
+     * @description 格式化颜色
+     */
+    stateTextColor (state) {
+      if (state === this.ACTIVITY_STATE.STARTED) return 'state-text--pending'
+      if (state === this.ACTIVITY_STATE.FINISHED || state === this.ACTIVITY_STATE.END_EARLY) return 'state-text--fail'
     }
   }
 }

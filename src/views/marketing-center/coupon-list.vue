@@ -36,7 +36,14 @@
           <el-table-column prop="total" label="总发型数量" />
           <el-table-column prop="activeNum" label="绑定数量" />
           <el-table-column prop="useNum" label="使用数量" />
-          <el-table-column prop="stateToCn" label="状态" />
+          <el-table-column prop="stateToCn" label="状态">
+            <template slot-scope="{ row }">
+              <div class="state-box">
+                <div class="point" :class="stateColor(row.state)"></div>
+                <span class="state-text" :class="stateTextColor(row.state)">{{ row.stateToCn }}</span>
+              </div>
+            </template>
+          </el-table-column>
           <el-table-column prop="createdAt" label="创建时间" width="100"/>
           <el-table-column prop="createdStaff" label="创建人" />
           <el-table-column label="操作"  align="right" width="150">
@@ -173,6 +180,14 @@ export default {
         path: '/marketing-center/coupon-management/coupon-detail',
         query: { id }
       })
+    },
+    stateColor (state) {
+      if (state === this.COUPON_BATCH_STATE.NORMAL) return 'point--complete'
+      if (state === this.COUPON_BATCH_STATE.VOID) return 'point--fail'
+    },
+    stateTextColor (state) {
+      if (state === this.COUPON_BATCH_STATE.NORMAL) return 'state-text--complete'
+      if (state === this.COUPON_BATCH_STATE.VOID) return 'state-text--fail'
     }
   }
 }
