@@ -16,7 +16,7 @@
     overflow: inherit;
     font-size: 0;
     -webkit-user-select: none;
-    background-color: var(--menuBg);
+    background: var(--menuBg);
     transition: width 0.28s;
 
     // reset element-ui css
@@ -26,6 +26,26 @@
 
     .scrollbar-wrapper {
       overflow-x: hidden !important;
+
+      .menuColor {
+        background: transparent;
+
+        .el-submenu__title {
+          background: @devSubMenuBg !important;
+        }
+
+        .el-menu--inline {
+          background: @devSubMenuBg !important;
+        }
+
+        .submenu-title-noDropdown {
+          background: @devSubMenuBg !important;
+
+          &.is-active {
+            background: rgba(34, 34, 34, 0.3) !important;
+          }
+        }
+      }
     }
 
     .el-scrollbar__bar.is-vertical {
@@ -99,7 +119,7 @@
     & .el-submenu .el-menu-item {
       padding-left: 60px !important;
       min-width: @sideBarWidth !important;
-      background-color: var(--subMenuBg) !important;
+      background: var(--subMenuBg) !important;
 
       span {
         position: relative;
