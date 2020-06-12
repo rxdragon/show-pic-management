@@ -45,7 +45,7 @@
     </el-upload>
     <div class="upload-tips">
       <div class="tip">提示：分享图不上传默认显示修修兽logo</div>
-      <div class="tip">只能上传100px x 100px的照片</div>
+      <div class="tip">只能上传100px * 100px的照片</div>
     </div>
   </div>
 </template>
@@ -108,7 +108,6 @@ export default {
     async beforeUpload (file) {
       try {
         const data = await getImagePx(file)
-        console.error(data)
         if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
         if (data.width !== 100 || data.height !== 100) throw new Error('请上传100px * 100px 的图片')
         return Promise.resolve()

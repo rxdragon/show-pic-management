@@ -11,7 +11,7 @@
         </div>
         <div class="search-item">
           <span>活动名称</span>
-          <el-input v-model.trim="acactivityName" clearable placeholder="请输入活动名称" />
+          <el-input v-model.trim="acactivityName" @keyup.native.enter="searchActivityList(1)" clearable placeholder="请输入活动名称" />
         </div>
         <div class="search-item">
           <span>活动状态</span>
