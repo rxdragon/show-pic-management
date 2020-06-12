@@ -151,10 +151,10 @@ const couponRules = {
   limitCount: [{ required: true, validator: validateLimitCount, trigger: ['blur', 'change'] }],
   type: [{ required: true, message: '请选择优惠劵类型', trigger: ['blur', 'change'] }],
   erectMoney: [{ required: true, message: '请输入立减券面额', trigger: 'blur' }],
-  useLimit: [{ required: true, validator: validateUseLimit, trigger: 'blur' }],
+  useLimit: [{ required: true, validator: validateUseLimit, trigger: ['blur', 'change'] }],
   discountRange: [{ required: true, message: '请输入折扣力度', trigger: 'blur' }],
   discountMaxMoney: [{ required: true, message: '请输入减免上限', trigger: 'blur' }],
-  effectivity: [{ required: true, validator: validateEffectivity, trigger: 'blur' }],
+  effectivity: [{ required: true, validator: validateEffectivity, trigger: ['blur', 'change'] }],
   lottery: [{ required: true, message: '请输入抽取概率', trigger: 'blur' }]
 }
 

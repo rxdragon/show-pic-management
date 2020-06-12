@@ -28,7 +28,7 @@ export default {
   },
   data () {
     return {
-      zIndex: 1000,
+      zIndex: 2000,
       showViewer: false, // 显示加载组件
       previewSrcList: [],
       showPhotoIndex: 0
@@ -48,7 +48,8 @@ export default {
      * @description 初始化预览组件
      */
     initPreviewList () {
-      this.previewSrcList = this.photoVersion.map(item => this.imgDomain + item.src)
+      const filterSrcList = this.photoVersion.filter(item => item.src)
+      this.previewSrcList = filterSrcList.map(item => this.imgDomain + item.src)
     },
     /**
      * @description 显示图片预览
