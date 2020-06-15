@@ -7,6 +7,7 @@ import CouponBatchModel from '@/model/CouponBatchModel'
 export default class ActivityModel {
   base = {}
   id = 0 // 活动编号
+  activityCode = '' // 活动编码
   name = '-' // 活动名称
   status = '' // 活动状态
   statusCN = '' // 活动状态
@@ -24,6 +25,7 @@ export default class ActivityModel {
     this.statusCN = activityToCN[this.status] || '-'
     this.beginTime = activityData.begin_time || '-'
     this.endTime = activityData.end_time || '-'
+    this.activityCode = activityData.himo_activity_id || ''
     this.creatorName = _.get(activityData, 'user_info.nickname') || _.get(activityData, 'user_info.name') || '-'
     this.getCouponBatchesInfo ()
   }

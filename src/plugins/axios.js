@@ -79,7 +79,7 @@ axios.interceptors.response.use(
       return Promise.reject(message)
     }
     // 没有权限
-    if (data.error_code === 401) {
+    if (error.error_code === 401) {
       SessionTool.removeSession()
       router.push('/login')
       User.logout()

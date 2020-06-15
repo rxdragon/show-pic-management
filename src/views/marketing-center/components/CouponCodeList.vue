@@ -39,7 +39,7 @@ export default {
 
 <style lang="less" scoped>
 .coupon-code-list {
-  max-width: 335px;
+  width: 335px;
   background-color: #fff;
 
   .list-main {

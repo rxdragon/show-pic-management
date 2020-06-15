@@ -1,4 +1,4 @@
-# 1.0.0 (2020-06-12)
+# 1.0.0 (2020-06-15)
 
 范围|描述|commitId
 --|--|--
@@ -50,6 +50,7 @@
  - | 更改样式 | [9483937](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9483937)
  - | 样式更改 | [c5f050a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/c5f050a)
  - | 样式更能 | [96c582a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/96c582a)
+ - | 样式更难过 | [84438e7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/84438e7)
 
 
 ### 🐛 Bug 修复

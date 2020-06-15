@@ -2,6 +2,7 @@ const defaultGetters = {
   permission_routes: state => state.permission.routes,
   personage_routers: state => state.permission.personageRouters, // 个人有的路由
   updateDomain: state => state.setting.updateDomain, // 上传后的照片域名
+  shareDomain: state => state.setting.shareDomain, // 分享域名
   imgDomain: state => state.setting.imgDomain, // 上传后的照片域名
   imgCompressDomain: state => state.setting.imgCompressDomain // 上传后自动压缩图域名
   

@@ -59,6 +59,12 @@
                   >
                     复制活动链接
                   </el-dropdown-item>
+                  <el-dropdown-item
+                    v-if="row.status === ACTIVITY_STATE.STARTED || row.status === ACTIVITY_STATE.WAITING"
+                    @click.native="showQRCode(row)"
+                  >
+                    展示二维码
+                  </el-dropdown-item>
                   <el-dropdown-item v-if="row.status === ACTIVITY_STATE.WAITING" @click.native="deleteActivity(row)">删除活动</el-dropdown-item>
                   <el-dropdown-item v-if="row.status === ACTIVITY_STATE.WAITING" @click.native="editActivity(row.id)">编辑活动</el-dropdown-item>
                   <el-dropdown-item @click.native="linkToDetail(row.couponBatchId)">查询活动优惠券</el-dropdown-item>
@@ -79,6 +85,7 @@
         @current-change="handleCurrentChange"
       />
     </div>
+    <canvas id="canvas"></canvas>
   </div>
 </template>
 
@@ -86,8 +93,10 @@
 import DatePicker from '@/components/DatePicker'
 import AccountSourceSelect from '@selectBox/AccountSourceSelect'
 import handleClipboard from '@/utils/clipboard.js'
+import getQRcode from '@/utils/getQRcode.js'
 import * as TimeUtil from '@/utils/timeUtil.js'
 import * as Activity from '@/api/activity.js'
+import { mapGetters } from 'vuex'
 import { ACTIVITY_STATE } from '@/model/Enumerate'
 
 export default {
@@ -106,6 +115,9 @@ export default {
         total: 100
       }
     }
+  },
+  computed: {
+    ...mapGetters(['shareDomain'])
   },
   created () {
     this.searchActivityList()
@@ -165,12 +177,31 @@ export default {
       })
     },
     /**
+     * @description 获取二维码图片地址
+     */
+    async showQRCode (rowData) {
+      const url = this.getActivityUrl(rowData.activityCode)
+      const imgUrl = await getQRcode(url)
+      const h = this.$createElement
+      this.$msgbox({
+        title: rowData.name,
+        message: h('img', { attrs: { src: imgUrl } }, ''),
+        confirmButtonText: '确定',
+        center: true
+      })
+    },
+    /**
      * @description 拷贝链接
      */
     copyActivityLink (row, event) {
-      // TODO 更改链接
-      const text = '123'
-      handleClipboard(text, event)
+      const url = this.getActivityUrl(row.activityCode)
+      handleClipboard(url, event)
+    },
+    /**
+     * @description 获取互动地址
+     */
+    getActivityUrl (code) {
+      return this.shareDomain + `actives/get-coupon?code=${code}`
     },
     /**
      * @description 编辑活动

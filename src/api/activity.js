@@ -104,7 +104,7 @@ export function getActivityDetail (params) {
         count: couponData.limitCount
       },
       type: couponData.couponType,
-      erectMoney: couponData.discount, // TODO 判断
+      erectMoney: couponData.discount,
       discountRange: couponData.discount,
       discountMaxMoney: couponData.reductionUpperLimit,
       useLimit: {
@@ -131,7 +131,7 @@ export function getActivityDetail (params) {
       bkgColor: msg.style_config.bkgColor, // 页面背景色
       captchaBkgColor: msg.style_config.captchaBkgColor, // 验证码背景色
       captchaTextColor: msg.style_config.captchaTextColor, // 验证码输入颜色
-      activityDesc: msg.style_config.rules, // TODO 返回格式不正确
+      activityDesc: msg.style_config.rules, // 返回格式不正确
       receiveBkgStart, // 渐变前置颜色
       receiveBkgEnd, // 渐变后置颜色
       receiveBkgAngle,
