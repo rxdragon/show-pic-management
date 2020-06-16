@@ -112,6 +112,7 @@
             type="textarea"
             maxlength="150"
             show-word-limit
+            :rows="6"
             v-model.trim="couponForm.desc"
             placeholder="请输入备注"
           />

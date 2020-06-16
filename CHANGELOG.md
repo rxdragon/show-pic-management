@@ -1,4 +1,4 @@
-# 1.0.0 (2020-06-15)
+# 1.0.0 (2020-06-16)
 
 范围|描述|commitId
 --|--|--
@@ -106,6 +106,7 @@
  - | 优化lodash | [d0d041d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d0d041d)
  - | 优化没有权限跳转到首页 | [cbc2040](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/cbc2040)
  - | 优化状态标示颜色 | [837a6f4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/837a6f4)
+ - | 优化部分功能 | [f8e01c4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f8e01c4)
  - | 更改部分字段显示错误问题 | [d2b1bb4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d2b1bb4)
  - | 自动更改更新时间 | [b5f84ce](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b5f84ce)
 
