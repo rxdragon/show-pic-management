@@ -114,7 +114,7 @@ export default {
         erectMoney: [{ required: true, message: '请输入立减券面额', trigger: 'blur' }],
         discountRange: [{ required: true, message: '请输入折扣力度', trigger: 'blur' }],
         discountMaxMoney: [{ required: true, message: '请输入减免上限', trigger: 'blur' }],
-        useLimit: [{ validator: validateUseLimit, trigger: ['blur', 'change'] }],
+        useLimit: [{ required: true, validator: validateUseLimit, trigger: ['blur', 'change'] }],
         circulation: [{ required: true, message: '请输入总发行量', trigger: 'blur' }],
         effectivity: [{ required: true, validator: validateEffectivity, trigger: ['blur', 'change'] }]
       },

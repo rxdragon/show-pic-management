@@ -34,7 +34,7 @@
             :span="6"
             v-if="couponBatchInfo.couponType !== 'decrease_coupon'"
           >
-            <div class="label">折扣上线：</div>
+            <div class="label">减免上限：</div>
             <div class="value">{{ couponBatchInfo.reductionUpperLimit | stringMoney }}</div>
           </el-col>
           <el-col :span="6">

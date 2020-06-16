@@ -108,6 +108,7 @@
  - | 优化没有权限跳转到首页 | [cbc2040](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/cbc2040)
  - | 优化状态标示颜色 | [837a6f4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/837a6f4)
  - | 优化部分功能 | [f8e01c4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f8e01c4)
+ - | 优惠照片对png的支持，增加占位图 | [f9c438b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f9c438b)
  - | 更改部分字段显示错误问题 | [d2b1bb4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d2b1bb4)
  - | 自动更改更新时间 | [b5f84ce](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b5f84ce)
 

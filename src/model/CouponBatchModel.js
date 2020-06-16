@@ -29,7 +29,7 @@ export default class CouponBatchModel {
   couponTypeCN = '' // 优惠类型
 
   orderMoneyLowerLimit = 0 // 满多少才可下单
-  reductionUpperLimit = 0 // 折扣上线
+  reductionUpperLimit = 0 // 减免上限
   discount = 0
 
   effectivityTime = '-' // 有效期
