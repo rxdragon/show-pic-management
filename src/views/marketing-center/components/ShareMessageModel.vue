@@ -5,7 +5,8 @@
       <div class="info">
         <div class="desc">{{ config.activityShareDesc }}</div>
         <div class="share-photo">
-          <img :src="sharePhoto" alt="">
+          <img v-if="sharePhoto" :src="sharePhoto" alt="">
+          <div v-else class="share-logo"></div>
         </div>
       </div>
     </div>
@@ -96,7 +97,6 @@ export default {
       .share-photo {
         width: 50px;
         height: 50px;
-        background-color: #e8e8e8;
 
         img {
           width: 100%;

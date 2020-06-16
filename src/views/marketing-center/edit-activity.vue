@@ -103,7 +103,14 @@
             </el-radio>
             <el-radio label="fixed">
               固定截止日期
-              <el-date-picker v-model="couponForm.effectivity.abortTime" type="datetime" placeholder="选择截止日期时间" default-time="12:00:00"/>
+              <el-date-picker
+                v-model="couponForm.effectivity.abortTime"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="选择截止日期时间"
+                :picker-options="pickerOptions"
+                default-time="12:00:00"
+              />
             </el-radio>
           </el-radio-group>
         </el-form-item>
@@ -164,6 +171,11 @@ export default {
   components: { DatePicker, UploadSharePhoto, ActivityH5Page, ShareMessageModel },
   data () {
     return {
+      pickerOptions: {
+        disabledDate (time) {
+          return time.getTime() < Date.now()
+        }
+      },
       baseRules,
       shareRules,
       couponRules,

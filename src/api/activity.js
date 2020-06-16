@@ -79,7 +79,8 @@ export function getActivityDetail (params) {
       activityName: msg.name,
       activityTime: [msg.begin_time, msg.end_time]
     }
-    const mainImg = msg.share_config.mainImg.replace(store.getters.imgDomain, '')
+    let mainImg = _.get(msg, 'share_config.mainImg') || ''
+    mainImg = mainImg.replace(store.getters.imgDomain, '')
     let fileList = []
     if (mainImg) {
       fileList = [{
