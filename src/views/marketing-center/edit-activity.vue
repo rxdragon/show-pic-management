@@ -138,6 +138,7 @@ import DatePicker from '@/components/DatePicker'
 import UploadSharePhoto from './components/UploadSharePhoto'
 import ActivityH5Page from './components/ActivityH5Page'
 import ShareMessageModel from './components/ShareMessageModel'
+import getPageTitle from '@/utils/getPageTitle' // 获取页面title
 import { validateLimitCount, validateUseLimit, validateEffectivity } from '@/utils/validator.js'
 import { mapGetters } from 'vuex'
 import * as Activity from '@/api/activity.js'
@@ -221,10 +222,19 @@ export default {
     const { activityId } = this.$route.query
     this.activityId = activityId
     this.isEdit = Boolean(activityId)
+    this.changeTitle()
     if (!this.isEdit) return
     this.getActivityId(activityId)
   },
   methods: {
+    /**
+     * @description 更新面包屑
+     */
+    changeTitle () {
+      const title = this.isEdit ? '编辑活动' : '新增活动'
+      this.$route.meta.title = title
+      document.title = getPageTitle(title)
+    },
     /**
      * @description 获取活动详情
      */
