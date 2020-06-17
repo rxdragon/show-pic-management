@@ -9,6 +9,7 @@
           <th>性别</th>
           <th>消费频次</th>
           <th>消费总金额</th>
+          <th>优惠券数量统计</th>
           <th>最近消费时间</th>
           <th>账号来源</th>
         </tr>
@@ -18,6 +19,7 @@
           <th>{{ userData.sex }}</th>
           <th>{{ userData.userConsumeNum }}次</th>
           <th>¥{{ userData.consumeTotal }}</th>
+          <th>{{ userData.couponCount }}</th>
           <th>{{ userData.recentlyConsume }}</th>
           <th :class="`${userData.from}-color`">{{ userData.from | toOrderFromToCN }}</th>
         </tr>

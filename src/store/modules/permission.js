@@ -73,17 +73,17 @@ const actions = {
       newRoles.forEach(roleItem => {
         if (roleItem.name) {
           const nameArr = roleItem.name.split('.')
+          nameArr.length = nameArr.length - 1
           // 全部权限列表
           newPermissionArr.push(toCapitalHump(roleItem.name))
-          if (nameArr.length !== 3) return
-          const moduleName = toCapitalHump(nameArr[0])
-          const menuName = toCapitalHump(nameArr[1])
-          newRolesArr = [...newRolesArr, moduleName, menuName]
+          const componentNames = nameArr.map(item => toCapitalHump(item))
+          newRolesArr = [...newRolesArr, ...componentNames]
         }
       })
       commit('SET_ROLES', newPermissionArr)
       newRolesArr = [...new Set(newRolesArr)]
-      accessedRoutes = [...filterAsyncRoutes(asyncRoutes, newRolesArr)]
+      // accessedRoutes = [...filterAsyncRoutes(asyncRoutes, newRolesArr)]
+      accessedRoutes = [...asyncRoutes]
       commit('SET_PERSONAGE_ROUTES', accessedRoutes)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)

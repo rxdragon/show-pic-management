@@ -92,6 +92,7 @@ const actions = {
         const savePermission = SessionTool.getUserPermission()
         const permissions = savePermission || await UserAction.getAuthority()
         SessionTool.setUserPermission(permissions)
+        // 动态添加路由
         const accessRoutes = await store.dispatch('permission/generateRoutes', permissions)
         resetRouter()
         router.addRoutes(accessRoutes)

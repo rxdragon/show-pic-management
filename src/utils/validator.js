@@ -136,3 +136,76 @@ export const urlValidator = (rule, value, callback) => {
   const reg = /^(http|https):\/\/([\w.]+\/?)\S*/.test(value)
   _validator(reg, rule, value, callback)
 }
+
+/**
+ * @description 每人限领张数
+ */
+export const validateLimitCount = (rule, value, callback) => {
+  if (value.limitType === '') {
+    callback(new Error('请选择每人限领张数'))
+  }
+  if (+value.limitType === 1 && !value.count) {
+    callback(new Error('请输入每人限领张数'))
+  }
+  callback()
+}
+
+/**
+ * @description 有效时间
+ */
+export const validateEffectivity = (rule, value, callback) => {
+  if (!value.effectivityType) {
+    callback(new Error('请选择有效时间类型'))
+  }
+  if (value.effectivityType === 'receive' && (!Number(value.autoExceed) || Number(value.autoExceed) <= 0)) {
+    callback(new Error('请输入激活有效天数'))
+  }
+  if (value.effectivityType === 'fixed' && !value.abortTime) {
+    callback(new Error('请输入固定截止日期'))
+  }
+  callback()
+}
+
+function checkIsColor (bgVal) {
+  let type = "^#[0-9a-fA-F]{6}$"
+  let re = new RegExp(type)
+  if (bgVal.match(re) == null) {
+    return false
+  } else {
+    return true
+  }
+}
+
+/**
+ * @description 验证颜色
+ */
+export const validateColor = (rule, value, callback) => {
+  if (!value || !checkIsColor(value)) {
+    callback(new Error('请输入正确的颜色'))
+  }
+  callback()
+}
+
+/**
+ * @description 验证规则
+ */
+export const validateRules = (rule, value, callback) => {
+  if (value.every(item => item.value)) {
+    callback()
+  } else {
+    callback(new Error('请选择填写完整的规则'))
+  }
+}
+
+/**
+ * @description 门槛规则
+ */
+export const validateUseLimit = (rule, value, callback) => {
+  if (value.usetype === '') {
+    callback(new Error('请选择使用门槛'))
+  }
+  if (+value.usetype === 1 && value.maxMoney === '') {
+    callback(new Error('请输入门槛规则'))
+  }
+  callback()
+}

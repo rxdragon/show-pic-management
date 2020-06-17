@@ -14,6 +14,10 @@ const InvoiceException = [
   [0xA17005008, '非自身发票'],
 ]
 
+const CouponException = [
+  [0xA17006005, '优惠券title已存在'],
+]
+
 const OrderException = [
   [0xA17001001, '非本人订单'],
   [0xA17001002, '非待支付状态'],
@@ -39,7 +43,8 @@ export const errText = [
   ...InvoiceException,
   ...OrderException,
   ...ProductException,
-  ...StaffException
+  ...StaffException,
+  ...CouponException
 ]
 let errMap = new Map(errText)
 export const errorCode = {

@@ -17,7 +17,12 @@ export default class OrderModel {
   orderNum = '' // 订单号
   state = '' // 订单状态
   stateCN = '' // 订单状态中文
-  totalFee = 0 // 订单总金额
+
+  allPrice = 0 // 订单总金额
+  discountsPrice = 0 // 订单优惠金额
+  totalFee = 0 // 订单实付金额
+  couponCode = '-' // 优惠券
+
   photoNum = 0 // 照片数量
   productList = [] // 产品列表
   createdAt = '-' // 创建时间
@@ -36,7 +41,7 @@ export default class OrderModel {
     this.base = orderData
     this.id = orderData.id
     this.orderNum = orderData.order_num || '-'
-    this.totalFee = Number(orderData.total_fee) || 0
+    this.getOrderPrice()
     this.photoNum = orderData.photo_count || 0
     this.getTimes(orderData)
     this.getProduct(orderData)
@@ -48,7 +53,14 @@ export default class OrderModel {
     this.clientName = _.get(orderData, 'userInfo.name') || '-'
     this.clientAccount = _.get(orderData, 'userInfo.phone') || '-'
     this.clientPhone = _.get(orderData, 'userInfo.phone') || '-'
-    
+    this.couponCode = _.get(orderData, 'coupon.code') || '-'
+  }
+
+  // 订单金额
+  getOrderPrice () {
+    this.totalFee = Number(this.base.total_fee) || 0
+    this.allPrice = Number(this.base.order_fee) || 0
+    this.discountsPrice = Number(this.base.discount_fee) || 0
   }
 
   // 获取时间点

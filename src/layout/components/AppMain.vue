@@ -1,10 +1,5 @@
 <template>
-  <section
-    v-loading.lock="isLoading"
-    element-loading-custom-class="main-loading"
-    class="app-main"
-    :class="{'overhidden':isLoading}"
-  >
+  <section v-loading.lock="isLoading" element-loading-custom-class="main-loading" class="app-main" :class="{'overhidden':isLoading}">
     <transition name="breadcrumb-box" mode="out-in">
       <div class="header-title" v-show="$route.name !== 'Home'">
         <Breadcrumb />
@@ -12,7 +7,7 @@
       </div>
     </transition>
     <transition :name="transitionName" mode="out-in">
-      <keep-alive :include="cachedViews" :max="4">
+      <keep-alive :include="cachedViews" exclude="" :max="4">
         <router-view :key="key" />
       </keep-alive>
     </transition>
@@ -29,7 +24,8 @@ export default {
     return {
       isLoading: false,
       // 根据组件名字
-      cachedViews: ['userManage', 'userDetail', 'orderManagement', 'financeIndex']
+      cachedViews: ['userManage', 'userDetail', 'orderManagement', 'financeIndex', 'CouponManagement'],
+      notCacheViews: ['CouponDetail']
     }
   },
   computed: {
@@ -73,7 +69,7 @@ export default {
   .header-title {
     position: sticky;
     top: 0;
-    z-index: 999;
+    z-index: 1990;
     width: calc(~'100vw - @{sideBarWidth}');
     height: 98px;
     padding: 12px 32px;

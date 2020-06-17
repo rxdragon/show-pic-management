@@ -1,9 +1,9 @@
 <template>
   <div class="photo-box">
     <div class="image-box">
-      <el-image :src="this.imgCompressDomain + src" fit="cover"></el-image>
+      <el-image :src="photoSrc" fit="cover" :preview-src-list="previewPhoto"></el-image>
     </div>
-    <div class="handle-box" @click.stop="">
+    <div class="handle-box" v-if="downing" @click.stop="">
       <div class="version-name">{{ version | toVersionCN }}</div>
       <el-button type="text" @click="downPhoto">下载照片</el-button>
     </div>
@@ -18,10 +18,24 @@ export default {
   name: 'PhotoBox',
   props: {
     src: { type: String, required: true },
-    version: { type: String, default: '' }
+    version: { type: String, default: '' },
+    downing: { type: Boolean, default: true },
+    originalPhoto: { type: Boolean },
+    preview: { type: Boolean }
   },
   computed: {
-    ...mapGetters(['imgDomain', 'imgCompressDomain'])
+    ...mapGetters(['imgDomain', 'imgCompressDomain']),
+    photoSrc () {
+      if (this.src.includes('http')) return this.src
+      if (this.originalPhoto) {
+        return this.imgDomain + this.src
+      } else {
+        return this.imgCompressDomain + this.src
+      }
+    },
+    previewPhoto () {
+      return this.preview ? [this.imgDomain + this.src] : []
+    }
   },
   methods: {
     /**
