@@ -18,7 +18,7 @@
           <p><span class="label">生成时间：</span>{{ infoData.creaetdAt }}</p>
           <p><span class="label">绑定时间：</span>{{ infoData.bindAt }}</p>
           <p><span class="label">使用时间：</span>{{ infoData.usedAt }}</p>
-          <p><span class="label">绑定账号：</span>{{ infoData.userId }}</p>
+          <p><span class="label">绑定账号：</span>{{ infoData.userTel }}</p>
           <p><span class="label">使用订单号：</span>{{ infoData.userOrderNum }}</p>
         </div>
         <no-data v-else />
@@ -42,12 +42,12 @@ export default {
       infoData: {
         code: '', // 劵码
         couponBatchTitle: '', // 优惠劵名称
-        stateCN: '', // 劵码
-        creaetdAt: '', // 劵码
-        bindAt: '', // 劵码
-        usedAt: '', // 劵码
-        userId: '', // 劵码
-        userOrderNum: '' // 劵码
+        stateCN: '', // 中文状态字段
+        creaetdAt: '', // 创建时间
+        bindAt: '', // 绑定时间
+        usedAt: '', // 使用时间
+        userTel: '', // 用户绑定手机号
+        userOrderNum: '' // 使用订单号
       }
     }
   },
@@ -61,11 +61,7 @@ export default {
         if (this.couponMark.length !== 10) return this.$newMessage.warning('请输入10位券码编号')
         this.loading = true
         const req = {
-          cond: {
-            couponCode: this.couponMark
-          },
-          page: 1,
-          pageSize: 1
+          code: this.couponMark
         }
         this.infoData = await Coupon.searchCouponCode(req)
       } catch (error) {

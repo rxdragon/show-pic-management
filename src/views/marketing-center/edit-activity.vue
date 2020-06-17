@@ -104,6 +104,7 @@
             <el-radio label="fixed">
               固定截止日期
               <el-date-picker
+                clearable
                 v-model="couponForm.effectivity.abortTime"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 type="datetime"
@@ -174,7 +175,7 @@ export default {
     return {
       pickerOptions: {
         disabledDate (time) {
-          return time.getTime() < Date.now()
+          return time.getTime() <= Date.now()
         }
       },
       baseRules,

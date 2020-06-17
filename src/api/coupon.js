@@ -38,14 +38,11 @@ export function voidCouponBatch (params) {
  */
 export function searchCouponCode (params) {
   return axios({
-    url: '/project_show_pic/admin/marketing/coupon/getCouponBatchCodeUseList',
-    method: 'POST',
-    data: params
+    url: '/project_show_pic/admin/marketing/coupon/detail',
+    method: 'GET',
+    params
   }).then(msg => {
-    let createData = {}
-    if (msg.list.length > 0) {
-      createData = new CouponModel(msg.list[0])
-    }
+    const createData = new CouponModel(msg)
     return createData
   })
 }

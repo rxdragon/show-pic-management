@@ -9,7 +9,7 @@ export default class CouponModel {
   state = '-'
   stateCN = '-'
   creaetdAt = '-' // 创建时间
-  bindAt = '-' // 激活时间
+  bindAt = '-' // 绑定时间
   usedAt = '-' // 使用时间
   userId = '' // 使用者id
   userTel = '' // 绑定用户手机号
@@ -19,7 +19,7 @@ export default class CouponModel {
     this.base = couponData
     this.id = couponData.id || 0
     this.code = couponData.code || '-'
-    this.couponBatchTitle = _.get(couponData, 'template.name') || '-'
+    this.couponBatchTitle = _.get(couponData, 'coupon_batch.title') || '-'
     this.state = couponData.status || '-'
     this.stateCN = couponToCN[this.state] || '-'
     this.creaetdAt = couponData.created_at || '-'
