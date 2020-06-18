@@ -107,7 +107,6 @@ export default {
           return time.getTime() < Date.now()
         }
       },
-      cacheTitle: '', // 缓存标题
       rules: {
         name: [{ required: true, message: '请输入优惠劵名称', trigger: 'blur' }],
         type: [{ required: true, message: '请选择优惠劵类型', trigger: ['blur', 'change'] }],
@@ -118,6 +117,7 @@ export default {
         circulation: [{ required: true, message: '请输入总发行量', trigger: 'blur' }],
         effectivity: [{ required: true, validator: validateEffectivity, trigger: ['blur', 'change'] }]
       },
+      cacheTitle: '', // 缓存标题
       couponForm: {
         name: '', // 优惠劵名称
         type: 'discount_coupon', // 优惠劵类型 discount_coupon 折扣 decrease_coupon 立减
@@ -139,7 +139,35 @@ export default {
       couponList: []
     }
   },
+  activated () {
+    this.resetPageData()
+  },
   methods: {
+    /**
+     * @description 初始化信息
+     */
+    resetPageData () {
+      this.cacheTitle = '',
+      this.couponForm = {
+        name: '', // 优惠劵名称
+        type: 'discount_coupon', // 优惠劵类型 discount_coupon 折扣 decrease_coupon 立减
+        erectMoney: '', // 立减劵面额
+        discountRange: '', // 折扣力度
+        discountMaxMoney: '', // 减免上限
+        useLimit: {
+          usetype: '', // 使用门槛
+          maxMoney: '', // 多少元可用
+        },
+        circulation: '', // 总发行量
+        effectivity: {
+          effectivityType: '', // 有效类型
+          autoExceed: '', // 自激活多少天后生效
+          abortTime: '' // 固定截止日期
+        },
+        desc: '' // 备注
+      }
+      this.$refs.form.resetFields()
+    },
     /**
      * @description 返回
      */

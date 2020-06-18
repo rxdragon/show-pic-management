@@ -39,7 +39,8 @@
           </el-col>
           <el-col :span="6">
             <div class="label">使用门槛：</div>
-            <div class="value">满{{ couponBatchInfo.orderMoneyLowerLimit | stringMoney }}可用</div>
+            <div class="value" v-if="couponBatchInfo.orderMoneyLowerLimit">满{{ couponBatchInfo.orderMoneyLowerLimit | stringMoney }}可用</div>
+            <div class="value" v-else>无限制</div>
           </el-col>
           <el-col :span="6">
             <div class="label">总发行量：</div>

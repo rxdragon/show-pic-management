@@ -51,6 +51,7 @@ export default class CouponBatchModel {
     this.couponTypeCN = couponTypeEnum[this.couponType]
     this.note = _.get(couponBatchData, 'extend.couponInfo.extend.note') || '-'
     this.orderMoneyLowerLimit = _.get(couponBatchData, 'extend.couponInfo.extend.limit.orderMoneyLowerLimit') || 0
+    this.orderMoneyLowerLimit = Number(this.orderMoneyLowerLimit)
     this.reductionUpperLimit = _.get(couponBatchData, 'extend.couponInfo.extend.limit.reductionUpperLimit') || 0
     this.discount = _.get(couponBatchData, 'extend.couponInfo.discount') || 0
     this.getEffectivityTime()
