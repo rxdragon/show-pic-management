@@ -78,12 +78,13 @@
  - | 修复部分问题 | [a5210c5](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a5210c5)
  - | 修复金额不正确和默认手机号问题 | [08d8264](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/08d8264)
  - | 修复错误吗报错 | [e6da9b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e6da9b0)
- 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
+ - | 修复问题 | [3cb3d66](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cb3d66)
  - | 入参修改 | [923ea40](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/923ea40)
  - | 更改打包路径 | [740c1f1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/740c1f1)
  - | 更新错误码 | [5ffa4a9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5ffa4a9)
  - | 用户详情订单列表取消订单不显示详情操作 | [1ed4fef](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1ed4fef)
  - | 联调修复 | [d7ae477](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d7ae477)
+ 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
 
 
 ### 📝 文档
