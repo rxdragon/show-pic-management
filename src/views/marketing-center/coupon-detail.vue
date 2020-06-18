@@ -232,7 +232,10 @@ export default {
     async showCancellation (listItem) {
       try {
         this.$loading()
-        const req = { code: listItem.code }
+        const req = {
+          code: listItem.code,
+          batchId: listItem.base.create_log_id
+        }
         await Coupon.voidCouponCode(req)
         listItem.showPopover = false
         this.searchCouponList()
