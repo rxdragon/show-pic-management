@@ -75,10 +75,13 @@ export default {
      * @description 转码
      */
     getLoginSsoUrl () {
+      let redirectPath = '/login.html'
+      if (window.location.pathname.includes('show-pic-management')) {
+        redirectPath = '/show-pic-management/login.html'
+      }
       const query = JSON.stringify({
         title: '缦图云端',
-        redirect: `./login.html#/?token=`
-        // redirect: `${window.location.origin}${BUILD_REDIRECT}#/?token=`
+        redirect: `${window.location.origin}${redirectPath}#/?token=`
       })
       this.ssoUrl = process.env.VUE_APP_LOGIN_API + Base64.encode(query)
     },
