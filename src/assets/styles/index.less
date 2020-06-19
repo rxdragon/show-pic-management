@@ -205,15 +205,6 @@ aside {
   z-index: 1000 !important;
 }
 
-.label {
-  padding: 3px 8px;
-  font-size: 12px;
-  color: #fff;
-  text-align: center;
-  background: linear-gradient(90deg, rgba(79, 136, 255, 1) 0%, rgba(70, 105, 251, 1) 100%);
-  border-radius: 4px;
-}
-
 // 颜色相关
 .warning-color {
   font-weight: 500;
@@ -280,16 +271,25 @@ aside {
 .table-box {
   background-color: #fff;
   border-radius: 16px;
+
+  ::-webkit-scrollbar {
+    height: 8px;
+  }
 }
 
 // 标题按钮扩展
 .header-plugin {
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: @headerHeight;
   left: 0;
   width: 100%;
   height: 98px;
-  z-index: 1000;
+  z-index: 1999;
+
+  .el-button {
+    float: right;
+    margin: 40px 24px 0 0;
+  }
 }
 
 // 标题
@@ -367,8 +367,8 @@ aside {
 // 模块框
 .module-panel {
   padding: 24px;
-  background-color: #fff;
   border-radius: 10px;
+  background-color: #fff;
 }
 
 // 照片盒子相关
@@ -396,6 +396,10 @@ aside {
     margin-right: 12px;
     font-size: 14px;
     color: #303133;
+  }
+
+  &:nth-last-of-type(1) {
+    margin: 0 0 20px 0;
   }
 }
 
@@ -452,6 +456,49 @@ aside {
     color: #fff !important;
     background-color: @panGreen !important;
     border-color: @panGreen !important;
+  }
+}
+// 状态点
+.state-box {
+  display: flex;
+  align-items: center;
+}
+
+.state-text {
+  font-size: 14px;
+
+  &--complete {
+    color: #52c41a;
+  }
+
+  &--fail {
+    color: #e64049;
+  }
+  
+  &--pending {
+    color: #fbd211;
+  }
+}
+
+.point {
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  background-color: #eee;
+  border-radius: 50%;
+
+  &--complete {
+    background-color: #52c41a;
+  }
+
+  &--wait_write,
+  &--pending {
+    background-color: #fbd211;
+  }
+
+  &--invalid,
+  &--fail {
+    background-color: #e64049;
   }
 }
 
@@ -511,4 +558,8 @@ aside {
 .standard-box {
   display: flex;
   align-items: center;
+}
+
+.el-textarea .el-input__count {
+  line-height: 1;
 }

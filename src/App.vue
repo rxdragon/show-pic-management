@@ -7,13 +7,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import variables from '@assetsDir/styles/variables.less'
+
 export default {
   name: 'App',
-  computed: {
-    ...mapGetters(['showCat', 'isRetoucher', 'lineState'])
-  },
   created () {
     if (this.$isDev) {
       document.body.style.setProperty('--subMenuBg', variables.devSubMenuBg)

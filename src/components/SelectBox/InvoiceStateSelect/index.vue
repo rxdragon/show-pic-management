@@ -7,12 +7,7 @@
       clearable
       v-on="$listeners"
     >
-      <el-option
-        v-for="(optionItem, optionIndex) in options"
-        :key="optionIndex"
-        :label="optionItem.label"
-        :value="optionItem.value"
-      />
+      <el-option v-for="(optionItem, optionIndex) in options" :key="optionIndex" :label="optionItem.label" :value="optionItem.value"/>
     </el-select>
   </div>
 </template>

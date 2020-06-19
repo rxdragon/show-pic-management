@@ -137,3 +137,52 @@ export const invalidToCN = {
   [INVOICE_STATE.FAIL]: '开具失败',
   [INVOICE_STATE.INVALID]: '作废发票'
 }
+
+/**
+ * @description 优惠券批次状态
+ */
+export const COUPON_BATCH_STATE = {
+  NORMAL: 'normal',
+  VOID: 'void'
+}
+
+export const couponBatchToCN = {
+  [COUPON_BATCH_STATE.NORMAL]: '正常',
+  [COUPON_BATCH_STATE.VOID]: '作废'
+}
+
+/**
+ * @description 优惠券状态
+ */
+export const COUPON_STATE = {
+  ACTIVATED: 'activated',
+  UNUSED: 'unused',
+  USED: 'used',
+  ABOLISHED: 'abolished',
+  EXPIRED: 'expired'
+}
+
+export const couponToCN = {
+  [COUPON_STATE.ACTIVATED]: '未绑定',
+  [COUPON_STATE.UNUSED]: '已绑定',
+  [COUPON_STATE.USED]: '已使用',
+  [COUPON_STATE.ABOLISHED]: '已作废',
+  [COUPON_STATE.EXPIRED]: '已过期'
+}
+
+/**
+ * @description 活动状态
+ */
+export const ACTIVITY_STATE = {
+  WAITING: 'wait',
+  STARTED: 'start',
+  FINISHED: 'finish',
+  END_EARLY: 'interrupt'
+}
+
+export const activityToCN = {
+  [ACTIVITY_STATE.WAITING]: '未开始',
+  [ACTIVITY_STATE.STARTED]: '进行中',
+  [ACTIVITY_STATE.FINISHED]: '已结束',
+  [ACTIVITY_STATE.END_EARLY]: '提前结束'
+}

@@ -1,0 +1,15 @@
+:export {
+  menuText: #ffffff;
+  menuActiveText: #ffcf49;
+  subMenuActiveText: #ffffff;
+  menuBg: #00B1B7;
+  devMenuBg: linear-gradient(135deg, #70F570 10%, #49C628 100%);
+  menuHover: rgba(34, 34, 34, 0.5);
+  subMenuBg: #00B1B7;
+  devSubMenuBg: transparent;
+  subMenuHover: rgba(34, 34, 34, 0.5);
+  sideBarWidth: 256px;
+  blue: #4669FB;
+  green: #00B1B7;
+  orange: #FF8F00;
+}

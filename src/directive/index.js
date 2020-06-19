@@ -1,4 +1,5 @@
 import './limit-num'
 import './limit-length'
 import './limit-decimal'
+import './limit-discount'
 import './no-special-char'

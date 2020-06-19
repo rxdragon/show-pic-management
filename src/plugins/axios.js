@@ -8,7 +8,7 @@ import * as SessionTool from '@/utils/sessionTool.js'
 import router from '@/router'
 
 // axios 配置
-axios.defaults.timeout = 10000
+axios.defaults.timeout = 15000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API
 axios.defaults.withCredentials = true
@@ -79,7 +79,7 @@ axios.interceptors.response.use(
       return Promise.reject(message)
     }
     // 没有权限
-    if (data.error_code === 401) {
+    if (error.error_code === 401) {
       SessionTool.removeSession()
       router.push('/login')
       User.logout()

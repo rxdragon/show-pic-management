@@ -2,5 +2,6 @@ build/*.js
 public
 src/assets
 src/plugins
+src/utils/palette.min.js
 src/electronMain/DownloadManager.js
 dist

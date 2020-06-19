@@ -14,6 +14,10 @@ const InvoiceException = [
   [0xA17005008, '非自身发票'],
 ]
 
+const CouponException = [
+  [0xA17006005, '优惠券title已存在'],
+]
+
 const OrderException = [
   [0xA17001001, '非本人订单'],
   [0xA17001002, '非待支付状态'],
@@ -34,12 +38,22 @@ const StaffException = [
   [0xA17004005, '角色组不存在']
 ]
 
+const ActivityException = [
+  [0xA17005001, '验证码错误'],
+  [0xA17005002, '活动名称重复'],
+  [0xA17005011, '领取次数超过限制'],
+  [0xA17005012, '已经不再活动时间内'],
+  [0xA17005013, '绑定优惠券失败']
+]
+
 export const errText = [
   ...CommonException,
   ...InvoiceException,
   ...OrderException,
   ...ProductException,
-  ...StaffException
+  ...StaffException,
+  ...CouponException,
+  ...ActivityException
 ]
 let errMap = new Map(errText)
 export const errorCode = {

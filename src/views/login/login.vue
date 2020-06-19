@@ -1,6 +1,16 @@
 <template>
   <div class="login">
     <iframe ref="login" class="login_iframe" :src="ssoUrl" />
+    <div id="loading-login">
+      <div class="loading-logo">
+        <img src="@/assets/logo.png" alt="Logo">
+      </div>
+      <div class="loading">
+        <div class="effect-1 effects"></div>
+        <div class="effect-2 effects"></div>
+        <div class="effect-3 effects"></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -65,9 +75,13 @@ export default {
      * @description 转码
      */
     getLoginSsoUrl () {
+      let redirectPath = '/login.html'
+      if (window.location.pathname.includes('show-pic-management')) {
+        redirectPath = '/show-pic-management/login.html'
+      }
       const query = JSON.stringify({
         title: '缦图云端',
-        redirect: `${window.location.origin}${BUILD_REDIRECT}#/?token=`
+        redirect: `${window.location.origin}${redirectPath}#/?token=`
       })
       this.ssoUrl = process.env.VUE_APP_LOGIN_API + Base64.encode(query)
     },
@@ -87,10 +101,103 @@ export default {
 <style lang="less" scoped>
 .login {
   iframe {
+    position: relative;
+    z-index: 2;
     width: 100vw;
     height: 100vh;
     border: none;
     -webkit-app-region: drag;
+  }
+
+  #loading-login {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #00b1b7;
+
+    .loading-logo {
+      position: absolute;
+      top: 40%;
+      left: calc(50% - 189px);
+    }
+
+    .loading {
+      position: absolute;
+      top: 55%;
+      left: calc(50% - 35px);
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 55px;
+      height: 55px;
+      border: 3px solid transparent;
+      border-radius: 50%;
+    }
+
+    .loading .effect-1,
+    .loading .effect-2 {
+      position: absolute;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      border: 3px solid transparent;
+      border-left: 3px solid #ff8f00;
+      border-radius: 50%;
+    }
+
+    .loading .effect-1 {
+      animation: rotate 1s ease infinite;
+    }
+
+    .loading .effect-2 {
+      animation: rotateOpacity 1s ease infinite 0.1s;
+    }
+
+    .loading .effect-3 {
+      position: absolute;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      border: 3px solid transparent;
+      border-left: 3px solid #ff8f00;
+      border-radius: 50%;
+      -webkit-animation: rotateopacity 1s ease infinite 0.2s;
+      animation: rotateOpacity 1s ease infinite 0.2s;
+    }
+
+    .loading .effects {
+      transition: all 0.3s ease;
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(1turn);
+      transform: rotate(1turn);
+    }
+  }
+
+  @keyframes rotateOpacity {
+    0% {
+      opacity: 0.1;
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      opacity: 1;
+      -webkit-transform: rotate(1turn);
+      transform: rotate(1turn);
+    }
   }
 }
 </style>
