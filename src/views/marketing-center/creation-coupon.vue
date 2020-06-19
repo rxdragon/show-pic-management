@@ -86,7 +86,7 @@
       </el-form>
       <!-- 券码编号 -->
       <div class="coupon-box" v-if="couponList.length">
-        <coupon-code-list :coupon-name="couponForm.name" :coupon-list="couponList" />
+        <coupon-code-list :coupon-name="outName" :coupon-list="couponList" />
       </div>
     </main>
   </div>
@@ -117,6 +117,7 @@ export default {
         circulation: [{ required: true, message: '请输入总发行量', trigger: 'blur' }],
         effectivity: [{ required: true, validator: validateEffectivity, trigger: ['blur', 'change'] }]
       },
+      outName: '', // 导出名字
       cacheTitle: '', // 缓存标题
       couponForm: {
         name: '', // 优惠劵名称
@@ -146,7 +147,7 @@ export default {
     /**
      * @description 初始化信息
      */
-    resetPageData () {
+    resetPageData (cleanList = true) {
       this.cacheTitle = '',
       this.couponForm = {
         name: '', // 优惠劵名称
@@ -165,6 +166,10 @@ export default {
           abortTime: '' // 固定截止日期
         },
         desc: '' // 备注
+      }
+      if (cleanList) {
+        this.couponList = []
+        this.outName = ''
       }
       this.$refs.form.resetFields()
     },
@@ -213,6 +218,8 @@ export default {
         const couponId = await Coupon.addCouponBatch(req)
         this.cacheTitle = this.couponForm.name
         await this.getCouponBatchCodeUseList(couponId)
+        this.outName = this.couponForm.name
+        this.resetPageData(false)
       } catch (error) {
         console.error(error)
       } finally {

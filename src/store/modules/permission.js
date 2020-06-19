@@ -82,8 +82,7 @@ const actions = {
       })
       commit('SET_ROLES', newPermissionArr)
       newRolesArr = [...new Set(newRolesArr)]
-      // accessedRoutes = [...filterAsyncRoutes(asyncRoutes, newRolesArr)]
-      accessedRoutes = [...asyncRoutes]
+      accessedRoutes = [...filterAsyncRoutes(asyncRoutes, newRolesArr)]
       commit('SET_PERSONAGE_ROUTES', accessedRoutes)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)

@@ -38,13 +38,22 @@ const StaffException = [
   [0xA17004005, '角色组不存在']
 ]
 
+const ActivityException = [
+  [0xA17005001, '验证码错误'],
+  [0xA17005002, '活动名称重复'],
+  [0xA17005011, '领取次数超过限制'],
+  [0xA17005012, '已经不再活动时间内'],
+  [0xA17005013, '绑定优惠券失败']
+]
+
 export const errText = [
   ...CommonException,
   ...InvoiceException,
   ...OrderException,
   ...ProductException,
   ...StaffException,
-  ...CouponException
+  ...CouponException,
+  ...ActivityException
 ]
 let errMap = new Map(errText)
 export const errorCode = {
