@@ -1,4 +1,4 @@
-# 1.0.0 (2020-07-02)
+# 1.0.0 (2020-07-09)
 
 范围|描述|commitId
 --|--|--
@@ -129,5 +129,6 @@
 ### chore
 范围|描述|commitId
 --|--|--
+ - | 更改xi更改x更改系统环境变量 | [3410805](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3410805)
  - | 更改测试预发地址 | [9a6eba9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9a6eba9)
 
