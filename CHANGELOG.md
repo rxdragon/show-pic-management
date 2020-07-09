@@ -1,4 +1,4 @@
-# 1.0.0 (2020-06-24)
+# 1.0.0 (2020-07-09)
 
 范围|描述|commitId
 --|--|--
@@ -115,6 +115,7 @@
  - | yangshi | [ecb14ea](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ecb14ea)
  - | 优化lodash | [d0d041d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d0d041d)
  - | 优化带阿妹 | [9987f02](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9987f02)
+ - | 优化文案 | [3c52518](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3c52518)
  - | 优化文案显示 | [7f6ce16](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7f6ce16)
  - | 优化没有权限跳转到首页 | [cbc2040](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/cbc2040)
  - | 优化状态标示颜色 | [837a6f4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/837a6f4)
@@ -128,5 +129,6 @@
 ### chore
 范围|描述|commitId
 --|--|--
+ - | 更改xi更改x更改系统环境变量 | [3410805](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3410805)
  - | 更改测试预发地址 | [9a6eba9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9a6eba9)
 
