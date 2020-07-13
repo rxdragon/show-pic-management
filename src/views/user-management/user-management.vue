@@ -1,5 +1,8 @@
 <template>
   <div class="user-management module-page-box">
+    <div class="header-plugin">
+      <drag-product />
+    </div>
     <main class="module-panel">
       <!-- 查询按钮 -->
       <div class="search-box">
@@ -72,9 +75,12 @@ import AccountSourceSelect from '@selectBox/AccountSourceSelect'
 import { getSeachTime } from '@/utils/timeUtil.js'
 import * as Clients from '@/api/clients'
 
+// TODO 调试 后期删除
+import DragProduct from '@/components/DragProduct'
+
 export default {
   name: 'userManage',
-  components: { DatePicker, AccountSourceSelect, NoData },
+  components: { DatePicker, AccountSourceSelect, NoData, DragProduct },
   data () {
     return {
       timeSpan: null, // 创建时间
