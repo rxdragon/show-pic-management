@@ -8,6 +8,7 @@ import orderManagement from './modules/orderManagement.js' // 订单管理
 import userManagement from './modules/userManagement.js' // 订单管理
 import financeCenter from './modules/financeCenter.js' // 财务中心
 import marketingCenter from './modules/marketingCenter.js' // 营销中心
+import productCenter from './modules/productCenter.js' // 产品中心
 
 // 基础权限路由
 export const constantRoutes = [
@@ -52,7 +53,8 @@ export const asyncRoutes = [
   orderManagement,
   userManagement,
   financeCenter,
-  marketingCenter
+  marketingCenter,
+  productCenter
 ]
 
 const createRouter = () => new Router({
