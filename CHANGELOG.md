@@ -1,9 +1,10 @@
-# 1.0.0 (2020-07-13)
+# 1.0.0 (2020-07-14)
 
 ### 🌟 新功能
 范围|描述|commitId
 --|--|--
  - | ui搭建完成 | [52ce88c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/52ce88c)
+ - | 产品列表模块提交 | [7417c30](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7417c30)
  - | 优化订单页面跳转问题 | [75b8692](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/75b8692)
  - | 优惠劵管理页面 | [000c301](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/000c301)
  - | 前端基本框架搭建完成 | [a0d38fa](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a0d38fa)

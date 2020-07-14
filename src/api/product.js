@@ -60,19 +60,22 @@ export function getProductList (params = {
         case 'online':
           productList[0].children.push({
             label: item.name,
-            id: item.id
+            id: item.id,
+            status: 'online'
           })
           break
         case 'offline':
           productList[1].children.push({
             label: item.name,
-            id: item.id
+            id: item.id,
+            status: 'offline'
           })
           break
         case 'lining':
           productList[2].children.push({
             label: item.name,
-            id: item.id
+            id: item.id,
+            status: 'lining'
           })
           break
       

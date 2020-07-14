@@ -5,9 +5,9 @@
       <el-button type="primary" size="small">添加产品</el-button>
     </div>
     <div class="search">
-      <el-input v-model.trim="searchName" @keyup.native.enter="searchProductList()" clearable placeholder="产品名称查询"></el-input>
+      <el-input v-model.trim="searchName" clearable placeholder="产品名称查询"></el-input>
       <el-select v-model="searchStat" placeholder="状态查询">
-        <el-option :label="item.name" :value="item.id" v-for="(item, index) in productStat" :key="index"></el-option>
+        <el-option :label="item.name" :value="item.status" v-for="(item, index) in productStat" :key="index"></el-option>
       </el-select>
     </div>
     <div class="list-area">
@@ -16,7 +16,6 @@
         default-expand-all
         :filter-node-method="filterProduct"
         :data="productList"
-        :props="defaultProps"
         @node-click="productSelect"
         ref="tree"
       >
@@ -34,22 +33,18 @@ export default {
   data() {
     return {
       productList: [],
-      defaultProps: {
-        children: 'children',
-        label: 'label'
-      },
       productStat: [
         {
           name: '已上线',
-          id: 0
+          status: 'online'
         },
         {
-          name: '未上线',
-          id: 1
+          name: '已下线',
+          status: 'offline'
         },
         {
           name: '上线中',
-          id: 2
+          status: 'lining'
         }
       ],
       searchStat: '',
@@ -58,7 +53,16 @@ export default {
   },
   watch: {
     searchName(val) {
-      this.$refs.tree.filter(val)
+      this.$refs.tree.filter({
+        type: 'text',
+        value: val
+      })
+    },
+    searchStat(val) {
+      this.$refs.tree.filter({
+        type: 'status',
+        value: val
+      })
     }
   },
   created () {
@@ -81,12 +85,17 @@ export default {
     /**
      * @description 筛选                    
      */
-    filterProduct (value, data) {
-      if (!value) return true
-      return data.label.indexOf(value) !== -1
+    filterProduct (filterObj, data) {
+      if (!filterObj) return true
+      if (filterObj.type === 'text') {
+        return data.label.indexOf(filterObj.value) > -1
+      }
+      if (filterObj.type === 'status') {
+        return data.status === filterObj.value
+      }
     },
     /**
-     * @description 筛选                    
+     * @description 选中产品                    
      */
     productSelect ( data) {
       // console.log('data', data)
