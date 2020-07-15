@@ -6,7 +6,7 @@
     </div>
     <div class="search">
       <el-input v-model.trim="searchName" @input="(value) => {triggerSearch('text', value)}" clearable placeholder="产品名称查询"></el-input>
-      <product-status-select @change="(value) => {triggerSearch('status', value)}" ></product-status-select>
+      <product-status-select @change="(value) => {triggerSearch('status', value)}" />
     </div>
     <div class="list-area">
       <el-tree

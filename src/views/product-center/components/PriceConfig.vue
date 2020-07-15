@@ -62,8 +62,6 @@ const priceRules = {
 }
 export default {
   name: 'PriceConfig',
-  components: {},
-  props: {},
   data() {
     return {
       psStandard: [],

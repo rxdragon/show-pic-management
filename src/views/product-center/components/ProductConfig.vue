@@ -39,10 +39,10 @@
           <el-input class="long" v-model.trim="otherForm.desc" placeholder="产品首页介绍,最多20个字符"  />
         </el-form-item>
         <el-form-item label="缩略图(非必填):">
-          <upload-pic v-model="otherForm.thumbnailList"></upload-pic>
+          <upload-pic v-model="otherForm.thumbnailList"/>
         </el-form-item>
         <el-form-item label="分享图(非必填):">
-          <upload-pic v-model="otherForm.shareList"></upload-pic>
+          <upload-pic v-model="otherForm.shareList"/>
         </el-form-item>
       </el-form>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <product-list></product-list>
+    <product-list/>
     <div class="config-area">
       <el-tabs v-model="whichStep" @tab-click="tabClick">
         <el-tab-pane disabled label="基础设置" name="ProductConfig"></el-tab-pane>

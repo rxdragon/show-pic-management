@@ -8,6 +8,7 @@
  - | 优化订单页面跳转问题 | [75b8692](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/75b8692)
  - | 优惠劵管理页面 | [000c301](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/000c301)
  - | 前端基本框架搭建完成 | [a0d38fa](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a0d38fa)
+ - | 基础设置部分提交 | [551ea4f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/551ea4f)
  - | 增加权限和优化代码 | [2c26dac](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2c26dac)
  - | 增加消费次数显示 | [9756960](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9756960)
  - | 增加状态查询 | [0a952c3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0a952c3)
