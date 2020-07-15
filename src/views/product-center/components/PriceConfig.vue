@@ -1,0 +1,133 @@
+<template>
+  <div class="normal-config">
+    <div class="top">
+      <span>选择修图标准:</span>
+      <el-checkbox-group @change="checkStandard" v-model="psStandard">
+        <el-checkbox label="blue">普通修图</el-checkbox>
+        <el-checkbox label="master">大师修图</el-checkbox>
+      </el-checkbox-group>
+    </div>
+    <div class="content">
+      <el-form
+        v-for="(item, index) in standerPrice"
+        ref="standerPrice"
+        :model="item"
+        :rules="priceRules"
+        label-width="100px"
+        :key="index"
+      >
+        <p class="title">{{ item.name }}</p>
+        <el-form-item label="起始人头数:" prop="basePeople">
+          <el-input v-model="item.basePeople"></el-input>
+          <span>人/张</span>
+        </el-form-item>
+        <el-form-item label="限制人头:" prop="limitPeople">
+          <el-input v-model="item.limitPeople"></el-input>
+          <span>人</span>
+        </el-form-item>
+        <el-form-item label="照片价格:" prop="price">
+          <el-input v-model="item.price"></el-input>
+          <span>元</span>
+        </el-form-item>
+        <el-form-item label="人头价格:" prop="stepPrice">
+          <el-input v-model="item.stepPrice"></el-input>
+          <span>元/人</span>
+        </el-form-item>
+      </el-form>
+    </div>
+  </div>
+</template>
+
+<script>
+import { positiveIntValidator, priceDoubleValidator } from '@/utils/validator.js'
+import { psTypeNameEnum } from '@/model/Enumerate.js'
+
+// 常规价格配置
+const priceRules = {
+  basePeople: [
+    { required: true, message: '请输入起始人头数', trigger: 'blur' },
+    { validator: positiveIntValidator, message: '大于0的整数', trigger: 'blur' }
+  ],
+  limitPeople: [
+    { validator: positiveIntValidator, message: '大于0的整数', trigger: 'blur' }
+  ],
+  price: [
+    { required: true, message: '请输入照片基础价格', trigger: 'blur' },
+    { validator: priceDoubleValidator, message: '最多支持两位小数', trigger: 'blur' }
+  ],
+  stepPrice: [
+    { required: true, message: '请输入单个人头价格', trigger: 'blur' },
+    { validator: priceDoubleValidator, message: '最多支持两位小数', trigger: 'blur' }
+  ]
+}
+export default {
+  name: 'PriceConfig',
+  components: {},
+  props: {},
+  data() {
+    return {
+      psStandard: [],
+      priceRules,
+      standerPrice: []
+    }
+  },
+  methods: {
+    /**
+     * @description 勾选修图标准
+     */
+    checkStandard (value) {
+      const tempArr = value.reduce((sum, item) => {
+        const tempObj = {
+          type: item,
+          name: psTypeNameEnum[item],
+          basePeople: '',
+          limitPeople: '',
+          price: '',
+          stepPrice: '',
+        }
+        if (item === 'blue') {
+          sum.unshift(tempObj)
+        } else {
+          sum.push(tempObj)
+        }
+        return sum
+      }, [])
+      this.standerPrice = tempArr
+    },
+    /**
+     * @description 表单校验
+     */
+    formCheck (value) {
+      this.psStandard.forEach((item, index) => {
+        this.$refs.standerPrice[index].validate()
+      })
+    },
+  }
+}
+</script>
+
+<style lang="less" scoped>
+.normal-config {
+  .top {
+    display: flex;
+  }
+
+  .content {
+    display: flex;
+
+    .title {
+      font-weight: bold;
+    }
+
+    .item {
+      margin-right: 100px;
+    }
+
+    .normal-item {
+      display: flex;
+      align-items: center;
+      margin: 10px;
+    }
+  }
+}
+</style>

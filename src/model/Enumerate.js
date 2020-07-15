@@ -186,3 +186,22 @@ export const activityToCN = {
   [ACTIVITY_STATE.FINISHED]: '已结束',
   [ACTIVITY_STATE.END_EARLY]: '提前结束'
 }
+
+/**
+ * @description 产品状态
+ */
+export const PRODUCT_STATE = ['online','offline','lining']
+
+export const ProductStatusNameEnum = {
+  'online': '已上线',
+  'offline': '已下线',
+  'lining': '上线中'
+}
+
+/**
+ * @description 修图标准
+ */
+export const psTypeNameEnum = {
+  'blue': '普通修图',
+  'master': '大师修图'
+}

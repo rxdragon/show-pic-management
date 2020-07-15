@@ -1,31 +1,26 @@
 import axios from '@/plugins/axios.js'
+import { ProductStatusNameEnum } from '@/model/Enumerate.js'
 
 /**
  * @description 获取产品列表
  */
-export function getProductList (params = {
-  page: 1,
-  pageSize: 10
-}) {
+export function getProductList () {
   return axios({
-    url: '/project_show_pic/admin/marketing/coupon/getCouponBatchList',
+    url: '/project_show_pic/admin/trading/product/getList',
     method: 'POST',
-    data: params
   }).then(msg => {
     const productList = [{
-      label: '已上线',
-      id: 0,
+      label: ProductStatusNameEnum.online,
       children: []
     }, {
-      label: '已下线',
-      id: 1,
+      label: ProductStatusNameEnum.offline,
       children: []
     }, {
-      label: '上线中',
-      id: 2,
+      label: ProductStatusNameEnum.lining,
       children: []
     }]
-    msg = [
+    // mock数据
+    const mock = [
       {
         id: 1,
         name: "手绘",
@@ -55,6 +50,8 @@ export function getProductList (params = {
         updated_at: "2020-06-30 12:00:00"
       }
     ]
+    msg = mock
+
     msg.forEach((item) => {
       switch (item.state) {
         case 'online':

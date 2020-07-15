@@ -5,10 +5,8 @@
       <el-button type="primary" size="small">添加产品</el-button>
     </div>
     <div class="search">
-      <el-input v-model.trim="searchName" clearable placeholder="产品名称查询"></el-input>
-      <el-select v-model="searchStat" placeholder="状态查询">
-        <el-option :label="item.name" :value="item.status" v-for="(item, index) in productStat" :key="index"></el-option>
-      </el-select>
+      <el-input v-model.trim="searchName" @input="(value) => {triggerSearch('text', value)}" clearable placeholder="产品名称查询"></el-input>
+      <product-status-select @change="(value) => {triggerSearch('status', value)}" ></product-status-select>
     </div>
     <div class="list-area">
       <el-tree
@@ -26,43 +24,16 @@
 
 <script>
 import * as Product from '@/api/product.js'
+import ProductStatusSelect from '@selectBox/ProductStatusSelect'
 
 export default {
   name: 'ProductList',
+  components: { ProductStatusSelect },
   props: {},
   data() {
     return {
       productList: [],
-      productStat: [
-        {
-          name: '已上线',
-          status: 'online'
-        },
-        {
-          name: '已下线',
-          status: 'offline'
-        },
-        {
-          name: '上线中',
-          status: 'lining'
-        }
-      ],
-      searchStat: '',
       searchName: '',
-    }
-  },
-  watch: {
-    searchName(val) {
-      this.$refs.tree.filter({
-        type: 'text',
-        value: val
-      })
-    },
-    searchStat(val) {
-      this.$refs.tree.filter({
-        type: 'status',
-        value: val
-      })
     }
   },
   created () {
@@ -86,7 +57,7 @@ export default {
      * @description 筛选                    
      */
     filterProduct (filterObj, data) {
-      if (!filterObj) return true
+      if (!filterObj.value) return true
       if (filterObj.type === 'text') {
         return data.label.indexOf(filterObj.value) > -1
       }
@@ -99,6 +70,15 @@ export default {
      */
     productSelect ( data) {
       // console.log('data', data)
+    },
+    /**
+     * @description 筛选                    
+     */
+    triggerSearch (type, value) {
+      this.$refs.tree.filter({
+        type: type,
+        value
+      })
     }
   }
 }
