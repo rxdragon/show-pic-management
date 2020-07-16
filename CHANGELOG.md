@@ -1,13 +1,4 @@
-# 1.0.0 (2020-07-13)
-
-范围|描述|commitId
---|--|--
- - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
- - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
- - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
- - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
- - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
-
+# 1.0.0 (2020-07-16)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -131,6 +122,18 @@
 ### chore
 范围|描述|commitId
 --|--|--
+ - | 删除调试代码 | [5f54a55](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5f54a55)
  - | 更改xi更改x更改系统环境变量 | [3410805](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3410805)
  - | 更改测试预发地址 | [9a6eba9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9a6eba9)
+
+
+范围|描述|commitId
+--|--|--
+ - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
+ - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
+ - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
+ - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
+ - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
+ - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
+ - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
 

@@ -43,7 +43,7 @@ export default {
   data () {
     return {
       dragOptions,
-      dialogVisible: true,
+      dialogVisible: false,
       productList: [], // 
       drag: false, // 是否拖拽
       loading: false // 加载
@@ -73,12 +73,13 @@ export default {
      */
     async submitData () {
       try {
-        const req = this.productList.map((productItem, productIndex) => {
+        const productWeights = this.productList.map((productItem, productIndex) => {
           return {
             id: productItem.id,
             weight: this.productList.length - productIndex
           }
         })
+        const req = { productWeights }
         this.loading = true
         await ProductApi.sortProduct(req)
         this.dialogVisible = false
@@ -128,8 +129,10 @@ export default {
 <style lang="less">
 .product-drag {
   .el-dialog__body {
+    max-height: 500px;
     padding-top: 0;
     padding-bottom: 0;
+    overflow-y: scroll;
   }
 }
 </style>
