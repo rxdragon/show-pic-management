@@ -3,14 +3,15 @@
     <product-list/>
     <div class="config-area">
       <el-tabs v-model="whichStep" @tab-click="tabClick">
-        <el-tab-pane disabled label="基础设置" name="ProductConfig"></el-tab-pane>
-        <el-tab-pane disabled label="子品类配置" name="SubCategoryConfig"></el-tab-pane>
-        <el-tab-pane disabled label="详情页配置" name="DetailConfig"></el-tab-pane>
-        <el-tab-pane disabled label="其他配置" name="OtherConfig"></el-tab-pane>
+        <el-tab-pane v-for="(item, index) in tabPaneConfig" :key="index" :label="item.label" :name="item.name"></el-tab-pane>
       </el-tabs>
-      <keep-alive>
-        <component  @next="goNext" :is="whichStep"/>
-      </keep-alive>
+      <component
+        :create-info="createInfo"
+        :product-skus="productSkus"
+        :product-obj="productObj"
+        @next="goNext"
+        :is="step"
+      />
     </div>
   </div>
 </template>
@@ -18,14 +19,63 @@
 <script>
 import ProductList from './components/ProductList.vue'
 import ProductConfig from './components/ProductConfig.vue'
-import SubCategoryConfig from './components/SubCategoryConfig.vue'
+import SubCategoryConfigCreate from './components/SubCategoryConfigCreate.vue'
+import SubCategoryConfigEdit from './components/SubCategoryConfigEdit.vue'
+import DetailConfig from './components/DetailConfig.vue'
+
+const tabPaneConfig = [
+  {
+    name: 'ProductConfig',
+    label: '基础设置'
+  },
+  {
+    name: 'SubCategoryConfig',
+    label: '子品类配置'
+  },
+  {
+    name: 'DetailConfig',
+    label: '详情页配置'
+  },
+  {
+    name: 'OtherConfig',
+    label: '其他配置'
+  }
+]
 
 export default {
   name: 'ProductManagement',
-  components: { ProductList,ProductConfig,SubCategoryConfig },
+  components: { ProductList,ProductConfig,SubCategoryConfigCreate, SubCategoryConfigEdit, DetailConfig },
   data () {
     return {
-      whichStep: 'productConfig',
+      tabPaneConfig,
+      whichStep: 'ProductConfig',
+      isCreate: false,
+      productObj: {
+        name: '',
+        description: '',
+        thumbnailPath: [],
+        sharePath: [],
+        startAt: '',
+        coverPath: '',
+        information: '',
+        productSkus: [],
+        skus: {},
+        isSimple: 'notSimple'
+      },
+      productSkus: [], // 存放配置保存的子品类
+      createInfo: {
+        isNew: true,
+        index: ''
+      }
+    }
+  },
+  computed: {
+    step () {
+      let finalStep = this.whichStep
+      if (this.whichStep === 'SubCategoryConfig') {
+        finalStep = this.isCreate ? 'SubCategoryConfigCreate' : 'SubCategoryConfigEdit'
+      }
+      return finalStep
     }
   },
   methods: {
@@ -36,7 +86,39 @@ export default {
      * @description 下一步
      */
     goNext (obj) {
-      this.whichStep = obj.aim
+      if (obj.type === 'create') { // 改成编辑模式
+        this.isCreate = false
+        // 如果有配置传出,判断是新增还是编辑 
+        if (obj.styleForm && obj.isNew) { // 新增
+          let tempObj = {}
+          tempObj.styleForm = obj.styleForm
+          tempObj.upgradeForms = obj.upgradeForms
+          this.productSkus.push(tempObj)
+        }
+        if (obj.styleForm && !obj.isNew) { // 编辑
+          let tempObj = {}
+          tempObj.styleForm = obj.styleForm
+          tempObj.upgradeForms = obj.upgradeForms
+          this.productSkus[obj.index] = tempObj
+        }
+        
+      }
+      if (obj.type === 'edit') { // 改成新增模式
+        this.isCreate = true
+        if (obj.isNew) {
+          this.createInfo = {
+            isNew: true,
+          }
+          return
+        }
+        this.createInfo = {
+          isNew: false,
+          index: obj.index
+        }
+      }
+      if (!obj.type) {
+        this.whichStep = obj.aim
+      }
     }
   }
 }
@@ -50,6 +132,7 @@ export default {
   border-radius: 20px;
 
   .config-area {
+    width: 100%;
     margin-left: 10px;
   }
 

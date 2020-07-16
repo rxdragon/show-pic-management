@@ -1,22 +1,34 @@
 <template>
   <div class="normal-config">
-    <div class="top">
+    <div class="condition">
+      <el-radio-group v-model="priceObj.simplePrice">
+        <div class="contact-wrap">
+          <el-radio label="contact">联系客服(针对特殊产品需要顾客联系客服下单)</el-radio>
+          <div class="show-price" v-if="priceObj.simplePrice === 'contact'">
+            <p class="title">展示价格:</p>
+            <el-input v-model.trim="priceObj.simplePriceText" placeholder="需要展示的价格"  />
+          </div>
+        </div>
+        <el-radio label="normal">常规设置</el-radio>
+      </el-radio-group>
+    </div>
+    <div class="top" v-if="priceObj.simplePrice === 'normal'">
       <span>选择修图标准:</span>
       <el-checkbox-group @change="checkStandard" v-model="psStandard">
         <el-checkbox label="blue">普通修图</el-checkbox>
         <el-checkbox label="master">大师修图</el-checkbox>
       </el-checkbox-group>
     </div>
-    <div class="content">
+    <div class="content"  v-if="priceObj.simplePrice === 'normal'">
       <el-form
-        v-for="(item, index) in standerPrice"
+        v-for="(item, index) in priceObj.standerPrice"
         ref="standerPrice"
         :model="item"
         :rules="priceRules"
         label-width="100px"
         :key="index"
       >
-        <p class="title">{{ item.name }}</p>
+        <p class="content-title">{{ item.name }}</p>
         <el-form-item label="起始人头数:" prop="basePeople">
           <el-input v-model="item.basePeople"></el-input>
           <span>人/张</span>
@@ -62,11 +74,13 @@ const priceRules = {
 }
 export default {
   name: 'PriceConfig',
+  props: {
+    priceObj: { type: Object, required: true }
+  },
   data() {
     return {
       psStandard: [],
-      priceRules,
-      standerPrice: []
+      priceRules
     }
   },
   methods: {
@@ -90,7 +104,7 @@ export default {
         }
         return sum
       }, [])
-      this.standerPrice = tempArr
+      this.priceObj.standerPrice = tempArr
     },
     /**
      * @description 表单校验
@@ -100,12 +114,44 @@ export default {
         this.$refs.standerPrice[index].validate()
       })
     },
+    /**
+     * @description 获取价格配置数据
+     */
+    getConfig (value) {
+      const { simplePrice, simplePriceText, standerPrice } = this.priceObj
+      let tempObj = { simplePrice }
+      
+      if (this.simplePrice === 'contact') { // 联系客服时候,获取展示价格
+        tempObj.simplePriceText = simplePriceText
+      }
+      if (this.simplePrice === 'normal') { // 正常设置时候
+        tempObj.standerPrice = standerPrice
+      }
+      return tempObj
+    },
   }
 }
 </script>
 
 <style lang="less" scoped>
 .normal-config {
+  .condition {
+    .contact-wrap {
+      display: flex;
+      align-items: center;
+    }
+
+    .show-price {
+      display: flex;
+      align-items: center;
+
+      .title {
+        width: 100px;
+        font-size: 14px;
+      }
+    }
+  }
+
   .top {
     display: flex;
   }
@@ -113,7 +159,7 @@ export default {
   .content {
     display: flex;
 
-    .title {
+    .content-title {
       font-weight: bold;
     }
 
