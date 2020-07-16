@@ -1,4 +1,4 @@
-# 1.0.0 (2020-07-09)
+# 1.0.0 (2020-07-16)
 
 范围|描述|commitId
 --|--|--
@@ -18,6 +18,7 @@
  - | 前端基本框架搭建完成 | [a0d38fa](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a0d38fa)
  - | 增加权限和优化代码 | [2c26dac](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2c26dac)
  - | 增加消费次数显示 | [9756960](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9756960)
+ - | 增加监控平台 | [2bfec46](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2bfec46)
  - | 增加订单列表显示，已经订单详情显示 | [056586c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/056586c)
  - | 处理部分版本mock数据 | [da1f5e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/da1f5e2)
  - | 完成大部分功能链条 | [5faa281](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5faa281)
@@ -35,9 +36,9 @@
  - | 活动页面基本联调完成 | [b390bdb](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b390bdb)
  - | 添加前端配置环境 | [1a29ab7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1a29ab7)
  - | 用户管理 | [cd016f5](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/cd016f5)
+ 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 联调优惠券生成和管理 | [d03f1b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d03f1b0)
  - | 获取ps内存 | [a9477f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a9477f6)
- 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
 
 
