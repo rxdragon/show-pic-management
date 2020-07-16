@@ -7,6 +7,7 @@ import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 import './plugins/axios'
 import './plugins/element.js' // ui布局
+import './plugins/logSdk.js' // ui布局
 import './plugins/icon-font/iconfont.css' // 字体
 import './assets/styles/font.less' // 全局样式
 import './assets/styles/index.less' // 字体
