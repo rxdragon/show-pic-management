@@ -190,7 +190,11 @@ export const activityToCN = {
 /**
  * @description 产品状态
  */
-export const PRODUCT_STATE = ['online','offline','lining']
+export const PRODUCT_STATE = {
+  ONLINE: 'online',
+  OFFLINE: 'offline',
+  LINING: 'lining',
+}
 
 export const ProductStatusNameEnum = {
   'online': '已上线',
@@ -199,9 +203,17 @@ export const ProductStatusNameEnum = {
 }
 
 /**
- * @description 修图标准
+ * @description 修图标准对应中文
  */
 export const psTypeNameEnum = {
   'blue': '普通修图',
   'master': '大师修图'
+}
+
+/**
+ * @description 修图对应id
+ */
+export const psTypeIdEnum = {
+  'blue': 1,
+  'master': 2
 }

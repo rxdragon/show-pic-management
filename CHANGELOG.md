@@ -1,4 +1,4 @@
-# 1.0.0 (2020-07-16)
+# 1.0.0 (2020-07-17)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -15,6 +15,7 @@
  - | 增加监控平台 | [2bfec46](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2bfec46)
  - | 增加订单列表显示，已经订单详情显示 | [056586c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/056586c)
  - | 处理部分版本mock数据 | [da1f5e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/da1f5e2)
+ - | 子品类设置暂存 | [0769962](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0769962)
  - | 完成大部分功能链条 | [5faa281](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5faa281)
  - | 完成接口活动页面的接口联调 | [3e85d7a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3e85d7a)
  - | 完成活动后台联调 | [bd24454](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bd24454)

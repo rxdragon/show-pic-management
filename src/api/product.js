@@ -84,3 +84,13 @@ export function getProductList () {
   })
 }
 
+/**
+ * @description 新增产品接口
+ */
+export function addProduct (params) {
+  return axios({
+    url: '/project_show_pic/admin/trading/product/addWithConfig',
+    method: 'POST',
+    data: params
+  })
+}

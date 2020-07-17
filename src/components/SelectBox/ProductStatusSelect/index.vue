@@ -14,12 +14,13 @@
 <script>
 import { ProductStatusNameEnum, PRODUCT_STATE } from '@/model/Enumerate.js'
 
-const productStat = PRODUCT_STATE.map((item) => {
-  return {
-    status: item,
-    name: ProductStatusNameEnum[item],
-  }
-})
+let productStat = []
+for (const key in PRODUCT_STATE) {
+  let tempObj = {}
+  tempObj.status = PRODUCT_STATE[key]
+  tempObj.name = ProductStatusNameEnum[PRODUCT_STATE[key]]
+  productStat.push(tempObj)
+}
 
 export default {
   name: 'ProductStatusSelect',

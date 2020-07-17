@@ -21,12 +21,12 @@
         </el-form-item>
       </el-form>
     </div>
-    <price-config ref="normalPriceConfig" v-if="styleForm.isSimple === 'simple'"/>
+    <price-config :price-obj="styleForm.priceObj" ref="normalPriceConfig" v-if="styleForm.isSimple === 'simple'"/>
     <!-- 升级体验设置 -->
     <div class="module-panel" v-else>
       <div class="panel-title">升级体验设置</div>
       <el-button @click="addUpgrade" type="primary" size="small">添加升级体验</el-button>
-      <upgrade-config :upgrade-form="item"  v-for="(item, index) in upgradeForms" :key="index" />
+      <upgrade-config :upgrade-form="item"  v-for="(item, index) in upgradeForms" :key="`item${index}`" />
     </div>
     <div class="submit-area">
       <el-button @click="back" size="small">返回</el-button>
@@ -39,18 +39,9 @@
 import UploadPic from './UploadPic'
 import PriceConfig from './PriceConfig'
 import UpgradeConfig from './UpgradeConfig'
+import SkuRule from '../rules/skuRule.js'
 
-const styleRules = {
-  name: [
-    { required: true, message: '请输入修图风格名称', trigger: 'blur' }
-  ],
-  desc: [
-    { required: true, message: '请输入下单说明', trigger: 'blur' }
-  ],
-  thumbnailList: [
-    { required: true, message: '请上传缩略图', trigger: 'change' }
-  ]
-}
+const styleRules = new SkuRule('style')
 class UpgradeObj { // 升级体验的item
   name = ''
   thumbnailList = []
@@ -76,7 +67,12 @@ export default {
         name: '',
         thumbnailList: [],
         desc: '',
-        isSimple: 'notSimple'
+        isSimple: 'notSimple',
+        priceObj: {
+          simplePriceText: '',
+          simplePrice: 'normal',
+          standerPrice: []
+        }
       },
       upgradeForms: []
     }
@@ -128,19 +124,13 @@ export default {
      * @description 返回上一页
      */
     async back () {
-      try {
-        await this.$confirm(`返回将不会保存单前的子品类配置`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-        // 跳转到下一个tab
-        this.$emit('next', {
-          type: 'create'
-        })
-      } catch (error) {
-        console.error(error)
-      }
+      await this.$confirm(`返回将不会保存单前的子品类配置`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      // 跳转到下一个tab
+      this.$emit('next', { type: 'create' })
     }
   }
 }

@@ -5,8 +5,8 @@
       <el-button type="primary" size="small">添加产品</el-button>
     </div>
     <div class="search">
-      <el-input v-model.trim="searchName" @input="(value) => {triggerSearch('text', value)}" clearable placeholder="产品名称查询"></el-input>
-      <product-status-select @change="(value) => {triggerSearch('status', value)}" />
+      <el-input v-model.trim="searchName" @input="inputTrigger" clearable placeholder="产品名称查询"></el-input>
+      <product-status-select @change="selectTrigger" />
     </div>
     <div class="list-area">
       <el-tree
@@ -72,11 +72,20 @@ export default {
       // console.log('data', data)
     },
     /**
-     * @description 筛选                    
+     * @description input触发                    
      */
-    triggerSearch (type, value) {
+    inputTrigger (value) {
       this.$refs.tree.filter({
-        type: type,
+        type: 'text',
+        value
+      })
+    },
+    /**
+     * @description select                    
+     */
+    selectTrigger (value) {
+      this.$refs.tree.filter({
+        type: 'status',
         value
       })
     }

@@ -18,18 +18,9 @@
 <script>
 import UploadPic from './UploadPic'
 import PriceConfig from './PriceConfig'
+import SkuRule from '../rules/skuRule.js'
 
-const upgradeRules = {
-  name: [
-    { required: true, message: '请输入升级体验名称', trigger: 'blur' }
-  ],
-  desc: [
-    { required: true, message: '请输入下单说明', trigger: 'blur' }
-  ],
-  thumbnailList: [
-    { required: true, message: '请上传缩略图', trigger: 'change' }
-  ]
-}
+const upgradeRules = new SkuRule('upgrade')
 
 export default {
   name: 'UpgradeConfig',

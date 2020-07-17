@@ -21,8 +21,22 @@
         <span class="label">价格设置:</span>
         <span v-if="item.styleForm.isSimple === 'notSimple'">无价格设置(见升级体验)</span>
         <div v-else>
-          <span>联系客服:</span>
-          <span>展示价格：¥200.00</span>
+          <div v-if="item.styleForm.priceObj.simplePrice === 'contact'">
+            <span>联系客服:</span>
+            <span>展示价格：¥{{ item.styleForm.priceObj.simplePriceText }}</span>
+          </div>
+          <div v-else>
+            <div
+              v-for="(standerPriceItem, standerPriceIndex) in item.styleForm.priceObj.standerPrice"
+              :key="standerPriceIndex"
+            >
+              <p>修图标准: {{ standerPriceItem.name }}</p>
+              <p>起始人头数: {{ standerPriceItem.basePeople }}人/张</p>
+              <p>限制人头数: {{ standerPriceItem.limitPeople }}人</p>
+              <p>照片价格: {{ standerPriceItem.price }}元/张</p>
+              <p>起始人头数: {{ standerPriceItem.stepPrice }}元/人</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="style-item">
