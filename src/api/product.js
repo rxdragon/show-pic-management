@@ -5,12 +5,19 @@ import axios from '@/plugins/axios.js'
  */
 export function getProductList () {
   const params = {
-    cond: { state: 'online' }
+    cond: { state: ['online', 'wait'] }
   }
   return axios({
     url: '/project_show_pic/admin/trading/product/getList',
     method: 'POST',
     data: params
+  }).then(msg => {
+    if (msg instanceof Array) {
+      msg.sort((a, b) => b.weight - a.weight)
+    } else {
+      msg = []
+    }
+    return msg
   })
 }
 
