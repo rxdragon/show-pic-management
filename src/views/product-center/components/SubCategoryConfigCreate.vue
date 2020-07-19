@@ -26,7 +26,7 @@
     <div class="module-panel" v-else>
       <div class="panel-title">升级体验设置</div>
       <el-button @click="addUpgrade" type="primary" size="small">添加升级体验</el-button>
-      <upgrade-config :upgrade-form="item"  v-for="(item, index) in upgradeForms" :key="`item${index}`" />
+      <upgrade-config :upgrade-form="item"  v-for="(item) in upgradeForms" :key="item.uuid" />
     </div>
     <div class="submit-area">
       <el-button @click="back" size="small">返回</el-button>
@@ -40,9 +40,11 @@ import UploadPic from './UploadPic'
 import PriceConfig from './PriceConfig'
 import UpgradeConfig from './UpgradeConfig'
 import SkuRule from '../rules/skuRule.js'
+import * as uuid from 'uuid'
 
 const styleRules = new SkuRule('style')
 class UpgradeObj { // 升级体验的item
+  uuid = uuid.v4()
   name = ''
   thumbnailList = []
   desc = ''
@@ -64,6 +66,7 @@ export default {
     return {
       styleRules,
       styleForm: {
+        uuid: uuid.v4(),
         name: '',
         thumbnailList: [],
         desc: '',

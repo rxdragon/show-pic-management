@@ -1,4 +1,4 @@
-# 1.0.0 (2020-07-17)
+# 1.0.0 (2020-07-19)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -22,6 +22,7 @@
  - | 完成订单页面 | [89f50c6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/89f50c6)
  - | 提交代码 | [0050ff1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0050ff1)
  - | 新增预览页面布局 | [462dd94](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/462dd94)
+ - | 新建产品主干调试ok | [f5883d2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f5883d2)
  - | 更改打包配置 | [4b126f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4b126f6)
  - | 更改环境变量 | [b2cff3f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b2cff3f)
  - | 更改配置 | [e632631](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e632631)

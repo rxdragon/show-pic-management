@@ -1,5 +1,5 @@
 import axios from '@/plugins/axios.js'
-import { ProductStatusNameEnum } from '@/model/Enumerate.js'
+import { ProductStatusNameEnum, PRODUCT_STATE } from '@/model/Enumerate.js'
 
 /**
  * @description 获取产品列表
@@ -54,25 +54,25 @@ export function getProductList () {
 
     msg.forEach((item) => {
       switch (item.state) {
-        case 'online':
+        case PRODUCT_STATE.ONLINE:
           productList[0].children.push({
             label: item.name,
             id: item.id,
-            status: 'online'
+            status: PRODUCT_STATE.ONLINE
           })
           break
-        case 'offline':
+        case PRODUCT_STATE.OFFLINE:
           productList[1].children.push({
             label: item.name,
             id: item.id,
-            status: 'offline'
+            status: PRODUCT_STATE.OFFLINE
           })
           break
-        case 'lining':
+        case PRODUCT_STATE.LINING:
           productList[2].children.push({
             label: item.name,
             id: item.id,
-            status: 'lining'
+            status: PRODUCT_STATE.LINING
           })
           break
       

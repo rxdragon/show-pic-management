@@ -1,23 +1,52 @@
 <template>
   <div class="other-config">
+    <div class="config-item">
+      <span class="title">上线时间:</span>
+      <el-date-picker value-format="yyyy-MM-dd HH:mm:ss" v-model="productObj.startAt" type="datetime" placeholder="选择上线时间"></el-date-picker>
+    </div>
+    <div class="config-item">
+      <span class="title">下线时间:</span>
+      <el-date-picker value-format="yyyy-MM-dd HH:mm:ss" v-model="productObj.endAt" type="datetime" placeholder="选择下线时间"></el-date-picker>
+    </div>
+    <div class="module-panel">
+      <div class="panel-title">云端产品审核信息</div>
+      <el-form ref="productObj" :model="productObj" :rules="otherRules" label-width="150px">
+        <el-form-item label="修图要求:" prop="cloudRetouchRequire">
+          <el-input
+            type="textarea"
+            placeholder="请填写修图要求,该修图要求将在云端产品审核时使用"
+            v-model="productObj.cloudRetouchRequire"
+            maxlength="30"
+            show-word-limit
+          >
+          </el-input>
+        </el-form-item>
+      </el-form>
+    </div>
     <el-button @click="finalSubmint" type="primary" >提交</el-button>
   </div>
 </template>
 
 <script>
-import * as uuid from 'uuid'
 import { psTypeIdEnum } from '@/model/Enumerate.js'
 import * as Product from '@/api/product.js'
+
+const otherRules = {
+  cloudRetouchRequire: [
+    { required: true, message: '请填写修图要求,该修图要求将在云端产品审核时使用', trigger: 'blur' }
+  ]
+}
 
 export default {
   name: 'OtherConfig',
   components: {},
   props: {
-    productSkus: { type: Array, required: true },
-    productObj: { type: Object, required: true }
+    productObj: { type: Object, required: true },
+    productSkus: { type: Array, required: true }
   },
   data() {
     return {
+      otherRules,
       upgradeForm: {
         name: '',
         thumbnailList: [],
@@ -30,11 +59,12 @@ export default {
      * @description 提交全部数据
      */
     async finalSubmint () {
-      const { thumbnailPath, sharePath, isSimple, ...rest } = this.productObj
+      const { thumbnailPath, sharePath, isSimple, coverPath, ...rest } = this.productObj
       let finalObj = rest
       const skuObj = this.handleProductSkus()
       finalObj.thumbnailPath = thumbnailPath[0].path
       finalObj.sharePath = sharePath[0].path
+      finalObj.coverPath = coverPath[0].path
       finalObj.productSkus = skuObj.finalProductSku
       finalObj.skus = skuObj.finalSkus
       await Product.addProduct(finalObj)
@@ -47,7 +77,6 @@ export default {
       let finalProductSku = []
       let finalSkus = {}
       productSkus.forEach((item) => {
-        item.styleForm.uuid = uuid.v4() // 给风格item创建uuid
         finalSkus[item.styleForm.uuid] = {
           name: item.styleForm.name,
           type: 's2',
@@ -76,7 +105,6 @@ export default {
         }
         if (item.styleForm.isSimple === 'notSimple') { // 升级体验存在的情况
           item.upgradeForms.forEach((upgradeItem) => {
-            upgradeItem.uuid = uuid.v4() // 给升级item创建uuid
             finalSkus[upgradeItem.uuid] = {
               name: upgradeItem.name,
               type: 's3',
@@ -137,3 +165,17 @@ export default {
   }
 }
 </script>
+<style lang="less" scoped>
+.other-config {
+  .config-item {
+    padding: 24px;
+
+    .title {
+      margin-right: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #303133;
+    }
+  }
+}
+</style>

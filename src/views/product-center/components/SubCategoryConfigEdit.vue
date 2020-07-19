@@ -1,7 +1,7 @@
 <template>
   <div class="sub-category-edit">
     <el-button class="add-style" @click="addStyle" type="primary">添加修图风格</el-button>
-    <div v-for="(item, index) in productSkus" class="categorys" :key="`id${index}`">
+    <div v-for="(item) in productSkus" class="categorys" :key="item.uuid">
       <div class="top">
         <span>{{ item.styleForm.name }}</span>
         <div class="operate">
