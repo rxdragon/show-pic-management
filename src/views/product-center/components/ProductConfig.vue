@@ -1,31 +1,31 @@
 <template>
   <div class="product-config">
     <!-- 基础设置 -->
-    <div class="module-panel">
+    <div class="module-box">
       <div class="panel-title">基础设置</div>
-      <el-form ref="productObjOne" :model="productObj" :rules="productConfigRules" label-width="80px">
+      <el-form ref="productObjOne" :model="productObj" :rules="productConfigRules" label-width="100px">
         <el-form-item label="名称:" prop="name">
-          <el-input maxlength="10" v-model.trim="productObj.name" placeholder="产品名称,最多10个字符"  />
+          <el-input class="product-name" maxlength="10" v-model.trim="productObj.name" placeholder="产品名称,最多10个字符"  />
         </el-form-item>
       </el-form>
     </div>
     <!-- 价格设置 -->
-    <div class="module-panel">
+    <div class="module-box">
       <div class="panel-title">价格设置</div>
       <div class="form-item row">
         <span class="title">是否在产品层级配置价格:</span>
         <el-radio-group v-model="productObj.isSimple">
-          <el-radio label="simple">是(将不可再配置修图风格&升级体验)</el-radio>
-          <el-radio label="notSimple">否(需要在后续步骤配置修图风格&升级体验)</el-radio>
+          <el-radio label="simple">是（将不可再配置修图风格&升级体验）</el-radio>
+          <el-radio label="notSimple">否（需要在后续步骤配置修图风格&升级体验）</el-radio>
         </el-radio-group>
       </div>
     </div>
     <!-- 常规设置区域 -->
     <price-config ref="normalPriceConfig" v-if="productObj.isSimple === 'simple'"/>
     <!-- 其他设置 -->
-    <div class="module-panel">
+    <div class="module-box">
       <div class="panel-title">其他设置</div>
-      <el-form ref="productObjTwo" :model="productObj" :rules="productConfigRules" label-width="120px">
+      <el-form ref="productObjTwo" :model="productObj" :rules="productConfigRules" label-width="100px">
         <el-form-item label="产品简介:" prop="description">
           <el-input class="long" maxlength="20" v-model.trim="productObj.description" placeholder="产品首页介绍,最多20个字符"  />
         </el-form-item>
@@ -112,14 +112,27 @@ export default {
     }
   }
 
+  .module-box {
+    margin-bottom: 24px;
+  }
+
+  .panel-title {
+    margin-bottom: 20px;
+  }
+
   .form-item {
     margin: 10px;
     font-size: 14px;
     color: #303133;
 
     .title {
+      margin-right: 20px;
       font-weight: 700;
     }
+  }
+
+  .product-name {
+    width: 300px;
   }
 
   .el-radio-group {

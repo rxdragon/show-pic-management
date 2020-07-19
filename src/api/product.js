@@ -19,39 +19,6 @@ export function getProductList () {
       label: ProductStatusNameEnum.lining,
       children: []
     }]
-    // mock数据
-    const mock = [
-      {
-        id: 1,
-        name: "手绘",
-        state: "online",
-        created_at: "2020-06-30 12:00:00",
-        updated_at: "2020-06-30 12:00:00"
-      },
-      {
-        id: 2,
-        name: "原片变大片",
-        state: "offline",
-        created_at: "2020-06-30 12:00:00",
-        updated_at: "2020-06-30 12:00:00"
-      },
-      {
-        id: 3,
-        name: "证件照",
-        state: "online",
-        created_at: "2020-06-30 12:00:00",
-        updated_at: "2020-06-30 12:00:00"
-      },
-      {
-        id: 4,
-        name: "全家福",
-        state: "lining",
-        created_at: "2020-06-30 12:00:00",
-        updated_at: "2020-06-30 12:00:00"
-      }
-    ]
-    msg = mock
-
     msg.forEach((item) => {
       switch (item.state) {
         case PRODUCT_STATE.ONLINE:

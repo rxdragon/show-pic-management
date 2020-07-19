@@ -1,7 +1,7 @@
 <template>
   <div class="sub-category-create">
     <!-- 风格设置 -->
-    <div class="module-panel">
+    <div class="module-box">
       <div class="panel-title">修图风格设置</div>
       <el-form ref="styleForm" :model="styleForm" :rules="styleRules" label-width="150px">
         <el-form-item label="名称:" prop="name">
@@ -23,7 +23,7 @@
     </div>
     <price-config :price-obj="styleForm.priceObj" ref="normalPriceConfig" v-if="styleForm.isSimple === 'simple'"/>
     <!-- 升级体验设置 -->
-    <div class="module-panel" v-else>
+    <div class="module-box" v-else>
       <div class="panel-title">升级体验设置</div>
       <el-button @click="addUpgrade" type="primary" size="small">添加升级体验</el-button>
       <upgrade-config :upgrade-form="item"  v-for="(item) in upgradeForms" :key="item.uuid" />
@@ -142,11 +142,19 @@ export default {
 <style lang="less" scoped>
 .sub-category-create {
   /deep/ .el-input {
-    width: 180px;
+    width: 300px;
 
     &.long {
       width: 300px;
     }
+  }
+
+  .panel-title {
+    margin-bottom: 20px;
+  }
+
+  .submit-area {
+    margin-top: 24px;
   }
 }
 </style>

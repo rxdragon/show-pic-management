@@ -1,6 +1,12 @@
 <template>
   <div class="drag-product" >
-    <el-button type="primary" icon="el-icon-sort" @click="showDialog" circle />
+    <el-button
+      type="primary"
+      icon="el-icon-sort"
+      @click="showDialog"
+      size="mini"
+      circle
+    />
     <el-dialog title="产品顺序" append-to-body :visible.sync="dialogVisible" custom-class="product-drag">
       <draggable
         v-loading="loading"
