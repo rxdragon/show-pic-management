@@ -2,6 +2,7 @@
   <div id="phoneModel" class="iphone-model">
     <div class="iphone-view">
       <div class="phone-header"></div>
+      <img src="" class="banner" alt="">
       <div class="html-page" v-html="pageHtml">
       </div>
     </div>
@@ -12,10 +13,8 @@
 export default {
   name: 'IphoneModel',
   props: {
-    pageHtml: {
-      type: String,
-      default: ''
-    }
+    pageHtml: { type: String,default: ''},
+    banner: { type: [],default: () => []}
   },
   data () {
     return {

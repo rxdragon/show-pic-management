@@ -16,7 +16,7 @@
           <div ref="toastuiEditor" class="toastui-editor"></div>
           <el-button type="primary" @click="preview">保存并预览</el-button>
         </div>
-        <iphone-model :page-html="pageHtml" ></iphone-model>
+        <iphone-model :banner="productObj.coverPath" :page-html="pageHtml" ></iphone-model>
       </div>
     </div>
     <el-button type="primary" @click="nextPage">下一步</el-button>
