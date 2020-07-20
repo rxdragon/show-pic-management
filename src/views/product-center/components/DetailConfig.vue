@@ -12,11 +12,17 @@
       <div class="panel-title">产品介绍</div>
       <div class="edit-content">
         <div class="edit-content-left">
-          <div ref="toastuiEditor" class="toastui-editor"></div>
+          <editor
+            :initialValue="productObj.information"
+            initialEditType="wysiwyg"
+            @change="editorInput"
+            height="100%"
+            ref="toastuiEditor"
+            :options="editorOptions"
+          />
         </div>
-        <iphone-model :banner="productObj.coverPath" :page-html="pageHtml" ></iphone-model>
+        <iphone-model :product-obj="productObj" :banner="productObj.coverPath" :page-html="pageHtml" ></iphone-model>
       </div>
-      <el-button class="preview-btn" type="primary" @click="preview">保存并预览</el-button>
     </div>
     <div class="next-btn">
       <el-button type="primary" @click="nextPage">下一步</el-button>
@@ -31,7 +37,8 @@ import defaultOptions from '../editorOption/index.js'
 import 'codemirror/lib/codemirror.css'
 import '@toast-ui/editor/dist/i18n/zh-cn'
 import '@toast-ui/editor/dist/toastui-editor.css'
-import Editor from '@toast-ui/editor'
+import { Editor } from '@toast-ui/vue-editor'
+
 import * as Commonality from '@/api/commonality'
 import { mapGetters } from 'vuex'
 import * as qiniu from 'qiniu-js'
@@ -44,7 +51,7 @@ const detailRules = {
 }
 export default {
   name: 'DetailConfig',
-  components: { IphoneModel, UploadPic },
+  components: { IphoneModel, UploadPic, Editor },
   props: {
     productObj: { type: Object, required: true }
   },
@@ -52,7 +59,8 @@ export default {
     return {
       detailRules,
       upyunConfig: '',
-      pageHtml: ''
+      pageHtml: '',
+      editorOptions: defaultOptions,
     }
   },
   computed: {
@@ -62,8 +70,7 @@ export default {
     this.getUpyunSign()
   },
   mounted() {
-    const options = { ...defaultOptions, el: this.$refs.toastuiEditor }
-    this.editor = new Editor(options)
+    this.editor = this.$refs.toastuiEditor.editor
     this.editor.eventManager.removeEventHandler('addImageBlobHook')
     // 添加自定义监听事件
     this.editor.eventManager.listen('addImageBlobHook', (blob, callback) => {
@@ -82,21 +89,12 @@ export default {
       })
     },
     /**
-     * @description 预览
+     * @description 输入监听
      */
-    preview () {
-      const temptHtml = this.editor.getHtml()
-      this.pageHtml = temptHtml
-      this.productObj.information = temptHtml
-    },
-    /**
-     * @description 提交到下一步
-     */
-    submit () {
-      // 跳转到下一个tab
-      this.$emit('next', {
-        aim: 'detailConfig'
-      })
+    editorInput () {
+      const html = this.$refs.toastuiEditor.invoke('getHtml')
+      this.pageHtml = html
+      this.productObj.information = html
     },
     /**
      * @description 获取又拍云
@@ -155,10 +153,6 @@ export default {
     /deep/ .iphone-model {
       transform: scale(0.8) translateY(-14%);
     }
-  }
-
-  .preview-btn {
-    margin-top: 24px;
   }
 
   .module-box {

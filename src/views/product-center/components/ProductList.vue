@@ -5,7 +5,7 @@
         产品列表
         <drag-product />
       </span>
-      <el-button type="primary" size="small">添加产品</el-button>
+      <el-button @click="addProduct" type="primary" size="small">添加产品</el-button>
     </div>
     <div class="search">
       <el-input v-model.trim="searchName" @input="inputTrigger" clearable placeholder="产品名称查询" />
@@ -17,7 +17,7 @@
         default-expand-all
         :filter-node-method="filterProduct"
         :data="productList"
-        @node-click="productSelect"
+        @node-click="selectProduct"
       />
     </div>
   </div>
@@ -70,8 +70,10 @@ export default {
     /**
      * @description 选中产品                    
      */
-    productSelect ( data) {
-      // console.log('data', data)
+    selectProduct ( data) {
+      this.$emit('selectProduct', {
+        id: data.id
+      })
     },
     /**
      * @description input触发                    
@@ -90,6 +92,12 @@ export default {
         type: 'status',
         value
       })
+    },
+    /**
+     * @description 添加新的产品                
+     */
+    addProduct () {
+      this.$emit('addProduct')
     }
   }
 }

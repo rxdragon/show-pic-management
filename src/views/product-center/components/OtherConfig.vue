@@ -63,20 +63,34 @@ export default {
      * @description 提交全部数据
      */
     async finalSubmint () {
-      const { thumbnailPath, sharePath, isSimple, coverPath, ...rest } = this.productObj
+      const { thumbnailPath, sharePath, isSimple, coverPath, id, cloudRetouchRequire, ...rest } = this.productObj
       let finalObj = rest
       const skuObj = this.handleProductSkus()
       finalObj.thumbnailPath = thumbnailPath[0].path
       finalObj.sharePath = sharePath[0].path
       finalObj.coverPath = coverPath[0].path
       finalObj.productSkus = skuObj.finalProductSku
-      finalObj.skus = skuObj.finalSkus
-      await Product.addProduct(finalObj)
+      finalObj.extend = { cloud_retouch_require: cloudRetouchRequire}
+      if (skuObj.finalSkus) {
+        finalObj.skus = skuObj.finalSkus
+      }
+      if (id) {
+        finalObj.id = id
+        await Product.edit(finalObj)
+      } else {
+        await Product.addProduct(finalObj)
+      }
+      this.$newMessage.success('提交成功')
+      this.$emit('next', { type: 'init' })
     },
     /**
-     * @description 提交全部数据
+     * @description 处理全部sku相关数据
      */
     handleProductSkus () {
+      // 如果是只有大师和普通两个标准的,走另一个逻辑
+      if (this.productObj.isSimple === 'simple') {
+        return this.handleSimpleSkus()
+      }
       const { productSkus } = this
       let finalProductSku = []
       let finalSkus = {}
@@ -93,6 +107,9 @@ export default {
           if (item.styleForm.priceObj.simplePrice === 'contact') { // 联系客服
             styleObj.handle_account = 1
             styleObj.price = item.styleForm.priceObj.simplePriceText
+            if (item.styleForm.priceObj.productId) {
+              styleObj.id = item.styleForm.priceObj.productId
+            }
           } else {
             item.styleForm.priceObj.standerPrice.forEach((standerPriceItem) => {
               this.handleStanderPriceItem(styleObj, standerPriceItem)
@@ -120,6 +137,9 @@ export default {
             if (upgradeItem.priceObj.simplePrice === 'contact') { // 联系客服时候
               upgradeObj.handle_account = 1
               upgradeObj.price = upgradeItem.priceObj.simplePriceText
+              if (upgradeItem.priceObj.productId) {
+                upgradeObj.id = upgradeItem.priceObj.productId
+              }
               upgradeSku.push({
                 uuid: upgradeItem.uuid
               })
@@ -155,9 +175,36 @@ export default {
       }
     },
     /**
+     * @description 处理只有大师和普通的特殊情况
+     */
+    handleSimpleSkus () {
+      let finalProductSku = []
+      let styleObj = {}
+      let styleSku = []
+      if (this.productObj.priceObj.simplePrice === 'contact') { // 联系客服
+        styleObj.handle_account = 1
+        styleObj.price = this.productObj.priceObj.simplePriceText
+      } else {
+        this.productObj.priceObj.standerPrice.forEach((standerPriceItem) => {
+          this.handleStanderPriceItem(styleObj, standerPriceItem)
+          styleSku.push({
+            id: psTypeIdEnum[standerPriceItem.type]
+          })
+        })
+      }
+      styleObj.skus = styleSku
+      finalProductSku.push(styleObj)
+      return {
+        finalProductSku
+      }
+    },
+    /**
      * @description 处理修图标准的数据
      */
     handleStanderPriceItem (aimObj, dataObj) {
+      if (dataObj.productId) {
+        aimObj.id = dataObj.productId
+      }
       aimObj.handle_account = 0
       aimObj.price = dataObj.price
       aimObj.price_extend = {

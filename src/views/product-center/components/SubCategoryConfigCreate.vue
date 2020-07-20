@@ -36,24 +36,15 @@
 </template>
 
 <script>
+import * as uuid from 'uuid'
 import UploadPic from './UploadPic'
 import PriceConfig from './PriceConfig'
 import UpgradeConfig from './UpgradeConfig'
 import SkuRule from '../rules/skuRule.js'
-import * as uuid from 'uuid'
+import { UpgradeObj } from '../objManage/index.js'
+
 
 const styleRules = new SkuRule('style')
-class UpgradeObj { // 升级体验的item
-  uuid = uuid.v4()
-  name = ''
-  thumbnailList = []
-  desc = ''
-  priceObj = {
-    simplePriceText: '',
-    simplePrice: 'normal',
-    standerPrice: []
-  }
-}
 
 export default {
   name: 'SubCategoryConfigCreate',

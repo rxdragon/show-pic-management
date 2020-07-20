@@ -2,23 +2,42 @@
   <div id="phoneModel" class="iphone-model">
     <div class="iphone-view">
       <div class="phone-header"></div>
-      <img src="" class="banner" alt="">
-      <div class="html-page" v-html="pageHtml">
+      <div class="phone-content">
+        <img :src="bannerImg" class="banner" alt="" />
+        <div class="price-area">
+          <span>{{ productObj.name }}</span>
+          <span class="price">¥120.00起</span>
+        </div>
+        <div class="html-page" v-html="pageHtml"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import * as PhotoTool from '@/utils/photoTool'
+
 export default {
   name: 'IphoneModel',
   props: {
     pageHtml: { type: String,default: ''},
-    banner: { type: [],default: () => []}
+    banner: { type: Array,default: () => []},
+    productObj: { type: Object, required: true }
   },
   data () {
     return {
       activityDesc: []
+    }
+  },
+  computed: {
+    ...mapGetters(['imgDomain']),
+    bannerImg() {
+      let img = ''
+      if (this.banner.length) {
+        img = `${this.imgDomain}${PhotoTool.handlePicPath(this.banner[0].path)}`
+      }
+      return img
     }
   }
 }
@@ -26,7 +45,11 @@ export default {
 
 <style lang="less" scoped>
 .iphone-model {
-  --bkgColor: #f0f2f5;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  --bkgColor: #fff;
 
   width: 422px;
   height: 858px;
@@ -46,6 +69,32 @@ export default {
     mask-position: top;
   }
 
+  .phone-content {
+    height: 775px;
+    overflow-y: auto;
+  }
+
+  .banner {
+    width: 375px;
+  }
+
+  .price-area {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    width: 375px;
+    height: 60px;
+    padding: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    background: #fff;
+
+    .price {
+      color: red;
+    }
+  }
+
   .phone-header {
     height: 83px;
     background: url(~@assetsDir/images/miniapp-header.png) no-repeat;
@@ -53,8 +102,6 @@ export default {
   }
 
   .html-page {
-    height: calc(100% - 83px);
-    overflow-y: overlay;
     background: var(--bkgColor);
   }
 }

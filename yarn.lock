@@ -1047,13 +1047,20 @@
     remark "^12.0.0"
     unist-util-find-all-after "^3.0.1"
 
-"@toast-ui/editor@^2.1.2":
+"@toast-ui/editor@^2.1.2", "@toast-ui/editor@^2.2.0":
   version "2.2.0"
   resolved "https://npm.code.hzmantu.com/@toast-ui%2feditor/-/editor-2.2.0.tgz#77fd790c6ae876d5de738bc022d6ebc5c84a6feb"
   integrity sha512-WiqrY7OeCOS08NlznJobCwtxOWJC/5my8QefHCKTZyX9/70kkojcnyQ8aoiQQ5kIfGUJ6dKt6/JuKD5OOib+bQ==
   dependencies:
     "@types/codemirror" "0.0.71"
     codemirror "^5.48.4"
+
+"@toast-ui/vue-editor@^2.2.0":
+  version "2.2.0"
+  resolved "https://npm.code.hzmantu.com/@toast-ui%2fvue-editor/-/vue-editor-2.2.0.tgz#bae8e6e6c0a7d6fb40a4f6b8e616aada3923118d"
+  integrity sha512-z8q60tEIfrIOk1fQitRg56ZxztOUyp2A1gLlTVuTpFNts21lTsMfFcUNdZsAivWUN6ToQu4qP8Bz80h9FZBLBg==
+  dependencies:
+    "@toast-ui/editor" "^2.2.0"
 
 "@types/codemirror@0.0.71":
   version "0.0.71"

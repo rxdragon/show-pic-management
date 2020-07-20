@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <product-list />
+    <product-list ref="productList" @selectProduct="selectProduct" @addProduct="addProduct" />
     <div class="config-area">
       <el-tabs v-model="whichStep">
         <el-tab-pane v-for="(item, index) in tabPaneConfig" :key="index" :label="item.label" :name="item.name" />
@@ -28,6 +28,9 @@ import SubCategoryConfigCreate from './components/SubCategoryConfigCreate.vue'
 import SubCategoryConfigEdit from './components/SubCategoryConfigEdit.vue'
 import DetailConfig from './components/DetailConfig.vue'
 import OtherConfig from './components/OtherConfig.vue'
+import { psTypeNameEnum, psIdTypeEnum } from '@/model/Enumerate.js'
+import { ProductObj } from './objManage/index.js'
+import * as Product from '@/api/product.js'
 
 const tabPaneConfig = [
   {
@@ -48,8 +51,6 @@ const tabPaneConfig = [
   }
 ]
 
-// todo mock数据
-// const mock = 
 export default {
   name: 'ProductManagement',
   components: { ProductList,ProductConfig,SubCategoryConfigCreate, SubCategoryConfigEdit, DetailConfig, OtherConfig },
@@ -58,18 +59,7 @@ export default {
       tabPaneConfig,
       whichStep: 'ProductConfig',
       isCreate: false,
-      productObj: {
-        name: '',
-        description: '',
-        thumbnailPath: [],
-        sharePath: [],
-        startAt: '',
-        endAt: '',
-        coverPath: [],
-        information: '111',
-        isSimple: 'notSimple',
-        cloudRetouchRequire: ''
-      },
+      productObj: new ProductObj(),
       productSkus: [], // 存放配置保存的子品类
       createInfo: {
         isNew: true,
@@ -120,8 +110,190 @@ export default {
           index: obj.index
         }
       }
+      if (obj.type === 'init') { // 提交后重置
+        this.addProduct()
+        this.$refs.productList.init()
+      }
       if (!obj.type) {
         this.whichStep = obj.aim
+      }
+    },
+    /**
+     * @description 新建产品
+     */
+    addProduct () {
+      this.productObj = new ProductObj()
+      this.productSkus = []
+      this.whichStep = 'ProductConfig'
+    },
+    /**
+     * @description 新建产品
+     */
+    async selectProduct (obj) {
+      const req = { id: obj.id }
+      const msg = await Product.getInfo(req)
+      this.handleEditorInfo(msg)
+    },
+    /**
+     * @description 处理成编辑状态的信息
+     */
+    handleEditorInfo (msg) {
+      const { id, tree, product_sku: productSku, name, description, thumbnail_path: thumbnailPath, share_path: sharePath, start_at: startAt, end_at: endAt, cover_path: coverPath, information, extend } = msg
+      let tempProductSku = []
+      let arrayS2 = []
+      let productObj = {
+        id,
+        name,
+        description,
+        thumbnailPath: [{
+          path: thumbnailPath,
+          status: 'success',
+          response: {}
+        }],
+        sharePath: [{
+          path: sharePath,
+          status: 'success',
+          response: {}
+        }],
+        startAt,
+        endAt,
+        coverPath: [{
+          path: coverPath,
+          status: 'success',
+          response: {}
+        }],
+        information,
+        cloudRetouchRequire: extend ? extend.cloud_retouch_require : '',
+        isSimple: 'notSimple'
+      }
+      tree.forEach((item) => {
+        if (item.k_s === 's2') {
+          arrayS2 = item.v
+        }
+      })
+      if (!arrayS2.length) { // 只有修图标准的情况
+        productObj.isSimple = 'simple'
+        productObj.priceObj = this.handlePriceObjS1(productSku)
+        this.productObj = productObj
+        this.productSkus = []
+        return
+      }
+      arrayS2.forEach((item) => {
+        const { id, description, img_path: imgPath, name, sku_child } = item
+        let upgradeForms = []
+        let styleForm = {
+          uuid: id,
+          name,
+          desc: description,
+          thumbnailList: [{
+            path: imgPath,
+            status: 'success',
+            response: {}
+          }],
+        }
+        if (sku_child) { // 是否有升级体验
+          styleForm.isSimple = 'notSimple'
+          sku_child.v.forEach((item) => {
+            upgradeForms.push(this.handleUpgradeObj(item, productSku, 's3'))
+          })
+        } else {
+          styleForm.isSimple = 'simple'
+          styleForm.priceObj = this.handlePriceObj(productSku, id, 's2')
+        }
+        tempProductSku.push({
+          styleForm,
+          upgradeForms
+        })
+      })
+      this.productObj = productObj
+      this.productSkus = tempProductSku
+    },
+    /**
+     * @description 处理升级体验部分
+     */
+    handleUpgradeObj (itemS3, productSku, type) {
+      const { id, description, img_path: imgPath, name } = itemS3
+      let upgradeObj = {
+        uuid: id,
+        name,
+        desc: description,
+        thumbnailList: [{
+          path: imgPath,
+          status: 'success',
+          response: {}
+        }]
+      }
+      upgradeObj.priceObj = this.handlePriceObj(productSku, id, type)
+      return upgradeObj
+    },
+    /**
+     * @description 处理价格部分
+     */
+    handlePriceObj (productSku, styleId, type) {
+      let simplePriceText = ''
+      let simplePrice = 'normal'
+      let productId = ''
+      let standerPrice = []
+      productSku.forEach((item) => {
+        let standerPriceObj = {}
+        if (item.skus[type] === styleId) {
+          if (item.handle_account) { // 联系客服
+            simplePrice = 'contact'
+            simplePriceText = item.price
+            productId = item.id
+          } else {
+            const psType = psIdTypeEnum[item.skus.s1]
+            const { basePeople, limitPeople, stepPrice } = item.price_extend
+            standerPriceObj.price = item.price
+            standerPriceObj.type = psType
+            standerPriceObj.name = psTypeNameEnum[psType]
+            standerPriceObj.basePeople = basePeople
+            standerPriceObj.limitPeople = limitPeople
+            standerPriceObj.stepPrice = stepPrice
+            standerPriceObj.productId = item.id
+            standerPrice.push(standerPriceObj)
+          }
+        }
+      })
+      return {
+        simplePriceText,
+        simplePrice,
+        standerPrice,
+        productId
+      }
+    },
+    /**
+     * @description 处理成编辑状态的信息
+     */
+    handlePriceObjS1 (productSku) {
+      let simplePriceText = ''
+      let simplePrice = 'normal'
+      let standerPrice = []
+      let productId = ''
+      productSku.forEach((item) => {
+        let standerPriceObj = {}
+        if (item.handle_account) { // 联系客服
+          simplePrice = 'contact'
+          simplePriceText = item.price
+          productId = item.id
+        } else {
+          const psType = psIdTypeEnum[item.skus.s1]
+          const { basePeople, limitPeople, stepPrice } = item.price_extend
+          standerPriceObj.type = psType
+          standerPriceObj.price = item.price
+          standerPriceObj.name = psTypeNameEnum[psType]
+          standerPriceObj.basePeople = basePeople
+          standerPriceObj.limitPeople = limitPeople
+          standerPriceObj.stepPrice = stepPrice
+          standerPriceObj.productId = item.id
+          standerPrice.push(standerPriceObj)
+        }
+      })
+      return {
+        simplePriceText,
+        simplePrice,
+        standerPrice,
+        productId
       }
     }
   }

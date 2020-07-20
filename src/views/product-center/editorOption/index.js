@@ -1,6 +1,4 @@
 export default {
-  minHeight: '500px',
-  height: '100%',
   viewer: true,
   language: 'zh-CN',
   initialEditType: 'wysiwyg',

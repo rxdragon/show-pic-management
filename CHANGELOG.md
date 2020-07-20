@@ -1,16 +1,5 @@
 # 1.0.0 (2020-07-20)
 
-范围|描述|commitId
---|--|--
- - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
- - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
- - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
- - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
- - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
- - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
- - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
-
-
 ### 🌟 新功能
 范围|描述|commitId
 --|--|--
@@ -57,8 +46,10 @@
 ### 🎨 代码样式
 范围|描述|commitId
 --|--|--
+ - | 优化样式 | [9075b0d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9075b0d)
  - | 修复关闭订单理由换行 | [214b2af](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/214b2af)
  - | 描述样式变更 | [828d37a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/828d37a)
+ - | 暂存,ui修改 | [0677215](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0677215)
  - | 更改全局less变量 | [03d1942](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03d1942)
  - | 更改文案 | [df0980e](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/df0980e)
  - | 更改样式 | [6a28f8c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6a28f8c)
@@ -90,8 +81,8 @@
  - | 修复部分bug | [8b45b0e](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8b45b0e)
  - | 修复部分文案错误 | [425fe26](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/425fe26)
  - | 修复部分查询问题 | [ec5abc9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ec5abc9)
- - | 修复部分问题 | [af21495](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/af21495)
  - | 修复部分问题 | [a5210c5](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a5210c5)
+ - | 修复部分问题 | [af21495](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/af21495)
  - | 修复金额不正确和默认手机号问题 | [08d8264](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/08d8264)
  - | 修复错误吗报错 | [e6da9b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e6da9b0)
  - | 修复问题 | [3cb3d66](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cb3d66)
@@ -138,6 +129,17 @@
  - | 更改接口传参 | [bd3e7f8](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bd3e7f8)
  - | 更改部分字段显示错误问题 | [d2b1bb4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d2b1bb4)
  - | 自动更改更新时间 | [b5f84ce](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b5f84ce)
+
+
+范围|描述|commitId
+--|--|--
+ - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
+ - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
+ - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
+ - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
+ - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
+ - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
+ - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
 
 
 ### chore

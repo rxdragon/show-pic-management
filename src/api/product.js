@@ -52,7 +52,7 @@ export function getProductList () {
 }
 
 /**
- * @description 获取订单列表
+ * @description 获取产品列表用于排序
  */
 export function getProductListForSort () {
   const params = {
@@ -90,6 +90,30 @@ export function addProduct (params) {
 export function sortProduct (params) {
   return axios({
     url: '/project_show_pic/admin/trading/product/sort',
+    method: 'POST',
+    data: params
+  })
+}
+
+/**
+ * @description 获取产品详情
+ * @param {*} params 
+ */
+export function getInfo (params) {
+  return axios({
+    url: '/project_show_pic/admin/trading/product/info',
+    method: 'GET',
+    params
+  })
+}
+
+/**
+ * @description 编辑产品
+ * @param {*} params 
+ */
+export function edit (params) {
+  return axios({
+    url: '/project_show_pic/admin/trading/product/edit',
     method: 'POST',
     data: params
   })

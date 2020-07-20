@@ -13,7 +13,7 @@
       </el-radio-group>
     </div>
     <div class="top" v-if="priceObj.simplePrice === 'normal'">
-      <span>选择修图标准:</span>
+      <span class="top-title">选择修图标准:</span>
       <el-checkbox-group @change="checkStandard" v-model="psStandard">
         <el-checkbox label="blue">普通修图</el-checkbox>
         <el-checkbox label="master">大师修图</el-checkbox>
@@ -135,10 +135,16 @@ export default {
 
 <style lang="less" scoped>
 .normal-config {
+  .el-input {
+    width: 100px;
+    margin-right: 12px;
+  }
+
   .condition {
     .contact-wrap {
       display: flex;
       align-items: center;
+      margin-bottom: 24px;
     }
 
     .show-price {
@@ -154,10 +160,23 @@ export default {
 
   .top {
     display: flex;
+    margin-top: 24px;
+    margin-bottom: 24px;
+
+    .top-title {
+      padding-right: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #303133;
+    }
   }
 
   .content {
     display: flex;
+
+    .el-form {
+      margin-right: 24px;
+    }
 
     .content-title {
       font-weight: bold;

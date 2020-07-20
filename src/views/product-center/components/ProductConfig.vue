@@ -21,7 +21,7 @@
       </div>
     </div>
     <!-- 常规设置区域 -->
-    <price-config ref="normalPriceConfig" v-if="productObj.isSimple === 'simple'"/>
+    <price-config :price-obj="productObj.priceObj" ref="normalPriceConfig" v-if="productObj.isSimple === 'simple'"/>
     <!-- 其他设置 -->
     <div class="module-box">
       <div class="panel-title">其他设置</div>

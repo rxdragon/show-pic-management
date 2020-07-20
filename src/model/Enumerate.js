@@ -203,6 +203,14 @@ export const ProductStatusNameEnum = {
 }
 
 /**
+ * @description 修图标准id
+ */
+export const PS_ID = {
+  ONE: 1,
+  TWO: 2,
+}
+
+/**
  * @description 修图标准对应中文
  */
 export const psTypeNameEnum = {
@@ -216,4 +224,12 @@ export const psTypeNameEnum = {
 export const psTypeIdEnum = {
   'blue': 1,
   'master': 2
+}
+
+/**
+ * @description 修图对应id
+ */
+export const psIdTypeEnum = {
+  [PS_ID.ONE]: 'blue',
+  [PS_ID.TWO]: 'master'
 }
