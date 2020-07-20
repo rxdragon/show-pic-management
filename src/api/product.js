@@ -19,39 +19,6 @@ export function getProductList () {
       label: ProductStatusNameEnum.lining,
       children: []
     }]
-    // mock数据
-    const mock = [
-      {
-        id: 1,
-        name: "手绘",
-        state: "online",
-        created_at: "2020-06-30 12:00:00",
-        updated_at: "2020-06-30 12:00:00"
-      },
-      {
-        id: 2,
-        name: "原片变大片",
-        state: "offline",
-        created_at: "2020-06-30 12:00:00",
-        updated_at: "2020-06-30 12:00:00"
-      },
-      {
-        id: 3,
-        name: "证件照",
-        state: "online",
-        created_at: "2020-06-30 12:00:00",
-        updated_at: "2020-06-30 12:00:00"
-      },
-      {
-        id: 4,
-        name: "全家福",
-        state: "lining",
-        created_at: "2020-06-30 12:00:00",
-        updated_at: "2020-06-30 12:00:00"
-      }
-    ]
-    msg = mock
-
     msg.forEach((item) => {
       switch (item.state) {
         case PRODUCT_STATE.ONLINE:
@@ -85,11 +52,44 @@ export function getProductList () {
 }
 
 /**
+ * @description 获取订单列表
+ */
+export function getProductListForSort () {
+  const params = {
+    cond: { stateIn: ['online', 'wait'] }
+  }
+  return axios({
+    url: '/project_show_pic/admin/trading/product/getList',
+    method: 'POST',
+    data: params
+  }).then(msg => {
+    if (msg instanceof Array) {
+      msg.sort((a, b) => b.weight - a.weight)
+    } else {
+      msg = []
+    }
+    return msg
+  })
+}
+
+/**
  * @description 新增产品接口
  */
 export function addProduct (params) {
   return axios({
     url: '/project_show_pic/admin/trading/product/addWithConfig',
+    method: 'POST',
+    data: params
+  })
+}
+
+/**
+ * @description 提交排序
+ * @param {*} params 
+ */
+export function sortProduct (params) {
+  return axios({
+    url: '/project_show_pic/admin/trading/product/sort',
     method: 'POST',
     data: params
   })

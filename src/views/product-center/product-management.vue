@@ -1,17 +1,22 @@
 <template>
   <div class="container">
-    <product-list/>
+    <product-list />
     <div class="config-area">
       <el-tabs v-model="whichStep">
-        <el-tab-pane v-for="(item, index) in tabPaneConfig" :key="index" :label="item.label" :name="item.name"></el-tab-pane>
+        <el-tab-pane v-for="(item, index) in tabPaneConfig" :key="index" :label="item.label" :name="item.name" />
       </el-tabs>
-      <component
-        :create-info="createInfo"
-        :product-skus="productSkus"
-        :product-obj="productObj"
-        @next="goNext"
-        :is="step"
-      />
+      <div
+        class="module-panel"
+        :class="{'no-border': whichStep === 'ProductConfig'}"
+      >
+        <component
+          :create-info="createInfo"
+          :product-skus="productSkus"
+          :product-obj="productObj"
+          @next="goNext"
+          :is="step"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -51,7 +56,7 @@ export default {
   data () {
     return {
       tabPaneConfig,
-      whichStep: 'OtherConfig',
+      whichStep: 'ProductConfig',
       isCreate: false,
       productObj: {
         name: '',
@@ -125,14 +130,11 @@ export default {
 <style lang="less" scoped>
 .container {
   display: flex;
-  padding: 10px;
   margin-top: 20px;
-  background: #fff;
-  border-radius: 20px;
 
   .config-area {
     width: 100%;
-    margin-left: 10px;
+    margin-left: 20px;
   }
 
   /deep/ .el-tabs__item {

@@ -1,25 +1,26 @@
 <template>
   <div class="detail-config">
-    <div class="module-panel">
+    <div class="module-box">
       <div class="panel-title">头图/封面图设置</div>
-      <el-form ref="productObj" :model="productObj" :rules="detailRules" label-width="150px">
+      <el-form ref="productObj" :model="productObj" :rules="detailRules" label-width="120px">
         <el-form-item label="头图/封面图:" prop="coverPath">
           <upload-pic v-model="productObj.coverPath"/>
         </el-form-item>
       </el-form>
     </div>
-    <div class="module-panel">
+    <div class="module-box">
       <div class="panel-title">产品介绍</div>
-      <p>产品详情配置：</p>
       <div class="edit-content">
         <div class="edit-content-left">
           <div ref="toastuiEditor" class="toastui-editor"></div>
-          <el-button type="primary" @click="preview">保存并预览</el-button>
         </div>
         <iphone-model :banner="productObj.coverPath" :page-html="pageHtml" ></iphone-model>
       </div>
+      <el-button class="preview-btn" type="primary" @click="preview">保存并预览</el-button>
     </div>
-    <el-button type="primary" @click="nextPage">下一步</el-button>
+    <div class="next-btn">
+      <el-button type="primary" @click="nextPage">下一步</el-button>
+    </div>
   </div>
 </template>
 
@@ -125,7 +126,7 @@ export default {
 .detail-config {
   .edit-content {
     display: flex;
-    width: 900px;
+    min-width: 900px;
     height: 600px;
 
     /deep/ .toastui-editor {
@@ -145,6 +146,31 @@ export default {
         }
       }
     }
+
+    .edit-content-left {
+      width: 600px;
+      margin-right: 48px;
+    }
+
+    /deep/ .iphone-model {
+      transform: scale(0.8) translateY(-14%);
+    }
+  }
+
+  .preview-btn {
+    margin-top: 24px;
+  }
+
+  .module-box {
+    margin-bottom: 24px;
+  }
+
+  .panel-title {
+    margin-bottom: 20px;
+  }
+
+  .next-btn {
+    text-align: center;
   }
 }
 </style>

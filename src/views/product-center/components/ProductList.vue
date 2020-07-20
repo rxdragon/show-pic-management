@@ -1,23 +1,24 @@
 <template>
-  <div class="product-list">
-    <div class="top">
-      <span>产品列表</span>
+  <div class="product-list module-panel">
+    <div class="panel-title">
+      <span class="panel-content">
+        产品列表
+        <drag-product />
+      </span>
       <el-button type="primary" size="small">添加产品</el-button>
     </div>
     <div class="search">
-      <el-input v-model.trim="searchName" @input="inputTrigger" clearable placeholder="产品名称查询"></el-input>
+      <el-input v-model.trim="searchName" @input="inputTrigger" clearable placeholder="产品名称查询" />
       <product-status-select @change="selectTrigger" />
     </div>
     <div class="list-area">
       <el-tree
-        :expand-on-click-node = "false"
+        ref="tree"
         default-expand-all
         :filter-node-method="filterProduct"
         :data="productList"
         @node-click="productSelect"
-        ref="tree"
-      >
-      </el-tree>
+      />
     </div>
   </div>
 </template>
@@ -25,10 +26,11 @@
 <script>
 import * as Product from '@/api/product.js'
 import ProductStatusSelect from '@selectBox/ProductStatusSelect'
+import DragProduct from '@/components/DragProduct'
 
 export default {
   name: 'ProductList',
-  components: { ProductStatusSelect },
+  components: { ProductStatusSelect, DragProduct },
   props: {},
   data() {
     return {
@@ -96,14 +98,22 @@ export default {
 <style lang="less" scoped>
 .product-list {
   box-sizing: border-box;
-  width: 400px;
+  flex-shrink: 0;
+  width: 350px;
   min-height: 600px;
-  padding: 10px;
-  border: 1px solid lightgray;
 
-  .top {
+  .panel-title {
     display: flex;
     justify-content: space-between;
+
+    .panel-content {
+      display: flex;
+      align-items: center;
+
+      .drag-product {
+        margin-left: 12px;
+      }
+    }
   }
 
   .search {
@@ -112,19 +122,19 @@ export default {
     margin-top: 10px;
 
     .el-input {
-      width: 50%;
+      width: 60%;
     }
 
     .el-select {
-      width: 30%;
+      width: 35%;
     }
   }
 
   .list-area {
     padding-top: 10px;
 
-    /deep/ .is-current {
-      color: aquamarine;
+    & /deep/ .el-tree-node:focus > .el-tree-node__content {
+      color: @menuBg;
     }
   }
 }

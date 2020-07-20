@@ -1,5 +1,6 @@
 <template>
   <div class="other-config">
+    <div class="panel-title">时间配置</div>
     <div class="config-item">
       <span class="title">上线时间:</span>
       <el-date-picker value-format="yyyy-MM-dd HH:mm:ss" v-model="productObj.startAt" type="datetime" placeholder="选择上线时间"></el-date-picker>
@@ -8,12 +9,13 @@
       <span class="title">下线时间:</span>
       <el-date-picker value-format="yyyy-MM-dd HH:mm:ss" v-model="productObj.endAt" type="datetime" placeholder="选择下线时间"></el-date-picker>
     </div>
-    <div class="module-panel">
+    <div class="module-box">
       <div class="panel-title">云端产品审核信息</div>
       <el-form ref="productObj" :model="productObj" :rules="otherRules" label-width="150px">
         <el-form-item label="修图要求:" prop="cloudRetouchRequire">
           <el-input
             type="textarea"
+            class="submit-textarea"
             placeholder="请填写修图要求,该修图要求将在云端产品审核时使用"
             v-model="productObj.cloudRetouchRequire"
             maxlength="30"
@@ -23,7 +25,9 @@
         </el-form-item>
       </el-form>
     </div>
-    <el-button @click="finalSubmint" type="primary" >提交</el-button>
+    <div class="submit-box">
+      <el-button @click="finalSubmint" type="primary" >提交</el-button>
+    </div>
   </div>
 </template>
 
@@ -168,7 +172,7 @@ export default {
 <style lang="less" scoped>
 .other-config {
   .config-item {
-    padding: 24px;
+    margin-bottom: 24px;
 
     .title {
       margin-right: 12px;
@@ -176,6 +180,18 @@ export default {
       font-weight: 700;
       color: #303133;
     }
+  }
+
+  .panel-title {
+    margin-bottom: 20px;
+  }
+
+  .submit-textarea {
+    width: 600px;
+  }
+
+  .submit-box {
+    text-align: center;
   }
 }
 </style>
