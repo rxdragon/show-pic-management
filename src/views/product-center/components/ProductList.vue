@@ -13,6 +13,7 @@
     </div>
     <div class="list-area">
       <el-tree
+        empty-text="当前没有产品,快去配置产品吧"
         ref="tree"
         default-expand-all
         :filter-node-method="filterProduct"
@@ -71,6 +72,9 @@ export default {
      * @description 选中产品                    
      */
     selectProduct ( data) {
+      if (!data.id) {
+        return
+      }
       this.$emit('selectProduct', {
         id: data.id
       })

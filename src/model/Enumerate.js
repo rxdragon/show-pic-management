@@ -199,7 +199,7 @@ export const PRODUCT_STATE = {
 export const ProductStatusNameEnum = {
   [PRODUCT_STATE.ONLINE]: '已上线',
   [PRODUCT_STATE.OFFLINE]: '已下线',
-  [PRODUCT_STATE.LINING]: '上线中'
+  [PRODUCT_STATE.LINING]: '待上线'
 }
 
 /**

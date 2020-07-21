@@ -260,6 +260,8 @@ export default {
       let simplePrice = 'normal'
       let productId = ''
       let standerPrice = []
+      let psStandard = []
+
       productSku.forEach((item) => {
         let standerPriceObj = {}
         if (item.skus[type] === styleId) {
@@ -278,6 +280,7 @@ export default {
             standerPriceObj.stepPrice = stepPrice
             standerPriceObj.productId = item.id
             standerPrice.push(standerPriceObj)
+            psStandard.push(psType)
           }
         }
       })
@@ -285,7 +288,8 @@ export default {
         simplePriceText,
         simplePrice,
         standerPrice,
-        productId
+        productId,
+        psStandard
       }
     },
     /**
@@ -296,6 +300,7 @@ export default {
       let simplePrice = 'normal'
       let standerPrice = []
       let productId = ''
+      let psStandard = []
       productSku.forEach((item) => {
         let standerPriceObj = {}
         if (item.handle_account) { // 联系客服
@@ -313,13 +318,15 @@ export default {
           standerPriceObj.stepPrice = stepPrice
           standerPriceObj.productId = item.id
           standerPrice.push(standerPriceObj)
+          psStandard.push(psType)
         }
       })
       return {
         simplePriceText,
         simplePrice,
         standerPrice,
-        productId
+        productId,
+        psStandard
       }
     }
   }

@@ -14,7 +14,7 @@
     </div>
     <div class="top" v-if="priceObj.simplePrice === 'normal'">
       <span class="top-title">选择修图标准:</span>
-      <el-checkbox-group @change="checkStandard" v-model="psStandard">
+      <el-checkbox-group @change="checkStandard" v-model="priceObj.psStandard">
         <el-checkbox label="blue">普通修图</el-checkbox>
         <el-checkbox label="master">大师修图</el-checkbox>
       </el-checkbox-group>
@@ -79,16 +79,8 @@ export default {
   },
   data() {
     return {
-      priceRules
-    }
-  },
-  computed: {
-    psStandard () {
-      let tempArr = []
-      this.priceObj.standerPrice.forEach((item) => {
-        tempArr.push(item.type)
-      })
-      return tempArr
+      priceRules,
+      psStandard: []
     }
   },
   methods: {

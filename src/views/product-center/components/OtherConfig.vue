@@ -14,7 +14,7 @@
               placeholder="选择上线时间"
             />
           </el-radio>
-          <el-radio label="now">马上上线</el-radio>
+          <el-radio label="now">立即上线</el-radio>
         </el-radio-group>
       </div>
       <div class="config-item">
@@ -30,7 +30,7 @@
               placeholder="选择下线时间"
             />
           </el-radio>
-          <el-radio label="now">马上下线</el-radio>
+          <el-radio label="now">立即下线</el-radio>
         </el-radio-group>
       </div>
     </div>
@@ -58,7 +58,7 @@
         </el-date-picker>
       </div>
     </div>
-    <div class="module-box">
+    <div class="module-box" v-if="productObj.editType !== 'edit'">
       <div class="panel-title">云端产品审核信息</div>
       <el-form ref="productObj" :model="productObj" :rules="otherRules" label-width="150px">
         <el-form-item label="修图要求:" prop="cloudRetouchRequire">

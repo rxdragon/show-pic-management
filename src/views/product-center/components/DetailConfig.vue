@@ -20,7 +20,7 @@
             :options="editorOptions"
           />
         </div>
-        <iphone-model :product-obj="productObj" :banner="productObj.coverPath" :page-html="pageHtml" ></iphone-model>
+        <iphone-model :product-obj="productObj" :banner="productObj.coverPath" :page-html="productObj.information" ></iphone-model>
       </div>
     </div>
     <div class="next-btn">
@@ -58,7 +58,6 @@ export default {
     return {
       detailRules,
       upyunConfig: '',
-      pageHtml: '',
       editorOptions: defaultOptions,
     }
   },
@@ -67,6 +66,9 @@ export default {
   },
   created() {
     this.getUpyunSign()
+  },
+  activated() {
+    this.editor.setHtml(this.productObj.information)
   },
   mounted() {
     this.editor = this.$refs.toastuiEditor.editor
@@ -77,7 +79,6 @@ export default {
         callback(url)
       })
     })
-    this.editor.setHtml(this.productObj.information)
   },
   methods: {
     /**
@@ -93,7 +94,6 @@ export default {
      */
     editorInput () {
       const html = this.$refs.toastuiEditor.invoke('getHtml')
-      this.pageHtml = html
       this.productObj.information = html
     },
     /**

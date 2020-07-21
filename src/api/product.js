@@ -9,6 +9,9 @@ export function getProductList () {
     url: '/project_show_pic/admin/trading/product/getList',
     method: 'POST',
   }).then(msg => {
+    if (!msg.length) {
+      return []
+    }
     const productList = [{
       label: ProductStatusNameEnum[PRODUCT_STATE.ONLINE],
       children: []

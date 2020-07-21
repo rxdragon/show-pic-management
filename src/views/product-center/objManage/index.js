@@ -8,7 +8,8 @@ export class UpgradeObj { // 升级体验的item
   priceObj = {
     simplePriceText: '',
     simplePrice: 'normal',
-    standerPrice: []
+    standerPrice: [],
+    psStandard: []
   }
 }
 
@@ -26,6 +27,7 @@ export class ProductObj { // 产品的obj
   priceObj = { // 只有大师和普通修图时候的价格存储
     simplePriceText: '',
     simplePrice: 'normal',
-    standerPrice: []
+    standerPrice: [],
+    psStandard: []
   }
 }
