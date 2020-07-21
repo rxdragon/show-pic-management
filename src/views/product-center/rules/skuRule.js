@@ -1,8 +1,5 @@
 export default class Rules {
   name = []
-  desc = [
-    { required: true, message: '请输入下单说明', trigger: 'blur' }
-  ]
   thumbnailList = [
     { required: true, message: '请上传缩略图', trigger: 'change' }
   ]

@@ -5,8 +5,12 @@
         <div class="contact-wrap">
           <el-radio label="contact">联系客服(针对特殊产品需要顾客联系客服下单)</el-radio>
           <div class="show-price" v-if="priceObj.simplePrice === 'contact'">
-            <p class="title">展示价格:</p>
-            <el-input v-model.trim="priceObj.simplePriceText" placeholder="需要展示的价格"  />
+            <!-- <p class="title">展示价格:</p> -->
+            <el-form ref="contactPrice" :model="priceObj" :rules="contactRules" label-width="100px">
+              <el-form-item label="展示价格:" prop="simplePriceText">
+                <el-input v-model.trim="priceObj.simplePriceText" placeholder="需要展示的价格"  />
+              </el-form-item>
+            </el-form>
           </div>
         </div>
         <el-radio label="normal">常规设置</el-radio>
@@ -55,6 +59,12 @@ import { positiveIntValidator, priceDoubleValidator } from '@/utils/validator.js
 import { psTypeNameEnum } from '@/model/Enumerate.js'
 
 // 常规价格配置
+const contactRules = {
+  simplePriceText: [
+    { required: true, message: '请输入客服展示价格', trigger: 'blur' }
+  ]
+}
+
 const priceRules = {
   basePeople: [
     { required: true, message: '请输入起始人头数', trigger: 'blur' },
@@ -80,6 +90,7 @@ export default {
   data() {
     return {
       priceRules,
+      contactRules,
       psStandard: []
     }
   },
@@ -115,7 +126,12 @@ export default {
      * @description 表单校验
      */
     formCheck (value) {
-      this.psStandard.forEach((item, index) => {
+      // 分客服情况和非客服情况
+      if (this.priceObj.simplePrice === 'contact') {
+        this.$refs.contactPrice.validate()
+        return
+      }
+      this.priceObj.psStandard.forEach((item, index) => {
         this.$refs.standerPrice[index].validate()
       })
     },
@@ -155,6 +171,10 @@ export default {
     .show-price {
       display: flex;
       align-items: center;
+
+      .el-form-item {
+        margin-bottom: 0;
+      }
 
       .title {
         width: 100px;

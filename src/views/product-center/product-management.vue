@@ -127,6 +127,7 @@ export default {
       this.productObj = new ProductObj()
       this.productSkus = []
       this.whichStep = 'ProductConfig'
+      this.isCreate = false
     },
     /**
      * @description 新建产品

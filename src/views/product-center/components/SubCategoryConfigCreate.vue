@@ -7,7 +7,7 @@
         <el-form-item label="名称:" prop="name">
           <el-input maxlength="10" v-model.trim="styleForm.name" placeholder="修图风格名称,最多10个字符" />
         </el-form-item>
-        <el-form-item label="下单说明(非必填):" prop="desc">
+        <el-form-item label="下单说明(非必填):">
           <el-input maxlength="30" class="long" v-model.trim="styleForm.desc" placeholder="下单说明,最多30个字符" />
         </el-form-item>
         <el-form-item label="缩略图:" prop="thumbnailList">
@@ -26,7 +26,14 @@
     <div class="module-box" v-else>
       <div class="panel-title">升级体验设置</div>
       <el-button @click="addUpgrade" type="primary" size="small">添加升级体验</el-button>
-      <upgrade-config :upgrade-form="item"  v-for="(item) in upgradeForms" :key="item.uuid" />
+      <upgrade-config
+        :ref="`upgradeConfig${index}`"
+        @del="delUpgradeItem"
+        :upgrade-form="item"
+        :upgrade-index="index"
+        v-for="(item, index) in upgradeForms"
+        :key="item.uuid"
+      />
     </div>
     <div class="submit-area">
       <el-button @click="back" size="small">返回</el-button>
@@ -65,13 +72,14 @@ export default {
         priceObj: {
           simplePriceText: '',
           simplePrice: 'normal',
-          standerPrice: []
+          standerPrice: [],
+          psStandard: []
         }
       },
       upgradeForms: []
     }
   },
-  mounted() {
+  activated() {
     if (!this.createInfo.isNew) {
       this.styleForm = this.productSkus[this.createInfo.index].styleForm
       this.upgradeForms = this.productSkus[this.createInfo.index].upgradeForms
@@ -89,7 +97,9 @@ export default {
         validateArr.push(this.$refs.normalPriceConfig.formCheck())
       }
       if (this.styleForm.isSimple === 'notSimple') { // 二层风格设置
-        
+        this.upgradeForms.forEach((item, index) => {
+          validateArr.push(this.$refs[`upgradeConfig${index}`][0].formCheck())
+        })
       }
       try {
         await Promise.all(validateArr)
@@ -113,6 +123,12 @@ export default {
      */
     addUpgrade () {
       this.upgradeForms.push(new UpgradeObj())
+    },
+    /**
+     * @description 删除升级体验
+     */
+    delUpgradeItem (obj) {
+      this.upgradeForms.splice(obj.index, 1)
     },
     /**
      * @description 返回上一页

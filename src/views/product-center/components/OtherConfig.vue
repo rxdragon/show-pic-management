@@ -83,7 +83,6 @@
 <script>
 import { psTypeIdEnum } from '@/model/Enumerate.js'
 import * as Product from '@/api/product.js'
-import moment from 'moment'
 
 const otherRules = {
   cloudRetouchRequire: [
@@ -134,11 +133,14 @@ export default {
       }
       if (editType === 'edit') { // 编辑状态下,判断有没有立马上下线
         if (this.editOnline === 'now') {
-          finalObj.startAt = moment().format('YYYY-MM-DD HH:mm:ss')
+          finalObj.state = 'online'
         }
         if (this.editOffline === 'now') {
-          finalObj.endAt = moment().format('YYYY-MM-DD HH:mm:ss')
+          finalObj.state = 'offline'
         }
+      }
+      if (!this.checkAll()) {
+        return
       }
       if (id) {
         finalObj.id = id
@@ -280,6 +282,16 @@ export default {
         basePeople: dataObj.basePeople,
         limitPeople: dataObj.limitPeople
       }
+    },
+    /**
+     * @description 检查所有情况
+     */
+    checkAll () {
+      if (this.editOnline === 'now' && this.editOffline === 'now') {
+        this.$newMessage.warning('不能同时设置立即上下线')
+        return false
+      }
+      return true
     }
   }
 }

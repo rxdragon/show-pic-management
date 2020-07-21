@@ -8,6 +8,7 @@
  - | 优化订单页面跳转问题 | [75b8692](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/75b8692)
  - | 优惠劵管理页面 | [000c301](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/000c301)
  - | 修修兽1.8 更新产品排序组件 | [616d78a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/616d78a)
+ - | 修改了状态名字,修图标准等 | [10471d6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10471d6)
  - | 前端基本框架搭建完成 | [a0d38fa](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a0d38fa)
  - | 发到release | [9948c7d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9948c7d)
  - | 基础设置部分提交 | [551ea4f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/551ea4f)
