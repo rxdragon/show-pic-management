@@ -13,7 +13,6 @@
       <div class="edit-content">
         <div class="edit-content-left">
           <editor
-            :initialValue="productObj.information"
             initialEditType="wysiwyg"
             @change="editorInput"
             height="100%"
@@ -78,6 +77,7 @@ export default {
         callback(url)
       })
     })
+    this.editor.setHtml(this.productObj.information)
   },
   methods: {
     /**

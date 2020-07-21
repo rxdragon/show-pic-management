@@ -79,8 +79,16 @@ export default {
   },
   data() {
     return {
-      psStandard: [],
       priceRules
+    }
+  },
+  computed: {
+    psStandard () {
+      let tempArr = []
+      this.priceObj.standerPrice.forEach((item) => {
+        tempArr.push(item.type)
+      })
+      return tempArr
     }
   },
   methods: {
@@ -89,7 +97,7 @@ export default {
      */
     checkStandard (value) {
       const tempArr = value.reduce((sum, item) => {
-        const tempObj = {
+        let tempObj = {
           type: item,
           name: psTypeNameEnum[item],
           basePeople: '',
@@ -97,6 +105,11 @@ export default {
           price: '',
           stepPrice: '',
         }
+        this.priceObj.standerPrice.forEach((standerPriceItem) => {
+          if (standerPriceItem.type === item) {
+            tempObj = standerPriceItem
+          }
+        })
         if (item === 'blue') {
           sum.unshift(tempObj)
         } else {
@@ -154,6 +167,10 @@ export default {
       .title {
         width: 100px;
         font-size: 14px;
+      }
+
+      /deep/ .el-input {
+        width: 130px;
       }
     }
   }

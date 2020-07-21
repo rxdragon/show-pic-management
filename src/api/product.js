@@ -10,13 +10,13 @@ export function getProductList () {
     method: 'POST',
   }).then(msg => {
     const productList = [{
-      label: ProductStatusNameEnum.online,
+      label: ProductStatusNameEnum[PRODUCT_STATE.ONLINE],
       children: []
     }, {
-      label: ProductStatusNameEnum.offline,
+      label: ProductStatusNameEnum[PRODUCT_STATE.OFFLINE],
       children: []
     }, {
-      label: ProductStatusNameEnum.lining,
+      label: ProductStatusNameEnum[PRODUCT_STATE.LINING],
       children: []
     }]
     msg.forEach((item) => {

@@ -9,13 +9,15 @@
         class="module-panel"
         :class="{'no-border': whichStep === 'ProductConfig'}"
       >
-        <component
-          :create-info="createInfo"
-          :product-skus="productSkus"
-          :product-obj="productObj"
-          @next="goNext"
-          :is="step"
-        />
+        <keep-alive>
+          <component
+            :create-info="createInfo"
+            :product-skus="productSkus"
+            :product-obj="productObj"
+            @next="goNext"
+            :is="step"
+          />
+        </keep-alive>
       </div>
     </div>
   </div>
@@ -119,9 +121,9 @@ export default {
       }
     },
     /**
-     * @description 新建产品
+     * @description 初始化
      */
-    addProduct () {
+    resetData () {
       this.productObj = new ProductObj()
       this.productSkus = []
       this.whichStep = 'ProductConfig'
@@ -129,18 +131,27 @@ export default {
     /**
      * @description 新建产品
      */
+    addProduct () {
+      this.resetData()
+    },
+    /**
+     * @description 选择产品编辑
+     */
     async selectProduct (obj) {
+      this.resetData()
       const req = { id: obj.id }
       const msg = await Product.getInfo(req)
       this.handleEditorInfo(msg)
+      this.productObj.editType = 'edit' // 标记为已有产品的编辑状态
     },
     /**
      * @description 处理成编辑状态的信息
      */
     handleEditorInfo (msg) {
-      const { id, tree, product_sku: productSku, name, description, thumbnail_path: thumbnailPath, share_path: sharePath, start_at: startAt, end_at: endAt, cover_path: coverPath, information, extend } = msg
+      const { id, tree, product_sku: productSku, name, description, thumbnail_path: thumbnailPath, share_path: sharePath, start_at: startAt, end_at: endAt, cover_path: coverPath, information, extend, handle_account: handleAccount, price } = msg
       let tempProductSku = []
       let arrayS2 = []
+      let arrayS1 = []
       let productObj = {
         id,
         name,
@@ -170,8 +181,23 @@ export default {
         if (item.k_s === 's2') {
           arrayS2 = item.v
         }
+        if (item.k_s === 's1') {
+          arrayS1 = item.v
+        }
       })
-      if (!arrayS2.length) { // 只有修图标准的情况
+      // 如果handleAccount存在说明是没有风格设置且没有修图标准的联系客服
+      if (handleAccount) {
+        productObj.isSimple = 'simple'
+        productObj.priceObj = {
+          simplePrice: 'contact',
+          simplePriceText: price,
+          productId: id
+        }
+        this.productObj = productObj
+        this.productSkus = []
+        return
+      }
+      if (!arrayS2.length && arrayS1.length) { // 只有修图标准的情况
         productObj.isSimple = 'simple'
         productObj.priceObj = this.handlePriceObjS1(productSku)
         this.productObj = productObj

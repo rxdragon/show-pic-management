@@ -1,13 +1,62 @@
 <template>
   <div class="other-config">
-    <div class="panel-title">时间配置</div>
-    <div class="config-item">
-      <span class="title">上线时间:</span>
-      <el-date-picker value-format="yyyy-MM-dd HH:mm:ss" v-model="productObj.startAt" type="datetime" placeholder="选择上线时间"></el-date-picker>
+    <div v-if="productObj.editType === 'edit'">
+      <div class="config-item">
+        <span class="title">上线时间:</span>
+        <el-radio-group v-model="editOnline">
+          <el-radio label="fixed">
+            固定时间
+            <el-date-picker
+              clearable
+              v-model="productObj.startAt"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              type="datetime"
+              placeholder="选择上线时间"
+            />
+          </el-radio>
+          <el-radio label="now">马上上线</el-radio>
+        </el-radio-group>
+      </div>
+      <div class="config-item">
+        <span class="title">下线时间:</span>
+        <el-radio-group v-model="editOffline">
+          <el-radio label="fixed">
+            固定时间
+            <el-date-picker
+              clearable
+              v-model="productObj.endAt"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              type="datetime"
+              placeholder="选择下线时间"
+            />
+          </el-radio>
+          <el-radio label="now">马上下线</el-radio>
+        </el-radio-group>
+      </div>
     </div>
-    <div class="config-item">
-      <span class="title">下线时间:</span>
-      <el-date-picker value-format="yyyy-MM-dd HH:mm:ss" v-model="productObj.endAt" type="datetime" placeholder="选择下线时间"></el-date-picker>
+    <div v-else>
+      <div class="config-item">
+        <span class="title">上线时间:</span>
+        <el-date-picker
+          clearable
+          value-format="yyyy-MM-dd HH:mm:ss"
+          v-model="productObj.startAt"
+          type="datetime"
+          placeholder="选择上线时间"
+        >
+        </el-date-picker>
+      </div>
+      <div class="config-item">
+        <span class="title">下线时间:</span>
+        <el-date-picker
+          clearable
+          value-format="yyyy-MM-dd HH:mm:ss"
+          v-model="productObj.endAt"
+          type="datetime"
+          placeholder="选择下线时间"
+        >
+        </el-date-picker>
+      </div>
     </div>
     <div class="module-box">
       <div class="panel-title">云端产品审核信息</div>
@@ -34,6 +83,7 @@
 <script>
 import { psTypeIdEnum } from '@/model/Enumerate.js'
 import * as Product from '@/api/product.js'
+import moment from 'moment'
 
 const otherRules = {
   cloudRetouchRequire: [
@@ -55,7 +105,9 @@ export default {
         name: '',
         thumbnailList: [],
         desc: ''
-      }
+      },
+      editOnline: 'fixed',
+      editOffline: 'fixed'
     }
   },
   methods: {
@@ -63,16 +115,30 @@ export default {
      * @description 提交全部数据
      */
     async finalSubmint () {
-      const { thumbnailPath, sharePath, isSimple, coverPath, id, cloudRetouchRequire, ...rest } = this.productObj
+      const { editType,thumbnailPath, priceObj, sharePath, isSimple, coverPath, id, cloudRetouchRequire, ...rest } = this.productObj
       let finalObj = rest
       const skuObj = this.handleProductSkus()
       finalObj.thumbnailPath = thumbnailPath[0].path
       finalObj.sharePath = sharePath[0].path
       finalObj.coverPath = coverPath[0].path
-      finalObj.productSkus = skuObj.finalProductSku
+      finalObj.handle_account = 0 // 有升级项
+      if (skuObj.finalProductSku.length) {
+        finalObj.productSkus = skuObj.finalProductSku
+      } else { // 基础设置联系客服,不传productSkus,但是外层要传handle_account和price
+        finalObj.handle_account = skuObj.styleObj.handle_account
+        finalObj.price = skuObj.styleObj.price
+      }
       finalObj.extend = { cloud_retouch_require: cloudRetouchRequire}
       if (skuObj.finalSkus) {
         finalObj.skus = skuObj.finalSkus
+      }
+      if (editType === 'edit') { // 编辑状态下,判断有没有立马上下线
+        if (this.editOnline === 'now') {
+          finalObj.startAt = moment().format('YYYY-MM-DD HH:mm:ss')
+        }
+        if (this.editOffline === 'now') {
+          finalObj.endAt = moment().format('YYYY-MM-DD HH:mm:ss')
+        }
       }
       if (id) {
         finalObj.id = id
@@ -87,7 +153,7 @@ export default {
      * @description 处理全部sku相关数据
      */
     handleProductSkus () {
-      // 如果是只有大师和普通两个标准的,走另一个逻辑
+      // 单层产品配置,走另一个逻辑
       if (this.productObj.isSimple === 'simple') {
         return this.handleSimpleSkus()
       }
@@ -175,27 +241,29 @@ export default {
       }
     },
     /**
-     * @description 处理只有大师和普通的特殊情况
+     * @description 处理单层产品的特殊情况
      */
     handleSimpleSkus () {
       let finalProductSku = []
       let styleObj = {}
-      let styleSku = []
-      if (this.productObj.priceObj.simplePrice === 'contact') { // 联系客服
+      if (this.productObj.priceObj.simplePrice === 'contact') { // 联系客服 不用传product_sku
         styleObj.handle_account = 1
         styleObj.price = this.productObj.priceObj.simplePriceText
       } else {
         this.productObj.priceObj.standerPrice.forEach((standerPriceItem) => {
-          this.handleStanderPriceItem(styleObj, standerPriceItem)
-          styleSku.push({
+          let normalObj = {}
+          let normalSku = []
+          this.handleStanderPriceItem(normalObj, standerPriceItem)
+          normalSku.push({
             id: psTypeIdEnum[standerPriceItem.type]
           })
+          normalObj.skus = normalSku
+          finalProductSku.push(normalObj)
         })
       }
-      styleObj.skus = styleSku
-      finalProductSku.push(styleObj)
       return {
-        finalProductSku
+        finalProductSku,
+        styleObj
       }
     },
     /**

@@ -1,4 +1,4 @@
-# 1.0.0 (2020-07-20)
+# 1.0.0 (2020-07-21)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -34,6 +34,7 @@
  - | 活动页面基本联调完成 | [b390bdb](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b390bdb)
  - | 添加前端配置环境 | [1a29ab7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1a29ab7)
  - | 用户管理 | [cd016f5](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/cd016f5)
+ - | 编辑仍有问题 | [0909974](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0909974)
  - | 联调产品列表排序问题 | [03b878c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03b878c)
  - | 联调优惠券生成和管理 | [d03f1b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d03f1b0)
  - | 能用自闭和用自闭和 | [92eefa6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/92eefa6)

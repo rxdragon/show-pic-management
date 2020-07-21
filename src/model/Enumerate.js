@@ -193,13 +193,13 @@ export const activityToCN = {
 export const PRODUCT_STATE = {
   ONLINE: 'online',
   OFFLINE: 'offline',
-  LINING: 'lining',
+  LINING: 'wait',
 }
 
 export const ProductStatusNameEnum = {
-  'online': '已上线',
-  'offline': '已下线',
-  'lining': '上线中'
+  [PRODUCT_STATE.ONLINE]: '已上线',
+  [PRODUCT_STATE.OFFLINE]: '已下线',
+  [PRODUCT_STATE.LINING]: '上线中'
 }
 
 /**

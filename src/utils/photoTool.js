@@ -3,7 +3,7 @@
  * @param {String} path 图片地址
  * @param {String} type 系统类型，外包系统相关(bpo)，云端系统相关(cloud)，云学院相关(cschool)，不传默认为：云端
  */
-export function handlePicPath (path, type) {
+export function handlePicPath (path = '', type) {
   let resPath = ''
   // 线上环境存储目录
   const prodFilePath = 'upload/'
