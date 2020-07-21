@@ -36,6 +36,7 @@
  - | 活动页面基本联调完成 | [b390bdb](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b390bdb)
  - | 添加前端配置环境 | [1a29ab7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1a29ab7)
  - | 用户管理 | [cd016f5](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/cd016f5)
+ - | 立即上下线修改 | [70f2471](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/70f2471)
  - | 编辑仍有问题 | [0909974](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0909974)
  - | 联调产品列表排序问题 | [03b878c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03b878c)
  - | 联调优惠券生成和管理 | [d03f1b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d03f1b0)

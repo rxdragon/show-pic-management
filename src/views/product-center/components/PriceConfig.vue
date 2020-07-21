@@ -5,7 +5,6 @@
         <div class="contact-wrap">
           <el-radio label="contact">联系客服(针对特殊产品需要顾客联系客服下单)</el-radio>
           <div class="show-price" v-if="priceObj.simplePrice === 'contact'">
-            <!-- <p class="title">展示价格:</p> -->
             <el-form ref="contactPrice" :model="priceObj" :rules="contactRules" label-width="100px">
               <el-form-item label="展示价格:" prop="simplePriceText">
                 <el-input v-model.trim="priceObj.simplePriceText" placeholder="需要展示的价格"  />
@@ -17,11 +16,14 @@
       </el-radio-group>
     </div>
     <div class="top" v-if="priceObj.simplePrice === 'normal'">
-      <span class="top-title">选择修图标准:</span>
-      <el-checkbox-group @change="checkStandard" v-model="priceObj.psStandard">
-        <el-checkbox label="blue">普通修图</el-checkbox>
-        <el-checkbox label="master">大师修图</el-checkbox>
-      </el-checkbox-group>
+      <el-form ref="psStandard" :model="priceObj" :rules="psStandardRules" label-width="110px">
+        <el-form-item label="选择修图标准:" prop="psStandard">
+          <el-checkbox-group @change="checkStandard" v-model="priceObj.psStandard">
+            <el-checkbox label="blue">普通修图</el-checkbox>
+            <el-checkbox label="master">大师修图</el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+      </el-form>
     </div>
     <div class="content"  v-if="priceObj.simplePrice === 'normal'">
       <el-form
@@ -58,10 +60,15 @@
 import { positiveIntValidator, priceDoubleValidator } from '@/utils/validator.js'
 import { psTypeNameEnum } from '@/model/Enumerate.js'
 
-// 常规价格配置
 const contactRules = {
   simplePriceText: [
     { required: true, message: '请输入客服展示价格', trigger: 'blur' }
+  ]
+}
+
+const psStandardRules = {
+  psStandard: [
+    { required: true, message: '请至少勾选一项', trigger: 'change' }
   ]
 }
 
@@ -91,7 +98,7 @@ export default {
     return {
       priceRules,
       contactRules,
-      psStandard: []
+      psStandardRules
     }
   },
   methods: {
@@ -126,14 +133,17 @@ export default {
      * @description 表单校验
      */
     formCheck (value) {
+      let tempArr = []
       // 分客服情况和非客服情况
       if (this.priceObj.simplePrice === 'contact') {
-        this.$refs.contactPrice.validate()
-        return
+        tempArr.push(this.$refs.contactPrice.validate())
+        return tempArr
       }
+      tempArr.push(this.$refs.psStandard.validate())
       this.priceObj.psStandard.forEach((item, index) => {
-        this.$refs.standerPrice[index].validate()
+        tempArr.push(this.$refs.standerPrice[index].validate())
       })
+      return tempArr
     },
     /**
      * @description 获取价格配置数据

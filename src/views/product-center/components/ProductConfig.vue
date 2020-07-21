@@ -84,10 +84,11 @@ export default {
         this.$refs.productObjTwo.validate()
       ]
       if (this.productObj.isSimple === 'simple') {
-        validateArr.push(this.$refs.normalPriceConfig.formCheck())
+        validateArr = validateArr.concat(this.$refs.normalPriceConfig.formCheck())
       }
       try {
         await Promise.all(validateArr)
+        
         // 跳转到下一个tab
         this.$emit('next', {
           aim: 'SubCategoryConfig'
