@@ -18,6 +18,7 @@
  - | 增加消费次数显示 | [9756960](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9756960)
  - | 增加状态查询 | [0a952c3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0a952c3)
  - | 增加监控平台 | [2bfec46](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2bfec46)
+ - | 增加空白文案,和基础设置下一步的跳转 | [dc770b3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/dc770b3)
  - | 增加订单列表显示，已经订单详情显示 | [056586c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/056586c)
  - | 处理部分版本mock数据 | [da1f5e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/da1f5e2)
  - | 子品类设置暂存 | [0769962](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0769962)

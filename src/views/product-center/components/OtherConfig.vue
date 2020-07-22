@@ -8,6 +8,7 @@
             固定时间
             <el-date-picker
               clearable
+              :picker-options="pickerOptions"
               v-model="productObj.startAt"
               value-format="yyyy-MM-dd HH:mm:ss"
               type="datetime"
@@ -24,6 +25,7 @@
             固定时间
             <el-date-picker
               clearable
+              :picker-options="pickerOptions"
               v-model="productObj.endAt"
               value-format="yyyy-MM-dd HH:mm:ss"
               type="datetime"
@@ -43,6 +45,7 @@
           v-model="productObj.startAt"
           type="datetime"
           placeholder="选择上线时间"
+          :picker-options="pickerOptions"
         >
         </el-date-picker>
       </div>
@@ -54,6 +57,7 @@
           v-model="productObj.endAt"
           type="datetime"
           placeholder="选择下线时间"
+          :picker-options="pickerOptions"
         >
         </el-date-picker>
       </div>
@@ -106,7 +110,12 @@ export default {
         desc: ''
       },
       editOnline: 'fixed',
-      editOffline: 'fixed'
+      editOffline: 'fixed',
+      pickerOptions: {
+        disabledDate (time) {
+          return time.getTime() < Date.now()
+        }
+      }
     }
   },
   methods: {
@@ -299,16 +308,28 @@ export default {
       // 检查基础设置
       if (!this.checkProductConfig()) {
         this.$newMessage.warning('基础设置还有未填内容')
+        this.$emit('finalCheck', {
+          type: 'add',
+          tab: 'ProductConfig'
+        })
         return false
       }
       // 检查子品类设置
       if (!this.checkSubCategoryConfig()) {
         this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
+        this.$emit('finalCheck', {
+          type: 'add',
+          tab: 'SubCategoryConfigEdit'
+        })
         return false
       }
       // 检查详情页设置
       if (!this.checkDetailConfig()) {
         this.$newMessage.warning('详情设置还有未填内容')
+        this.$emit('finalCheck', {
+          type: 'add',
+          tab: 'DetailConfig'
+        })
         return false
       }
       // 检查其他页设置

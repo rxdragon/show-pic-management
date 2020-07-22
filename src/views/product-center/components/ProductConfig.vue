@@ -42,7 +42,7 @@
       </el-form>
     </div>
     <div class="submit-area">
-      <el-button @click="submit" type="primary" size="small">下一步</el-button>
+      <el-button @click="check('next')" type="primary" size="small">下一步</el-button>
     </div>
   </div>
 </template>
@@ -72,7 +72,8 @@ export default {
   components: { UploadPic,PriceConfig },
   props: {
     productObj: { type: Object, required: true },
-    productSkus: { type: Array, required: true }
+    productSkus: { type: Array, required: true },
+    checkStatus: { type: Object, required: true }
   },
   data() {
     return {
@@ -89,15 +90,22 @@ export default {
       }
     }
   },
+  activated() {
+    if (this.checkStatus.ProductConfig) {
+      this.check()
+      this.$emit('finalCheck', {
+        type: 'del',
+        tab: 'ProductConfig'
+      })
+    }
+  },
   methods: {
     /**
      * @description 是否单层产品配置
      */
     async changeIsSimple (type) {
       const { isSimple } = this.productObj
-      if (type === isSimple) {
-        return
-      }
+      if (type === isSimple) return
       if (this.productSkus.length && type === 'simple') { // 已有子品类的情况下
         await this.$confirm(`变更配置会清空子品类已有配置`, '提示', {
           confirmButtonText: '确定',
@@ -105,37 +113,25 @@ export default {
           type: 'warning'
         })
         this.productObj.isSimple = type
-        this.$emit('next', {
-          type: 'emptySubCategory'
-        })
+        this.$emit('next', { type: 'emptySubCategory' })
         return
       }
       this.productObj.isSimple = type
-      if (type === 'simple') { // 没有配置好的子品类,但是可能存在子品类正在配置ing,切换的话也会将配置中清空
-        this.$emit('next', {
-          type: 'emptySubCategory'
-        })
-      }
+      if (type === 'simple') this.$emit('next', { type: 'emptySubCategory' }) // 没有配置好的子品类,但是可能存在子品类正在配置ing,切换的话也会将配置中清空
     },
     /**
      * @description 提交到下一步
      */
-    async submit() {
+    async check(type) {
       const aim = this.productObj.isSimple === 'simple' ? 'DetailConfig' : 'SubCategoryConfig'
       let validateArr = [
         this.$refs.productObjOne.validate(),
         this.$refs.productObjTwo.validate()
       ]
-      if (this.productObj.isSimple === 'simple') {
-        validateArr = validateArr.concat(this.$refs.normalPriceConfig.formCheck())
-      }
+      if (this.productObj.isSimple === 'simple') validateArr = validateArr.concat(this.$refs.normalPriceConfig.formCheck())
       try {
         await Promise.all(validateArr)
-        
-        // 跳转到下一个tab
-        this.$emit('next', {
-          aim
-        })
+        if (type === 'next') this.$emit('next', { aim })
       } catch (error) {
         console.error(error)
         this.$newMessage.warning(error.message || error || '请输入相关配置')

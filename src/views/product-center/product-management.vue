@@ -14,8 +14,10 @@
             :create-info="createInfo"
             :product-skus="productSkus"
             :product-obj="productObj"
+            :check-status="checkStatus"
             @next="goNext"
             :is="step"
+            @finalCheck="modifyCheckStatus"
           />
         </keep-alive>
       </div>
@@ -66,6 +68,12 @@ export default {
       createInfo: {
         isNew: true,
         index: ''
+      },
+      checkStatus: { // 用于存放最终校验失败的模块, 被对应模块重新校验后消耗掉
+        ProductConfig: false,
+        SubCategoryConfigEdit: false,
+        DetailConfig: false,
+        OtherConfig: false
       }
     }
   },
@@ -341,6 +349,13 @@ export default {
         productId,
         psStandard
       }
+    },
+    /**
+     * @description 处理检查的队列
+     */
+    modifyCheckStatus (modifyObj) {
+      const { type, tab } = modifyObj
+      this.checkStatus[tab] = type === 'add'
     }
   }
 }

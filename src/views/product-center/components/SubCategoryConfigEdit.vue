@@ -94,7 +94,7 @@
       </div>
     </div>
     <div class="next-page">
-      <el-button @click="nextPage" type="primary">下一步</el-button>
+      <el-button @click="check('next')" type="primary">下一步</el-button>
     </div>
   </div>
 </template>
@@ -107,10 +107,20 @@ export default {
   components: {},
   props: {
     productObj: { type: Object, required: true },
-    productSkus: { type: Array, required: true }
+    productSkus: { type: Array, required: true },
+    checkStatus: { type: Object, required: true }
   },
   computed: {
     ...mapGetters(['imgCompressDomain'])
+  },
+  mounted() {
+    if (this.checkStatus.SubCategoryConfigEdit) {
+      this.check()
+      this.$emit('finalCheck', {
+        type: 'del',
+        tab: 'SubCategoryConfigEdit'
+      })
+    }
   },
   methods: {
     /**
@@ -141,23 +151,20 @@ export default {
     /**
      * @description 下一步
      */
-    nextPage () {
+    check (type) {
       const { isSimple } = this.productObj
       const { productSkus } = this
       if (isSimple === 'notSimple' && !productSkus.length) {
         this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
         return
       }
-      let hasNeedUpgrade = productSkus.some((item) => {
-        return item.styleForm.isSimple === 'notSimple' && !item.upgradeForms.length
-      })
+      let hasNeedUpgrade = productSkus.some((item) => item.styleForm.isSimple === 'notSimple' && !item.upgradeForms.length)
       if (hasNeedUpgrade) {
         this.$newMessage.warning('存在缺少升级体验的产品')
         return
       }
-      this.$emit('next', {
-        aim: 'DetailConfig'
-      })
+      if (type === 'next') this.$emit('next', { aim: 'DetailConfig' })
+     
       
     },
     /**

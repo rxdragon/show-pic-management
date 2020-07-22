@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="next-btn">
-      <el-button type="primary" @click="nextPage">下一步</el-button>
+      <el-button type="primary" @click="check('next')">下一步</el-button>
     </div>
   </div>
 </template>
@@ -52,7 +52,8 @@ export default {
   name: 'DetailConfig',
   components: { IphoneModel, UploadPic, Editor },
   props: {
-    productObj: { type: Object, required: true }
+    productObj: { type: Object, required: true },
+    checkStatus: { type: Object, required: true }
   },
   data() {
     return {
@@ -73,6 +74,13 @@ export default {
   },
   activated() {
     this.editor.setHtml(this.productObj.information)
+    if (this.checkStatus.DetailConfig) {
+      this.check()
+      this.$emit('finalCheck', {
+        type: 'del',
+        tab: 'DetailConfig'
+      })
+    }
   },
   mounted() {
     this.editor = this.$refs.toastuiEditor.editor
@@ -88,15 +96,11 @@ export default {
     /**
      * @description 下一步
      */
-    async nextPage () {
+    async check (type) {
       try {
         await this.$refs.productObj.validate()
-        if (!this.productObj.information) {
-          throw new Error('产品介绍还没填写')
-        }
-        this.$emit('next', {
-          aim: 'OtherConfig'
-        })
+        if (!this.productObj.information) throw new Error('产品介绍还没填写')
+        if (type === 'next') this.$emit('next', { aim: 'OtherConfig' })
       } catch (error) {
         console.error(error)
         this.$newMessage.warning(error.message || error || '请输入相关配置')
