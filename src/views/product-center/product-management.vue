@@ -116,6 +116,10 @@ export default {
         this.addProduct()
         this.$refs.productList.init()
       }
+      if (obj.type === 'emptySubCategory') { // 清空子品类
+        this.productSkus = []
+        this.isCreate = false
+      }
       if (!obj.type) {
         this.whichStep = obj.aim
       }
@@ -176,7 +180,13 @@ export default {
         }],
         information,
         cloudRetouchRequire: extend ? extend.cloud_retouch_require : '',
-        isSimple: 'notSimple'
+        isSimple: 'notSimple',
+        priceObj: {
+          simplePrice: 'normal',
+          simplePriceText: '',
+          standerPrice: [],
+          psStandard: []
+        }
       }
       tree.forEach((item) => {
         if (item.k_s === 's2') {

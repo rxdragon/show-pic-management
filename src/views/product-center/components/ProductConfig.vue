@@ -17,6 +17,10 @@
         <el-radio-group v-model="productObj.isSimple">
           <el-radio label="simple">是（将不可再配置修图风格&升级体验）</el-radio>
           <el-radio label="notSimple">否（需要在后续步骤配置修图风格&升级体验）</el-radio>
+          <div class="fake-change-area">
+            <div @click="changeIsSimple('simple')" class="fake-change-item left"></div>
+            <div @click="changeIsSimple('notSimple')" class="fake-change-item right"></div>
+          </div>
         </el-radio-group>
       </div>
     </div>
@@ -67,7 +71,8 @@ export default {
   name: 'ProductConfig',
   components: { UploadPic,PriceConfig },
   props: {
-    productObj: { type: Object, required: true }
+    productObj: { type: Object, required: true },
+    productSkus: { type: Array, required: true }
   },
   data() {
     return {
@@ -75,6 +80,28 @@ export default {
     }
   },
   methods: {
+    /**
+     * @description 是否单层产品配置
+     */
+    async changeIsSimple (type) {
+      const { isSimple } = this.productObj
+      if (type === isSimple) {
+        return
+      }
+      if (this.productSkus.length && type === 'simple') { // 已有子品类的情况下
+        await this.$confirm(`变更配置会清空子品类已有配置`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+        this.productObj.isSimple = type
+        this.$emit('next', {
+          type: 'emptySubCategory'
+        })
+        return
+      }
+      this.productObj.isSimple = type
+    },
     /**
      * @description 提交到下一步
      */
@@ -126,6 +153,27 @@ export default {
     font-size: 14px;
     color: #303133;
 
+    .fake-change-area {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 615px;
+      height: 18px;
+
+      .fake-change-item {
+        display: inline-block;
+        height: 100%;
+
+        &.left {
+          width: 300px;
+        }
+
+        &.right {
+          width: 305px;
+        }
+      }
+    }
+
     .title {
       margin-right: 20px;
       font-weight: 700;
@@ -137,6 +185,8 @@ export default {
   }
 
   .el-radio-group {
+    position: relative;
+
     &.column {
       display: flex;
       flex-direction: column;

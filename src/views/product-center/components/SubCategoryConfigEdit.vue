@@ -144,9 +144,16 @@ export default {
      * @description 下一步
      */
     nextPage () {
+      const { isSimple } = this.productObj
+      const { productSkus } = this
+      if (isSimple === 'notSimple' && !productSkus.length) {
+        this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
+        return
+      }
       this.$emit('next', {
         aim: 'DetailConfig'
       })
+      
     },
     /**
      * @description add一个风格
