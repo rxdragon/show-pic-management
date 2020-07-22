@@ -43,12 +43,11 @@
 </template>
 
 <script>
-import * as uuid from 'uuid'
 import UploadPic from './UploadPic'
 import PriceConfig from './PriceConfig'
 import UpgradeConfig from './UpgradeConfig'
 import SkuRule from '../rules/skuRule.js'
-import { UpgradeObj } from '../objManage/index.js'
+import { UpgradeObj,StyleObj } from '../objManage/index.js'
 import cloneDeep from 'lodash/cloneDeep.js'
 
 const styleRules = new SkuRule('style')
@@ -63,19 +62,7 @@ export default {
   data() {
     return {
       styleRules,
-      styleForm: {
-        uuid: uuid.v4(),
-        name: '',
-        thumbnailList: [],
-        desc: '',
-        isSimple: 'notSimple',
-        priceObj: {
-          simplePriceText: '',
-          simplePrice: 'normal',
-          standerPrice: [],
-          psStandard: []
-        }
-      },
+      styleForm: new StyleObj(),
       upgradeForms: [],
       thumbnailOption: {
         width: 220,
@@ -111,17 +98,25 @@ export default {
         // 发送给编辑界面
         const tempObj = {
           type: 'create',
-          styleForm: this.styleForm,
-          upgradeForms: this.upgradeForms,
+          styleForm: cloneDeep(this.styleForm),
+          upgradeForms: cloneDeep(this.upgradeForms),
           isNew: this.createInfo.isNew,
           index: this.createInfo.index
         }
+        this.resetData()
         this.$emit('next', tempObj)
       } catch (error) {
         console.error(error)
         this.$newMessage.warning(error.message || error || '请输入相关配置')
       }
       
+    },
+    /**
+     * @description 重置页面数据
+     */
+    resetData () {
+      this.styleForm = new StyleObj()
+      this.upgradeForms = []
     },
     /**
      * @description 添加升级体验

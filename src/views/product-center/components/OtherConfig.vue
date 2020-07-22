@@ -117,7 +117,7 @@ export default {
       if (!this.checkAll()) {
         return
       }
-      const { endAt, startAt, editType,thumbnailPath, priceObj, sharePath, isSimple, coverPath, id, cloudRetouchRequire, ...rest } = this.productObj
+      const { endAt, editType,thumbnailPath, priceObj, sharePath, isSimple, coverPath, id, cloudRetouchRequire, ...rest } = this.productObj
       let finalObj = rest
       const skuObj = this.handleProductSkus()
       finalObj.thumbnailPath = thumbnailPath[0] && thumbnailPath[0].path

@@ -1,5 +1,19 @@
 import * as uuid from 'uuid'
 
+export class StyleObj { // 风格的item
+  uuid = uuid.v4()
+  name = ''
+  thumbnailList = []
+  desc = ''
+  isSimple = 'notSimple'
+  priceObj = {
+    simplePriceText: '',
+    simplePrice: 'normal',
+    standerPrice: [],
+    psStandard: []
+  }
+}
+
 export class UpgradeObj { // 升级体验的item
   uuid = uuid.v4()
   name = ''
