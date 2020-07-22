@@ -121,6 +121,7 @@ export default {
      * @description 提交到下一步
      */
     async submit() {
+      const aim = this.productObj.isSimple === 'simple' ? 'DetailConfig' : 'SubCategoryConfig'
       let validateArr = [
         this.$refs.productObjOne.validate(),
         this.$refs.productObjTwo.validate()
@@ -133,7 +134,7 @@ export default {
         
         // 跳转到下一个tab
         this.$emit('next', {
-          aim: 'SubCategoryConfig'
+          aim
         })
       } catch (error) {
         console.error(error)

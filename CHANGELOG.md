@@ -99,6 +99,7 @@
  - | 修复问题 | [3cb3d66](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cb3d66)
  - | 入参修改 | [923ea40](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/923ea40)
  - | 升级体验删除逻辑 | [e7dc220](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e7dc220)
+ - | 升级体验查看页面删除fix | [4070f8d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4070f8d)
  - | 单层筛选时候,清空子品类 | [ffe4dc0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ffe4dc0)
  - | 增加上下线时间判断 | [b99ed2b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b99ed2b)
  - | 子品类配置返回清空 | [abbf877](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/abbf877)

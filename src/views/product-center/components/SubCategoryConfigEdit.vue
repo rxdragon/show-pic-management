@@ -1,6 +1,7 @@
 <template>
   <div class="sub-category-edit">
     <el-button v-if="productObj.isSimple === 'notSimple'" class="add-style" @click="addStyle" type="primary">添加修图风格</el-button>
+    <p class="product-sku-empty" v-if="productObj.isSimple === 'simple'">当前产品暂无修图风格/升级体验设置</p>
     <div v-for="(item, index) in productSkus" class="categorys" :key="item.uuid">
       <div class="top">
         <span>{{ item.styleForm.name }}</span>
@@ -199,6 +200,10 @@ export default {
 
 <style lang="less" scoped>
 .sub-category-edit {
+  .product-sku-empty {
+    text-align: center;
+  }
+
   .thumbnail-img {
     width: 100px;
     height: 100px;
