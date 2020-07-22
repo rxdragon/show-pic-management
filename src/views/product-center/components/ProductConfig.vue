@@ -34,10 +34,10 @@
           <el-input class="long" maxlength="20" v-model.trim="productObj.description" placeholder="产品首页介绍,最多20个字符"  />
         </el-form-item>
         <el-form-item label="缩略图:" prop="thumbnailPath">
-          <upload-pic v-model="productObj.thumbnailPath"/>
+          <upload-pic :option="thumbnailOption" v-model="productObj.thumbnailPath"/>
         </el-form-item>
         <el-form-item label="分享图:" prop="sharePath">
-          <upload-pic v-model="productObj.sharePath"/>
+          <upload-pic :option="shareOption" v-model="productObj.sharePath"/>
         </el-form-item>
       </el-form>
     </div>
@@ -76,7 +76,17 @@ export default {
   },
   data() {
     return {
-      productConfigRules
+      productConfigRules,
+      thumbnailOption: {
+        width: 220,
+        height: 220,
+        tip: '只能上传220x220的png/jpg图片'
+      },
+      shareOption: {
+        width: 100,
+        height: 100,
+        tip: '只能上传100x100的png/jpg图片'
+      }
     }
   },
   methods: {

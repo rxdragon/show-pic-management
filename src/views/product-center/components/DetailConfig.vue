@@ -4,7 +4,7 @@
       <div class="panel-title">头图/封面图设置</div>
       <el-form ref="productObj" :model="productObj" :rules="detailRules" label-width="120px">
         <el-form-item label="头图/封面图:" prop="coverPath">
-          <upload-pic v-model="productObj.coverPath"/>
+          <upload-pic :option="coverOption" v-model="productObj.coverPath"/>
         </el-form-item>
       </el-form>
     </div>
@@ -59,6 +59,10 @@ export default {
       detailRules,
       upyunConfig: '',
       editorOptions: defaultOptions,
+      coverOption: {
+        width: 750,
+        tip: '只能上传宽度750的png/jpg图片'
+      }
     }
   },
   computed: {

@@ -202,7 +202,9 @@ export default {
         productObj.priceObj = {
           simplePrice: 'contact',
           simplePriceText: price,
-          productId: id
+          productId: id,
+          standerPrice: [],
+          psStandard: []
         }
         this.productObj = productObj
         this.productSkus = []

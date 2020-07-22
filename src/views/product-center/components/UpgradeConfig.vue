@@ -6,7 +6,7 @@
         <el-input maxlength="10" v-model.trim="upgradeForm.name" placeholder="升级体验名称,最多10个字符" />
       </el-form-item>
       <el-form-item label="缩略图:" prop="thumbnailList">
-        <upload-pic v-model="upgradeForm.thumbnailList"/>
+        <upload-pic :option="thumbnailOption" v-model="upgradeForm.thumbnailList"/>
       </el-form-item>
       <el-form-item label="下单说明(非必填):">
         <el-input class="long" maxlength="30" v-model.trim="upgradeForm.desc" placeholder="下单说明,最多30个字符" />
@@ -33,6 +33,11 @@ export default {
   data() {
     return {
       upgradeRules,
+      thumbnailOption: {
+        width: 220,
+        height: 220,
+        tip: '只能上传220x220的png/jpg图片'
+      }
     }
   },
   methods: {

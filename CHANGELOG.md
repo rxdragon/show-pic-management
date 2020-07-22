@@ -95,6 +95,7 @@
  - | 修复错误吗报错 | [e6da9b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e6da9b0)
  - | 修复问题 | [3cb3d66](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cb3d66)
  - | 入参修改 | [923ea40](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/923ea40)
+ - | 单层筛选时候,清空子品类 | [ffe4dc0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ffe4dc0)
  - | 更login跳转路径 | [5db076c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5db076c)
  - | 更改打包路径 | [740c1f1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/740c1f1)
  - | 更改登录配置i | [84ffa60](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/84ffa60)

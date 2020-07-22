@@ -11,7 +11,7 @@
           <el-input maxlength="30" class="long" v-model.trim="styleForm.desc" placeholder="下单说明,最多30个字符" />
         </el-form-item>
         <el-form-item label="缩略图:" prop="thumbnailList">
-          <upload-pic v-model="styleForm.thumbnailList"/>
+          <upload-pic :option="thumbnailOption" v-model="styleForm.thumbnailList"/>
         </el-form-item>
         <el-form-item label="价格设置:">
           <el-radio-group v-model="styleForm.isSimple">
@@ -76,7 +76,12 @@ export default {
           psStandard: []
         }
       },
-      upgradeForms: []
+      upgradeForms: [],
+      thumbnailOption: {
+        width: 220,
+        height: 220,
+        tip: '只能上传220x220的png/jpg图片'
+      }
     }
   },
   activated() {
