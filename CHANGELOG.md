@@ -70,6 +70,7 @@
 范围|描述|commitId
 --|--|--
  - | 0元情况判断 | [c46d3de](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/c46d3de)
+ - | 价格初识状态fix | [bd43876](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bd43876)
  - | 优化修复部分功能 | [d9f6a8d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d9f6a8d)
  - | 修图查询显示 | [85c5083](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/85c5083)
  - | 修复最小开票金额判断错误问题 | [7f210c9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7f210c9)

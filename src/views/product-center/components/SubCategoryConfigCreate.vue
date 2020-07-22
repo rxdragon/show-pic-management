@@ -49,7 +49,7 @@ import PriceConfig from './PriceConfig'
 import UpgradeConfig from './UpgradeConfig'
 import SkuRule from '../rules/skuRule.js'
 import { UpgradeObj } from '../objManage/index.js'
-
+import cloneDeep from 'lodash/cloneDeep.js'
 
 const styleRules = new SkuRule('style')
 
@@ -86,8 +86,8 @@ export default {
   },
   activated() {
     if (!this.createInfo.isNew) {
-      this.styleForm = this.productSkus[this.createInfo.index].styleForm
-      this.upgradeForms = this.productSkus[this.createInfo.index].upgradeForms
+      this.styleForm = cloneDeep(this.productSkus[this.createInfo.index].styleForm)
+      this.upgradeForms = cloneDeep(this.productSkus[this.createInfo.index].upgradeForms)
     }
   },
   methods: {
