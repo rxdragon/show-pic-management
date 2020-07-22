@@ -111,6 +111,11 @@ export default {
         return
       }
       this.productObj.isSimple = type
+      if (type === 'simple') { // 没有配置好的子品类,但是可能存在子品类正在配置ing,切换的话也会将配置中清空
+        this.$emit('next', {
+          type: 'emptySubCategory'
+        })
+      }
     },
     /**
      * @description 提交到下一步
