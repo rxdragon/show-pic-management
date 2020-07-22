@@ -172,6 +172,8 @@ export default {
   }
 
   .condition {
+    margin-bottom: 20px;
+
     .contact-wrap {
       display: flex;
       align-items: center;

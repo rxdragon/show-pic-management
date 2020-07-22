@@ -113,13 +113,16 @@ export default {
     /**
      * @description 提交全部数据
      */
-    async finalSubmint () {
+    finalSubmint () {
+      if (!this.checkAll()) {
+        return
+      }
       const { editType,thumbnailPath, priceObj, sharePath, isSimple, coverPath, id, cloudRetouchRequire, ...rest } = this.productObj
       let finalObj = rest
       const skuObj = this.handleProductSkus()
-      finalObj.thumbnailPath = thumbnailPath[0].path
-      finalObj.sharePath = sharePath[0].path
-      finalObj.coverPath = coverPath[0].path
+      finalObj.thumbnailPath = thumbnailPath[0] && thumbnailPath[0].path
+      finalObj.sharePath = sharePath[0] && sharePath[0].path
+      finalObj.coverPath = coverPath[0] && coverPath[0].path
       finalObj.handle_account = 0 // 有升级项
       if (skuObj.finalProductSku.length) {
         finalObj.productSkus = skuObj.finalProductSku
@@ -139,9 +142,12 @@ export default {
           finalObj.state = 'offline'
         }
       }
-      if (!this.checkAll()) {
-        return
-      }
+      this.fetchSubmit(id, finalObj)
+    },
+    /**
+     * @description 提交请求
+     */
+    async fetchSubmit (id, finalObj) {
       if (id) {
         finalObj.id = id
         await Product.edit(finalObj)
@@ -287,8 +293,90 @@ export default {
      * @description 检查所有情况
      */
     checkAll () {
-      if (this.editOnline === 'now' && this.editOffline === 'now') {
+      // 检查基础设置
+      if (!this.checkProductConfig()) {
+        this.$newMessage.warning('基础设置还有未填内容')
+        return false
+      }
+      // 检查子品类设置
+      if (!this.checkSubCategoryConfig()) {
+        this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
+        return false
+      }
+      // 检查详情页设置
+      if (!this.checkDetailConfig()) {
+        this.$newMessage.warning('详情设置还有未填内容')
+        return false
+      }
+      // 检查其他页设置
+      if (!this.checkOtherConfig()) {
+        return false
+      }
+      return true
+    },
+    /**
+     * @description 检查基础设置
+     */
+    checkProductConfig () {
+      const { name, description, thumbnailPath, sharePath, isSimple, priceObj } = this.productObj
+      let checkArr = [name, description, thumbnailPath.length, sharePath.length] // 校验为空的内容
+      if (isSimple === 'simple' && priceObj.simplePrice === 'contact') { // 联系客服
+        checkArr.push(priceObj.simplePriceText)
+      }
+      if (isSimple === 'simple' && priceObj.simplePrice === 'normal') { // 正常价格
+        checkArr.push(priceObj.standerPrice.length)
+        priceObj.standerPrice.forEach((item) => {
+          checkArr.push(item.basePeople)
+          checkArr.push(item.price)
+          checkArr.push(item.stepPrice)
+        })
+      }
+      let hasEmpty = checkArr.some((item) => {
+        return !item
+      })
+      return !hasEmpty
+    },
+    /**
+     * @description 检查子品类设置
+     */
+    checkSubCategoryConfig () {
+      const { isSimple } = this.productObj
+      const { productSkus } = this
+      if (isSimple === 'notSimple') {
+        return productSkus.length
+      }
+      return true
+    },
+    /**
+     * @description 详情设置
+     */
+    checkDetailConfig () {
+      const { information, coverPath } = this.productObj
+      let checkArr = [information, coverPath.length] // 校验为空的内容
+      let hasEmpty = checkArr.some((item) => {
+        return !item
+      })
+      return !hasEmpty
+    },
+    /**
+     * @description 其他设置
+     */
+    checkOtherConfig () {
+      const { cloudRetouchRequire } = this.productObj
+      if (this.productObj.editType === 'edit' && this.editOnline === 'now' && this.editOffline === 'now') {
         this.$newMessage.warning('不能同时设置立即上下线')
+        return false
+      }
+      if (this.productObj.editType === 'edit' && this.editOnline === 'fixed' && !this.productObj.startAt) {
+        this.$newMessage.warning('上线时间没有选择')
+        return false
+      }
+      if (this.productObj.editType !== 'edit' && !this.productObj.startAt) {
+        this.$newMessage.warning('上线时间没有选择')
+        return false
+      }
+      if (this.productObj.editType !== 'edit' && !cloudRetouchRequire) {
+        this.$newMessage.warning('修图要求没有填写')
         return false
       }
       return true

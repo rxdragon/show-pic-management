@@ -46,8 +46,10 @@ export default {
      * @description 校验
      */
     formCheck () {
-      this.$refs.upgradeForm.validate()
-      this.$refs.normalPriceConfig.formCheck()
+      let tempArr = []
+      tempArr.push(this.$refs.upgradeForm.validate())
+      tempArr = tempArr.concat(this.$refs.normalPriceConfig.formCheck())
+      return tempArr
     }
   }
 }

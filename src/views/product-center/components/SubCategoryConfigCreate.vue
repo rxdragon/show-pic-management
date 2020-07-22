@@ -93,12 +93,12 @@ export default {
       let validateArr = [
         this.$refs.styleForm.validate()
       ]
-      if (this.styleForm.isSimple === 'simple') { // 一层风格设置
-        validateArr.push(this.$refs.normalPriceConfig.formCheck())
+      if (this.styleForm.isSimple === 'simple') { // 风格设置
+        validateArr = validateArr.concat(this.$refs.normalPriceConfig.formCheck())
       }
-      if (this.styleForm.isSimple === 'notSimple') { // 二层风格设置
+      if (this.styleForm.isSimple === 'notSimple') { // 升级体验设置
         this.upgradeForms.forEach((item, index) => {
-          validateArr.push(this.$refs[`upgradeConfig${index}`][0].formCheck())
+          validateArr = validateArr.concat(this.$refs[`upgradeConfig${index}`][0].formCheck())
         })
       }
       try {

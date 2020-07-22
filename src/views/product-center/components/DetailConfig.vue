@@ -84,10 +84,19 @@ export default {
     /**
      * @description 下一步
      */
-    nextPage () {
-      this.$emit('next', {
-        aim: 'OtherConfig'
-      })
+    async nextPage () {
+      try {
+        await this.$refs.productObj.validate()
+        if (!this.productObj.information) {
+          throw new Error('产品介绍还没填写')
+        }
+        this.$emit('next', {
+          aim: 'OtherConfig'
+        })
+      } catch (error) {
+        console.error(error)
+        this.$newMessage.warning(error.message || error || '请输入相关配置')
+      }
     },
     /**
      * @description 输入监听
@@ -164,6 +173,7 @@ export default {
   }
 
   .next-btn {
+    margin-top: 100px;
     text-align: center;
   }
 }
