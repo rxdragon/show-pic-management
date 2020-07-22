@@ -146,6 +146,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       })
+      this.resetData()
       // 跳转到下一个tab
       this.$emit('next', { type: 'create' })
     }
