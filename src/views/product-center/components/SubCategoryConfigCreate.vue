@@ -93,6 +93,10 @@ export default {
           validateArr = validateArr.concat(this.$refs[`upgradeConfig${index}`][0].formCheck())
         })
       }
+      if (!this.upgradeForms.length && this.styleForm.isSimple === 'notSimple') {
+        this.$newMessage.warning('请添加升级体验')
+        return
+      }
       try {
         await Promise.all(validateArr)
         // 发送给编辑界面
@@ -122,13 +126,16 @@ export default {
      * @description 添加升级体验
      */
     addUpgrade () {
-      this.upgradeForms.push(new UpgradeObj())
+      this.upgradeForms.unshift(new UpgradeObj())
     },
     /**
      * @description 删除升级体验
      */
     delUpgradeItem (obj) {
       this.upgradeForms.splice(obj.index, 1)
+      if (!this.upgradeForms.length) {
+        this.upgradeForms.unshift(new UpgradeObj())
+      }
     },
     /**
      * @description 返回上一页

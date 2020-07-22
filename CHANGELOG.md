@@ -103,6 +103,7 @@
  - | 更改打包路径 | [740c1f1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/740c1f1)
  - | 更改登录配置i | [84ffa60](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/84ffa60)
  - | 更新错误码 | [5ffa4a9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5ffa4a9)
+ - | 正在配置时候 更换单层产品设置,取消掉设置界面 | [03b4596](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03b4596)
  - | 用户详情订单列表取消订单不显示详情操作 | [1ed4fef](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1ed4fef)
  - | 联调修复 | [d7ae477](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d7ae477)
  修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
