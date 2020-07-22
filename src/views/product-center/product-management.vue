@@ -9,7 +9,7 @@
         class="module-panel"
         :class="{'no-border': whichStep === 'ProductConfig'}"
       >
-        <keep-alive>
+        <keep-alive exclude="SubCategoryConfigEdit">
           <component
             :create-info="createInfo"
             :product-skus="productSkus"
