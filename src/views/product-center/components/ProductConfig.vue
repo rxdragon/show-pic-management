@@ -50,7 +50,7 @@
 <script>
 import UploadPic from './UploadPic'
 import PriceConfig from './PriceConfig'
-
+import { thumbnailOption, shareOption } from '../config/imgOption.js'
 // 基础配置
 const productConfigRules = {
   name: [
@@ -78,16 +78,8 @@ export default {
   data() {
     return {
       productConfigRules,
-      thumbnailOption: {
-        width: 220,
-        height: 220,
-        tip: '只能上传220x220的png/jpg图片'
-      },
-      shareOption: {
-        width: 100,
-        height: 100,
-        tip: '只能上传100x100的png/jpg图片'
-      }
+      thumbnailOption,
+      shareOption
     }
   },
   activated() {

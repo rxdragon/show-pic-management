@@ -1047,7 +1047,7 @@
     remark "^12.0.0"
     unist-util-find-all-after "^3.0.1"
 
-"@toast-ui/editor@^2.1.2", "@toast-ui/editor@^2.2.0":
+"@toast-ui/editor@^2.2.0":
   version "2.2.0"
   resolved "https://npm.code.hzmantu.com/@toast-ui%2feditor/-/editor-2.2.0.tgz#77fd790c6ae876d5de738bc022d6ebc5c84a6feb"
   integrity sha512-WiqrY7OeCOS08NlznJobCwtxOWJC/5my8QefHCKTZyX9/70kkojcnyQ8aoiQQ5kIfGUJ6dKt6/JuKD5OOib+bQ==
@@ -3937,10 +3937,10 @@ elegant-spinner@^2.0.0:
   resolved "https://npm.code.hzmantu.com/elegant-spinner/-/elegant-spinner-2.0.0.tgz#f236378985ecd16da75488d166be4b688fd5af94"
   integrity sha512-5YRYHhvhYzV/FC4AiMdeSIg3jAYGq9xFvbhZMpPlJoBsfYgrw2DSCYeXfat6tYBu45PWiyRr3+flaCPPmviPaA==
 
-element-ui@2.11.0:
-  version "2.11.0"
-  resolved "https://npm.code.hzmantu.com/element-ui/-/element-ui-2.11.0.tgz#4e8bb208389785b6f2215c5ffdf6431ddc017c9d"
-  integrity sha512-zW0yM5jRERZ3gx+Drr7AjDpVBYF1DbwwGZxFcyPX5358FJiv04i3s8MNAAMWErHLysoydxAJrFeqkYjw3+zppg==
+element-ui@2.12.0:
+  version "2.12.0"
+  resolved "https://npm.code.hzmantu.com/element-ui/-/element-ui-2.12.0.tgz#a893bc11ae4f7dbb7e9d541606f23e643f131ee4"
+  integrity sha512-DapyT0PW4i/1ETPHk8K8Qbe8B6hj10+dXsRTrOTFryV9wAs6e9mCxbV65awokyR2/v/KuIHJmqX+mH3wUa4rOQ==
   dependencies:
     async-validator "~1.8.1"
     babel-helper-vue-jsx-merge-props "^2.0.0"

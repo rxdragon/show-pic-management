@@ -13,10 +13,12 @@
       <div class="style-item">
         <span class="label">缩略图:</span>
         <img
+          v-if="item.styleForm.thumbnailList.length"
           class="thumbnail-img"
           :src="imgCompressDomain + item.styleForm.thumbnailList[0].path"
           alt=""
         />
+        <div class="empty-img" v-else></div>
       </div>
       <div class="style-item">
         <span class="label">价格设置:</span>
@@ -52,10 +54,12 @@
           <el-table-column label="缩略图" width="180">
             <template slot-scope="scope">
               <img
+                v-if="scope.row.thumbnailList.length"
                 class="thumbnail-img"
                 :src="imgCompressDomain + scope.row.thumbnailList[0].path"
                 alt=""
               />
+              <div class="empty-img" v-else></div>
             </template>
           </el-table-column>
           <el-table-column label="价格设置">
@@ -207,11 +211,19 @@ export default {
 
 <style lang="less" scoped>
 .sub-category-edit {
+  .empty-img {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background: #fafafa;
+  }
+
   .product-sku-empty {
     text-align: center;
   }
 
   .thumbnail-img {
+    display: inline-block;
     width: 100px;
     height: 100px;
   }

@@ -177,7 +177,7 @@ export default {
     .contact-wrap {
       display: flex;
       align-items: center;
-      margin-bottom: 24px;
+      height: 40px;
     }
 
     .show-price {
@@ -201,8 +201,6 @@ export default {
 
   .top {
     display: flex;
-    margin-top: 24px;
-    margin-bottom: 24px;
 
     .top-title {
       padding-right: 12px;
@@ -220,7 +218,11 @@ export default {
     }
 
     .content-title {
+      width: 100px;
+      padding-right: 12px;
+      margin-bottom: 10px;
       font-weight: bold;
+      text-align: right;
     }
 
     .item {

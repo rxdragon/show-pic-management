@@ -232,11 +232,14 @@ export default {
           uuid: id,
           name,
           desc: description,
-          thumbnailList: [{
+          thumbnailList: [],
+        }
+        if (imgPath) {
+          styleForm.thumbnailList.push({
             path: imgPath,
             status: 'success',
             response: {}
-          }],
+          })
         }
         if (sku_child) { // 是否有升级体验
           styleForm.isSimple = 'notSimple'

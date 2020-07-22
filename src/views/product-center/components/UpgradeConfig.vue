@@ -20,6 +20,7 @@
 import UploadPic from './UploadPic'
 import PriceConfig from './PriceConfig'
 import SkuRule from '../rules/skuRule.js'
+import { thumbnailOption } from '../config/imgOption.js'
 
 const upgradeRules = new SkuRule('upgrade')
 
@@ -33,11 +34,7 @@ export default {
   data() {
     return {
       upgradeRules,
-      thumbnailOption: {
-        width: 220,
-        height: 220,
-        tip: '只能上传220x220的png/jpg图片'
-      }
+      thumbnailOption
     }
   },
   methods: {

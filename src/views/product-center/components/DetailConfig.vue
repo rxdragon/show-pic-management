@@ -41,6 +41,7 @@ import { Editor } from '@toast-ui/vue-editor'
 import * as Commonality from '@/api/commonality'
 import { mapGetters } from 'vuex'
 import * as qiniu from 'qiniu-js'
+import { coverOption } from '../config/imgOption.js'
 import * as PhotoTool from '@/utils/photoTool'
 
 const detailRules = {
@@ -60,10 +61,7 @@ export default {
       detailRules,
       upyunConfig: '',
       editorOptions: defaultOptions,
-      coverOption: {
-        width: 750,
-        tip: '只能上传宽度750的png/jpg图片'
-      }
+      coverOption
     }
   },
   computed: {

@@ -43,12 +43,14 @@
 </template>
 
 <script>
+import cloneDeep from 'lodash/cloneDeep.js'
 import UploadPic from './UploadPic'
 import PriceConfig from './PriceConfig'
 import UpgradeConfig from './UpgradeConfig'
 import SkuRule from '../rules/skuRule.js'
 import { UpgradeObj,StyleObj } from '../objManage/index.js'
-import cloneDeep from 'lodash/cloneDeep.js'
+import { thumbnailOption } from '../config/imgOption.js'
+
 
 const styleRules = new SkuRule('style')
 
@@ -64,11 +66,7 @@ export default {
       styleRules,
       styleForm: new StyleObj(),
       upgradeForms: [],
-      thumbnailOption: {
-        width: 220,
-        height: 220,
-        tip: '只能上传220x220的png/jpg图片'
-      }
+      thumbnailOption
     }
   },
   activated() {

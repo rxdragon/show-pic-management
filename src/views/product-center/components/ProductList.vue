@@ -145,7 +145,7 @@ export default {
   .list-area {
     padding-top: 10px;
 
-    & /deep/ .el-tree-node:focus > .el-tree-node__content {
+    & /deep/ .el-tree-node.is-current > .el-tree-node__content {
       color: @menuBg;
     }
   }
