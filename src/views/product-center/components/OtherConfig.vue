@@ -326,9 +326,9 @@ export default {
       if (isSimple === 'simple' && priceObj.simplePrice === 'normal') { // 正常价格
         checkArr.push(priceObj.standerPrice.length)
         priceObj.standerPrice.forEach((item) => {
-          checkArr.push(item.basePeople)
-          checkArr.push(item.price)
-          checkArr.push(item.stepPrice)
+          checkArr.push(String(item.basePeople))
+          checkArr.push(String(item.price))
+          checkArr.push(String(item.stepPrice))
         })
       }
       let hasEmpty = checkArr.some((item) => {
