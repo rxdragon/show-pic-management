@@ -108,9 +108,6 @@ export default {
     productObj: { type: Object, required: true },
     productSkus: { type: Array, required: true }
   },
-  data() {
-    return {}
-  },
   computed: {
     ...mapGetters(['imgCompressDomain'])
   },
@@ -148,6 +145,13 @@ export default {
       const { productSkus } = this
       if (isSimple === 'notSimple' && !productSkus.length) {
         this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
+        return
+      }
+      let hasNeedUpgrade = productSkus.some((item) => {
+        return item.styleForm.isSimple === 'notSimple' && !item.upgradeForms.length
+      })
+      if (hasNeedUpgrade) {
+        this.$newMessage.warning('存在缺少升级体验的产品')
         return
       }
       this.$emit('next', {

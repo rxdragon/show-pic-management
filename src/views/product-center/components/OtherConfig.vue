@@ -378,6 +378,10 @@ export default {
         this.$newMessage.warning('上线时间没有选择')
         return false
       }
+      if (this.productObj.endAt && (new Date(this.productObj.endAt).getTime() < new Date(this.productObj.startAt).getTime())) {
+        this.$newMessage.warning('上线时间要小于下线时间')
+        return false
+      }
       if (this.productObj.editType !== 'edit' && !cloudRetouchRequire) {
         this.$newMessage.warning('修图要求没有填写')
         return false
