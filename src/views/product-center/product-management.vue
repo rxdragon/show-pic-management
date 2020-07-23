@@ -1,27 +1,33 @@
 <template>
   <div class="container">
-    <product-list ref="productList" @selectProduct="selectProduct" @addProduct="addProduct" />
-    <div class="config-area">
-      <el-tabs v-model="whichStep">
-        <el-tab-pane v-for="(item, index) in tabPaneConfig" :key="index" :label="item.label" :name="item.name" />
-      </el-tabs>
-      <div
-        class="module-panel"
-        :class="{'no-border': whichStep === 'ProductConfig'}"
-      >
-        <keep-alive exclude="SubCategoryConfigEdit">
-          <component
-            :create-info="createInfo"
-            :product-skus="productSkus"
-            :product-obj="productObj"
-            :check-status="checkStatus"
-            @next="goNext"
-            :is="step"
-            @finalCheck="modifyCheckStatus"
-          />
-        </keep-alive>
-      </div>
-    </div>
+    <el-row :gutter="10">
+      <el-col :xl="4" :lg="6" >
+        <product-list ref="productList" @selectProduct="selectProduct" @addProduct="addProduct" />
+      </el-col>
+      <el-col :xl="16" :lg="18">
+        <div class="config-area">
+          <el-tabs v-model="whichStep">
+            <el-tab-pane v-for="(item, index) in tabPaneConfig" :key="index" :label="item.label" :name="item.name" />
+          </el-tabs>
+          <div
+            class="module-panel"
+            :class="{'no-border': whichStep === 'ProductConfig'}"
+          >
+            <keep-alive exclude="SubCategoryConfigEdit">
+              <component
+                :create-info="createInfo"
+                :product-skus="productSkus"
+                :product-obj="productObj"
+                :check-status="checkStatus"
+                @next="goNext"
+                :is="step"
+                @finalCheck="modifyCheckStatus"
+              />
+            </keep-alive>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -366,7 +372,12 @@ export default {
 <style lang="less" scoped>
 .container {
   display: flex;
+  min-width: 900px;
   margin-top: 20px;
+
+  .el-row {
+    width: 100%;
+  }
 
   .config-area {
     width: 100%;

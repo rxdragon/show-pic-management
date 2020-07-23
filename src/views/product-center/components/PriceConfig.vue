@@ -7,7 +7,7 @@
           <div class="show-price" v-if="priceObj.simplePrice === 'contact'">
             <el-form ref="contactPrice" :model="priceObj" :rules="contactRules" label-width="100px">
               <el-form-item label="展示价格:" prop="simplePriceText">
-                <el-input v-model.trim="priceObj.simplePriceText" placeholder="需要展示的价格"  />
+                <el-input v-numberOnly v-model.trim="priceObj.simplePriceText" placeholder="需要展示的价格"  />
               </el-form-item>
             </el-form>
           </div>
@@ -36,19 +36,19 @@
       >
         <p class="content-title">{{ item.name }}</p>
         <el-form-item label="起始人头数:" prop="basePeople">
-          <el-input v-model="item.basePeople"></el-input>
+          <el-input v-numberOnly v-model="item.basePeople"></el-input>
           <span>人/张</span>
         </el-form-item>
         <el-form-item label="限制人头:" prop="limitPeople">
-          <el-input v-model="item.limitPeople"></el-input>
+          <el-input v-numberOnly v-model="item.limitPeople"></el-input>
           <span>人</span>
         </el-form-item>
         <el-form-item label="照片价格:" prop="price">
-          <el-input v-model="item.price"></el-input>
+          <el-input v-numberOnly v-model="item.price"></el-input>
           <span>元</span>
         </el-form-item>
         <el-form-item label="人头价格:" prop="stepPrice">
-          <el-input v-model="item.stepPrice"></el-input>
+          <el-input v-numberOnly v-model="item.stepPrice"></el-input>
           <span>元/人</span>
         </el-form-item>
       </el-form>

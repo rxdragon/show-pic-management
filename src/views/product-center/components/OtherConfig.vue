@@ -436,10 +436,6 @@ export default {
     margin-bottom: 20px;
   }
 
-  .submit-textarea {
-    width: 600px;
-  }
-
   .submit-box {
     text-align: center;
   }

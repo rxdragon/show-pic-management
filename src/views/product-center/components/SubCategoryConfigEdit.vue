@@ -49,7 +49,7 @@
       <!-- 升级体验区域 -->
       <div v-if="item.upgradeForms.length" class="upgrade-area" >
         <p>升级体验</p>
-        <el-table class="upgrade-form" :data="item.upgradeForms" style="width: 1000px;">
+        <el-table class="upgrade-form" :data="item.upgradeForms" style="width: 100%;">
           <el-table-column prop="name" label="升级体验名称" width="180"></el-table-column>
           <el-table-column label="缩略图" width="180">
             <template slot-scope="scope">
@@ -68,7 +68,7 @@
                 <p>联系客服</p>
                 <p>展示价格: ¥{{ scope.row.priceObj.simplePriceText }}</p>
               </div>
-              <div v-else>
+              <div class="price-area-wrap" v-else>
                 <div
                   class="price-area"
                   v-for="(standerPriceItem, standerPriceIndex) in scope.row.priceObj.standerPrice"
@@ -279,8 +279,12 @@ export default {
   }
 
   .upgrade-form {
-    .price-area {
-      margin-bottom: 10px;
+    .price-area-wrap {
+      display: flex;
+
+      .price-area {
+        margin-bottom: 10px;
+      }
     }
   }
 

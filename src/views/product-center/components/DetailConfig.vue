@@ -139,7 +139,6 @@ export default {
 .detail-config {
   .edit-content {
     display: flex;
-    min-width: 900px;
     height: 600px;
 
     /deep/ .toastui-editor {

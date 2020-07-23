@@ -111,7 +111,7 @@ export default {
 .product-list {
   box-sizing: border-box;
   flex-shrink: 0;
-  width: 350px;
+  width: 100%;
   min-height: 600px;
 
   .panel-title {
