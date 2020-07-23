@@ -127,7 +127,7 @@ export default {
       if (!this.checkAll()) {
         return
       }
-      const { endAt, editType,thumbnailPath, priceObj, sharePath, isSimple, coverPath, id, cloudRetouchRequire, ...rest } = this.productObj
+      const { endAt, startAt, editType,thumbnailPath, priceObj, sharePath, isSimple, coverPath, id, cloudRetouchRequire, ...rest } = this.productObj
       let finalObj = rest
       const skuObj = this.handleProductSkus()
       finalObj.thumbnailPath = thumbnailPath[0] && thumbnailPath[0].path
@@ -135,6 +135,9 @@ export default {
       finalObj.coverPath = coverPath[0] && coverPath[0].path
       if (endAt) { // 后端传null不识别
         finalObj.endAt = endAt
+      }
+      if (startAt) { // 后端传null不识别
+        finalObj.startAt = startAt
       }
       finalObj.handle_account = 0 // 有升级项
       if (skuObj.finalProductSku.length) {
