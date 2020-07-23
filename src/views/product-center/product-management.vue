@@ -150,13 +150,23 @@ export default {
     /**
      * @description 新建产品
      */
-    addProduct () {
+    async addProduct () {
+      await this.$confirm('当前操作未保存，刷新页面后数据将不做保存?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
       this.resetData()
     },
     /**
      * @description 选择产品编辑
      */
     async selectProduct (obj) {
+      await this.$confirm('当前操作未保存，刷新页面后数据将不做保存?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
       this.resetData()
       const req = { id: obj.id }
       const msg = await Product.getInfo(req)

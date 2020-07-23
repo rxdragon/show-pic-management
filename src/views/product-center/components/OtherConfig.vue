@@ -133,10 +133,10 @@ export default {
       finalObj.thumbnailPath = thumbnailPath[0] && thumbnailPath[0].path
       finalObj.sharePath = sharePath[0] && sharePath[0].path
       finalObj.coverPath = coverPath[0] && coverPath[0].path
-      if (endAt) { // 后端传null不识别
+      if (endAt && this.editOffline !== 'now') {
         finalObj.endAt = endAt
       }
-      if (startAt) { // 后端传null不识别
+      if (startAt && this.editOnline !== 'now') {
         finalObj.startAt = startAt
       }
       finalObj.handle_account = 0 // 有升级项
