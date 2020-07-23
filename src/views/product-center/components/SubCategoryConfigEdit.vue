@@ -33,7 +33,7 @@
               v-for="(standerPriceItem, standerPriceIndex) in item.styleForm.priceObj.standerPrice"
               :key="standerPriceIndex"
             >
-              <p>修图标准: {{ standerPriceItem.name }}</p>
+              <p>{{ standerPriceItem.name }}</p>
               <p>起始人头数: {{ standerPriceItem.basePeople }}人/张</p>
               <p>限制人头数: {{ standerPriceItem.limitPeople }}人</p>
               <p>照片价格: {{ standerPriceItem.price }}元/张</p>
@@ -43,15 +43,15 @@
         </div>
       </div>
       <div class="style-item">
-        <span class="label">下单说明</span>
+        <span class="label">下单说明:</span>
         <span>{{ item.styleForm.desc }}</span>
       </div>
       <!-- 升级体验区域 -->
       <div v-if="item.upgradeForms.length" class="upgrade-area" >
-        <p>升级体验</p>
-        <el-table class="upgrade-form" :data="item.upgradeForms" style="width: 100%;">
-          <el-table-column prop="name" label="升级体验名称" width="180"></el-table-column>
-          <el-table-column label="缩略图" width="180">
+        <p class="title">升级体验</p>
+        <el-table border class="upgrade-form" :data="item.upgradeForms" style="width: 100%;">
+          <el-table-column prop="name" label="升级体验名称" width="120"></el-table-column>
+          <el-table-column label="缩略图" width="120">
             <template slot-scope="scope">
               <img
                 v-if="scope.row.thumbnailList.length"
@@ -74,7 +74,7 @@
                   v-for="(standerPriceItem, standerPriceIndex) in scope.row.priceObj.standerPrice"
                   :key="standerPriceIndex"
                 >
-                  <p>修图标准: {{ standerPriceItem.name }}</p>
+                  <p>{{ standerPriceItem.name }}</p>
                   <p>起始人头数: {{ standerPriceItem.basePeople }}人/张</p>
                   <p>限制人头数: {{ standerPriceItem.limitPeople }}人</p>
                   <p>照片价格: {{ standerPriceItem.price }}元/张</p>
@@ -83,8 +83,8 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="desc" label="下单说明" width="180"></el-table-column>
-          <el-table-column label="操作" width="180">
+          <el-table-column prop="desc" label="下单说明" width="150"></el-table-column>
+          <el-table-column label="操作" width="100">
             <template slot-scope="scope">
               <el-button
                 type="danger"
@@ -225,7 +225,9 @@ export default {
   }
 
   .categorys {
-    margin-top: 10px;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #303133;
   }
 
   .empty-img {
@@ -251,6 +253,8 @@ export default {
     justify-content: space-between;
     width: 100%;
     padding: 10px;
+    font-size: 16px;
+    font-weight: 700;
     background: #f0f2f5;
 
     .operate-text {
@@ -278,12 +282,21 @@ export default {
     }
   }
 
+  .upgrade-area {
+    margin-top: 10px;
+
+    .title {
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+  }
+
   .upgrade-form {
     .price-area-wrap {
       display: flex;
 
       .price-area {
-        margin-bottom: 10px;
+        margin-right: 10px;
       }
     }
   }

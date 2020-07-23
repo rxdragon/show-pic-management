@@ -7,7 +7,7 @@
           <div class="show-price" v-if="priceObj.simplePrice === 'contact'">
             <el-form ref="contactPrice" :model="priceObj" :rules="contactRules" label-width="100px">
               <el-form-item label="展示价格:" prop="simplePriceText">
-                <el-input v-numberOnly v-model.trim="priceObj.simplePriceText" placeholder="需要展示的价格"  />
+                <el-input v-decimalOnly v-model.trim="priceObj.simplePriceText" placeholder="需要展示的价格"  />
               </el-form-item>
             </el-form>
           </div>
@@ -44,11 +44,11 @@
           <span>人</span>
         </el-form-item>
         <el-form-item label="照片价格:" prop="price">
-          <el-input v-numberOnly v-model="item.price"></el-input>
+          <el-input v-decimalOnly v-model="item.price"></el-input>
           <span>元</span>
         </el-form-item>
         <el-form-item label="人头价格:" prop="stepPrice">
-          <el-input v-numberOnly v-model="item.stepPrice"></el-input>
+          <el-input v-decimalOnly v-model="item.stepPrice"></el-input>
           <span>元/人</span>
         </el-form-item>
       </el-form>

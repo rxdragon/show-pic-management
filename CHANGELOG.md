@@ -58,6 +58,7 @@
  - | tab样式fix,一些uichange | [fa216ee](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/fa216ee)
  - | 优化样式 | [9075b0d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9075b0d)
  - | 修复关闭订单理由换行 | [214b2af](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/214b2af)
+ - | 增加栅格布局 | [8c5282f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8c5282f)
  - | 描述样式变更 | [828d37a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/828d37a)
  - | 暂存,ui修改 | [0677215](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0677215)
  - | 更改全局less变量 | [03d1942](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03d1942)
