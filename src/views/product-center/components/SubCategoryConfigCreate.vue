@@ -154,6 +154,13 @@ export default {
 
 <style lang="less" scoped>
 .sub-category-create {
+  height: 1000px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar-thumb {
+    display: none;
+  }
+
   /deep/ .el-input {
     width: 300px;
 

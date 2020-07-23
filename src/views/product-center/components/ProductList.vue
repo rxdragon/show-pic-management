@@ -143,7 +143,17 @@ export default {
   }
 
   .list-area {
+    height: 900px;
     padding-top: 10px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #00b1b7;
+    }
 
     & /deep/ .el-tree-node.is-current > .el-tree-node__content {
       color: @menuBg;

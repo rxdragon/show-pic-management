@@ -105,6 +105,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Tool from '../tools/index.js'
 
 export default {
   name: 'SubCategoryConfigEdit',
@@ -167,6 +168,11 @@ export default {
         this.$newMessage.warning('存在缺少升级体验的产品')
         return
       }
+      // 编辑时候可能老数据没有缩略图,检查没有缩略图的情况
+      if (Tool.checkNoThumbnail(productSkus)) {
+        this.$newMessage.warning('存在缺少缩略图的的产品')
+        return
+      }
       if (type === 'next') this.$emit('next', { aim: 'DetailConfig' })
      
       
@@ -211,6 +217,17 @@ export default {
 
 <style lang="less" scoped>
 .sub-category-edit {
+  height: 1000px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar-thumb {
+    display: none;
+  }
+
+  .categorys {
+    margin-top: 10px;
+  }
+
   .empty-img {
     display: inline-block;
     width: 100px;
@@ -234,7 +251,7 @@ export default {
     justify-content: space-between;
     width: 100%;
     padding: 10px;
-    background: lightgray;
+    background: #f0f2f5;
 
     .operate-text {
       margin: 10px;
@@ -251,6 +268,7 @@ export default {
   }
 
   .style-item {
+    display: flex;
     margin-top: 10px;
 
     .label {

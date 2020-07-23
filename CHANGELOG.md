@@ -1,4 +1,4 @@
-# 1.0.0 (2020-07-22)
+# 1.0.0 (2020-07-23)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -54,6 +54,7 @@
 ### 🎨 代码样式
 范围|描述|commitId
 --|--|--
+ - | tab样式fix,一些uichange | [fa216ee](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/fa216ee)
  - | 优化样式 | [9075b0d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9075b0d)
  - | 修复关闭订单理由换行 | [214b2af](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/214b2af)
  - | 描述样式变更 | [828d37a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/828d37a)

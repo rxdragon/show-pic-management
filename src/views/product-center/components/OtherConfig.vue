@@ -87,6 +87,7 @@
 <script>
 import { psTypeIdEnum } from '@/model/Enumerate.js'
 import * as Product from '@/api/product.js'
+import Tool from '../tools/index.js'
 
 const otherRules = {
   cloudRetouchRequire: [
@@ -316,7 +317,6 @@ export default {
       }
       // 检查子品类设置
       if (!this.checkSubCategoryConfig()) {
-        this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
         this.$emit('finalCheck', {
           type: 'add',
           tab: 'SubCategoryConfigEdit'
@@ -366,8 +366,14 @@ export default {
     checkSubCategoryConfig () {
       const { isSimple } = this.productObj
       const { productSkus } = this
-      if (isSimple === 'notSimple') {
-        return productSkus.length
+      if (isSimple === 'notSimple' && !productSkus.length) {
+        this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
+        return false
+      }
+      // 编辑时候可能老数据没有缩略图,检查没有缩略图的情况
+      if (Tool.checkNoThumbnail(productSkus)) {
+        this.$newMessage.warning('子品类中存在缺少缩略图的情况')
+        return false
       }
       return true
     },
@@ -377,9 +383,7 @@ export default {
     checkDetailConfig () {
       const { information, coverPath } = this.productObj
       let checkArr = [information, coverPath.length] // 校验为空的内容
-      let hasEmpty = checkArr.some((item) => {
-        return !item
-      })
+      let hasEmpty = checkArr.some((item) => !item)
       return !hasEmpty
     },
     /**
