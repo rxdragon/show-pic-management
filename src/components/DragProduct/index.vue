@@ -89,6 +89,7 @@ export default {
         this.loading = true
         await ProductApi.sortProduct(req)
         this.dialogVisible = false
+        this.$newMessage.success('修改排序成功')
         this.$emit('uploadSuccess')
       } finally {
         this.loading = false

@@ -31,7 +31,7 @@
       <div class="panel-title">其他设置</div>
       <el-form ref="productObjTwo" :model="productObj" :rules="productConfigRules" label-width="100px">
         <el-form-item label="产品简介:" prop="description">
-          <el-input class="long" maxlength="20" v-model.trim="productObj.description" placeholder="产品首页介绍,最多20个字符"  />
+          <el-input class="long" maxlength="30" v-model.trim="productObj.description" placeholder="产品首页介绍,最多30个字符"  />
         </el-form-item>
         <el-form-item label="缩略图:" prop="thumbnailPath">
           <upload-pic :option="thumbnailOption" v-model="productObj.thumbnailPath"/>

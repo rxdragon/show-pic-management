@@ -403,10 +403,6 @@ export default {
         this.$newMessage.warning('不能同时设置立即上下线')
         return false
       }
-      if (this.productObj.editType === 'edit' && this.editOnline === 'fixed' && !this.productObj.startAt) {
-        this.$newMessage.warning('上线时间没有选择')
-        return false
-      }
       if (this.productObj.editType !== 'edit' && !this.productObj.startAt) {
         this.$newMessage.warning('上线时间没有选择')
         return false
