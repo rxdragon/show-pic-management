@@ -6,7 +6,7 @@
         <img :src="bannerImg" class="banner" alt="" />
         <div class="price-area">
           <span>{{ productObj.name }}</span>
-          <span class="price">¥120.00起</span>
+          <span class="price">¥{{ minimumPrice }}起</span>
         </div>
         <div class="title-box">
           <div class="icon-dot">
@@ -35,6 +35,7 @@ export default {
   name: 'IphoneModel',
   props: {
     pageHtml: { type: String,default: ''},
+    minimumPrice: { type: String,default: ''},
     banner: { type: Array,default: () => []},
     productObj: { type: Object, default: () => new Object() }
   },

@@ -20,7 +20,7 @@
             :options="editorOptions"
           />
         </div>
-        <iphone-model :product-obj="productObj" :banner="productObj.coverPath" :page-html="productObj.information" ></iphone-model>
+        <iphone-model :minimum-price="minimumPrice" :product-obj="productObj" :banner="productObj.coverPath" :page-html="productObj.information" ></iphone-model>
       </div>
     </div>
     <div class="next-btn">
@@ -43,6 +43,7 @@ import { mapGetters } from 'vuex'
 import * as qiniu from 'qiniu-js'
 import { coverOption } from '../config/imgOption.js'
 import * as PhotoTool from '@/utils/photoTool'
+import Tool from '../tools/index.js'
 
 const detailRules = {
   coverPath: [
@@ -54,14 +55,16 @@ export default {
   components: { IphoneModel, UploadPic, Editor },
   props: {
     productObj: { type: Object, required: true },
-    checkStatus: { type: Object, required: true }
+    checkStatus: { type: Object, required: true },
+    productSkus: { type: Array, required: true }
   },
   data() {
     return {
       detailRules,
       upyunConfig: '',
       editorOptions: defaultOptions,
-      coverOption
+      coverOption,
+      minimumPrice: '--'
     }
   },
   computed: {
@@ -72,6 +75,7 @@ export default {
   },
   activated() {
     this.editor.setHtml(this.productObj.information)
+    this.updateMinimumPrice()
     if (this.checkStatus.DetailConfig) {
       this.check()
       this.$emit('finalCheck', {
@@ -131,6 +135,28 @@ export default {
         }
       }
       observable.subscribe(observer)
+    },
+    /**
+     * @description 更新设置的最低价格
+     */
+    updateMinimumPrice () {
+      const { productObj, productSkus } = this
+      let priceArr = []
+      if (productObj.isSimple === 'simple') {
+        priceArr = priceArr.concat(Tool.findPrice(productObj.priceObj))
+      } else {
+        productSkus.forEach((item) => {
+          if (item.styleForm.isSimple === 'simple') {
+            priceArr = priceArr.concat(Tool.findPrice(item.styleForm.priceObj))
+          } else {
+            item.upgradeForms.forEach((upgradeFormitem) => {
+              priceArr = priceArr.concat(Tool.findPrice(upgradeFormitem.priceObj))
+            })
+          }
+        })
+      }
+      priceArr.sort((a,b) => a - b)
+      this.minimumPrice = priceArr[0] ? Number(priceArr[0]).toFixed(2): '--'
     }
   }
 }

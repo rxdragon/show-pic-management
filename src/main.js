@@ -6,6 +6,7 @@ import * as filters from './filters' // 全局过滤器
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 import './plugins/axios'
+import 'element-ui/lib/theme-chalk/display.css' // 栅格隐藏
 import './plugins/element.js' // ui布局
 import './plugins/icon-font/iconfont.css' // 字体
 import './assets/styles/font.less' // 全局样式

@@ -1,3 +1,6 @@
+/**
+ * @description 检查是否存在无效的缩略图
+ */
 const checkNoThumbnail = (productSkus) => {
   let hasNoThumbnail = false
   productSkus.forEach((item) => {
@@ -14,7 +17,23 @@ const checkNoThumbnail = (productSkus) => {
   })
   return hasNoThumbnail
 }
+/**
+ * @description 找到价格,并返回
+ */
+const findPrice = (priceObj) => {
+  const { simplePrice, simplePriceText, standerPrice } = priceObj
+  let priceArr = []
+  if (simplePrice === 'contact') {
+    priceArr.push(simplePriceText)
+  } else {
+    standerPrice.forEach((item) => {
+      priceArr.push(item.price)
+    })
+  }
+  return priceArr
+}
 
 export default {
-  checkNoThumbnail
+  checkNoThumbnail,
+  findPrice
 }

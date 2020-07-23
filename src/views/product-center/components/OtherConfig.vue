@@ -373,6 +373,11 @@ export default {
         this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
         return false
       }
+      let hasNeedUpgrade = productSkus.some((item) => item.styleForm.isSimple === 'notSimple' && !item.upgradeForms.length)
+      if (hasNeedUpgrade) {
+        this.$newMessage.warning('子品类中存在缺少升级体验的产品')
+        return false
+      }
       // 编辑时候可能老数据没有缩略图,检查没有缩略图的情况
       if (Tool.checkNoThumbnail(productSkus)) {
         this.$newMessage.warning('子品类中存在缺少缩略图的情况')

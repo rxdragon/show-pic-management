@@ -91,14 +91,6 @@ const actions = {
       try {
         const savePermission = SessionTool.getUserPermission()
         const permissions = savePermission || await UserAction.getAuthority()
-        // todo 最后提醒增加权限
-        permissions.push({
-          application: 889,
-          id: 2001,
-          name: "product_center.product_management.getList",
-          title: "产品管理-产品中心-产品列表"
-        })
-
         SessionTool.setUserPermission(permissions)
         // 动态添加路由
         const accessRoutes = await store.dispatch('permission/generateRoutes', permissions)

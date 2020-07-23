@@ -79,6 +79,7 @@
  - | 上线时间fix | [ea61bbc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ea61bbc)
  - | 上线时间不能传null | [e1bd83a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e1bd83a)
  - | 价格初识状态fix | [bd43876](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bd43876)
+ - | 价格设置改为小数2位 | [ddab5b1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ddab5b1)
  - | 优化修复部分功能 | [d9f6a8d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d9f6a8d)
  - | 修图查询显示 | [85c5083](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/85c5083)
  - | 修复最小开票金额判断错误问题 | [7f210c9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7f210c9)
