@@ -115,20 +115,11 @@ export default {
           isNew: this.createInfo.isNew,
           index: this.createInfo.index
         }
-        this.resetData()
         this.$emit('next', tempObj)
       } catch (error) {
         console.error(error)
         this.$newMessage.warning(error.message || error || '请输入相关配置')
       }
-      
-    },
-    /**
-     * @description 重置页面数据
-     */
-    resetData () {
-      // this.styleForm = new StyleObj()
-      // this.upgradeForms = []
     },
     /**
      * @description 升级体验有无的切换
@@ -160,7 +151,6 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       })
-      this.resetData()
       this.$emit('next', { type: 'create' })
     }
   }
