@@ -30,21 +30,22 @@
 </template>
 
 <script>
-import IphoneModel from './IphoneModel.vue'
-import UploadPic from './UploadPic'
-import defaultOptions from '../editorOption/index.js'
 import 'codemirror/lib/codemirror.css'
 import '@toast-ui/editor/dist/i18n/zh-cn'
 import '@toast-ui/editor/dist/toastui-editor.css'
-import { Editor } from '@toast-ui/vue-editor'
+
+import IphoneModel from './IphoneModel.vue'
+import UploadPic from './UploadPic'
+import defaultOptions from '../editorOption/index.js'
+import Tool from '../tools/index.js'
 
 import * as Commonality from '@/api/commonality'
-import { mapGetters } from 'vuex'
-import * as qiniu from 'qiniu-js'
+import * as Product from '@/api/product'
+
+import { Editor } from '@toast-ui/vue-editor'
 import { coverOption } from '../config/imgOption.js'
-import * as PhotoTool from '@/utils/photoTool'
-import Tool from '../tools/index.js'
 import { PRODUCT_IS_SIMPLE } from '@/model/Enumerate.js'
+import { mapGetters } from 'vuex'
 
 const detailRules = {
   coverPath: [
@@ -89,7 +90,12 @@ export default {
     this.editor = this.$refs.toastuiEditor.editor
     this.editor.eventManager.removeEventHandler('addImageBlobHook')
     // 添加自定义监听事件
-    this.editor.eventManager.listen('addImageBlobHook', (blob, callback) => this.upload(blob, url => callback(url)))
+    this.editor.eventManager.listen('addImageBlobHook', (file, callback) => {
+      this.upload(file, url => {
+        callback(url)
+        this.$loadingClose()
+      })
+    })
   },
   methods: {
     /**
@@ -101,7 +107,6 @@ export default {
         if (!this.productObj.information) throw new Error('产品介绍还没填写')
         if (type === 'next') this.$emit('next', { aim: 'OtherConfig' })
       } catch (error) {
-        console.error(error)
         this.$newMessage.warning(error.message || error || '请输入相关配置')
       }
     },
@@ -121,17 +126,18 @@ export default {
     /**
      * @description 上传
      */
-    upload (blob, cb) {
-      const { upyunConfig, imgDomain } = this
-      const observable = qiniu.upload(blob, undefined, upyunConfig.token) // key传undefined,是为了忽略key
-      // 上传事件 lifeCycle
-      const observer = {
-        complete (res) {
-          const url = `${imgDomain}${PhotoTool.handlePicPath(res.url)}`
-          cb(url)
-        }
+    async upload (file, cb) {
+      try {
+        this.$loading()
+        const { token } = this.upyunConfig
+        const req = { file, token }
+        const url = await Product.uploadPhotoData(req)
+        cb(`${this.imgDomain}${url}`)
+      } catch (error) {
+        this.$newMessage.warning('上传失败')
+        this.$loadingClose()
+        throw new Error(error)
       }
-      observable.subscribe(observer)
     },
     /**
      * @description 更新设置的最低价格

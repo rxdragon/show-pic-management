@@ -196,7 +196,8 @@ export default {
     addStyle () {
       this.$emit('next', {
         type: 'edit',
-        isNew: true
+        isNew: true,
+        needInit: true
       })
     },
     /**
@@ -211,13 +212,14 @@ export default {
       this.productSkus.splice(index, 1)
     },
     /**
-     * @description 跳转新增页面页
+     * @description 去编辑一个老的商品
      */
     editStyle (index) {
       this.$emit('next', {
         type: 'edit',
         isNew: false,
-        index
+        index,
+        needInit: true
       })
     },
   }

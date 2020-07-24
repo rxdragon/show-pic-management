@@ -72,8 +72,9 @@ export default {
       productObj: new ProductObj(),
       productSkus: [], // 存放配置保存的子品类
       createInfo: {
-        isNew: true,
-        index: ''
+        isNew: true, // 判断页面是新建的还是编辑老的
+        index: '',
+        needInit: true // 控制新建页面是否需要初始化
       },
       checkStatus: { // 用于存放最终校验失败的模块, 被对应模块重新校验后消耗掉
         ProductConfig: false,
@@ -113,14 +114,22 @@ export default {
       }
       if (obj.type === 'edit') { // 改成新增模式
         this.isCreate = true
-        if (obj.isNew) {
-          this.createInfo = { isNew: true }
+        if (obj.isNew) { // 新建一个风格
+          this.createInfo = {
+            isNew: true,
+            index: '',
+            needInit: true
+          }
           return
         }
-        this.createInfo = {
+        this.createInfo = { // 编辑一个现有的风格
           isNew: false,
-          index: obj.index
+          index: obj.index,
+          needInit: true
         }
+      }
+      if (obj.type === 'noNeedInit') { // 页面初始化后,将needInit改为false,下次需要初始化再主动触发
+        this.createInfo.needInit = false
       }
       if (obj.type === 'init') { // 提交后重置
         this.resetData()
@@ -139,7 +148,8 @@ export default {
       this.productObj = new ProductObj()
       this.productSkus = []
       this.whichStep = 'ProductConfig'
-      this.isCreate = false
+      this.isCreate = false // 转成子品类编辑页
+      this.createInfo.needInit = true // 初始化数据都需要子品类初始化
     },
     /**
      * @description 新建产品

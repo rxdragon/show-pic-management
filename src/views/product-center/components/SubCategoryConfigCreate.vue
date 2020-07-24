@@ -14,7 +14,7 @@
           <upload-pic :option="thumbnailOption" v-model="styleForm.thumbnailList" />
         </el-form-item>
         <el-form-item label="价格设置:">
-          <el-radio-group v-model="styleForm.isSimple">
+          <el-radio-group @change="changeIsSimple" v-model="styleForm.isSimple">
             <el-radio label="simple">是(将不可再配置修图风格&升级体验)</el-radio>
             <el-radio label="notSimple">否(需要在后续步骤配置修图风格&升级体验)</el-radio>
           </el-radio-group>
@@ -76,9 +76,15 @@ export default {
     }
   },
   activated() {
-    if (!this.createInfo.isNew) {
+    if (this.createInfo.needInit && this.createInfo.isNew) {
+      this.upgradeForms = []
+      this.styleForm = new StyleObj()
+      this.$emit('next', { type: 'noNeedInit' })
+    }
+    if (!this.createInfo.isNew && this.createInfo.needInit) { // 编辑情况下,并且需要初始化才会去初始化
       this.styleForm = cloneDeep(this.productSkus[this.createInfo.index].styleForm)
       this.upgradeForms = cloneDeep(this.productSkus[this.createInfo.index].upgradeForms)
+      this.$emit('next', { type: 'noNeedInit' })
     }
   },
   methods: {
@@ -121,8 +127,16 @@ export default {
      * @description 重置页面数据
      */
     resetData () {
-      this.styleForm = new StyleObj()
-      this.upgradeForms = []
+      // this.styleForm = new StyleObj()
+      // this.upgradeForms = []
+    },
+    /**
+     * @description 升级体验有无的切换
+     */
+    changeIsSimple (value) {
+      if (value === 'simple') {
+        this.upgradeForms = []
+      }
     },
     /**
      * @description 添加升级体验
