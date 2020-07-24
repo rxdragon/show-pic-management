@@ -18,11 +18,7 @@
           <el-radio label="simple">是（将不可再配置修图风格&升级体验）</el-radio>
           <el-radio label="notSimple">否（需要在后续步骤配置修图风格&升级体验）</el-radio>
           <div class="fake-change-area">
-            <div
-              @click="changeIsSimple(PRODUCT_IS_SIMPLE.SIMPLE)"
-              class="fake-change-item left"
-            >
-            </div>
+            <div @click="changeIsSimple(PRODUCT_IS_SIMPLE.SIMPLE)" class="fake-change-item left"></div>
             <div
               @click="changeIsSimple(PRODUCT_IS_SIMPLE.NOTSIMPLE)"
               class="fake-change-item right"

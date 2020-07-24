@@ -68,6 +68,7 @@
  - | 更改样式 | [7014fe2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7014fe2)
  - | 更改样式 | [6a28f8c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6a28f8c)
  - | 更改样式 | [9483937](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9483937)
+ - | 枚举值规范修改 | [da7b03c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/da7b03c)
  - | 样式更改 | [c5f050a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/c5f050a)
  - | 样式更能 | [96c582a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/96c582a)
  - | 样式更难过 | [84438e7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/84438e7)
