@@ -46,8 +46,7 @@
           type="datetime"
           placeholder="选择上线时间"
           :picker-options="pickerOptions"
-        >
-        </el-date-picker>
+        />
       </div>
       <div class="config-item">
         <span class="title">下线时间:</span>
@@ -58,8 +57,7 @@
           type="datetime"
           placeholder="选择下线时间"
           :picker-options="pickerOptions"
-        >
-        </el-date-picker>
+        />
       </div>
     </div>
     <div class="module-box" v-if="productObj.editType !== 'edit'">
@@ -73,8 +71,7 @@
             v-model="productObj.cloudRetouchRequire"
             maxlength="30"
             show-word-limit
-          >
-          </el-input>
+          />
         </el-form-item>
       </el-form>
     </div>
@@ -124,21 +121,15 @@ export default {
      * @description 提交全部数据
      */
     finalSubmint () {
-      if (!this.checkAll()) {
-        return
-      }
+      if (!this.checkAll()) return
       const { endAt, startAt, editType,thumbnailPath, priceObj, sharePath, isSimple, coverPath, id, cloudRetouchRequire, ...rest } = this.productObj
       let finalObj = rest
       const skuObj = this.handleProductSkus()
       finalObj.thumbnailPath = thumbnailPath[0] && thumbnailPath[0].path
       finalObj.sharePath = sharePath[0] && sharePath[0].path
       finalObj.coverPath = coverPath[0] && coverPath[0].path
-      if (endAt && this.editOffline !== 'now') {
-        finalObj.endAt = endAt
-      }
-      if (startAt && this.editOnline !== 'now') {
-        finalObj.startAt = startAt
-      }
+      if (endAt && this.editOffline !== 'now') finalObj.endAt = endAt
+      if (startAt && this.editOnline !== 'now') finalObj.startAt = startAt
       finalObj.handle_account = 0 // 有升级项
       if (skuObj.finalProductSku.length) {
         finalObj.productSkus = skuObj.finalProductSku
@@ -172,11 +163,11 @@ export default {
      */
     handleProductSkus () {
       // 单层产品配置,走另一个逻辑
-      if (this.productObj.isSimple === productIsSimpleEnum.SIMPLE) this.handleSimpleSkus()
+      if (this.productObj.isSimple === productIsSimpleEnum.SIMPLE) return this.handleSimpleSkus()
       const { productSkus } = this
       let finalProductSku = []
       let finalSkus = {}
-      productSkus.forEach((skuItem) => {
+      productSkus.forEach(skuItem => {
         finalSkus[skuItem.styleForm.uuid] = {
           name: skuItem.styleForm.name,
           type: 's2',
@@ -201,7 +192,7 @@ export default {
         styleObj.handle_account = 1
         styleObj.price = this.productObj.priceObj.simplePriceText
       } else {
-        this.productObj.priceObj.standerPrice.forEach((standerPriceItem) => {
+        this.productObj.priceObj.standerPrice.forEach(standerPriceItem => {
           let normalObj = {}
           let normalSku = []
           this.handleStanderPriceItem(normalObj, standerPriceItem)
@@ -221,27 +212,28 @@ export default {
      * @description 处理只有风格没有升级体验的情况
      */
     handleNoUpgrade (skuItem, finalProductSku) {
-      let styleObj = {}
-      let styleSku = []
       if (skuItem.styleForm.priceObj.simplePrice === productPriceStatusEnum.CONTACT) { // 联系客服
+        let styleObj = {}
         styleObj.handle_account = 1
         styleObj.price = skuItem.styleForm.priceObj.simplePriceText
         if (skuItem.styleForm.priceObj.productId) styleObj.id = skuItem.styleForm.priceObj.productId
       } else {
-        skuItem.styleForm.priceObj.standerPrice.forEach((standerPriceItem) => {
+        skuItem.styleForm.priceObj.standerPrice.forEach(standerPriceItem => {
+          let styleObj = {}
+          let styleSku = []
           this.handleStanderPriceItem(styleObj, standerPriceItem)
           styleSku.push({ id: psTypeIdEnum[standerPriceItem.type] })
+          styleSku.push({ uuid: skuItem.styleForm.uuid })
+          styleObj.skus = styleSku
+          finalProductSku.push(styleObj)
         })
       }
-      styleSku.push({ uuid: skuItem.styleForm.uuid })
-      styleObj.skus = styleSku
-      finalProductSku.push(styleObj)
     },
     /**
      * @description 处理有升级体验的情况
      */
     handleHasUpgrade (skuItem, finalProductSku, finalSkus) {
-      skuItem.upgradeForms.forEach((upgradeItem) => {
+      skuItem.upgradeForms.forEach(upgradeItem => {
         finalSkus[upgradeItem.uuid] = {
           name: upgradeItem.name,
           type: 's3',
@@ -259,7 +251,7 @@ export default {
           upgradeObj.skus = upgradeSku
           finalProductSku.push(upgradeObj)
         } else { // 正常价格配置
-          upgradeItem.priceObj.standerPrice.forEach((standerPriceItem) => {
+          upgradeItem.priceObj.standerPrice.forEach(standerPriceItem => {
             let upgradeObj = {}
             let upgradeSku = []
             this.handleStanderPriceItem(upgradeObj, standerPriceItem)
@@ -276,9 +268,7 @@ export default {
      * @description 处理修图标准的数据
      */
     handleStanderPriceItem (aimObj, dataObj) {
-      if (dataObj.productId) {
-        aimObj.id = dataObj.productId
-      }
+      if (dataObj.productId) aimObj.id = dataObj.productId
       aimObj.handle_account = 0
       aimObj.price = dataObj.price
       aimObj.price_extend = {
@@ -318,9 +308,7 @@ export default {
         return false
       }
       // 检查其他页设置
-      if (!this.checkOtherConfig()) {
-        return false
-      }
+      if (!this.checkOtherConfig()) return false
       return true
     },
     /**
@@ -334,13 +322,13 @@ export default {
       }
       if (isSimple === productIsSimpleEnum.SIMPLE && priceObj.simplePrice === productPriceStatusEnum.NORMAL) { // 正常价格
         checkArr.push(priceObj.standerPrice.length)
-        priceObj.standerPrice.forEach((item) => {
+        priceObj.standerPrice.forEach(item => {
           checkArr.push(String(item.basePeople))
           checkArr.push(String(item.price))
           checkArr.push(String(item.stepPrice))
         })
       }
-      const hasEmpty = checkArr.some((item) => !item)
+      const hasEmpty = checkArr.some(item => !item)
       return !hasEmpty
     },
     /**
@@ -353,7 +341,7 @@ export default {
         this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
         return false
       }
-      let hasNeedUpgrade = productSkus.some((item) => item.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE && !item.upgradeForms.length)
+      let hasNeedUpgrade = productSkus.some(item => item.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE && !item.upgradeForms.length)
       if (hasNeedUpgrade) {
         this.$newMessage.warning('子品类中存在缺少升级体验的产品')
         return false
@@ -370,8 +358,8 @@ export default {
      */
     checkDetailConfig () {
       const { information, coverPath } = this.productObj
-      let checkArr = [information, coverPath.length] // 校验为空的内容
-      let hasEmpty = checkArr.some((item) => !item)
+      const checkArr = [information, coverPath.length] // 校验为空的内容
+      const hasEmpty = checkArr.some(item => !item)
       return !hasEmpty
     },
     /**

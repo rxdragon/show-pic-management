@@ -5,7 +5,7 @@
       <div class="panel-title">基础设置</div>
       <el-form ref="productObjOne" :model="productObj" :rules="productConfigRules" label-width="100px">
         <el-form-item label="名称:" prop="name">
-          <el-input class="product-name" maxlength="10" v-model.trim="productObj.name" placeholder="产品名称,最多10个字符"  />
+          <el-input class="product-name" maxlength="10" v-model.trim="productObj.name" placeholder="产品名称,最多10个字符" />
         </el-form-item>
       </el-form>
     </div>
@@ -43,13 +43,13 @@
       <div class="panel-title">其他设置</div>
       <el-form ref="productObjTwo" :model="productObj" :rules="productConfigRules" label-width="100px">
         <el-form-item label="产品简介:" prop="description">
-          <el-input class="long" maxlength="30" v-model.trim="productObj.description" placeholder="产品首页介绍,最多30个字符"  />
+          <el-input class="long" maxlength="30" v-model.trim="productObj.description" placeholder="产品首页介绍,最多30个字符" />
         </el-form-item>
         <el-form-item label="缩略图:" prop="thumbnailPath">
-          <upload-pic :option="thumbnailOption" v-model="productObj.thumbnailPath"/>
+          <upload-pic :option="thumbnailOption" v-model="productObj.thumbnailPath" />
         </el-form-item>
         <el-form-item label="分享图:" prop="sharePath">
-          <upload-pic :option="shareOption" v-model="productObj.sharePath"/>
+          <upload-pic :option="shareOption" v-model="productObj.sharePath" />
         </el-form-item>
       </el-form>
     </div>

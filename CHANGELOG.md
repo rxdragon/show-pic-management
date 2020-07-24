@@ -57,6 +57,7 @@
 范围|描述|commitId
 --|--|--
  - | tab样式fix,一些uichange | [fa216ee](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/fa216ee)
+ - | 代码review更改 | [56c262c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/56c262c)
  - | 优化样式 | [9075b0d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9075b0d)
  - | 修复关闭订单理由换行 | [214b2af](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/214b2af)
  - | 增加栅格布局 | [8c5282f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8c5282f)

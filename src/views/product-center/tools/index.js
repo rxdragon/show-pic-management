@@ -6,16 +6,10 @@ import { productPriceStatusEnum } from '@/model/Enumerate.js'
 const checkNoThumbnail = (productSkus) => {
   let hasNoThumbnail = false
   productSkus.forEach((item) => {
-    if (hasNoThumbnail) {
-      return
-    }
-    if (!item.styleForm.thumbnailList.length) {
-      hasNoThumbnail = true
-    }
+    if (hasNoThumbnail) return
+    if (!item.styleForm.thumbnailList.length) hasNoThumbnail = true
     const upgradeNothumbnailList = item.upgradeForms.some((item) => !item.thumbnailList.length)
-    if (upgradeNothumbnailList) {
-      hasNoThumbnail = true
-    }
+    if (upgradeNothumbnailList) hasNoThumbnail = true
   })
   return hasNoThumbnail
 }
@@ -28,7 +22,7 @@ const findPrice = (priceObj) => {
   if (simplePrice === productPriceStatusEnum.CONTACT) {
     priceArr.push(simplePriceText)
   } else {
-    standerPrice.forEach((item) => {
+    standerPrice.forEach(item => {
       priceArr.push(item.price)
     })
   }

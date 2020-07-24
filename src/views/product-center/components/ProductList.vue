@@ -1,10 +1,10 @@
 <template>
   <div class="product-list module-panel">
     <div class="panel-title">
-      <span class="panel-content">
+      <div class="panel-content">
         产品列表
-        <drag-product />
-      </span>
+        <drag-product @sortSuccess="sortSuccess" />
+      </div>
       <el-button @click="addProduct" type="primary" size="small">添加产品</el-button>
     </div>
     <div class="search">
@@ -61,12 +61,8 @@ export default {
      */
     filterProduct (filterObj, data) {
       if (!filterObj.value) return true
-      if (filterObj.type === 'text') {
-        return data.label.indexOf(filterObj.value) > -1
-      }
-      if (filterObj.type === 'status') {
-        return data.status === filterObj.value
-      }
+      if (filterObj.type === 'text') return data.label.indexOf(filterObj.value) > -1
+      if (filterObj.type === 'status') return data.status === filterObj.value
     },
     /**
      * @description 选中产品                    
@@ -99,6 +95,12 @@ export default {
      */
     addProduct () {
       this.$emit('addProduct')
+    },
+    /**
+     * @description 排序成功后重新请求产品列表                
+     */
+    sortSuccess () {
+      this.init()
     }
   }
 }

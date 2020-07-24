@@ -86,9 +86,7 @@ export default {
   computed: {
     step () {
       let finalStep = this.whichStep
-      if (finalStep === 'SubCategoryConfig') {
-        finalStep = this.isCreate ? 'SubCategoryConfigCreate' : 'SubCategoryConfigEdit'
-      }
+      if (finalStep === 'SubCategoryConfig') finalStep = this.isCreate ? 'SubCategoryConfigCreate' : 'SubCategoryConfigEdit'
       return finalStep
     }
   },
@@ -125,16 +123,14 @@ export default {
         }
       }
       if (obj.type === 'init') { // 提交后重置
-        this.addProduct()
+        this.resetData()
         this.$refs.productList.init()
       }
       if (obj.type === 'emptySubCategory') { // 清空子品类
         this.productSkus = []
         this.isCreate = false
       }
-      if (!obj.type) {
-        this.whichStep = obj.aim
-      }
+      if (!obj.type) this.whichStep = obj.aim
     },
     /**
      * @description 初始化
@@ -210,13 +206,9 @@ export default {
           psStandard: []
         }
       }
-      tree.forEach((treeItem) => {
-        if (treeItem.k_s === 's2') {
-          styleArray = treeItem.v
-        }
-        if (treeItem.k_s === 's1') {
-          psStandardArray = treeItem.v
-        }
+      tree.forEach(treeItem => {
+        if (treeItem.k_s === 's2') styleArray = treeItem.v
+        if (treeItem.k_s === 's1') psStandardArray = treeItem.v
       })
       // 如果handleAccount存在说明是没有风格设置且没有修图标准的联系客服
       if (handleAccount) {
@@ -239,7 +231,7 @@ export default {
         this.productSkus = []
         return
       }
-      styleArray.forEach((item) => {
+      styleArray.forEach(item => {
         const { id, description, img_path: imgPath, name, sku_child } = item
         let upgradeForms = []
         let styleForm = {
@@ -257,7 +249,13 @@ export default {
         }
         if (sku_child) { // 是否有升级体验
           styleForm.isSimple = productIsSimpleEnum.NOTSIMPLE
-          sku_child.v.forEach((item) => {
+          styleForm.priceObj = {
+            simplePrice: 'normal',
+            simplePriceText: '',
+            standerPrice: [],
+            psStandard: []
+          }
+          sku_child.v.forEach(item => {
             upgradeForms.push(this.handleUpgradeObj(item, productSku, 's3'))
           })
         } else {
@@ -300,23 +298,23 @@ export default {
       let standerPrice = []
       let psStandard = []
 
-      productSku.forEach((item) => {
+      productSku.forEach(skuItem => {
         let standerPriceObj = {}
-        if (item.skus[type] !== styleId) return
-        if (item.handle_account) { // 联系客服
+        if (skuItem.skus[type] !== styleId) return
+        if (skuItem.handle_account) { // 联系客服
           simplePrice = productPriceStatusEnum.CONTACT
-          simplePriceText = item.price
-          productId = item.id
+          simplePriceText = skuItem.price
+          productId = skuItem.id
         } else {
-          const psType = psIdTypeEnum[item.skus.s1]
-          const { basePeople, limitPeople, stepPrice } = item.price_extend
-          standerPriceObj.price = item.price
+          const psType = psIdTypeEnum[skuItem.skus.s1]
+          const { basePeople, limitPeople, stepPrice } = skuItem.price_extend
+          standerPriceObj.price = skuItem.price
           standerPriceObj.type = psType
           standerPriceObj.name = psTypeNameEnum[psType]
           standerPriceObj.basePeople = basePeople
           standerPriceObj.limitPeople = limitPeople
           standerPriceObj.stepPrice = stepPrice
-          standerPriceObj.productId = item.id
+          standerPriceObj.productId = skuItem.id
           standerPrice.push(standerPriceObj)
           psStandard.push(psType)
         }
@@ -338,22 +336,22 @@ export default {
       let standerPrice = []
       let productId = ''
       let psStandard = []
-      productSku.forEach((item) => {
+      productSku.forEach(skuItem => {
         let standerPriceObj = {}
-        if (item.handle_account) { // 联系客服
+        if (skuItem.handle_account) { // 联系客服
           simplePrice = productPriceStatusEnum.CONTACT
-          simplePriceText = item.price
-          productId = item.id
+          simplePriceText = skuItem.price
+          productId = skuItem.id
         } else {
-          const psType = psIdTypeEnum[item.skus.s1]
-          const { basePeople, limitPeople, stepPrice } = item.price_extend
+          const psType = psIdTypeEnum[skuItem.skus.s1]
+          const { basePeople, limitPeople, stepPrice } = skuItem.price_extend
           standerPriceObj.type = psType
-          standerPriceObj.price = item.price
+          standerPriceObj.price = skuItem.price
           standerPriceObj.name = psTypeNameEnum[psType]
           standerPriceObj.basePeople = basePeople
           standerPriceObj.limitPeople = limitPeople
           standerPriceObj.stepPrice = stepPrice
-          standerPriceObj.productId = item.id
+          standerPriceObj.productId = skuItem.id
           standerPrice.push(standerPriceObj)
           psStandard.push(psType)
         }

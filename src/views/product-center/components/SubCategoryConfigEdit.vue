@@ -40,8 +40,9 @@
             <span>联系客服:</span>
             <span>展示价格：¥{{ item.styleForm.priceObj.simplePriceText }}</span>
           </div>
-          <div v-else>
+          <div class="price-standards" v-else>
             <div
+              class="standard"
               v-for="(standerPriceItem, standerPriceIndex) in item.styleForm.priceObj.standerPrice"
               :key="standerPriceIndex"
             >
@@ -62,7 +63,7 @@
       <div v-if="item.upgradeForms.length" class="upgrade-area" >
         <p class="title">升级体验</p>
         <el-table border class="upgrade-form" :data="item.upgradeForms" style="width: 100%;">
-          <el-table-column prop="name" label="升级体验名称" width="120"></el-table-column>
+          <el-table-column prop="name" label="升级体验名称" width="120" />
           <el-table-column label="缩略图" width="120">
             <template slot-scope="scope">
               <img
@@ -95,7 +96,7 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="desc" label="下单说明" width="150"></el-table-column>
+          <el-table-column prop="desc" label="下单说明" width="150" />
           <el-table-column label="操作" width="100">
             <template slot-scope="scope">
               <el-button
@@ -131,7 +132,8 @@ export default {
   },
   data() {
     return {
-      productPriceStatusEnum
+      productPriceStatusEnum,
+      productIsSimpleEnum
     }
   },
   computed: {
@@ -281,6 +283,14 @@ export default {
   .style-item {
     display: flex;
     margin-top: 10px;
+
+    .price-standards {
+      display: flex;
+
+      .standard {
+        margin-right: 10px;
+      }
+    }
 
     .label {
       display: inline-block;

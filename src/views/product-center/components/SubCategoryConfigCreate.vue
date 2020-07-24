@@ -89,9 +89,7 @@ export default {
       let validateArr = [
         this.$refs.styleForm.validate()
       ]
-      if (this.styleForm.isSimple === productIsSimpleEnum.SIMPLE) { // 风格设置
-        validateArr = validateArr.concat(this.$refs.normalPriceConfig.formCheck())
-      }
+      if (this.styleForm.isSimple === productIsSimpleEnum.SIMPLE) validateArr = validateArr.concat(this.$refs.normalPriceConfig.formCheck()) // 风格设置
       if (this.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE) { // 升级体验设置
         this.upgradeForms.forEach((item, index) => {
           validateArr = validateArr.concat(this.$refs[`upgradeConfig${index}`][0].formCheck())
@@ -137,9 +135,7 @@ export default {
      */
     delUpgradeItem (obj) {
       this.upgradeForms.splice(obj.index, 1)
-      if (!this.upgradeForms.length) {
-        this.upgradeForms.unshift(new UpgradeObj())
-      }
+      if (!this.upgradeForms.length) this.upgradeForms.unshift(new UpgradeObj())
     },
     /**
      * @description 返回上一页
@@ -151,7 +147,6 @@ export default {
         type: 'warning'
       })
       this.resetData()
-      // 跳转到下一个tab
       this.$emit('next', { type: 'create' })
     }
   }

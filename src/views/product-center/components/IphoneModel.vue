@@ -48,9 +48,7 @@ export default {
     ...mapGetters(['imgDomain']),
     bannerImg() {
       let img = ''
-      if (this.banner.length) {
-        img = `${this.imgDomain}${PhotoTool.handlePicPath(this.banner[0].path)}`
-      }
+      if (this.banner.length) img = `${this.imgDomain}${PhotoTool.handlePicPath(this.banner[0].path)}`
       return img
     }
   }

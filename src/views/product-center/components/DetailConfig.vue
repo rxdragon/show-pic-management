@@ -89,11 +89,7 @@ export default {
     this.editor = this.$refs.toastuiEditor.editor
     this.editor.eventManager.removeEventHandler('addImageBlobHook')
     // 添加自定义监听事件
-    this.editor.eventManager.listen('addImageBlobHook', (blob, callback) => {
-      this.upload(blob, url => {
-        callback(url)
-      })
-    })
+    this.editor.eventManager.listen('addImageBlobHook', (blob, callback) => this.upload(blob, url => callback(url)))
   },
   methods: {
     /**
@@ -146,7 +142,7 @@ export default {
       if (productObj.isSimple === productIsSimpleEnum.SIMPLE) {
         priceArr = priceArr.concat(Tool.findPrice(productObj.priceObj))
       } else {
-        productSkus.forEach((item) => {
+        productSkus.forEach(item => {
           if (item.styleForm.isSimple === productIsSimpleEnum.SIMPLE) {
             priceArr = priceArr.concat(Tool.findPrice(item.styleForm.priceObj))
           } else {

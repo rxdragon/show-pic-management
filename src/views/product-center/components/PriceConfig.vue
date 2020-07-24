@@ -10,7 +10,7 @@
           >
             <el-form ref="contactPrice" :model="priceObj" :rules="contactRules" label-width="100px">
               <el-form-item label="展示价格:" prop="simplePriceText">
-                <el-input v-decimalOnly v-model.trim="priceObj.simplePriceText" placeholder="需要展示的价格"  />
+                <el-input v-decimalOnly v-model.trim="priceObj.simplePriceText" placeholder="需要展示的价格" />
               </el-form-item>
             </el-form>
           </div>
@@ -45,19 +45,19 @@
       >
         <p class="content-title">{{ item.name }}</p>
         <el-form-item label="起始人头数:" prop="basePeople">
-          <el-input v-numberOnly v-model="item.basePeople"></el-input>
+          <el-input v-numberOnly v-model="item.basePeople" />
           <span>人/张</span>
         </el-form-item>
         <el-form-item label="限制人头:" prop="limitPeople">
-          <el-input v-numberOnly v-model="item.limitPeople"></el-input>
+          <el-input v-numberOnly v-model="item.limitPeople" />
           <span>人</span>
         </el-form-item>
         <el-form-item label="照片价格:" prop="price">
-          <el-input v-decimalOnly v-model="item.price"></el-input>
+          <el-input v-decimalOnly v-model="item.price" />
           <span>元</span>
         </el-form-item>
         <el-form-item label="人头价格:" prop="stepPrice">
-          <el-input v-decimalOnly v-model="item.stepPrice"></el-input>
+          <el-input v-decimalOnly v-model="item.stepPrice" />
           <span>元/人</span>
         </el-form-item>
       </el-form>
@@ -74,13 +74,11 @@ const contactRules = {
     { required: true, message: '请输入客服展示价格', trigger: 'blur' }
   ]
 }
-
 const psStandardRules = {
   psStandard: [
     { required: true, message: '请至少勾选一项', trigger: 'change' }
   ]
 }
-
 const priceRules = {
   basePeople: [
     { required: true, message: '请输入起始人头数', trigger: 'blur' },
@@ -123,12 +121,10 @@ export default {
           basePeople: '',
           limitPeople: '',
           price: '',
-          stepPrice: '',
+          stepPrice: ''
         }
-        this.priceObj.standerPrice.forEach((standerPriceItem) => {
-          if (standerPriceItem.type === item) {
-            tempObj = standerPriceItem
-          }
+        this.priceObj.standerPrice.forEach(standerPriceItem => {
+          if (standerPriceItem.type === item) tempObj = standerPriceItem
         })
         if (item === 'blue') {
           sum.unshift(tempObj)
