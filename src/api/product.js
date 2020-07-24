@@ -1,4 +1,6 @@
 import axios from '@/plugins/axios.js'
+import store from '@/store'
+import * as PhotoTool from '@/utils/photoTool'
 import { ProductStatusNameEnum, PRODUCT_STATE } from '@/model/Enumerate.js'
 
 /**
@@ -119,5 +121,24 @@ export function edit (params) {
     url: '/project_show_pic/admin/trading/product/edit',
     method: 'POST',
     data: params
+  })
+}
+
+/**
+ * @description 上传照片
+ */
+export function uploadPhotoData (params) {
+  const { file, token } = params
+  const formData = new FormData()
+  formData.append('file', file)
+  formData.append('token', token)
+  return axios({
+    url: store.getters.updateDomain,
+    method: 'POST',
+    data: formData,
+    withCredentials: false
+  }).then(msg => {
+    const url = PhotoTool.handlePicPath(msg.url)
+    return url
   })
 }

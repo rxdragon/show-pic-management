@@ -23,7 +23,6 @@
     "moment": "^2.25.3",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^6.1.0",
-    "qiniu-js": "^3.0.3",
     "qrcode": "^1.4.4",
     "uuid": "^8.1.0",
     "vue": "^2.6.11",
