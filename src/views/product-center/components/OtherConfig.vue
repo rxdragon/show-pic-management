@@ -200,19 +200,26 @@ export default {
             if (item.styleForm.priceObj.productId) {
               styleObj.id = item.styleForm.priceObj.productId
             }
-          } else {
+            styleSku.push({
+              uuid: item.styleForm.uuid
+            })
+            styleObj.skus = styleSku
+            finalProductSku.push(styleObj)
+          } else { // 正常价格配置
             item.styleForm.priceObj.standerPrice.forEach((standerPriceItem) => {
+              styleObj = {}
+              styleSku = []
               this.handleStanderPriceItem(styleObj, standerPriceItem)
               styleSku.push({
                 id: psTypeIdEnum[standerPriceItem.type]
               })
+              styleSku.push({
+                uuid: item.styleForm.uuid
+              })
+              styleObj.skus = styleSku
+              finalProductSku.push(styleObj)
             })
           }
-          styleSku.push({
-            uuid: item.styleForm.uuid
-          })
-          styleObj.skus = styleSku
-          finalProductSku.push(styleObj)
         }
         if (item.styleForm.isSimple === 'notSimple') { // 升级体验存在的情况
           item.upgradeForms.forEach((upgradeItem) => {

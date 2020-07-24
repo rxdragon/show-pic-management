@@ -127,7 +127,7 @@ export default {
         }
       }
       if (obj.type === 'init') { // 提交后重置
-        this.addProduct()
+        this.resetData()
         this.$refs.productList.init()
       }
       if (obj.type === 'emptySubCategory') { // 清空子品类
@@ -259,6 +259,12 @@ export default {
         }
         if (sku_child) { // 是否有升级体验
           styleForm.isSimple = 'notSimple'
+          styleForm.priceObj = {
+            simplePrice: 'normal',
+            simplePriceText: '',
+            standerPrice: [],
+            psStandard: []
+          }
           sku_child.v.forEach((item) => {
             upgradeForms.push(this.handleUpgradeObj(item, productSku, 's3'))
           })

@@ -28,8 +28,9 @@
             <span>联系客服:</span>
             <span>展示价格：¥{{ item.styleForm.priceObj.simplePriceText }}</span>
           </div>
-          <div v-else>
+          <div class="price-standards" v-else>
             <div
+              class="standard"
               v-for="(standerPriceItem, standerPriceIndex) in item.styleForm.priceObj.standerPrice"
               :key="standerPriceIndex"
             >
@@ -274,6 +275,14 @@ export default {
   .style-item {
     display: flex;
     margin-top: 10px;
+
+    .price-standards {
+      display: flex;
+
+      .standard {
+        margin-right: 10px;
+      }
+    }
 
     .label {
       display: inline-block;
