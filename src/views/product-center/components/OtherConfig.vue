@@ -214,9 +214,13 @@ export default {
     handleNoUpgrade (skuItem, finalProductSku) {
       if (skuItem.styleForm.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) { // 联系客服
         let styleObj = {}
+        let styleSku = []
         styleObj.handle_account = 1
         styleObj.price = skuItem.styleForm.priceObj.simplePriceText
         if (skuItem.styleForm.priceObj.productId) styleObj.id = skuItem.styleForm.priceObj.productId
+        styleSku.push({ uuid: skuItem.styleForm.uuid })
+        styleObj.skus = styleSku
+        finalProductSku.push(styleObj)
       } else {
         skuItem.styleForm.priceObj.standerPrice.forEach(standerPriceItem => {
           let styleObj = {}
