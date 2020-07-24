@@ -44,7 +44,7 @@ import * as qiniu from 'qiniu-js'
 import { coverOption } from '../config/imgOption.js'
 import * as PhotoTool from '@/utils/photoTool'
 import Tool from '../tools/index.js'
-import { productIsSimpleEnum } from '@/model/Enumerate.js'
+import { PRODUCT_IS_SIMPLE } from '@/model/Enumerate.js'
 
 const detailRules = {
   coverPath: [
@@ -139,14 +139,14 @@ export default {
     updateMinimumPrice () {
       const { productObj, productSkus } = this
       let priceArr = []
-      if (productObj.isSimple === productIsSimpleEnum.SIMPLE) {
+      if (productObj.isSimple === PRODUCT_IS_SIMPLE.SIMPLE) {
         priceArr = priceArr.concat(Tool.findPrice(productObj.priceObj))
       } else {
-        productSkus.forEach(item => {
-          if (item.styleForm.isSimple === productIsSimpleEnum.SIMPLE) {
-            priceArr = priceArr.concat(Tool.findPrice(item.styleForm.priceObj))
+        productSkus.forEach(skuItem => {
+          if (skuItem.styleForm.isSimple === PRODUCT_IS_SIMPLE.SIMPLE) {
+            priceArr = priceArr.concat(Tool.findPrice(skuItem.styleForm.priceObj))
           } else {
-            item.upgradeForms.forEach((upgradeFormitem) => {
+            skuItem.upgradeForms.forEach((upgradeFormitem) => {
               priceArr = priceArr.concat(Tool.findPrice(upgradeFormitem.priceObj))
             })
           }

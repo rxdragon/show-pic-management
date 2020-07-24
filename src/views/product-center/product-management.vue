@@ -38,7 +38,7 @@ import SubCategoryConfigCreate from './components/SubCategoryConfigCreate.vue'
 import SubCategoryConfigEdit from './components/SubCategoryConfigEdit.vue'
 import DetailConfig from './components/DetailConfig.vue'
 import OtherConfig from './components/OtherConfig.vue'
-import { psTypeNameEnum, psIdTypeEnum, productPriceStatusEnum, productIsSimpleEnum } from '@/model/Enumerate.js'
+import { psTypeNameEnum, psIdTypeEnum, PRODUCT_PRICE_STATUS, PRODUCT_IS_SIMPLE } from '@/model/Enumerate.js'
 import { ProductObj } from './objManage/index.js'
 import * as Product from '@/api/product.js'
 
@@ -198,9 +198,9 @@ export default {
         }],
         information,
         cloudRetouchRequire: extend ? extend.cloud_retouch_require : '',
-        isSimple: productIsSimpleEnum.NOTSIMPLE,
+        isSimple: PRODUCT_IS_SIMPLE.NOTSIMPLE,
         priceObj: {
-          simplePrice: productPriceStatusEnum.NORMAL,
+          simplePrice: PRODUCT_PRICE_STATUS.NORMAL,
           simplePriceText: '',
           standerPrice: [],
           psStandard: []
@@ -212,9 +212,9 @@ export default {
       })
       // 如果handleAccount存在说明是没有风格设置且没有修图标准的联系客服
       if (handleAccount) {
-        productObj.isSimple = productIsSimpleEnum.SIMPLE
+        productObj.isSimple = PRODUCT_IS_SIMPLE.SIMPLE
         productObj.priceObj = {
-          simplePrice: productPriceStatusEnum.CONTACT,
+          simplePrice: PRODUCT_PRICE_STATUS.CONTACT,
           simplePriceText: price,
           productId: id,
           standerPrice: [],
@@ -225,14 +225,14 @@ export default {
         return
       }
       if (!styleArray.length && psStandardArray.length) { // 只有修图标准的情况
-        productObj.isSimple = productIsSimpleEnum.SIMPLE
+        productObj.isSimple = PRODUCT_IS_SIMPLE.SIMPLE
         productObj.priceObj = this.handlePriceObjS1(productSku)
         this.productObj = productObj
         this.productSkus = []
         return
       }
-      styleArray.forEach(item => {
-        const { id, description, img_path: imgPath, name, sku_child } = item
+      styleArray.forEach(styleArrayItem => {
+        const { id, description, img_path: imgPath, name, sku_child } = styleArrayItem
         let upgradeForms = []
         let styleForm = {
           uuid: id,
@@ -248,18 +248,18 @@ export default {
           })
         }
         if (sku_child) { // 是否有升级体验
-          styleForm.isSimple = productIsSimpleEnum.NOTSIMPLE
+          styleForm.isSimple = PRODUCT_IS_SIMPLE.NOTSIMPLE
           styleForm.priceObj = {
             simplePrice: 'normal',
             simplePriceText: '',
             standerPrice: [],
             psStandard: []
           }
-          sku_child.v.forEach(item => {
-            upgradeForms.push(this.handleUpgradeObj(item, productSku, 's3'))
+          sku_child.v.forEach(skuChildItem => {
+            upgradeForms.push(this.handleUpgradeObj(skuChildItem, productSku, 's3'))
           })
         } else {
-          styleForm.isSimple = productIsSimpleEnum.SIMPLE
+          styleForm.isSimple = PRODUCT_IS_SIMPLE.SIMPLE
           styleForm.priceObj = this.handlePriceObj(productSku, id, 's2')
         }
         tempProductSku.push({
@@ -293,7 +293,7 @@ export default {
      */
     handlePriceObj (productSku, styleId, type) {
       let simplePriceText = ''
-      let simplePrice = productPriceStatusEnum.NORMAL
+      let simplePrice = PRODUCT_PRICE_STATUS.NORMAL
       let productId = ''
       let standerPrice = []
       let psStandard = []
@@ -302,7 +302,7 @@ export default {
         let standerPriceObj = {}
         if (skuItem.skus[type] !== styleId) return
         if (skuItem.handle_account) { // 联系客服
-          simplePrice = productPriceStatusEnum.CONTACT
+          simplePrice = PRODUCT_PRICE_STATUS.CONTACT
           simplePriceText = skuItem.price
           productId = skuItem.id
         } else {
@@ -332,14 +332,14 @@ export default {
      */
     handlePriceObjS1 (productSku) {
       let simplePriceText = ''
-      let simplePrice = productPriceStatusEnum.NORMAL
+      let simplePrice = PRODUCT_PRICE_STATUS.NORMAL
       let standerPrice = []
       let productId = ''
       let psStandard = []
       productSku.forEach(skuItem => {
         let standerPriceObj = {}
         if (skuItem.handle_account) { // 联系客服
-          simplePrice = productPriceStatusEnum.CONTACT
+          simplePrice = PRODUCT_PRICE_STATUS.CONTACT
           simplePriceText = skuItem.price
           productId = skuItem.id
         } else {

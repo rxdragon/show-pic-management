@@ -24,7 +24,7 @@
     <price-config
       :price-obj="styleForm.priceObj"
       ref="normalPriceConfig"
-      v-if="styleForm.isSimple === productIsSimpleEnum.SIMPLE"
+      v-if="styleForm.isSimple === PRODUCT_IS_SIMPLE.SIMPLE"
     />
     <!-- 升级体验设置 -->
     <div class="module-box" v-else>
@@ -54,7 +54,7 @@ import UpgradeConfig from './UpgradeConfig'
 import SkuRule from '../rules/skuRule.js'
 import { UpgradeObj,StyleObj } from '../objManage/index.js'
 import { thumbnailOption } from '../config/imgOption.js'
-import { productIsSimpleEnum } from '@/model/Enumerate.js'
+import { PRODUCT_IS_SIMPLE } from '@/model/Enumerate.js'
 
 
 const styleRules = new SkuRule('style')
@@ -72,7 +72,7 @@ export default {
       styleForm: new StyleObj(),
       upgradeForms: [],
       thumbnailOption,
-      productIsSimpleEnum
+      PRODUCT_IS_SIMPLE
     }
   },
   activated() {
@@ -89,13 +89,13 @@ export default {
       let validateArr = [
         this.$refs.styleForm.validate()
       ]
-      if (this.styleForm.isSimple === productIsSimpleEnum.SIMPLE) validateArr = validateArr.concat(this.$refs.normalPriceConfig.formCheck()) // 风格设置
-      if (this.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE) { // 升级体验设置
+      if (this.styleForm.isSimple === PRODUCT_IS_SIMPLE.SIMPLE) validateArr = validateArr.concat(this.$refs.normalPriceConfig.formCheck()) // 风格设置
+      if (this.styleForm.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE) { // 升级体验设置
         this.upgradeForms.forEach((item, index) => {
           validateArr = validateArr.concat(this.$refs[`upgradeConfig${index}`][0].formCheck())
         })
       }
-      if (!this.upgradeForms.length && this.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE) {
+      if (!this.upgradeForms.length && this.styleForm.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE) {
         this.$newMessage.warning('请添加升级体验')
         return
       }

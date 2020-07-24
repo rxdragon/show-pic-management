@@ -237,7 +237,7 @@ export const psIdTypeEnum = {
 /**
  * @description 产品库价格设置的状态 联系客服和正常设置
  */
-export const productPriceStatusEnum = {
+export const PRODUCT_PRICE_STATUS = {
   CONTACT: 'contact', // 联系客服
   NORMAL: 'normal' // 正常设置
 }
@@ -245,7 +245,7 @@ export const productPriceStatusEnum = {
 /**
  * @description 产品库产品是否需要后续sku设置
  */
-export const productIsSimpleEnum = {
+export const PRODUCT_IS_SIMPLE = {
   SIMPLE: 'simple', // 不需要
   NOTSIMPLE: 'notSimple' // 需要
 }

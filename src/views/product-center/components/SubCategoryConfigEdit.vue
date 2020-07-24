@@ -1,7 +1,7 @@
 <template>
   <div class="sub-category-edit">
     <el-button
-      v-if="productObj.isSimple === productIsSimpleEnum.NOTSIMPLE"
+      v-if="productObj.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE"
       class="add-style"
       @click="addStyle"
       type="primary"
@@ -10,7 +10,7 @@
     </el-button>
     <p
       class="product-sku-empty"
-      v-if="productObj.isSimple === productIsSimpleEnum.SIMPLE"
+      v-if="productObj.isSimple === PRODUCT_IS_SIMPLE.SIMPLE"
     >
       当前产品暂无修图风格/升级体验设置
     </p>
@@ -34,9 +34,9 @@
       </div>
       <div class="style-item">
         <span class="label">价格设置:</span>
-        <span v-if="item.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE">无价格设置(见升级体验)</span>
+        <span v-if="item.styleForm.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE">无价格设置(见升级体验)</span>
         <div v-else>
-          <div v-if="item.styleForm.priceObj.simplePrice === productPriceStatusEnum.CONTACT">
+          <div v-if="item.styleForm.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT">
             <span>联系客服:</span>
             <span>展示价格：¥{{ item.styleForm.priceObj.simplePriceText }}</span>
           </div>
@@ -77,7 +77,7 @@
           </el-table-column>
           <el-table-column label="价格设置">
             <template slot-scope="scope">
-              <div v-if="scope.row.priceObj.simplePrice === productPriceStatusEnum.CONTACT">
+              <div v-if="scope.row.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT">
                 <p>联系客服</p>
                 <p>展示价格: ¥{{ scope.row.priceObj.simplePriceText }}</p>
               </div>
@@ -119,7 +119,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import Tool from '../tools/index.js'
-import { productPriceStatusEnum, productIsSimpleEnum } from '@/model/Enumerate.js'
+import { PRODUCT_PRICE_STATUS, PRODUCT_IS_SIMPLE } from '@/model/Enumerate.js'
 
 
 export default {
@@ -132,8 +132,8 @@ export default {
   },
   data() {
     return {
-      productPriceStatusEnum,
-      productIsSimpleEnum
+      PRODUCT_PRICE_STATUS,
+      PRODUCT_IS_SIMPLE
     }
   },
   computed: {
@@ -172,11 +172,11 @@ export default {
     check (type) {
       const { isSimple } = this.productObj
       const { productSkus } = this
-      if (isSimple === productIsSimpleEnum.NOTSIMPLE && !productSkus.length) {
+      if (isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE && !productSkus.length) {
         this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
         return
       }
-      let hasNeedUpgrade = productSkus.some((item) => item.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE && !item.upgradeForms.length)
+      let hasNeedUpgrade = productSkus.some((item) => item.styleForm.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE && !item.upgradeForms.length)
       if (hasNeedUpgrade) {
         this.$newMessage.warning('存在缺少升级体验的产品')
         return

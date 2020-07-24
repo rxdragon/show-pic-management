@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import { psTypeIdEnum, productPriceStatusEnum, productIsSimpleEnum } from '@/model/Enumerate.js'
+import { psTypeIdEnum, PRODUCT_PRICE_STATUS, PRODUCT_IS_SIMPLE } from '@/model/Enumerate.js'
 import * as Product from '@/api/product.js'
 import Tool from '../tools/index.js'
 
@@ -163,7 +163,7 @@ export default {
      */
     handleProductSkus () {
       // 单层产品配置,走另一个逻辑
-      if (this.productObj.isSimple === productIsSimpleEnum.SIMPLE) return this.handleSimpleSkus()
+      if (this.productObj.isSimple === PRODUCT_IS_SIMPLE.SIMPLE) return this.handleSimpleSkus()
       const { productSkus } = this
       let finalProductSku = []
       let finalSkus = {}
@@ -174,8 +174,8 @@ export default {
           description: skuItem.styleForm.desc,
           img_path: skuItem.styleForm.thumbnailList[0].path
         }
-        if (skuItem.styleForm.isSimple === productIsSimpleEnum.SIMPLE) this.handleNoUpgrade(skuItem, finalProductSku) // 无升级体验的情况
-        if (skuItem.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE) this.handleHasUpgrade(skuItem, finalProductSku, finalSkus) // 升级体验存在的情况
+        if (skuItem.styleForm.isSimple === PRODUCT_IS_SIMPLE.SIMPLE) this.handleNoUpgrade(skuItem, finalProductSku) // 无升级体验的情况
+        if (skuItem.styleForm.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE) this.handleHasUpgrade(skuItem, finalProductSku, finalSkus) // 升级体验存在的情况
       })
       return {
         finalProductSku,
@@ -188,7 +188,7 @@ export default {
     handleSimpleSkus () {
       let finalProductSku = []
       let styleObj = {}
-      if (this.productObj.priceObj.simplePrice === productPriceStatusEnum.CONTACT) { // 联系客服 不用传product_sku
+      if (this.productObj.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) { // 联系客服 不用传product_sku
         styleObj.handle_account = 1
         styleObj.price = this.productObj.priceObj.simplePriceText
       } else {
@@ -212,7 +212,7 @@ export default {
      * @description 处理只有风格没有升级体验的情况
      */
     handleNoUpgrade (skuItem, finalProductSku) {
-      if (skuItem.styleForm.priceObj.simplePrice === productPriceStatusEnum.CONTACT) { // 联系客服
+      if (skuItem.styleForm.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) { // 联系客服
         let styleObj = {}
         styleObj.handle_account = 1
         styleObj.price = skuItem.styleForm.priceObj.simplePriceText
@@ -240,7 +240,7 @@ export default {
           description: upgradeItem.desc,
           img_path: upgradeItem.thumbnailList[0].path
         }
-        if (upgradeItem.priceObj.simplePrice === productPriceStatusEnum.CONTACT) { // 联系客服时候
+        if (upgradeItem.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) { // 联系客服时候
           let upgradeObj = {}
           let upgradeSku = []
           upgradeObj.handle_account = 1
@@ -317,15 +317,15 @@ export default {
     checkProductConfig () {
       const { name, description, thumbnailPath, sharePath, isSimple, priceObj } = this.productObj
       let checkArr = [name, description, thumbnailPath.length, sharePath.length] // 校验为空的内容
-      if (isSimple === productIsSimpleEnum.SIMPLE && priceObj.simplePrice === productPriceStatusEnum.CONTACT) { // 联系客服
+      if (isSimple === PRODUCT_IS_SIMPLE.SIMPLE && priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) { // 联系客服
         checkArr.push(priceObj.simplePriceText)
       }
-      if (isSimple === productIsSimpleEnum.SIMPLE && priceObj.simplePrice === productPriceStatusEnum.NORMAL) { // 正常价格
+      if (isSimple === PRODUCT_IS_SIMPLE.SIMPLE && priceObj.simplePrice === PRODUCT_PRICE_STATUS.NORMAL) { // 正常价格
         checkArr.push(priceObj.standerPrice.length)
-        priceObj.standerPrice.forEach(item => {
-          checkArr.push(String(item.basePeople))
-          checkArr.push(String(item.price))
-          checkArr.push(String(item.stepPrice))
+        priceObj.standerPrice.forEach(standerPriceItem => {
+          checkArr.push(String(standerPriceItem.basePeople))
+          checkArr.push(String(standerPriceItem.price))
+          checkArr.push(String(standerPriceItem.stepPrice))
         })
       }
       const hasEmpty = checkArr.some(item => !item)
@@ -337,11 +337,11 @@ export default {
     checkSubCategoryConfig () {
       const { isSimple } = this.productObj
       const { productSkus } = this
-      if (isSimple === productIsSimpleEnum.NOTSIMPLE && !productSkus.length) {
+      if (isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE && !productSkus.length) {
         this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
         return false
       }
-      let hasNeedUpgrade = productSkus.some(item => item.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE && !item.upgradeForms.length)
+      let hasNeedUpgrade = productSkus.some(item => item.styleForm.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE && !item.upgradeForms.length)
       if (hasNeedUpgrade) {
         this.$newMessage.warning('子品类中存在缺少升级体验的产品')
         return false

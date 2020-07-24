@@ -3,10 +3,10 @@
     <div class="condition">
       <el-radio-group v-model="priceObj.simplePrice">
         <div class="contact-wrap">
-          <el-radio :label="productPriceStatusEnum.CONTACT">联系客服(针对特殊产品需要顾客联系客服下单)</el-radio>
+          <el-radio :label="PRODUCT_PRICE_STATUS.CONTACT">联系客服(针对特殊产品需要顾客联系客服下单)</el-radio>
           <div
             class="show-price"
-            v-if="priceObj.simplePrice === productPriceStatusEnum.CONTACT"
+            v-if="priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT"
           >
             <el-form ref="contactPrice" :model="priceObj" :rules="contactRules" label-width="100px">
               <el-form-item label="展示价格:" prop="simplePriceText">
@@ -15,12 +15,12 @@
             </el-form>
           </div>
         </div>
-        <el-radio :label="productPriceStatusEnum.NORMAL">常规设置</el-radio>
+        <el-radio :label="PRODUCT_PRICE_STATUS.NORMAL">常规设置</el-radio>
       </el-radio-group>
     </div>
     <div
       class="top"
-      v-if="priceObj.simplePrice === productPriceStatusEnum.NORMAL"
+      v-if="priceObj.simplePrice === PRODUCT_PRICE_STATUS.NORMAL"
     >
       <el-form ref="psStandard" :model="priceObj" :rules="psStandardRules" label-width="110px">
         <el-form-item label="选择修图标准:" prop="psStandard">
@@ -33,7 +33,7 @@
     </div>
     <div
       class="content"
-      v-if="priceObj.simplePrice === productPriceStatusEnum.NORMAL"
+      v-if="priceObj.simplePrice === PRODUCT_PRICE_STATUS.NORMAL"
     >
       <el-form
         v-for="(item, index) in priceObj.standerPrice"
@@ -67,7 +67,7 @@
 
 <script>
 import { positiveIntValidator, priceDoubleValidator } from '@/utils/validator.js'
-import { psTypeNameEnum, productPriceStatusEnum } from '@/model/Enumerate.js'
+import { psTypeNameEnum, PRODUCT_PRICE_STATUS } from '@/model/Enumerate.js'
 
 const contactRules = {
   simplePriceText: [
@@ -106,7 +106,7 @@ export default {
       priceRules,
       contactRules,
       psStandardRules,
-      productPriceStatusEnum
+      PRODUCT_PRICE_STATUS
     }
   },
   methods: {
@@ -141,7 +141,7 @@ export default {
     formCheck (value) {
       let tempArr = []
       // 分客服情况和非客服情况
-      if (this.priceObj.simplePrice === productPriceStatusEnum.CONTACT) {
+      if (this.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) {
         tempArr.push(this.$refs.contactPrice.validate())
         return tempArr
       }
@@ -158,10 +158,10 @@ export default {
       const { simplePrice, simplePriceText, standerPrice } = this.priceObj
       let tempObj = { simplePrice }
       
-      if (this.simplePrice === productPriceStatusEnum.CONTACT) { // 联系客服时候,获取展示价格
+      if (this.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) { // 联系客服时候,获取展示价格
         tempObj.simplePriceText = simplePriceText
       }
-      if (this.simplePrice === productPriceStatusEnum.NORMAL) { // 正常设置时候
+      if (this.simplePrice === PRODUCT_PRICE_STATUS.NORMAL) { // 正常设置时候
         tempObj.standerPrice = standerPrice
       }
       return tempObj

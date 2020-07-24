@@ -76,12 +76,14 @@
 ### 🐛 Bug 修复
 范围|描述|commitId
 --|--|--
- - | 产品简介改为30字,去掉多余的校验,排序成功后给与提示 | [3235c9b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3235c9b)
- 去掉权限校验,增加最后提交的子品类校验 | 去掉权限校验,增加最后提交的子品类校验 | [3cc34ba](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cc34ba)
  - | 0元情况判断 | [c46d3de](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/c46d3de)
+ - | fix comfirm | [0ee11c3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0ee11c3)
+ - | fix单层风格价格无法设置 样式调整 产品排序 | [141ff79](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/141ff79)
  - | fix编辑部分引用类型 | [f27c017](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f27c017)
  - | 上线时间fix | [ea61bbc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ea61bbc)
  - | 上线时间不能传null | [e1bd83a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e1bd83a)
+ - | 产品简介改为30字,去掉多余的校验,排序成功后给与提示 | [3235c9b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3235c9b)
+ 去掉权限校验,增加最后提交的子品类校验 | 去掉权限校验,增加最后提交的子品类校验 | [3cc34ba](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cc34ba)
  - | 价格初识状态fix | [bd43876](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bd43876)
  - | 价格设置改为小数2位 | [ddab5b1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ddab5b1)
  - | 优化修复部分功能 | [d9f6a8d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d9f6a8d)
@@ -159,6 +161,15 @@
  - | 自动更改更新时间 | [b5f84ce](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b5f84ce)
 
 
+### chore
+范围|描述|commitId
+--|--|--
+ - | 删除调试代码 | [5f54a55](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5f54a55)
+ - | 更改xi更改x更改系统环境变量 | [3410805](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3410805)
+ - | 更改测试预发地址 | [9a6eba9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9a6eba9)
+ - | 更改环境变量 | [931b586](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/931b586)
+
+
 范围|描述|commitId
 --|--|--
  - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
@@ -168,12 +179,4 @@
  - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
  - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
  - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
-
-
-### chore
-范围|描述|commitId
---|--|--
- - | 删除调试代码 | [5f54a55](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5f54a55)
- - | 更改xi更改x更改系统环境变量 | [3410805](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3410805)
- - | 更改测试预发地址 | [9a6eba9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9a6eba9)
 
