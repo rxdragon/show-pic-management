@@ -46,6 +46,7 @@ import { Editor } from '@toast-ui/vue-editor'
 import { coverOption } from '../config/imgOption.js'
 import { PRODUCT_IS_SIMPLE } from '@/model/Enumerate.js'
 import { mapGetters } from 'vuex'
+import { getImagePx } from '@/utils/photoExif.js'
 
 const detailRules = {
   coverPath: [
@@ -129,12 +130,15 @@ export default {
     async upload (file, cb) {
       try {
         this.$loading()
+        const data = await getImagePx(file)
+        if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
+        if (data.width !== 750) throw new Error(`请上传宽度为750px的图片`)
         const { token } = this.upyunConfig
         const req = { file, token }
         const url = await Product.uploadPhotoData(req)
         cb(`${this.imgDomain}${url}`)
       } catch (error) {
-        this.$newMessage.warning('上传失败')
+        this.$newMessage.warning(error.message || '上传失败')
         this.$loadingClose()
         throw new Error(error)
       }
