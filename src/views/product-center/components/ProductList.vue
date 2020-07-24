@@ -72,12 +72,9 @@ export default {
      * @description 选中产品                    
      */
     selectProduct ( data) {
-      if (!data.id) {
-        return
-      }
-      this.$emit('selectProduct', {
-        id: data.id
-      })
+      const { id } = data
+      if (!id) return
+      this.$emit('selectProduct', { id })
     },
     /**
      * @description input触发                    

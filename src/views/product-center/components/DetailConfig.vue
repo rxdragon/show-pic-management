@@ -4,7 +4,7 @@
       <div class="panel-title">头图/封面图设置</div>
       <el-form ref="productObj" :model="productObj" :rules="detailRules" label-width="120px">
         <el-form-item label="头图/封面图:" prop="coverPath">
-          <upload-pic :option="coverOption" v-model="productObj.coverPath"/>
+          <upload-pic :option="coverOption" v-model="productObj.coverPath" />
         </el-form-item>
       </el-form>
     </div>
@@ -20,7 +20,7 @@
             :options="editorOptions"
           />
         </div>
-        <iphone-model :minimum-price="minimumPrice" :product-obj="productObj" :banner="productObj.coverPath" :page-html="productObj.information" ></iphone-model>
+        <iphone-model :minimum-price="minimumPrice" :product-obj="productObj" :banner="productObj.coverPath" :page-html="productObj.information" />
       </div>
     </div>
     <div class="next-btn">
@@ -44,6 +44,7 @@ import * as qiniu from 'qiniu-js'
 import { coverOption } from '../config/imgOption.js'
 import * as PhotoTool from '@/utils/photoTool'
 import Tool from '../tools/index.js'
+import { productIsSimpleEnum } from '@/model/Enumerate.js'
 
 const detailRules = {
   coverPath: [
@@ -142,11 +143,11 @@ export default {
     updateMinimumPrice () {
       const { productObj, productSkus } = this
       let priceArr = []
-      if (productObj.isSimple === 'simple') {
+      if (productObj.isSimple === productIsSimpleEnum.SIMPLE) {
         priceArr = priceArr.concat(Tool.findPrice(productObj.priceObj))
       } else {
         productSkus.forEach((item) => {
-          if (item.styleForm.isSimple === 'simple') {
+          if (item.styleForm.isSimple === productIsSimpleEnum.SIMPLE) {
             priceArr = priceArr.concat(Tool.findPrice(item.styleForm.priceObj))
           } else {
             item.upgradeForms.forEach((upgradeFormitem) => {

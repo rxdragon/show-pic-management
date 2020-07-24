@@ -1,7 +1,19 @@
 <template>
   <div class="sub-category-edit">
-    <el-button v-if="productObj.isSimple === 'notSimple'" class="add-style" @click="addStyle" type="primary">添加修图风格</el-button>
-    <p class="product-sku-empty" v-if="productObj.isSimple === 'simple'">当前产品暂无修图风格/升级体验设置</p>
+    <el-button
+      v-if="productObj.isSimple === productIsSimpleEnum.NOTSIMPLE"
+      class="add-style"
+      @click="addStyle"
+      type="primary"
+    >
+      添加修图风格
+    </el-button>
+    <p
+      class="product-sku-empty"
+      v-if="productObj.isSimple === productIsSimpleEnum.SIMPLE"
+    >
+      当前产品暂无修图风格/升级体验设置
+    </p>
     <div v-for="(item, index) in productSkus" class="categorys" :key="item.uuid">
       <div class="top">
         <span>{{ item.styleForm.name }}</span>
@@ -22,9 +34,9 @@
       </div>
       <div class="style-item">
         <span class="label">价格设置:</span>
-        <span v-if="item.styleForm.isSimple === 'notSimple'">无价格设置(见升级体验)</span>
+        <span v-if="item.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE">无价格设置(见升级体验)</span>
         <div v-else>
-          <div v-if="item.styleForm.priceObj.simplePrice === 'contact'">
+          <div v-if="item.styleForm.priceObj.simplePrice === productPriceStatusEnum.CONTACT">
             <span>联系客服:</span>
             <span>展示价格：¥{{ item.styleForm.priceObj.simplePriceText }}</span>
           </div>
@@ -64,7 +76,7 @@
           </el-table-column>
           <el-table-column label="价格设置">
             <template slot-scope="scope">
-              <div v-if="scope.row.priceObj.simplePrice === 'contact'">
+              <div v-if="scope.row.priceObj.simplePrice === productPriceStatusEnum.CONTACT">
                 <p>联系客服</p>
                 <p>展示价格: ¥{{ scope.row.priceObj.simplePriceText }}</p>
               </div>
@@ -106,6 +118,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import Tool from '../tools/index.js'
+import { productPriceStatusEnum, productIsSimpleEnum } from '@/model/Enumerate.js'
+
 
 export default {
   name: 'SubCategoryConfigEdit',
@@ -114,6 +128,11 @@ export default {
     productObj: { type: Object, required: true },
     productSkus: { type: Array, required: true },
     checkStatus: { type: Object, required: true }
+  },
+  data() {
+    return {
+      productPriceStatusEnum
+    }
   },
   computed: {
     ...mapGetters(['imgCompressDomain'])
@@ -132,26 +151,18 @@ export default {
      * @description 提交到下一步
      */
     submit () {
-      if (this.check()) {
-        this.$emit('next', {
-          aim: 'DetailConfig'
-        })
-      }
+      if (this.check()) this.$emit('next', { aim: 'DetailConfig' })
     },
     /**
      * @description 删除一个升级项
      */
     async delUpgradeItem (upgradeIndex, item, skuIndex) {
-      try {
-        await this.$confirm(`确定要删除${item.name}升级体验吗?`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-        this.productSkus[skuIndex].upgradeForms.splice(upgradeIndex, 1)
-      } catch (error) {
-        console.error(error)
-      }
+      await this.$confirm(`确定要删除${item.name}升级体验吗?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      this.productSkus[skuIndex].upgradeForms.splice(upgradeIndex, 1)
     },
     /**
      * @description 下一步
@@ -159,11 +170,11 @@ export default {
     check (type) {
       const { isSimple } = this.productObj
       const { productSkus } = this
-      if (isSimple === 'notSimple' && !productSkus.length) {
+      if (isSimple === productIsSimpleEnum.NOTSIMPLE && !productSkus.length) {
         this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
         return
       }
-      let hasNeedUpgrade = productSkus.some((item) => item.styleForm.isSimple === 'notSimple' && !item.upgradeForms.length)
+      let hasNeedUpgrade = productSkus.some((item) => item.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE && !item.upgradeForms.length)
       if (hasNeedUpgrade) {
         this.$newMessage.warning('存在缺少升级体验的产品')
         return
@@ -190,16 +201,12 @@ export default {
      * @description 删除一个风格
      */
     async delStyle (index, item) {
-      try {
-        await this.$confirm(`确定要删除${item.name}风格吗?`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-        this.productSkus.splice(index, 1)
-      } catch (error) {
-        console.error(error)
-      }
+      await this.$confirm(`确定要删除${item.name}风格吗?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      this.productSkus.splice(index, 1)
     },
     /**
      * @description 跳转新增页面页

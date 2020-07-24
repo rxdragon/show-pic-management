@@ -79,13 +79,13 @@
       </el-form>
     </div>
     <div class="submit-box">
-      <el-button @click="finalSubmint" type="primary" >提交</el-button>
+      <el-button @click="finalSubmint" type="primary">提交</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import { psTypeIdEnum } from '@/model/Enumerate.js'
+import { psTypeIdEnum, productPriceStatusEnum, productIsSimpleEnum } from '@/model/Enumerate.js'
 import * as Product from '@/api/product.js'
 import Tool from '../tools/index.js'
 
@@ -146,17 +146,11 @@ export default {
         finalObj.handle_account = skuObj.styleObj.handle_account
         finalObj.price = skuObj.styleObj.price
       }
-      finalObj.extend = { cloud_retouch_require: cloudRetouchRequire}
-      if (skuObj.finalSkus) {
-        finalObj.skus = skuObj.finalSkus
-      }
+      finalObj.extend = { cloud_retouch_require: cloudRetouchRequire }
+      if (skuObj.finalSkus) finalObj.skus = skuObj.finalSkus
       if (editType === 'edit') { // 编辑状态下,判断有没有立马上下线
-        if (this.editOnline === 'now') {
-          finalObj.state = 'online'
-        }
-        if (this.editOffline === 'now') {
-          finalObj.state = 'offline'
-        }
+        if (this.editOnline === 'now') finalObj.state = 'online'
+        if (this.editOffline === 'now') finalObj.state = 'offline'
       }
       this.fetchSubmit(id, finalObj)
     },
@@ -178,86 +172,19 @@ export default {
      */
     handleProductSkus () {
       // 单层产品配置,走另一个逻辑
-      if (this.productObj.isSimple === 'simple') {
-        return this.handleSimpleSkus()
-      }
+      if (this.productObj.isSimple === productIsSimpleEnum.SIMPLE) this.handleSimpleSkus()
       const { productSkus } = this
       let finalProductSku = []
       let finalSkus = {}
-      productSkus.forEach((item) => {
-        finalSkus[item.styleForm.uuid] = {
-          name: item.styleForm.name,
+      productSkus.forEach((skuItem) => {
+        finalSkus[skuItem.styleForm.uuid] = {
+          name: skuItem.styleForm.name,
           type: 's2',
-          description: item.styleForm.desc,
-          img_path: item.styleForm.thumbnailList[0].path
+          description: skuItem.styleForm.desc,
+          img_path: skuItem.styleForm.thumbnailList[0].path
         }
-        if (item.styleForm.isSimple === 'simple') { // 无升级体验的情况
-          let styleObj = {}
-          let styleSku = []
-          if (item.styleForm.priceObj.simplePrice === 'contact') { // 联系客服
-            styleObj.handle_account = 1
-            styleObj.price = item.styleForm.priceObj.simplePriceText
-            if (item.styleForm.priceObj.productId) {
-              styleObj.id = item.styleForm.priceObj.productId
-            }
-          } else {
-            item.styleForm.priceObj.standerPrice.forEach((standerPriceItem) => {
-              this.handleStanderPriceItem(styleObj, standerPriceItem)
-              styleSku.push({
-                id: psTypeIdEnum[standerPriceItem.type]
-              })
-            })
-          }
-          styleSku.push({
-            uuid: item.styleForm.uuid
-          })
-          styleObj.skus = styleSku
-          finalProductSku.push(styleObj)
-        }
-        if (item.styleForm.isSimple === 'notSimple') { // 升级体验存在的情况
-          item.upgradeForms.forEach((upgradeItem) => {
-            finalSkus[upgradeItem.uuid] = {
-              name: upgradeItem.name,
-              type: 's3',
-              description: upgradeItem.desc,
-              img_path: upgradeItem.thumbnailList[0].path
-            }
-            let upgradeObj = {}
-            let upgradeSku = []
-            if (upgradeItem.priceObj.simplePrice === 'contact') { // 联系客服时候
-              upgradeObj.handle_account = 1
-              upgradeObj.price = upgradeItem.priceObj.simplePriceText
-              if (upgradeItem.priceObj.productId) {
-                upgradeObj.id = upgradeItem.priceObj.productId
-              }
-              upgradeSku.push({
-                uuid: upgradeItem.uuid
-              })
-              upgradeSku.push({
-                uuid: item.styleForm.uuid
-              })
-              upgradeObj.skus = upgradeSku
-              finalProductSku.push(upgradeObj)
-            } else { // 正常价格配置
-              upgradeItem.priceObj.standerPrice.forEach((standerPriceItem) => {
-                upgradeObj = {}
-                upgradeSku = []
-                this.handleStanderPriceItem(upgradeObj, standerPriceItem)
-                upgradeSku.push({
-                  id: psTypeIdEnum[standerPriceItem.type]
-                })
-                upgradeSku.push({
-                  uuid: upgradeItem.uuid
-                })
-                upgradeSku.push({
-                  uuid: item.styleForm.uuid
-                })
-                upgradeObj.skus = upgradeSku
-                finalProductSku.push(upgradeObj)
-              })
-            }
-          })
-        }
+        if (skuItem.styleForm.isSimple === productIsSimpleEnum.SIMPLE) this.handleNoUpgrade(skuItem, finalProductSku) // 无升级体验的情况
+        if (skuItem.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE) this.handleHasUpgrade(skuItem, finalProductSku, finalSkus) // 升级体验存在的情况
       })
       return {
         finalProductSku,
@@ -270,7 +197,7 @@ export default {
     handleSimpleSkus () {
       let finalProductSku = []
       let styleObj = {}
-      if (this.productObj.priceObj.simplePrice === 'contact') { // 联系客服 不用传product_sku
+      if (this.productObj.priceObj.simplePrice === productPriceStatusEnum.CONTACT) { // 联系客服 不用传product_sku
         styleObj.handle_account = 1
         styleObj.price = this.productObj.priceObj.simplePriceText
       } else {
@@ -289,6 +216,61 @@ export default {
         finalProductSku,
         styleObj
       }
+    },
+    /**
+     * @description 处理只有风格没有升级体验的情况
+     */
+    handleNoUpgrade (skuItem, finalProductSku) {
+      let styleObj = {}
+      let styleSku = []
+      if (skuItem.styleForm.priceObj.simplePrice === productPriceStatusEnum.CONTACT) { // 联系客服
+        styleObj.handle_account = 1
+        styleObj.price = skuItem.styleForm.priceObj.simplePriceText
+        if (skuItem.styleForm.priceObj.productId) styleObj.id = skuItem.styleForm.priceObj.productId
+      } else {
+        skuItem.styleForm.priceObj.standerPrice.forEach((standerPriceItem) => {
+          this.handleStanderPriceItem(styleObj, standerPriceItem)
+          styleSku.push({ id: psTypeIdEnum[standerPriceItem.type] })
+        })
+      }
+      styleSku.push({ uuid: skuItem.styleForm.uuid })
+      styleObj.skus = styleSku
+      finalProductSku.push(styleObj)
+    },
+    /**
+     * @description 处理有升级体验的情况
+     */
+    handleHasUpgrade (skuItem, finalProductSku, finalSkus) {
+      skuItem.upgradeForms.forEach((upgradeItem) => {
+        finalSkus[upgradeItem.uuid] = {
+          name: upgradeItem.name,
+          type: 's3',
+          description: upgradeItem.desc,
+          img_path: upgradeItem.thumbnailList[0].path
+        }
+        if (upgradeItem.priceObj.simplePrice === productPriceStatusEnum.CONTACT) { // 联系客服时候
+          let upgradeObj = {}
+          let upgradeSku = []
+          upgradeObj.handle_account = 1
+          upgradeObj.price = upgradeItem.priceObj.simplePriceText
+          if (upgradeItem.priceObj.productId) upgradeObj.id = upgradeItem.priceObj.productId
+          upgradeSku.push({ uuid: upgradeItem.uuid })
+          upgradeSku.push({ uuid: skuItem.styleForm.uuid })
+          upgradeObj.skus = upgradeSku
+          finalProductSku.push(upgradeObj)
+        } else { // 正常价格配置
+          upgradeItem.priceObj.standerPrice.forEach((standerPriceItem) => {
+            let upgradeObj = {}
+            let upgradeSku = []
+            this.handleStanderPriceItem(upgradeObj, standerPriceItem)
+            upgradeSku.push({ id: psTypeIdEnum[standerPriceItem.type] })
+            upgradeSku.push({ uuid: upgradeItem.uuid })
+            upgradeSku.push({ uuid: skuItem.styleForm.uuid })
+            upgradeObj.skus = upgradeSku
+            finalProductSku.push(upgradeObj)
+          })
+        }
+      })
     },
     /**
      * @description 处理修图标准的数据
@@ -347,10 +329,10 @@ export default {
     checkProductConfig () {
       const { name, description, thumbnailPath, sharePath, isSimple, priceObj } = this.productObj
       let checkArr = [name, description, thumbnailPath.length, sharePath.length] // 校验为空的内容
-      if (isSimple === 'simple' && priceObj.simplePrice === 'contact') { // 联系客服
+      if (isSimple === productIsSimpleEnum.SIMPLE && priceObj.simplePrice === productPriceStatusEnum.CONTACT) { // 联系客服
         checkArr.push(priceObj.simplePriceText)
       }
-      if (isSimple === 'simple' && priceObj.simplePrice === 'normal') { // 正常价格
+      if (isSimple === productIsSimpleEnum.SIMPLE && priceObj.simplePrice === productPriceStatusEnum.NORMAL) { // 正常价格
         checkArr.push(priceObj.standerPrice.length)
         priceObj.standerPrice.forEach((item) => {
           checkArr.push(String(item.basePeople))
@@ -358,9 +340,7 @@ export default {
           checkArr.push(String(item.stepPrice))
         })
       }
-      let hasEmpty = checkArr.some((item) => {
-        return !item
-      })
+      const hasEmpty = checkArr.some((item) => !item)
       return !hasEmpty
     },
     /**
@@ -369,11 +349,11 @@ export default {
     checkSubCategoryConfig () {
       const { isSimple } = this.productObj
       const { productSkus } = this
-      if (isSimple === 'notSimple' && !productSkus.length) {
+      if (isSimple === productIsSimpleEnum.NOTSIMPLE && !productSkus.length) {
         this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
         return false
       }
-      let hasNeedUpgrade = productSkus.some((item) => item.styleForm.isSimple === 'notSimple' && !item.upgradeForms.length)
+      let hasNeedUpgrade = productSkus.some((item) => item.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE && !item.upgradeForms.length)
       if (hasNeedUpgrade) {
         this.$newMessage.warning('子品类中存在缺少升级体验的产品')
         return false

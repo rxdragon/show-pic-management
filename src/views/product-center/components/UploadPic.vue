@@ -109,8 +109,7 @@ export default {
       try {
         const { width, height } = this.option
         const data = await getImagePx(file)
-        // todo 测试方便先去除SRGB判断
-        // if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
+        if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
         if (width && height) {
           if (data.width !== width || data.height !== height) throw new Error(`请上传${width}px * ${height}px 的图片`)
         }

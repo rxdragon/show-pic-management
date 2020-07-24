@@ -11,7 +11,7 @@
           <el-input maxlength="30" class="long" v-model.trim="styleForm.desc" placeholder="下单说明,最多30个字符" />
         </el-form-item>
         <el-form-item label="缩略图:" prop="thumbnailList">
-          <upload-pic :option="thumbnailOption" v-model="styleForm.thumbnailList"/>
+          <upload-pic :option="thumbnailOption" v-model="styleForm.thumbnailList" />
         </el-form-item>
         <el-form-item label="价格设置:">
           <el-radio-group v-model="styleForm.isSimple">
@@ -21,7 +21,11 @@
         </el-form-item>
       </el-form>
     </div>
-    <price-config :price-obj="styleForm.priceObj" ref="normalPriceConfig" v-if="styleForm.isSimple === 'simple'"/>
+    <price-config
+      :price-obj="styleForm.priceObj"
+      ref="normalPriceConfig"
+      v-if="styleForm.isSimple === productIsSimpleEnum.SIMPLE"
+    />
     <!-- 升级体验设置 -->
     <div class="module-box" v-else>
       <div class="panel-title">升级体验设置</div>
@@ -50,6 +54,7 @@ import UpgradeConfig from './UpgradeConfig'
 import SkuRule from '../rules/skuRule.js'
 import { UpgradeObj,StyleObj } from '../objManage/index.js'
 import { thumbnailOption } from '../config/imgOption.js'
+import { productIsSimpleEnum } from '@/model/Enumerate.js'
 
 
 const styleRules = new SkuRule('style')
@@ -66,7 +71,8 @@ export default {
       styleRules,
       styleForm: new StyleObj(),
       upgradeForms: [],
-      thumbnailOption
+      thumbnailOption,
+      productIsSimpleEnum
     }
   },
   activated() {
@@ -83,15 +89,15 @@ export default {
       let validateArr = [
         this.$refs.styleForm.validate()
       ]
-      if (this.styleForm.isSimple === 'simple') { // 风格设置
+      if (this.styleForm.isSimple === productIsSimpleEnum.SIMPLE) { // 风格设置
         validateArr = validateArr.concat(this.$refs.normalPriceConfig.formCheck())
       }
-      if (this.styleForm.isSimple === 'notSimple') { // 升级体验设置
+      if (this.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE) { // 升级体验设置
         this.upgradeForms.forEach((item, index) => {
           validateArr = validateArr.concat(this.$refs[`upgradeConfig${index}`][0].formCheck())
         })
       }
-      if (!this.upgradeForms.length && this.styleForm.isSimple === 'notSimple') {
+      if (!this.upgradeForms.length && this.styleForm.isSimple === productIsSimpleEnum.NOTSIMPLE) {
         this.$newMessage.warning('请添加升级体验')
         return
       }

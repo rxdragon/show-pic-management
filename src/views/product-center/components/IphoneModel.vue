@@ -37,7 +37,7 @@ export default {
     pageHtml: { type: String,default: ''},
     minimumPrice: { type: String,default: ''},
     banner: { type: Array,default: () => []},
-    productObj: { type: Object, default: () => new Object() }
+    productObj: { type: Object, default: () => ({}) }
   },
   data () {
     return {

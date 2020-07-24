@@ -1,3 +1,5 @@
+import { productPriceStatusEnum } from '@/model/Enumerate.js'
+
 /**
  * @description 检查是否存在无效的缩略图
  */
@@ -23,7 +25,7 @@ const checkNoThumbnail = (productSkus) => {
 const findPrice = (priceObj) => {
   const { simplePrice, simplePriceText, standerPrice } = priceObj
   let priceArr = []
-  if (simplePrice === 'contact') {
+  if (simplePrice === productPriceStatusEnum.CONTACT) {
     priceArr.push(simplePriceText)
   } else {
     standerPrice.forEach((item) => {

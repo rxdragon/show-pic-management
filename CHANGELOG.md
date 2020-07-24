@@ -1,4 +1,4 @@
-# 1.0.0 (2020-07-23)
+# 1.0.0 (2020-07-24)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -28,6 +28,7 @@
  - | 完成活动后台联调 | [bd24454](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bd24454)
  - | 完成订单页面 | [89f50c6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/89f50c6)
  - | 提交代码 | [0050ff1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0050ff1)
+ - | 新增产品和编辑产品时候增加丢失保存的二次提醒 | [622b887](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/622b887)
  - | 新增预览页面布局 | [462dd94](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/462dd94)
  - | 新建产品主干调试ok | [f5883d2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f5883d2)
  - | 更改打包配置 | [4b126f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4b126f6)
