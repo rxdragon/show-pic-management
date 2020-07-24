@@ -37,7 +37,7 @@ export default {
     pageHtml: { type: String,default: ''},
     minimumPrice: { type: String,default: ''},
     banner: { type: Array,default: () => []},
-    productObj: { type: Object, default: () => new Object() }
+    productObj: { type: Object, default: () => ({}) }
   },
   data () {
     return {
@@ -48,9 +48,7 @@ export default {
     ...mapGetters(['imgDomain']),
     bannerImg() {
       let img = ''
-      if (this.banner.length) {
-        img = `${this.imgDomain}${PhotoTool.handlePicPath(this.banner[0].path)}`
-      }
+      if (this.banner.length) img = `${this.imgDomain}${PhotoTool.handlePicPath(this.banner[0].path)}`
       return img
     }
   }

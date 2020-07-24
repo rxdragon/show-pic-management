@@ -5,7 +5,7 @@
       <div class="panel-title">基础设置</div>
       <el-form ref="productObjOne" :model="productObj" :rules="productConfigRules" label-width="100px">
         <el-form-item label="名称:" prop="name">
-          <el-input class="product-name" maxlength="10" v-model.trim="productObj.name" placeholder="产品名称,最多10个字符"  />
+          <el-input class="product-name" maxlength="10" v-model.trim="productObj.name" placeholder="产品名称,最多10个字符" />
         </el-form-item>
       </el-form>
     </div>
@@ -18,26 +18,34 @@
           <el-radio label="simple">是（将不可再配置修图风格&升级体验）</el-radio>
           <el-radio label="notSimple">否（需要在后续步骤配置修图风格&升级体验）</el-radio>
           <div class="fake-change-area">
-            <div @click="changeIsSimple('simple')" class="fake-change-item left"></div>
-            <div @click="changeIsSimple('notSimple')" class="fake-change-item right"></div>
+            <div @click="changeIsSimple(PRODUCT_IS_SIMPLE.SIMPLE)" class="fake-change-item left"></div>
+            <div
+              @click="changeIsSimple(PRODUCT_IS_SIMPLE.NOTSIMPLE)"
+              class="fake-change-item right"
+            >
+            </div>
           </div>
         </el-radio-group>
       </div>
     </div>
     <!-- 常规设置区域 -->
-    <price-config :price-obj="productObj.priceObj" ref="normalPriceConfig" v-if="productObj.isSimple === 'simple'"/>
+    <price-config
+      :price-obj="productObj.priceObj"
+      ref="normalPriceConfig"
+      v-if="productObj.isSimple === PRODUCT_IS_SIMPLE.SIMPLE"
+    />
     <!-- 其他设置 -->
     <div class="module-box">
       <div class="panel-title">其他设置</div>
       <el-form ref="productObjTwo" :model="productObj" :rules="productConfigRules" label-width="100px">
         <el-form-item label="产品简介:" prop="description">
-          <el-input class="long" maxlength="30" v-model.trim="productObj.description" placeholder="产品首页介绍,最多30个字符"  />
+          <el-input class="long" maxlength="30" v-model.trim="productObj.description" placeholder="产品首页介绍,最多30个字符" />
         </el-form-item>
         <el-form-item label="缩略图:" prop="thumbnailPath">
-          <upload-pic :option="thumbnailOption" v-model="productObj.thumbnailPath"/>
+          <upload-pic :option="thumbnailOption" v-model="productObj.thumbnailPath" />
         </el-form-item>
         <el-form-item label="分享图:" prop="sharePath">
-          <upload-pic :option="shareOption" v-model="productObj.sharePath"/>
+          <upload-pic :option="shareOption" v-model="productObj.sharePath" />
         </el-form-item>
       </el-form>
     </div>
@@ -51,6 +59,7 @@
 import UploadPic from './UploadPic'
 import PriceConfig from './PriceConfig'
 import { thumbnailOption, shareOption } from '../config/imgOption.js'
+import { PRODUCT_IS_SIMPLE } from '@/model/Enumerate.js'
 // 基础配置
 const productConfigRules = {
   name: [
@@ -79,7 +88,8 @@ export default {
     return {
       productConfigRules,
       thumbnailOption,
-      shareOption
+      shareOption,
+      PRODUCT_IS_SIMPLE
     }
   },
   activated() {
@@ -98,7 +108,7 @@ export default {
     async changeIsSimple (type) {
       const { isSimple } = this.productObj
       if (type === isSimple) return
-      if (this.productSkus.length && type === 'simple') { // 已有子品类的情况下
+      if (this.productSkus.length && type === PRODUCT_IS_SIMPLE.SIMPLE) { // 已有子品类的情况下
         await this.$confirm(`变更配置会清空子品类已有配置`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -109,18 +119,18 @@ export default {
         return
       }
       this.productObj.isSimple = type
-      if (type === 'simple') this.$emit('next', { type: 'emptySubCategory' }) // 没有配置好的子品类,但是可能存在子品类正在配置ing,切换的话也会将配置中清空
+      if (type === PRODUCT_IS_SIMPLE.SIMPLE) this.$emit('next', { type: 'emptySubCategory' }) // 没有配置好的子品类,但是可能存在子品类正在配置ing,切换的话也会将配置中清空
     },
     /**
      * @description 提交到下一步
      */
     async check(type) {
-      const aim = this.productObj.isSimple === 'simple' ? 'DetailConfig' : 'SubCategoryConfig'
+      const aim = this.productObj.isSimple === PRODUCT_IS_SIMPLE.SIMPLE ? 'DetailConfig' : 'SubCategoryConfig'
       let validateArr = [
         this.$refs.productObjOne.validate(),
         this.$refs.productObjTwo.validate()
       ]
-      if (this.productObj.isSimple === 'simple') validateArr = validateArr.concat(this.$refs.normalPriceConfig.formCheck())
+      if (this.productObj.isSimple === PRODUCT_IS_SIMPLE.SIMPLE) validateArr = validateArr.concat(this.$refs.normalPriceConfig.formCheck())
       try {
         await Promise.all(validateArr)
         if (type === 'next') this.$emit('next', { aim })

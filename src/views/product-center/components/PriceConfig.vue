@@ -3,19 +3,25 @@
     <div class="condition">
       <el-radio-group v-model="priceObj.simplePrice">
         <div class="contact-wrap">
-          <el-radio label="contact">联系客服(针对特殊产品需要顾客联系客服下单)</el-radio>
-          <div class="show-price" v-if="priceObj.simplePrice === 'contact'">
+          <el-radio :label="PRODUCT_PRICE_STATUS.CONTACT">联系客服(针对特殊产品需要顾客联系客服下单)</el-radio>
+          <div
+            class="show-price"
+            v-if="priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT"
+          >
             <el-form ref="contactPrice" :model="priceObj" :rules="contactRules" label-width="100px">
               <el-form-item label="展示价格:" prop="simplePriceText">
-                <el-input v-decimalOnly v-model.trim="priceObj.simplePriceText" placeholder="需要展示的价格"  />
+                <el-input v-decimalOnly v-model.trim="priceObj.simplePriceText" placeholder="需要展示的价格" />
               </el-form-item>
             </el-form>
           </div>
         </div>
-        <el-radio label="normal">常规设置</el-radio>
+        <el-radio :label="PRODUCT_PRICE_STATUS.NORMAL">常规设置</el-radio>
       </el-radio-group>
     </div>
-    <div class="top" v-if="priceObj.simplePrice === 'normal'">
+    <div
+      class="top"
+      v-if="priceObj.simplePrice === PRODUCT_PRICE_STATUS.NORMAL"
+    >
       <el-form ref="psStandard" :model="priceObj" :rules="psStandardRules" label-width="110px">
         <el-form-item label="选择修图标准:" prop="psStandard">
           <el-checkbox-group @change="checkStandard" v-model="priceObj.psStandard">
@@ -25,7 +31,10 @@
         </el-form-item>
       </el-form>
     </div>
-    <div class="content"  v-if="priceObj.simplePrice === 'normal'">
+    <div
+      class="content"
+      v-if="priceObj.simplePrice === PRODUCT_PRICE_STATUS.NORMAL"
+    >
       <el-form
         v-for="(item, index) in priceObj.standerPrice"
         ref="standerPrice"
@@ -36,19 +45,19 @@
       >
         <p class="content-title">{{ item.name }}</p>
         <el-form-item label="起始人头数:" prop="basePeople">
-          <el-input v-numberOnly v-model="item.basePeople"></el-input>
+          <el-input v-numberOnly v-model="item.basePeople" />
           <span>人/张</span>
         </el-form-item>
         <el-form-item label="限制人头:" prop="limitPeople">
-          <el-input v-numberOnly v-model="item.limitPeople"></el-input>
+          <el-input v-numberOnly v-model="item.limitPeople" />
           <span>人</span>
         </el-form-item>
         <el-form-item label="照片价格:" prop="price">
-          <el-input v-decimalOnly v-model="item.price"></el-input>
+          <el-input v-decimalOnly v-model="item.price" />
           <span>元</span>
         </el-form-item>
         <el-form-item label="人头价格:" prop="stepPrice">
-          <el-input v-decimalOnly v-model="item.stepPrice"></el-input>
+          <el-input v-decimalOnly v-model="item.stepPrice" />
           <span>元/人</span>
         </el-form-item>
       </el-form>
@@ -58,20 +67,18 @@
 
 <script>
 import { positiveIntValidator, priceDoubleValidator } from '@/utils/validator.js'
-import { psTypeNameEnum } from '@/model/Enumerate.js'
+import { psTypeNameEnum, PRODUCT_PRICE_STATUS } from '@/model/Enumerate.js'
 
 const contactRules = {
   simplePriceText: [
     { required: true, message: '请输入客服展示价格', trigger: 'blur' }
   ]
 }
-
 const psStandardRules = {
   psStandard: [
     { required: true, message: '请至少勾选一项', trigger: 'change' }
   ]
 }
-
 const priceRules = {
   basePeople: [
     { required: true, message: '请输入起始人头数', trigger: 'blur' },
@@ -98,7 +105,8 @@ export default {
     return {
       priceRules,
       contactRules,
-      psStandardRules
+      psStandardRules,
+      PRODUCT_PRICE_STATUS
     }
   },
   methods: {
@@ -113,12 +121,10 @@ export default {
           basePeople: '',
           limitPeople: '',
           price: '',
-          stepPrice: '',
+          stepPrice: ''
         }
-        this.priceObj.standerPrice.forEach((standerPriceItem) => {
-          if (standerPriceItem.type === item) {
-            tempObj = standerPriceItem
-          }
+        this.priceObj.standerPrice.forEach(standerPriceItem => {
+          if (standerPriceItem.type === item) tempObj = standerPriceItem
         })
         if (item === 'blue') {
           sum.unshift(tempObj)
@@ -135,7 +141,7 @@ export default {
     formCheck (value) {
       let tempArr = []
       // 分客服情况和非客服情况
-      if (this.priceObj.simplePrice === 'contact') {
+      if (this.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) {
         tempArr.push(this.$refs.contactPrice.validate())
         return tempArr
       }
@@ -152,10 +158,10 @@ export default {
       const { simplePrice, simplePriceText, standerPrice } = this.priceObj
       let tempObj = { simplePrice }
       
-      if (this.simplePrice === 'contact') { // 联系客服时候,获取展示价格
+      if (this.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) { // 联系客服时候,获取展示价格
         tempObj.simplePriceText = simplePriceText
       }
-      if (this.simplePrice === 'normal') { // 正常设置时候
+      if (this.simplePrice === PRODUCT_PRICE_STATUS.NORMAL) { // 正常设置时候
         tempObj.standerPrice = standerPrice
       }
       return tempObj

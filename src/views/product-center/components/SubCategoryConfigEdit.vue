@@ -1,7 +1,19 @@
 <template>
   <div class="sub-category-edit">
-    <el-button v-if="productObj.isSimple === 'notSimple'" class="add-style" @click="addStyle" type="primary">添加修图风格</el-button>
-    <p class="product-sku-empty" v-if="productObj.isSimple === 'simple'">当前产品暂无修图风格/升级体验设置</p>
+    <el-button
+      v-if="productObj.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE"
+      class="add-style"
+      @click="addStyle"
+      type="primary"
+    >
+      添加修图风格
+    </el-button>
+    <p
+      class="product-sku-empty"
+      v-if="productObj.isSimple === PRODUCT_IS_SIMPLE.SIMPLE"
+    >
+      当前产品暂无修图风格/升级体验设置
+    </p>
     <div v-for="(item, index) in productSkus" class="categorys" :key="item.uuid">
       <div class="top">
         <span>{{ item.styleForm.name }}</span>
@@ -22,9 +34,9 @@
       </div>
       <div class="style-item">
         <span class="label">价格设置:</span>
-        <span v-if="item.styleForm.isSimple === 'notSimple'">无价格设置(见升级体验)</span>
+        <span v-if="item.styleForm.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE">无价格设置(见升级体验)</span>
         <div v-else>
-          <div v-if="item.styleForm.priceObj.simplePrice === 'contact'">
+          <div v-if="item.styleForm.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT">
             <span>联系客服:</span>
             <span>展示价格：¥{{ item.styleForm.priceObj.simplePriceText }}</span>
           </div>
@@ -51,7 +63,7 @@
       <div v-if="item.upgradeForms.length" class="upgrade-area" >
         <p class="title">升级体验</p>
         <el-table border class="upgrade-form" :data="item.upgradeForms" style="width: 100%;">
-          <el-table-column prop="name" label="升级体验名称" width="120"></el-table-column>
+          <el-table-column prop="name" label="升级体验名称" width="120" />
           <el-table-column label="缩略图" width="120">
             <template slot-scope="scope">
               <img
@@ -65,7 +77,7 @@
           </el-table-column>
           <el-table-column label="价格设置">
             <template slot-scope="scope">
-              <div v-if="scope.row.priceObj.simplePrice === 'contact'">
+              <div v-if="scope.row.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT">
                 <p>联系客服</p>
                 <p>展示价格: ¥{{ scope.row.priceObj.simplePriceText }}</p>
               </div>
@@ -84,7 +96,7 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="desc" label="下单说明" width="150"></el-table-column>
+          <el-table-column prop="desc" label="下单说明" width="150" />
           <el-table-column label="操作" width="100">
             <template slot-scope="scope">
               <el-button
@@ -107,6 +119,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import Tool from '../tools/index.js'
+import { PRODUCT_PRICE_STATUS, PRODUCT_IS_SIMPLE } from '@/model/Enumerate.js'
+
 
 export default {
   name: 'SubCategoryConfigEdit',
@@ -115,6 +129,12 @@ export default {
     productObj: { type: Object, required: true },
     productSkus: { type: Array, required: true },
     checkStatus: { type: Object, required: true }
+  },
+  data() {
+    return {
+      PRODUCT_PRICE_STATUS,
+      PRODUCT_IS_SIMPLE
+    }
   },
   computed: {
     ...mapGetters(['imgCompressDomain'])
@@ -133,26 +153,18 @@ export default {
      * @description 提交到下一步
      */
     submit () {
-      if (this.check()) {
-        this.$emit('next', {
-          aim: 'DetailConfig'
-        })
-      }
+      if (this.check()) this.$emit('next', { aim: 'DetailConfig' })
     },
     /**
      * @description 删除一个升级项
      */
     async delUpgradeItem (upgradeIndex, item, skuIndex) {
-      try {
-        await this.$confirm(`确定要删除${item.name}升级体验吗?`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-        this.productSkus[skuIndex].upgradeForms.splice(upgradeIndex, 1)
-      } catch (error) {
-        console.error(error)
-      }
+      await this.$confirm(`确定要删除${item.name}升级体验吗?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      this.productSkus[skuIndex].upgradeForms.splice(upgradeIndex, 1)
     },
     /**
      * @description 下一步
@@ -160,11 +172,11 @@ export default {
     check (type) {
       const { isSimple } = this.productObj
       const { productSkus } = this
-      if (isSimple === 'notSimple' && !productSkus.length) {
+      if (isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE && !productSkus.length) {
         this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
         return
       }
-      let hasNeedUpgrade = productSkus.some((item) => item.styleForm.isSimple === 'notSimple' && !item.upgradeForms.length)
+      let hasNeedUpgrade = productSkus.some((item) => item.styleForm.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE && !item.upgradeForms.length)
       if (hasNeedUpgrade) {
         this.$newMessage.warning('存在缺少升级体验的产品')
         return
@@ -184,32 +196,30 @@ export default {
     addStyle () {
       this.$emit('next', {
         type: 'edit',
-        isNew: true
+        isNew: true,
+        needInit: true
       })
     },
     /**
      * @description 删除一个风格
      */
     async delStyle (index, item) {
-      try {
-        await this.$confirm(`确定要删除${item.name}风格吗?`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-        this.productSkus.splice(index, 1)
-      } catch (error) {
-        console.error(error)
-      }
+      await this.$confirm(`确定要删除${item.name}风格吗?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      this.productSkus.splice(index, 1)
     },
     /**
-     * @description 跳转新增页面页
+     * @description 去编辑一个老的商品
      */
     editStyle (index) {
       this.$emit('next', {
         type: 'edit',
         isNew: false,
-        index
+        index,
+        needInit: true
       })
     },
   }

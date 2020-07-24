@@ -1,19 +1,15 @@
+import { PRODUCT_PRICE_STATUS } from '@/model/Enumerate.js'
+
 /**
  * @description 检查是否存在无效的缩略图
  */
 const checkNoThumbnail = (productSkus) => {
   let hasNoThumbnail = false
   productSkus.forEach((item) => {
-    if (hasNoThumbnail) {
-      return
-    }
-    if (!item.styleForm.thumbnailList.length) {
-      hasNoThumbnail = true
-    }
+    if (hasNoThumbnail) return
+    if (!item.styleForm.thumbnailList.length) hasNoThumbnail = true
     const upgradeNothumbnailList = item.upgradeForms.some((item) => !item.thumbnailList.length)
-    if (upgradeNothumbnailList) {
-      hasNoThumbnail = true
-    }
+    if (upgradeNothumbnailList) hasNoThumbnail = true
   })
   return hasNoThumbnail
 }
@@ -23,10 +19,10 @@ const checkNoThumbnail = (productSkus) => {
 const findPrice = (priceObj) => {
   const { simplePrice, simplePriceText, standerPrice } = priceObj
   let priceArr = []
-  if (simplePrice === 'contact') {
+  if (simplePrice === PRODUCT_PRICE_STATUS.CONTACT) {
     priceArr.push(simplePriceText)
   } else {
-    standerPrice.forEach((item) => {
+    standerPrice.forEach(item => {
       priceArr.push(item.price)
     })
   }
