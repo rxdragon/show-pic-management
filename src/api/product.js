@@ -22,6 +22,7 @@ export function getProductList () {
       label: ProductStatusNameEnum[PRODUCT_STATE.LINING],
       children: []
     }]
+    msg.sort((a, b) => b.weight - a.weight)
     msg.forEach((item) => {
       switch (item.state) {
         case PRODUCT_STATE.ONLINE:

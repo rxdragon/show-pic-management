@@ -259,6 +259,12 @@ export default {
         }
         if (sku_child) { // 是否有升级体验
           styleForm.isSimple = 'notSimple'
+          styleForm.priceObj = {
+            simplePrice: 'normal',
+            simplePriceText: '',
+            standerPrice: [],
+            psStandard: []
+          }
           sku_child.v.forEach((item) => {
             upgradeForms.push(this.handleUpgradeObj(item, productSku, 's3'))
           })

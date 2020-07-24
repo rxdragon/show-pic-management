@@ -75,9 +75,10 @@
 ### 🐛 Bug 修复
 范围|描述|commitId
 --|--|--
+ - | 0元情况判断 | [c46d3de](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/c46d3de)
+ - | fix comfirm | [0ee11c3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0ee11c3)
  - | 产品简介改为30字,去掉多余的校验,排序成功后给与提示 | [3235c9b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3235c9b)
  去掉权限校验,增加最后提交的子品类校验 | 去掉权限校验,增加最后提交的子品类校验 | [3cc34ba](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cc34ba)
- - | 0元情况判断 | [c46d3de](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/c46d3de)
  - | fix编辑部分引用类型 | [f27c017](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f27c017)
  - | 上线时间fix | [ea61bbc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ea61bbc)
  - | 上线时间不能传null | [e1bd83a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e1bd83a)
