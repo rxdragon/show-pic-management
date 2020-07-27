@@ -38,6 +38,7 @@ module.exports = {
     "block-spacing": 2, // 代码块中开括号前和闭括号后有空格
     "eqeqeq": [2, "always", { "null": "ignore" }], // 必须使用 === 和 !== ，和 null 对比时除外
     "eol-last": 2, // 要求文件末尾存在空行
+    'prefer-const': 2,
     "lines-around-comment": 0, // 要求在注释周围有空行
     "no-multiple-empty-lines": [2, { // 禁止出现多行空行
       max: 3, // 文件内最多连续 3 个

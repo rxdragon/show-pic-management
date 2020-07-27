@@ -14,9 +14,9 @@
 <script>
 import { ProductStatusToCN, PRODUCT_STATE } from '@/model/Enumerate.js'
 
-let productStat = []
+const productStat = []
 for (const key in PRODUCT_STATE) {
-  let tempObj = {}
+  const tempObj = {}
   tempObj.status = PRODUCT_STATE[key]
   tempObj.name = ProductStatusToCN[PRODUCT_STATE[key]]
   productStat.push(tempObj)

@@ -101,7 +101,7 @@ export default {
   props: {
     priceObj: { type: Object, required: true }
   },
-  data() {
+  data () {
     return {
       priceRules,
       contactRules,
@@ -139,7 +139,7 @@ export default {
      * @description 表单校验
      */
     formCheck (value) {
-      let tempArr = []
+      const tempArr = []
       // 分客服情况和非客服情况
       if (this.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) {
         tempArr.push(this.$refs.contactPrice.validate())
@@ -156,7 +156,7 @@ export default {
      */
     getConfig (value) {
       const { simplePrice, simplePriceText, standerPrice } = this.priceObj
-      let tempObj = { simplePrice }
+      const tempObj = { simplePrice }
       
       if (this.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) { // 联系客服时候,获取展示价格
         tempObj.simplePriceText = simplePriceText

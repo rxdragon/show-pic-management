@@ -84,7 +84,7 @@ export default {
     productSkus: { type: Array, required: true },
     checkStatus: { type: Object, required: true }
   },
-  data() {
+  data () {
     return {
       productConfigRules,
       thumbnailOption,
@@ -92,8 +92,8 @@ export default {
       PRODUCT_IS_SIMPLE
     }
   },
-  activated() {
-    if (this.checkStatus.ProductConfig) {
+  activated () {
+    if (this.checkStatus.ProductConfig) { // 需要检查的话去检查
       this.check()
       this.$emit('finalCheck', {
         type: 'del',
@@ -124,7 +124,7 @@ export default {
     /**
      * @description 提交到下一步
      */
-    async check(type) {
+    async check (type) {
       const aim = this.productObj.isSimple === PRODUCT_IS_SIMPLE.SIMPLE ? 'DetailConfig' : 'SubCategoryConfig'
       let validateArr = [
         this.$refs.productObjOne.validate(),
@@ -138,6 +138,13 @@ export default {
         console.error(error)
         this.$newMessage.warning(error.message || error || '请输入相关配置')
       }
+    },
+    /**
+     * @description 重置校验
+     */
+    resetCheck () {
+      this.$refs.productObjOne.resetFields()
+      this.$refs.productObjTwo.resetFields()
     }
   }
 }

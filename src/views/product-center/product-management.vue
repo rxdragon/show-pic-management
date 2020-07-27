@@ -22,6 +22,7 @@
                 @next="goNext"
                 :is="step"
                 @finalCheck="modifyCheckStatus"
+                :ref="step"
               />
             </keep-alive>
           </div>
@@ -97,13 +98,13 @@ export default {
         this.isCreate = false
         // 如果有配置传出,判断是新增还是编辑 
         if (obj.styleForm && obj.isNew) { // 新增
-          let tempObj = {}
+          const tempObj = {}
           tempObj.styleForm = obj.styleForm
           tempObj.upgradeForms = obj.upgradeForms
           this.productSkus.push(tempObj)
         }
         if (obj.styleForm && !obj.isNew) { // 编辑
-          let tempObj = {}
+          const tempObj = {}
           tempObj.styleForm = obj.styleForm
           tempObj.upgradeForms = obj.upgradeForms
           this.productSkus[obj.index] = tempObj
@@ -148,6 +149,11 @@ export default {
       this.whichStep = 'ProductConfig'
       this.isCreate = false // 转成子品类编辑页
       this.createInfo.needInit = true // 初始化数据都需要子品类初始化
+      // 去掉基础设置中的校验状态,其他校验状态放到active中重置
+      this.$nextTick(() => {
+        this.$refs.ProductConfig.resetCheck()
+      })
+
     },
     /**
      * @description 新建产品
@@ -180,10 +186,10 @@ export default {
      */
     handleEditorInfo (msg) {
       const { id, tree, product_sku: productSku, name, description, thumbnail_path: thumbnailPath, share_path: sharePath, start_at: startAt, end_at: endAt, cover_path: coverPath, information, extend, handle_account: handleAccount, price } = msg
-      let tempProductSku = []
+      const tempProductSku = []
       let styleArray = []
       let psStandardArray = []
-      let productObj = {
+      const productObj = {
         id,
         name,
         description,
@@ -241,8 +247,8 @@ export default {
       }
       styleArray.forEach(styleArrayItem => {
         const { id, description, img_path: imgPath, name, sku_child } = styleArrayItem
-        let upgradeForms = []
-        let styleForm = {
+        const upgradeForms = []
+        const styleForm = {
           uuid: id,
           name,
           desc: description,
@@ -283,7 +289,7 @@ export default {
      */
     handleUpgradeObj (itemS3, productSku, type) {
       const { id, description, img_path: imgPath, name } = itemS3
-      let upgradeObj = {
+      const upgradeObj = {
         uuid: id,
         name,
         desc: description,
@@ -303,11 +309,11 @@ export default {
       let simplePriceText = ''
       let simplePrice = PRODUCT_PRICE_STATUS.NORMAL
       let productId = ''
-      let standerPrice = []
-      let psStandard = []
+      const standerPrice = []
+      const psStandard = []
 
       productSku.forEach(skuItem => {
-        let standerPriceObj = {}
+        const standerPriceObj = {}
         if (skuItem.skus[type] !== styleId) return
         if (skuItem.handle_account) { // 联系客服
           simplePrice = PRODUCT_PRICE_STATUS.CONTACT
@@ -341,11 +347,11 @@ export default {
     handlePriceObjS1 (productSku) {
       let simplePriceText = ''
       let simplePrice = PRODUCT_PRICE_STATUS.NORMAL
-      let standerPrice = []
+      const standerPrice = []
       let productId = ''
-      let psStandard = []
+      const psStandard = []
       productSku.forEach(skuItem => {
-        let standerPriceObj = {}
+        const standerPriceObj = {}
         if (skuItem.handle_account) { // 联系客服
           simplePrice = PRODUCT_PRICE_STATUS.CONTACT
           simplePriceText = skuItem.price

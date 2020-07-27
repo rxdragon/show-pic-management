@@ -92,9 +92,6 @@ export default {
   computed: {
     ...mapGetters(['updateDomain'])
   },
-  activated () {
-    this.getUpyunSign()
-  },
   methods: {
     /**
      * @description 获取又拍云
@@ -109,6 +106,7 @@ export default {
       try {
         const { width, height } = this.option
         const data = await getImagePx(file)
+        await this.getUpyunSign()
         if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
         if (width && height) {
           if (data.width !== width || data.height !== height) throw new Error(`请上传${width}px * ${height}px 的图片`)
