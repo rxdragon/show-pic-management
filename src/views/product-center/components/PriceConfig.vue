@@ -172,11 +172,6 @@ export default {
 
 <style lang="less" scoped>
 .normal-config {
-  .el-input {
-    width: 100px;
-    margin-right: 12px;
-  }
-
   .condition {
     margin-bottom: 20px;
 
@@ -198,10 +193,10 @@ export default {
         width: 100px;
         font-size: 14px;
       }
+    }
 
-      /deep/ .el-input {
-        width: 130px;
-      }
+    /deep/ .el-input {
+      width: 130px;
     }
   }
 
@@ -218,6 +213,11 @@ export default {
 
   .content {
     display: flex;
+
+    /deep/ .el-input {
+      width: 100px;
+      margin-right: 12px;
+    }
 
     .el-form {
       margin-right: 24px;

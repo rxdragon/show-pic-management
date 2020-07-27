@@ -3,7 +3,7 @@
     <div v-if="productObj.editType === 'edit'">
       <div class="config-item">
         <span class="title">上线时间:</span>
-        <el-radio-group v-model="editOnline">
+        <el-radio-group @change="selectOnline" v-model="editOnline">
           <el-radio label="fixed">
             固定时间
             <el-date-picker
@@ -20,7 +20,7 @@
       </div>
       <div class="config-item">
         <span class="title">下线时间:</span>
-        <el-radio-group v-model="editOffline">
+        <el-radio-group @change="selectOffline" v-model="editOffline">
           <el-radio label="fixed">
             固定时间
             <el-date-picker
@@ -128,8 +128,8 @@ export default {
       finalObj.thumbnailPath = thumbnailPath[0] && thumbnailPath[0].path
       finalObj.sharePath = sharePath[0] && sharePath[0].path
       finalObj.coverPath = coverPath[0] && coverPath[0].path
-      if (endAt && this.editOffline !== 'now') finalObj.endAt = endAt
-      if (startAt && this.editOnline !== 'now') finalObj.startAt = startAt
+      if (endAt) finalObj.endAt = endAt
+      if (startAt) finalObj.startAt = startAt
       finalObj.handle_account = 0 // 有升级项
       if (skuObj.finalProductSku.length) {
         finalObj.productSkus = skuObj.finalProductSku
@@ -371,23 +371,52 @@ export default {
      */
     checkOtherConfig () {
       const { cloudRetouchRequire } = this.productObj
-      if (this.productObj.editType === 'edit' && this.editOnline === 'now' && this.editOffline === 'now') {
-        this.$newMessage.warning('不能同时设置立即上下线')
-        return false
-      }
-      if (this.productObj.editType !== 'edit' && !this.productObj.startAt) {
-        this.$newMessage.warning('上线时间没有选择')
-        return false
-      }
-      if (this.productObj.endAt && (new Date(this.productObj.endAt).getTime() < new Date(this.productObj.startAt).getTime())) {
-        this.$newMessage.warning('上线时间要小于下线时间')
-        return false
+      const endTime = this.productObj.endAt
+      const startTime = this.productObj.startAt
+      const nowTime = Date.now()
+      const onlineNow = this.editOnline === 'now'
+      const offlineNow = this.editOffline === 'now'
+      // 新建模式下
+      if (this.productObj.editType !== 'edit') {
+        if (!startTime) {
+          this.$newMessage.warning('上线时间没有选择')
+          return false
+        }
+        if (endTime && new Date(endTime).getTime() < new Date(startTime).getTime()) {
+          this.$newMessage.warning('下线时间要晚于上线时间')
+          return false
+        }
+      } else { // 编辑下
+        if (onlineNow && offlineNow) {
+          this.$newMessage.warning('不能同时设置立即上下线')
+          return false
+        }
+        if (onlineNow && (new Date(endTime).getTime() < nowTime)) {
+          this.$newMessage.warning('下线时间要晚于上线时间')
+          return false
+        }
+        if (offlineNow && (nowTime < new Date(startTime).getTime())) {
+          this.$newMessage.warning('下线时间要晚于上线时间')
+          return false
+        }
       }
       if (this.productObj.editType !== 'edit' && !cloudRetouchRequire) {
         this.$newMessage.warning('修图要求没有填写')
         return false
       }
       return true
+    },
+    /**
+     * @description 切换立即下线
+     */
+    selectOffline (value) {
+      if (value === 'now') this.productObj.endAt = ''
+    },
+    /**
+     * @description 切换立即上线
+     */
+    selectOnline (value) {
+      if (value === 'now') this.productObj.startAt = ''
     }
   }
 }
