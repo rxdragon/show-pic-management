@@ -186,3 +186,66 @@ export const activityToCN = {
   [ACTIVITY_STATE.FINISHED]: '已结束',
   [ACTIVITY_STATE.END_EARLY]: '提前结束'
 }
+
+/**
+ * @description 产品状态
+ */
+export const PRODUCT_STATE = {
+  ONLINE: 'online',
+  OFFLINE: 'offline',
+  LINING: 'wait',
+}
+
+export const ProductStatusToCN = {
+  [PRODUCT_STATE.ONLINE]: '已上线',
+  [PRODUCT_STATE.OFFLINE]: '已下线',
+  [PRODUCT_STATE.LINING]: '待上线'
+}
+
+/**
+ * @description 修图标准id
+ */
+export const PS_ID = {
+  ONE: 1,
+  TWO: 2,
+}
+
+/**
+ * @description 修图标准对应中文
+ */
+export const psTypeNameEnum = {
+  'blue': '普通修图',
+  'master': '大师修图'
+}
+
+/**
+ * @description 修图对应id
+ */
+export const psTypeIdEnum = {
+  'blue': 1,
+  'master': 2
+}
+
+/**
+ * @description id对应修图
+ */
+export const psIdTypeEnum = {
+  [PS_ID.ONE]: 'blue',
+  [PS_ID.TWO]: 'master'
+}
+
+/**
+ * @description 产品库价格设置的状态 联系客服和正常设置
+ */
+export const PRODUCT_PRICE_STATUS = {
+  CONTACT: 'contact', // 联系客服
+  NORMAL: 'normal' // 正常设置
+}
+
+/**
+ * @description 产品库产品是否需要后续sku设置
+ */
+export const PRODUCT_IS_SIMPLE = {
+  SIMPLE: 'simple', // 不需要
+  NOTSIMPLE: 'notSimple' // 需要
+}
