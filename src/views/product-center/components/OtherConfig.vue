@@ -371,9 +371,11 @@ export default {
      */
     checkOtherConfig () {
       const { cloudRetouchRequire } = this.productObj
-      let endTime = this.productObj.endAt
-      let startTime = this.productObj.startAt
+      const endTime = this.productObj.endAt
+      const startTime = this.productObj.startAt
       const nowTime = Date.now()
+      const onlineNow = this.editOnline === 'now'
+      const offlineNow = this.editOffline === 'now'
       // 新建模式下
       if (this.productObj.editType !== 'edit') {
         if (!startTime) {
@@ -385,15 +387,15 @@ export default {
           return false
         }
       } else { // 编辑下
-        if (this.editOnline === 'now' && this.editOffline === 'now') {
+        if (onlineNow && offlineNow) {
           this.$newMessage.warning('不能同时设置立即上下线')
           return false
         }
-        if (this.editOnline === 'now' && (new Date(endTime).getTime() < nowTime)) {
+        if (onlineNow && (new Date(endTime).getTime() < nowTime)) {
           this.$newMessage.warning('下线时间要晚于上线时间')
           return false
         }
-        if (this.editOffline === 'now' && (nowTime < new Date(startTime).getTime())) {
+        if (offlineNow && (nowTime < new Date(startTime).getTime())) {
           this.$newMessage.warning('下线时间要晚于上线时间')
           return false
         }

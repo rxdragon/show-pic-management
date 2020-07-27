@@ -38,8 +38,10 @@ import SubCategoryConfigCreate from './components/SubCategoryConfigCreate.vue'
 import SubCategoryConfigEdit from './components/SubCategoryConfigEdit.vue'
 import DetailConfig from './components/DetailConfig.vue'
 import OtherConfig from './components/OtherConfig.vue'
+
 import { psTypeNameEnum, psIdTypeEnum, PRODUCT_PRICE_STATUS, PRODUCT_IS_SIMPLE } from '@/model/Enumerate.js'
-import { ProductObj } from './objManage/index.js'
+import { ProductObj, CheckStatusObj } from './objManage/index.js'
+
 import * as Product from '@/api/product.js'
 
 const tabPaneConfig = [
@@ -76,12 +78,7 @@ export default {
         index: '',
         needInit: true // 控制新建页面是否需要初始化
       },
-      checkStatus: { // 用于存放最终校验失败的模块, 被对应模块重新校验后消耗掉
-        ProductConfig: false,
-        SubCategoryConfigEdit: false,
-        DetailConfig: false,
-        OtherConfig: false
-      }
+      checkStatus: new CheckStatusObj() // 用于存放最终校验失败的模块, 被对应模块重新校验后消耗掉
     }
   },
   computed: {
@@ -146,6 +143,7 @@ export default {
      */
     resetData () {
       this.productObj = new ProductObj()
+      this.checkStatus = new CheckStatusObj()
       this.productSkus = []
       this.whichStep = 'ProductConfig'
       this.isCreate = false // 转成子品类编辑页

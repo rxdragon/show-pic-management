@@ -73,10 +73,8 @@ export default {
   computed: {
     ...mapGetters(['imgDomain'])
   },
-  created() {
-    this.getUpyunSign()
-  },
   activated() {
+    this.getUpyunSign()
     this.editor.setHtml(this.productObj.information)
     this.updateMinimumPrice()
     if (this.checkStatus.DetailConfig) {

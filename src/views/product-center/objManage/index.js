@@ -46,3 +46,10 @@ export class ProductObj { // 产品的obj
     psStandard: []
   }
 }
+
+export class CheckStatusObj { // 需要校验的tab
+  ProductConfig = false
+  SubCategoryConfigEdit = false
+  DetailConfig = false
+  OtherConfig = false
+}
