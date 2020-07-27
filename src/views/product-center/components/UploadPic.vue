@@ -92,7 +92,7 @@ export default {
   computed: {
     ...mapGetters(['updateDomain'])
   },
-  activated() {
+  activated () {
     this.getUpyunSign()
   },
   methods: {

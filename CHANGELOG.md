@@ -12,6 +12,7 @@
  - | 最后一步校验时候,触发对应的tab的校验 | [26fec85](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/26fec85)
  - | 前端基本框架搭建完成 | [a0d38fa](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a0d38fa)
  - | 发到release | [9948c7d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9948c7d)
+ - | 图片token获取更加频繁,新建和选择产品时候清空检查的队列 | [ef539f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ef539f0)
  - | 基础设置部分提交 | [551ea4f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/551ea4f)
  - | 基础配置校验补齐 | [c06047a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/c06047a)
  - | 增加最后提交时候的校验 | [3afec4f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3afec4f)
@@ -51,9 +52,9 @@
  - | 联调优惠券生成和管理 | [d03f1b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d03f1b0)
  - | 能用自闭和用自闭和 | [92eefa6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/92eefa6)
  - | 获取ps内存 | [a9477f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a9477f6)
- - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
  - | 详情设置和其他设置暂存 | [d282988](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d282988)
  更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
+ - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
 
 
 ### 🎨 代码样式
