@@ -1,4 +1,4 @@
-# 1.0.0 (2020-07-24)
+# 1.0.0 (2020-07-27)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -15,6 +15,7 @@
  - | 基础设置部分提交 | [551ea4f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/551ea4f)
  - | 基础配置校验补齐 | [c06047a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/c06047a)
  - | 增加最后提交时候的校验 | [3afec4f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3afec4f)
+ - | 增加富文本图片上传限制 | [1e0625f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1e0625f)
  - | 增加权限和优化代码 | [2c26dac](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2c26dac)
  - | 增加消费次数显示 | [9756960](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9756960)
  - | 增加状态查询 | [0a952c3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0a952c3)

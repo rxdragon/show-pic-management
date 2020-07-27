@@ -196,7 +196,7 @@ export const PRODUCT_STATE = {
   LINING: 'wait',
 }
 
-export const ProductStatusNameEnum = {
+export const ProductStatusToCN = {
   [PRODUCT_STATE.ONLINE]: '已上线',
   [PRODUCT_STATE.OFFLINE]: '已下线',
   [PRODUCT_STATE.LINING]: '待上线'

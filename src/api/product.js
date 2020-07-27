@@ -1,7 +1,7 @@
 import axios from '@/plugins/axios.js'
 import store from '@/store'
 import * as PhotoTool from '@/utils/photoTool'
-import { ProductStatusNameEnum, PRODUCT_STATE } from '@/model/Enumerate.js'
+import { ProductStatusToCN, PRODUCT_STATE } from '@/model/Enumerate.js'
 
 /**
  * @description 获取产品列表
@@ -15,36 +15,36 @@ export function getProductList () {
       return []
     }
     const productList = [{
-      label: ProductStatusNameEnum[PRODUCT_STATE.ONLINE],
+      label: ProductStatusToCN[PRODUCT_STATE.ONLINE],
       children: []
     }, {
-      label: ProductStatusNameEnum[PRODUCT_STATE.OFFLINE],
+      label: ProductStatusToCN[PRODUCT_STATE.OFFLINE],
       children: []
     }, {
-      label: ProductStatusNameEnum[PRODUCT_STATE.LINING],
+      label: ProductStatusToCN[PRODUCT_STATE.LINING],
       children: []
     }]
     msg.sort((a, b) => b.weight - a.weight)
-    msg.forEach((item) => {
-      switch (item.state) {
+    msg.forEach((productItem) => {
+      switch (productItem.state) {
         case PRODUCT_STATE.ONLINE:
           productList[0].children.push({
-            label: item.name,
-            id: item.id,
+            label: productItem.name,
+            id: productItem.id,
             status: PRODUCT_STATE.ONLINE
           })
           break
         case PRODUCT_STATE.OFFLINE:
           productList[1].children.push({
-            label: item.name,
-            id: item.id,
+            label: productItem.name,
+            id: productItem.id,
             status: PRODUCT_STATE.OFFLINE
           })
           break
         case PRODUCT_STATE.LINING:
           productList[2].children.push({
-            label: item.name,
-            id: item.id,
+            label: productItem.name,
+            id: productItem.id,
             status: PRODUCT_STATE.LINING
           })
           break
