@@ -1,14 +1,4 @@
 # 1.0.0 (2020-07-27)
-# 1.0.0 (2020-07-20)
-
-范围|描述|commitId
---|--|--
- - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
- - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
- - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
- - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
- - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
-
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -31,7 +21,6 @@
  - | 增加状态查询 | [0a952c3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0a952c3)
  - | 增加监控平台 | [2bfec46](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2bfec46)
  - | 增加空白文案,和基础设置下一步的跳转 | [dc770b3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/dc770b3)
- - | 增加监控平台 | [2bfec46](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2bfec46)
  - | 增加订单列表显示，已经订单详情显示 | [056586c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/056586c)
  - | 处理部分版本mock数据 | [da1f5e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/da1f5e2)
  - | 子品类设置暂存 | [0769962](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0769962)
@@ -73,6 +62,7 @@
  - | 代码review更改 | [56c262c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/56c262c)
  - | 优化样式 | [9075b0d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9075b0d)
  - | 修复关闭订单理由换行 | [214b2af](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/214b2af)
+ - | 命名修改 | [6b74a86](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6b74a86)
  - | 增加栅格布局 | [8c5282f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8c5282f)
  - | 描述样式变更 | [828d37a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/828d37a)
  - | 暂存,ui修改 | [0677215](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0677215)
@@ -149,6 +139,12 @@
  - | 更改打包跳转露肩 | [1be062b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1be062b)
  - | 更新产品文档 | [ed4467f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ed4467f)
  - | 注释更改 | [28f46da](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/28f46da)
+
+
+### 🔧 测试
+范围|描述|commitId
+--|--|--
+ - | 更改预登录地址 | [e6ab6b9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e6ab6b9)
 
 
 ### 🔨 代码重构
