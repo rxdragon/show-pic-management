@@ -59,9 +59,10 @@ export default {
   props: {
     productObj: { type: Object, required: true },
     checkStatus: { type: Object, required: true },
-    productSkus: { type: Array, required: true }
+    productSkus: { type: Array, required: true },
+    createInfo: { type: Object, required: true }
   },
-  data() {
+  data () {
     return {
       detailRules,
       upyunConfig: '',
@@ -74,7 +75,6 @@ export default {
     ...mapGetters(['imgDomain'])
   },
   activated () {
-    this.getUpyunSign()
     this.editor.setHtml(this.productObj.information)
     this.updateMinimumPrice()
     if (this.checkStatus.DetailConfig) {
@@ -83,6 +83,9 @@ export default {
         type: 'del',
         tab: 'DetailConfig'
       })
+    }
+    if (this.createInfo.needInit) {
+      this.resetData()
     }
   },
   mounted() {
@@ -110,6 +113,12 @@ export default {
       }
     },
     /**
+     * @description 重置校验状态
+     */
+    resetData () {
+      this.$refs.productObj.resetFields()
+    },
+    /**
      * @description 输入监听
      */
     editorInput () {
@@ -131,6 +140,7 @@ export default {
         const data = await getImagePx(file)
         if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
         if (data.width !== 750) throw new Error(`请上传宽度为750px的图片`)
+        await this.getUpyunSign()
         const { token } = this.upyunConfig
         const req = { file, token }
         const url = await Product.uploadPhotoData(req)

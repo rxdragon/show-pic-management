@@ -78,6 +78,7 @@
  - | 样式更改 | [c5f050a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/c5f050a)
  - | 样式更能 | [96c582a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/96c582a)
  - | 样式更难过 | [84438e7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/84438e7)
+ - | 格式化代码 | [704bfa3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/704bfa3)
 
 
 ### 🐛 Bug 修复

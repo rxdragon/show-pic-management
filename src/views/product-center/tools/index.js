@@ -18,7 +18,7 @@ const checkNoThumbnail = (productSkus) => {
  */
 const findPrice = (priceObj) => {
   const { simplePrice, simplePriceText, standerPrice } = priceObj
-  let priceArr = []
+  const priceArr = []
   if (simplePrice === PRODUCT_PRICE_STATUS.CONTACT) {
     priceArr.push(simplePriceText)
   } else {

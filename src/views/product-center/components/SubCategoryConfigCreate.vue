@@ -66,7 +66,7 @@ export default {
     createInfo: { type: Object, required: true },
     productSkus: { type: Array, required: true }
   },
-  data() {
+  data () {
     return {
       styleRules,
       styleForm: new StyleObj(),
@@ -75,7 +75,10 @@ export default {
       PRODUCT_IS_SIMPLE
     }
   },
-  activated() {
+  activated () {
+    if (this.createInfo.needInit) { // 重新选择产品或者新建之后校验状态清空
+      this.resetData()
+    }
     if (this.createInfo.needInit && this.createInfo.isNew) {
       this.upgradeForms = []
       this.styleForm = new StyleObj()
@@ -141,6 +144,12 @@ export default {
     delUpgradeItem (obj) {
       this.upgradeForms.splice(obj.index, 1)
       if (!this.upgradeForms.length) this.upgradeForms.unshift(new UpgradeObj())
+    },
+    /**
+     * @description 重置校验状态
+     */
+    resetData () {
+      this.$refs.styleForm.resetFields()
     },
     /**
      * @description 返回上一页

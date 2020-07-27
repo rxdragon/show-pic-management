@@ -31,7 +31,7 @@ export default {
     upgradeForm: { type: Object, required: true },
     upgradeIndex: { type: Number, required: true }
   },
-  data() {
+  data () {
     return {
       upgradeRules,
       thumbnailOption

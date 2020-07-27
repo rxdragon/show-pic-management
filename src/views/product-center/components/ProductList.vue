@@ -33,7 +33,7 @@ export default {
   name: 'ProductList',
   components: { ProductStatusSelect, DragProduct },
   props: {},
-  data() {
+  data () {
     return {
       productList: [],
       searchName: '',

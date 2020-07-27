@@ -97,16 +97,12 @@ export default {
   components: {},
   props: {
     productObj: { type: Object, required: true },
-    productSkus: { type: Array, required: true }
+    productSkus: { type: Array, required: true },
+    createInfo: { type: Object, required: true }
   },
-  data() {
+  data () {
     return {
       otherRules,
-      upgradeForm: {
-        name: '',
-        thumbnailList: [],
-        desc: ''
-      },
       editOnline: 'fixed',
       editOffline: 'fixed',
       pickerOptions: {
@@ -116,6 +112,11 @@ export default {
       }
     }
   },
+  activated () {
+    if (this.createInfo.needInit) {
+      this.resetData()
+    }
+  },
   methods: {
     /**
      * @description 提交全部数据
@@ -123,7 +124,7 @@ export default {
     finalSubmint () {
       if (!this.checkAll()) return
       const { endAt, startAt, editType,thumbnailPath, priceObj, sharePath, isSimple, coverPath, id, cloudRetouchRequire, ...rest } = this.productObj
-      let finalObj = rest
+      const finalObj = rest
       const skuObj = this.handleProductSkus()
       finalObj.thumbnailPath = thumbnailPath[0] && thumbnailPath[0].path
       finalObj.sharePath = sharePath[0] && sharePath[0].path
@@ -165,8 +166,8 @@ export default {
       // 单层产品配置,走另一个逻辑
       if (this.productObj.isSimple === PRODUCT_IS_SIMPLE.SIMPLE) return this.handleSimpleSkus()
       const { productSkus } = this
-      let finalProductSku = []
-      let finalSkus = {}
+      const finalProductSku = []
+      const finalSkus = {}
       productSkus.forEach(skuItem => {
         finalSkus[skuItem.styleForm.uuid] = {
           name: skuItem.styleForm.name,
@@ -186,15 +187,15 @@ export default {
      * @description 处理单层产品的特殊情况
      */
     handleSimpleSkus () {
-      let finalProductSku = []
-      let styleObj = {}
+      const finalProductSku = []
+      const styleObj = {}
       if (this.productObj.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) { // 联系客服 不用传product_sku
         styleObj.handle_account = 1
         styleObj.price = this.productObj.priceObj.simplePriceText
       } else {
         this.productObj.priceObj.standerPrice.forEach(standerPriceItem => {
-          let normalObj = {}
-          let normalSku = []
+          const normalObj = {}
+          const normalSku = []
           this.handleStanderPriceItem(normalObj, standerPriceItem)
           normalSku.push({
             id: psTypeIdEnum[standerPriceItem.type]
@@ -213,8 +214,8 @@ export default {
      */
     handleNoUpgrade (skuItem, finalProductSku) {
       if (skuItem.styleForm.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) { // 联系客服
-        let styleObj = {}
-        let styleSku = []
+        const styleObj = {}
+        const styleSku = []
         styleObj.handle_account = 1
         styleObj.price = skuItem.styleForm.priceObj.simplePriceText
         if (skuItem.styleForm.priceObj.productId) styleObj.id = skuItem.styleForm.priceObj.productId
@@ -223,8 +224,8 @@ export default {
         finalProductSku.push(styleObj)
       } else {
         skuItem.styleForm.priceObj.standerPrice.forEach(standerPriceItem => {
-          let styleObj = {}
-          let styleSku = []
+          const styleObj = {}
+          const styleSku = []
           this.handleStanderPriceItem(styleObj, standerPriceItem)
           styleSku.push({ id: psTypeIdEnum[standerPriceItem.type] })
           styleSku.push({ uuid: skuItem.styleForm.uuid })
@@ -245,8 +246,8 @@ export default {
           img_path: upgradeItem.thumbnailList[0].path
         }
         if (upgradeItem.priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) { // 联系客服时候
-          let upgradeObj = {}
-          let upgradeSku = []
+          const upgradeObj = {}
+          const upgradeSku = []
           upgradeObj.handle_account = 1
           upgradeObj.price = upgradeItem.priceObj.simplePriceText
           if (upgradeItem.priceObj.productId) upgradeObj.id = upgradeItem.priceObj.productId
@@ -256,8 +257,8 @@ export default {
           finalProductSku.push(upgradeObj)
         } else { // 正常价格配置
           upgradeItem.priceObj.standerPrice.forEach(standerPriceItem => {
-            let upgradeObj = {}
-            let upgradeSku = []
+            const upgradeObj = {}
+            const upgradeSku = []
             this.handleStanderPriceItem(upgradeObj, standerPriceItem)
             upgradeSku.push({ id: psTypeIdEnum[standerPriceItem.type] })
             upgradeSku.push({ uuid: upgradeItem.uuid })
@@ -320,7 +321,7 @@ export default {
      */
     checkProductConfig () {
       const { name, description, thumbnailPath, sharePath, isSimple, priceObj } = this.productObj
-      let checkArr = [name, description, thumbnailPath.length, sharePath.length] // 校验为空的内容
+      const checkArr = [name, description, thumbnailPath.length, sharePath.length] // 校验为空的内容
       if (isSimple === PRODUCT_IS_SIMPLE.SIMPLE && priceObj.simplePrice === PRODUCT_PRICE_STATUS.CONTACT) { // 联系客服
         checkArr.push(priceObj.simplePriceText)
       }
@@ -345,7 +346,7 @@ export default {
         this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
         return false
       }
-      let hasNeedUpgrade = productSkus.some(item => item.styleForm.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE && !item.upgradeForms.length)
+      const hasNeedUpgrade = productSkus.some(item => item.styleForm.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE && !item.upgradeForms.length)
       if (hasNeedUpgrade) {
         this.$newMessage.warning('子品类中存在缺少升级体验的产品')
         return false
@@ -391,7 +392,7 @@ export default {
           this.$newMessage.warning('不能同时设置立即上下线')
           return false
         }
-        if (onlineNow && (new Date(endTime).getTime() < nowTime)) {
+        if (onlineNow && endTime && (new Date(endTime).getTime() < nowTime)) {
           this.$newMessage.warning('下线时间要晚于上线时间')
           return false
         }
@@ -417,6 +418,13 @@ export default {
      */
     selectOnline (value) {
       if (value === 'now') this.productObj.startAt = ''
+    },
+    /**
+     * @description 初始化
+     */
+    resetData () {
+      this.editOnline = 'fixed'
+      this.editOffline = 'fixed'
     }
   }
 }

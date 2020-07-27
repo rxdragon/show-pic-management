@@ -130,7 +130,7 @@ export default {
     productSkus: { type: Array, required: true },
     checkStatus: { type: Object, required: true }
   },
-  data() {
+  data () {
     return {
       PRODUCT_PRICE_STATUS,
       PRODUCT_IS_SIMPLE
@@ -139,7 +139,7 @@ export default {
   computed: {
     ...mapGetters(['imgCompressDomain'])
   },
-  mounted() {
+  mounted () {
     if (this.checkStatus.SubCategoryConfigEdit) {
       this.check()
       this.$emit('finalCheck', {
@@ -176,7 +176,7 @@ export default {
         this.$newMessage.warning('设置了非单层商品,但是还未添加子品类')
         return
       }
-      let hasNeedUpgrade = productSkus.some((item) => item.styleForm.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE && !item.upgradeForms.length)
+      const hasNeedUpgrade = productSkus.some((item) => item.styleForm.isSimple === PRODUCT_IS_SIMPLE.NOTSIMPLE && !item.upgradeForms.length)
       if (hasNeedUpgrade) {
         this.$newMessage.warning('存在缺少升级体验的产品')
         return
