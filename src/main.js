@@ -8,6 +8,7 @@ import sortBy from 'lodash/sortBy'
 import './plugins/axios'
 import 'element-ui/lib/theme-chalk/display.css' // 栅格隐藏
 import './plugins/element.js' // ui布局
+import './plugins/logSdk.js' // ui布局
 import './plugins/icon-font/iconfont.css' // 字体
 import './assets/styles/font.less' // 全局样式
 import './assets/styles/index.less' // 字体

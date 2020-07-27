@@ -1,4 +1,14 @@
 # 1.0.0 (2020-07-27)
+# 1.0.0 (2020-07-20)
+
+范围|描述|commitId
+--|--|--
+ - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
+ - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
+ - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
+ - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
+ - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
+
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -21,6 +31,7 @@
  - | 增加状态查询 | [0a952c3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0a952c3)
  - | 增加监控平台 | [2bfec46](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2bfec46)
  - | 增加空白文案,和基础设置下一步的跳转 | [dc770b3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/dc770b3)
+ - | 增加监控平台 | [2bfec46](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2bfec46)
  - | 增加订单列表显示，已经订单详情显示 | [056586c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/056586c)
  - | 处理部分版本mock数据 | [da1f5e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/da1f5e2)
  - | 子品类设置暂存 | [0769962](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0769962)
@@ -34,6 +45,7 @@
  - | 新建产品主干调试ok | [f5883d2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f5883d2)
  - | 更改打包配置 | [4b126f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4b126f6)
  - | 更改环境变量 | [b2cff3f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b2cff3f)
+ - | 更改监控平台引入方式 | [15e8abd](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/15e8abd)
  - | 更改配置 | [e632631](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e632631)
  - | 更新活动管理和活动框架的ui | [0b5b712](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0b5b712)
  - | 更新用户获取信息 | [a7a8bbd](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a7a8bbd)
