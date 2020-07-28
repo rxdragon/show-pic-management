@@ -27,9 +27,10 @@
       </span>
     </div>
     <el-upload
-      v-if="uploadPhoto.length < 1"
+      v-show="uploadPhoto.length < 1"
       v-on="$listeners"
       v-bind="$attrs"
+      ref="uploadButton"
       :action="updateDomain"
       :show-file-list="false"
       :before-upload="beforeUpload"

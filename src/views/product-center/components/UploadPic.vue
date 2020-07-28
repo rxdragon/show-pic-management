@@ -1,5 +1,5 @@
 <template>
-  <div class="upload-share-photo">
+  <div class="upload-pic">
     <div v-for="(photoItem, photoIndex) in uploadPhoto" :key="photoItem.uid" class="list-photo-item">
       <transition name="el-zoom-in-center" mode="out-in">
         <photo-box
@@ -27,9 +27,10 @@
       </span>
     </div>
     <el-upload
-      v-if="uploadPhoto.length < 1"
+      v-show="uploadPhoto.length < 1"
       v-on="$listeners"
       v-bind="$attrs"
+      ref="uploadButton"
       :action="updateDomain"
       :show-file-list="false"
       :before-upload="beforeUpload"
@@ -58,7 +59,7 @@ import * as Commonality from '@/api/commonality'
 import * as PhotoTool from '@/utils/photoTool'
 
 export default {
-  name: 'UploadSharePhoto',
+  name: 'UploadPic',
   components: { PhotoBox },
   filters: {
     // 过滤进度条
@@ -149,6 +150,8 @@ export default {
      * @description 移除文件
      */
     deleteUploadPhoto (photoItem, index) {
+      const isPending = !photoItem.response
+      if (isPending) { this.$refs.uploadButton.abort(this.uploadPhoto[index]) }
       this.$emit('change', [])
     }
   }
@@ -156,7 +159,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.upload-share-photo {
+.upload-pic {
   display: flex;
 
   .avatar-upload {
