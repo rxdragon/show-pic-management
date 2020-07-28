@@ -41,15 +41,15 @@
         :model="item"
         :rules="priceRules"
         label-width="100px"
-        :key="index"
+        :key="item.name"
       >
         <p class="content-title">{{ item.name }}</p>
         <el-form-item label="起始人头数:" prop="basePeople">
-          <el-input v-numberOnly v-model="item.basePeople" />
+          <el-input @change="(value) => baseChange(value, index)" v-numberOnly v-model="item.basePeople" />
           <span>人/张</span>
         </el-form-item>
-        <el-form-item label="限制人头:" prop="limitPeople">
-          <el-input v-numberOnly v-model="item.limitPeople" />
+        <el-form-item label="指定人头数:" prop="limitPeople">
+          <el-input @change="(value) => limitChange(value, index)" v-numberOnly v-model="item.limitPeople" />
           <span>人</span>
         </el-form-item>
         <el-form-item label="照片价格:" prop="price">
@@ -71,7 +71,7 @@ import { psTypeNameEnum, PRODUCT_PRICE_STATUS } from '@/model/Enumerate.js'
 
 const contactRules = {
   simplePriceText: [
-    { required: true, message: '请输入客服展示价格', trigger: 'blur' }
+    { required: true, message: '请输入客服展示价格', trigger: ['blur', 'change'] }
   ]
 }
 const psStandardRules = {
@@ -81,19 +81,19 @@ const psStandardRules = {
 }
 const priceRules = {
   basePeople: [
-    { required: true, message: '请输入起始人头数', trigger: 'blur' },
-    { validator: positiveIntValidator, message: '大于0的整数', trigger: 'blur' }
+    { required: true, message: '请输入起始人头数', trigger: ['blur', 'change'] },
+    { validator: positiveIntValidator, message: '大于0的整数', trigger: ['blur', 'change'] }
   ],
   limitPeople: [
-    { validator: positiveIntValidator, message: '大于0的整数', trigger: 'blur' }
+    { validator: positiveIntValidator, message: '大于0的整数', trigger: ['blur', 'change'] }
   ],
   price: [
-    { required: true, message: '请输入照片基础价格', trigger: 'blur' },
-    { validator: priceDoubleValidator, message: '最多支持两位小数', trigger: 'blur' }
+    { required: true, message: '请输入照片基础价格', trigger: ['blur', 'change'] },
+    { validator: priceDoubleValidator, message: '最多支持两位小数', trigger: ['blur', 'change'] }
   ],
   stepPrice: [
-    { required: true, message: '请输入单个人头价格', trigger: 'blur' },
-    { validator: priceDoubleValidator, message: '最多支持两位小数', trigger: 'blur' }
+    { required: true, message: '请输入单个人头价格', trigger: ['blur', 'change'] },
+    { validator: priceDoubleValidator, message: '最多支持两位小数', trigger: ['blur', 'change'] }
   ]
 }
 export default {
@@ -165,6 +165,18 @@ export default {
         tempObj.standerPrice = standerPrice
       }
       return tempObj
+    },
+    /**
+     * @description 限制人头数更改时
+     */
+    limitChange (value, index) {
+      this.priceObj.standerPrice[index].basePeople = value
+    },
+    /**
+     * @description 起始人头数更改时
+     */
+    baseChange (value, index) {
+      this.priceObj.standerPrice[index].limitPeople = ''
     },
   }
 }

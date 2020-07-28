@@ -68,7 +68,8 @@ export default {
       upyunConfig: '',
       editorOptions: defaultOptions,
       coverOption,
-      minimumPrice: '--'
+      minimumPrice: '--',
+      checkedFail: false // 表示页面校验不通过
     }
   },
   computed: {
@@ -84,7 +85,7 @@ export default {
         tab: 'DetailConfig'
       })
     }
-    if (this.createInfo.needInit) {
+    if (this.checkedFail) {
       this.resetData()
     }
   },
@@ -109,6 +110,7 @@ export default {
         if (!this.productObj.information) throw new Error('产品介绍还没填写')
         if (type === 'next') this.$emit('next', { aim: 'OtherConfig' })
       } catch (error) {
+        this.checkedFail = true
         this.$newMessage.warning(error.message || error || '请输入相关配置')
       }
     },
@@ -116,7 +118,8 @@ export default {
      * @description 重置校验状态
      */
     resetData () {
-      this.$refs.productObj.resetFields()
+      this.$refs.productObj.clearValidate()
+      this.checkedFail = false
     },
     /**
      * @description 输入监听

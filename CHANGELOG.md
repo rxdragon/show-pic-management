@@ -1,4 +1,4 @@
-# 1.0.0 (2020-07-27)
+# 1.0.0 (2020-07-28)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -30,6 +30,7 @@
  - | 完成活动后台联调 | [bd24454](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bd24454)
  - | 完成订单页面 | [89f50c6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/89f50c6)
  - | 提交代码 | [0050ff1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0050ff1)
+ - | 新增const的lint,图片token获取修改 | [8158953](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8158953)
  - | 新增产品和编辑产品时候增加丢失保存的二次提醒 | [622b887](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/622b887)
  - | 新增预览页面布局 | [462dd94](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/462dd94)
  - | 新建产品主干调试ok | [f5883d2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f5883d2)
@@ -52,9 +53,10 @@
  - | 联调优惠券生成和管理 | [d03f1b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d03f1b0)
  - | 能用自闭和用自闭和 | [92eefa6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/92eefa6)
  - | 获取ps内存 | [a9477f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a9477f6)
- - | 详情设置和其他设置暂存 | [d282988](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d282988)
- 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
+ - | 详情设置和其他设置暂存 | [d282988](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d282988)
+ - | 限定人头和初始人头校验,校验重置调整 | [823e16a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/823e16a)
+ 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
 
 
 ### 🎨 代码样式

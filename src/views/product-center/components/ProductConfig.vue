@@ -63,10 +63,10 @@ import { PRODUCT_IS_SIMPLE } from '@/model/Enumerate.js'
 // 基础配置
 const productConfigRules = {
   name: [
-    { required: true, message: '请输入产品名称', trigger: 'blur' }
+    { required: true, message: '请输入产品名称', trigger: ['blur', 'change'] }
   ],
   description: [
-    { required: true, message: '请输入产品首页介绍', trigger: 'blur' }
+    { required: true, message: '请输入产品首页介绍', trigger: ['blur', 'change'] }
   ],
   thumbnailPath: [
     { required: true, message: '请上传产品缩略图', trigger: 'change' }
@@ -89,7 +89,8 @@ export default {
       productConfigRules,
       thumbnailOption,
       shareOption,
-      PRODUCT_IS_SIMPLE
+      PRODUCT_IS_SIMPLE,
+      checkFail: false
     }
   },
   activated () {
@@ -100,6 +101,7 @@ export default {
         tab: 'ProductConfig'
       })
     }
+    if (this.checkFail) this.resetCheck()
   },
   methods: {
     /**
@@ -136,6 +138,7 @@ export default {
         if (type === 'next') this.$emit('next', { aim })
       } catch (error) {
         console.error(error)
+        this.checkFail = true
         this.$newMessage.warning(error.message || error || '请输入相关配置')
       }
     },
@@ -143,8 +146,10 @@ export default {
      * @description 重置校验
      */
     resetCheck () {
-      this.$refs.productObjOne.resetFields()
-      this.$refs.productObjTwo.resetFields()
+      if (!this.checkFail) return
+      this.$refs.productObjOne.clearValidate()
+      this.$refs.productObjTwo.clearValidate()
+      this.checkFail = false
     }
   }
 }
