@@ -12,13 +12,7 @@
       <div class="panel-title">产品介绍</div>
       <div class="edit-content">
         <div class="edit-content-left">
-          <editor
-            initialEditType="wysiwyg"
-            @change="editorInput"
-            height="100%"
-            ref="toastuiEditor"
-            :options="editorOptions"
-          />
+          <div ref="toastuiEditor"></div>
         </div>
         <iphone-model :minimum-price="minimumPrice" :product-obj="productObj" :banner="productObj.coverPath" :page-html="productObj.information" />
       </div>
@@ -33,16 +27,19 @@
 import 'codemirror/lib/codemirror.css'
 import '@toast-ui/editor/dist/i18n/zh-cn'
 import '@toast-ui/editor/dist/toastui-editor.css'
-
+import 'tui-color-picker/dist/tui-color-picker.css'
+ 
 import IphoneModel from './IphoneModel.vue'
 import UploadPic from './UploadPic'
 import defaultOptions from '../editorOption/index.js'
 import Tool from '../tools/index.js'
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax'
+import Editor from '@toast-ui/editor'
+
 
 import * as Commonality from '@/api/commonality'
 import * as Product from '@/api/product'
 
-import { Editor } from '@toast-ui/vue-editor'
 import { coverOption } from '../config/imgOption.js'
 import { PRODUCT_IS_SIMPLE } from '@/model/Enumerate.js'
 import { mapGetters } from 'vuex'
@@ -53,9 +50,10 @@ const detailRules = {
     { required: true, message: '请上传产品缩略图', trigger: 'change' }
   ]
 }
+
 export default {
   name: 'DetailConfig',
-  components: { IphoneModel, UploadPic, Editor },
+  components: { IphoneModel, UploadPic },
   props: {
     productObj: { type: Object, required: true },
     checkStatus: { type: Object, required: true },
@@ -66,10 +64,10 @@ export default {
     return {
       detailRules,
       upyunConfig: '',
-      editorOptions: defaultOptions,
       coverOption,
       minimumPrice: '--',
-      checkedFail: false // 表示页面校验不通过
+      checkedFail: false, // 表示页面校验不通过
+      colorSyntax
     }
   },
   computed: {
@@ -90,14 +88,22 @@ export default {
     }
   },
   mounted() {
-    this.editor = this.$refs.toastuiEditor.editor
+    this.editor = new Editor({
+      plugins: [colorSyntax],
+      el: this.$refs.toastuiEditor,
+      ...defaultOptions
+    })
     this.editor.eventManager.removeEventHandler('addImageBlobHook')
+    this.editor.eventManager.removeEventHandler('change')
     // 添加自定义监听事件
     this.editor.eventManager.listen('addImageBlobHook', (file, callback) => {
       this.upload(file, url => {
         callback(url)
         this.$loadingClose()
       })
+    })
+    this.editor.eventManager.listen('change', () => {
+      this.editorInput()
     })
   },
   methods: {
@@ -125,7 +131,7 @@ export default {
      * @description 输入监听
      */
     editorInput () {
-      const html = this.$refs.toastuiEditor.invoke('getHtml')
+      const html = this.editor.getHtml()
       this.productObj.information = html
     },
     /**

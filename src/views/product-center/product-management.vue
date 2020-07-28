@@ -139,7 +139,10 @@ export default {
         this.productSkus = []
         this.isCreate = false
       }
-      if (!obj.type) this.whichStep = obj.aim
+      if (!obj.type) {
+        this.whichStep = obj.aim
+        document.getElementsByClassName('app-main')[0].scrollTop = 0
+      }
     },
     /**
      * @description 初始化

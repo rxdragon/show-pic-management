@@ -1,23 +1,14 @@
 export default {
+  height: '100%',
   language: 'zh-CN',
+  initialEditType: 'wysiwyg',
   toolbarItems: [
     'heading',
     'bold',
     'italic',
     'strike',
-    'divider',
     'hr',
-    'quote',
-    'divider',
-    'ul',
-    'ol',
-    'task',
-    'indent',
-    'outdent',
-    'divider',
     'table',
-    'image',
-    'link',
-    'divider'
+    'image'
   ]
 }
