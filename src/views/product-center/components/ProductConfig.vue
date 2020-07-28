@@ -63,10 +63,10 @@ import { PRODUCT_IS_SIMPLE } from '@/model/Enumerate.js'
 // 基础配置
 const productConfigRules = {
   name: [
-    { required: true, message: '请输入产品名称', trigger: ['blur', 'change'] }
+    { required: true, message: '请输入产品名称', trigger: 'blur' }
   ],
   description: [
-    { required: true, message: '请输入产品首页介绍', trigger: ['blur', 'change'] }
+    { required: true, message: '请输入产品首页介绍', trigger: 'blur' }
   ],
   thumbnailPath: [
     { required: true, message: '请上传产品缩略图', trigger: 'change' }

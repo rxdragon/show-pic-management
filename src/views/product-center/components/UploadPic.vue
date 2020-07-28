@@ -149,8 +149,6 @@ export default {
      * @description 移除文件
      */
     deleteUploadPhoto (photoItem, index) {
-      const isPending = !photoItem.response
-      if (isPending) { this.$refs.uploadButton.abort(this.uploadPhoto[index]) }
       this.$emit('change', [])
     }
   }

@@ -29,6 +29,7 @@
  - | 完成接口活动页面的接口联调 | [3e85d7a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3e85d7a)
  - | 完成活动后台联调 | [bd24454](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bd24454)
  - | 完成订单页面 | [89f50c6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/89f50c6)
+ - | 封面图规格更改 | [531fd4f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/531fd4f)
  - | 提交代码 | [0050ff1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0050ff1)
  - | 新增const的lint,图片token获取修改 | [8158953](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8158953)
  - | 新增产品和编辑产品时候增加丢失保存的二次提醒 | [622b887](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/622b887)
