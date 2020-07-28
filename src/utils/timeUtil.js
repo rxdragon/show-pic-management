@@ -16,7 +16,7 @@ export function timeFormat (seconds, type, showZero = false) {
     s = parseInt(s % 60)
   }
   // 补零
-  let zero = function (v) {
+  const zero = function (v) {
     if (showZero) {
       return (v >> 0) < 10 ? '0' + v : v
     } else {

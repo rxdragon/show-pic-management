@@ -167,8 +167,8 @@ export const validateEffectivity = (rule, value, callback) => {
 }
 
 function checkIsColor (bgVal) {
-  let type = "^#[0-9a-fA-F]{6}$"
-  let re = new RegExp(type)
+  const type = "^#[0-9a-fA-F]{6}$"
+  const re = new RegExp(type)
   if (bgVal.match(re) == null) {
     return false
   } else {

@@ -1,5 +1,5 @@
 <template>
-  <div class="upload-share-photo">
+  <div class="upload-pic">
     <div v-for="(photoItem, photoIndex) in uploadPhoto" :key="photoItem.uid" class="list-photo-item">
       <transition name="el-zoom-in-center" mode="out-in">
         <photo-box
@@ -45,8 +45,7 @@
       </div>
     </el-upload>
     <div class="upload-tips">
-      <div class="tip">提示：分享图不上传默认显示修修兽logo</div>
-      <div class="tip">只能上传100px * 100px的照片</div>
+      <div class="tip">{{ option.tip }}</div>
     </div>
   </div>
 </template>
@@ -60,7 +59,7 @@ import * as Commonality from '@/api/commonality'
 import * as PhotoTool from '@/utils/photoTool'
 
 export default {
-  name: 'UploadSharePhoto',
+  name: 'UploadPic',
   components: { PhotoBox },
   filters: {
     // 过滤进度条
@@ -83,7 +82,8 @@ export default {
     event: 'change'
   },
   props: {
-    uploadPhoto: { type: Array, required: true }
+    uploadPhoto: { type: Array, required: true },
+    option: { type: Object, required: true }
   },
   data () {
     return {
@@ -92,9 +92,6 @@ export default {
   },
   computed: {
     ...mapGetters(['updateDomain'])
-  },
-  created () {
-    this.getUpyunSign()
   },
   methods: {
     /**
@@ -108,9 +105,20 @@ export default {
      */
     async beforeUpload (file) {
       try {
+        const { width, height } = this.option
         const data = await getImagePx(file)
+        await this.getUpyunSign()
         if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
-        if (data.width !== 100 || data.height !== 100) throw new Error('请上传100px * 100px 的图片')
+        if (width && height) {
+          if (data.width !== width || data.height !== height) throw new Error(`请上传${width}px * ${height}px 的图片`)
+        }
+        if (width) {
+          if (data.width !== width) throw new Error(`请上传宽度为${width}px的图片`)
+        }
+        if (height) {
+          if (data.height !== height) throw new Error(`请上传高度为${height}px的图片`)
+        }
+        if (file.type !== 'image/jpeg' && file.type !== 'image/png') throw new Error(`请上传jpg/png的图片`)
         return Promise.resolve()
       } catch (error) {
         this.$newMessage({
@@ -151,7 +159,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.upload-share-photo {
+.upload-pic {
   display: flex;
 
   .avatar-upload {
