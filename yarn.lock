@@ -1054,10 +1054,10 @@
   dependencies:
     tui-color-picker "^2.2.6"
 
-"@toast-ui/editor@^2.3.1-alpha":
-  version "2.3.1-alpha"
-  resolved "https://registry.npmjs.org/@toast-ui/editor/-/editor-2.3.1-alpha.tgz#ad899f9f5b99bdd6d16c870aee4b826808f5535e"
-  integrity sha512-cGXHMYNnSgqxlGxvmtUjiO7eKkM2NvhUPut40hMzVRivD/ikedGE4sb5QHGrXFFKMYhqMJ/oKRcALMZnu7KkNA==
+"@toast-ui/editor@2.2.0":
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/@toast-ui/editor/-/editor-2.2.0.tgz#77fd790c6ae876d5de738bc022d6ebc5c84a6feb"
+  integrity sha512-WiqrY7OeCOS08NlznJobCwtxOWJC/5my8QefHCKTZyX9/70kkojcnyQ8aoiQQ5kIfGUJ6dKt6/JuKD5OOib+bQ==
   dependencies:
     "@types/codemirror" "0.0.71"
     codemirror "^5.48.4"
