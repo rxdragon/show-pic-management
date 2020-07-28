@@ -10,7 +10,8 @@ const shareOption = {
 }
 const coverOption = {
   width: 750,
-  tip: '只能上传宽度750的png/jpg图片'
+  height: 500,
+  tip: '只能上传750x500的png/jpg图片'
 }
 
 export {
