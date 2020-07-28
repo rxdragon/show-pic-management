@@ -4,7 +4,7 @@
       <el-col :xl="4" :lg="6" >
         <product-list ref="productList" @selectProduct="selectProduct" @addProduct="addProduct" />
       </el-col>
-      <el-col :xl="16" :lg="18">
+      <el-col v-if="showInit" :xl="16" :lg="18">
         <div class="config-area">
           <el-tabs v-model="whichStep">
             <el-tab-pane v-for="(item, index) in tabPaneConfig" :key="index" :label="item.label" :name="item.name" />
@@ -70,6 +70,7 @@ export default {
   data () {
     return {
       tabPaneConfig,
+      showInit: false, // 控制右侧编辑区展示隐藏,提交后隐藏,初始状态隐藏
       whichStep: 'ProductConfig',
       isCreate: false,
       productObj: new ProductObj(),
@@ -130,6 +131,7 @@ export default {
         this.createInfo.needInit = false
       }
       if (obj.type === 'init') { // 提交后重置
+        this.showInit = false
         this.resetData()
         this.$refs.productList.init()
       }
@@ -149,7 +151,7 @@ export default {
       this.whichStep = 'ProductConfig'
       this.isCreate = false // 转成子品类编辑页
       this.createInfo.needInit = true // 初始化数据都需要子品类初始化
-      // 去掉基础设置中的校验状态,其他校验状态放到active中重置
+      if (!this.showInit) return // 编辑区不展示的时候不需要校验
       this.$nextTick(() => {
         this.$refs.ProductConfig.resetCheck()
       })
@@ -159,22 +161,28 @@ export default {
      * @description 新建产品
      */
     async addProduct () {
-      await this.$confirm('当前操作未保存，刷新页面后数据将不做保存?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
+      if (this.showInit) {
+        await this.$confirm('当前操作未保存，刷新页面后数据将不做保存?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+      }
+      this.showInit = true
       this.resetData()
     },
     /**
      * @description 选择产品编辑
      */
     async selectProduct (obj) {
-      await this.$confirm('当前操作未保存，刷新页面后数据将不做保存?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
+      if (this.showInit) {
+        await this.$confirm('当前操作未保存，刷新页面后数据将不做保存?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+      }
+      this.showInit = true
       this.resetData()
       const req = { id: obj.id }
       const msg = await Product.getInfo(req)

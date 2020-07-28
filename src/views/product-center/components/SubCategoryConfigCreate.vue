@@ -72,13 +72,12 @@ export default {
       styleForm: new StyleObj(),
       upgradeForms: [],
       thumbnailOption,
-      PRODUCT_IS_SIMPLE
+      PRODUCT_IS_SIMPLE,
+      checkFail: false
     }
   },
   activated () {
-    if (this.createInfo.needInit) { // 重新选择产品或者新建之后校验状态清空
-      this.resetData()
-    }
+    if (this.checkFail) this.resetData() // 校验不通过重置
     if (this.createInfo.needInit && this.createInfo.isNew) {
       this.upgradeForms = []
       this.styleForm = new StyleObj()
@@ -120,7 +119,7 @@ export default {
         }
         this.$emit('next', tempObj)
       } catch (error) {
-        console.error(error)
+        this.checkFail = true
         this.$newMessage.warning(error.message || error || '请输入相关配置')
       }
     },
@@ -149,7 +148,8 @@ export default {
      * @description 重置校验状态
      */
     resetData () {
-      this.$refs.styleForm.resetFields()
+      this.$refs.styleForm.clearValidate()
+      this.checkFail = false
     },
     /**
      * @description 返回上一页

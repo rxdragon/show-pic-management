@@ -21,7 +21,14 @@
             <div class="dot green-right" />
           </div>
         </div>
-        <div class="html-page" v-html="pageHtml"></div>
+        <div class="html-page">
+          <div v-html="pageHtml"></div>
+          <h1>修修兽品牌介绍</h1>
+          <div class="list">修修兽是杭州缦图云端摄影有限责任公司的一对一线上修图品牌，长期为海马体照相馆提供后期修图服务。</div>
+          <div class="list">每一位修修兽修图师都经过严苛的专业技能培训、拥有独到艺术美学修养。</div>
+          <div class="list">修修兽的修图方向在于还原真实且更有美感的人像，创造更加高级的光影与色调。</div>
+          <div class="list">修修兽一对一线上修图，会根据您提供的照片和需求，定制您的专属风格，拒绝千篇一律。</div>
+        </div>
       </div>
     </div>
   </div>
@@ -82,7 +89,7 @@ export default {
   }
 
   .phone-content {
-    height: 775px;
+    height: 730px;
     overflow-y: auto;
   }
 
@@ -166,7 +173,7 @@ export default {
   }
 
   .html-page {
-    padding: 0 14px;
+    padding: 0 14px 64px;
     background: var(--bkgColor);
 
     /deep/ img {
@@ -211,6 +218,13 @@ export default {
       font-weight: 300;
       line-height: 19px;
       color: #45454d;
+    }
+
+    .list {
+      margin-bottom: 12px;
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 19px;
     }
   }
 }

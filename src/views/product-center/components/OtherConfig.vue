@@ -88,7 +88,7 @@ import Tool from '../tools/index.js'
 
 const otherRules = {
   cloudRetouchRequire: [
-    { required: true, message: '请填写修图要求,该修图要求将在云端产品审核时使用', trigger: 'blur' }
+    { required: true, message: '请填写修图要求,该修图要求将在云端产品审核时使用', trigger: ['blur', 'change'] }
   ]
 }
 

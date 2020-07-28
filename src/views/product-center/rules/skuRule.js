@@ -7,10 +7,10 @@ export default class Rules {
   constructor (type) {
     switch (type) {
       case 'style':
-        this.name.push({ required: true, message: '请输入修图风格名称', trigger: 'blur' })
+        this.name.push({ required: true, message: '请输入修图风格名称', trigger: ['blur', 'change'] })
         break
       case 'upgrade':
-        this.name.push({ required: true, message: '请输入升级体验名称', trigger: 'blur' })
+        this.name.push({ required: true, message: '请输入升级体验名称', trigger: ['blur', 'change'] })
         break
     
       default:
