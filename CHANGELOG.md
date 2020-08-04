@@ -1,4 +1,4 @@
-# 1.0.0 (2020-07-28)
+# 1.0.0 (2020-08-04)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -101,6 +101,7 @@
  - | 优化修复部分功能 | [d9f6a8d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d9f6a8d)
  - | 修图查询显示 | [85c5083](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/85c5083)
  - | 修复最小开票金额判断错误问题 | [7f210c9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7f210c9)
+ - | 修复券码作废问题 | [3ee9eca](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3ee9eca)
  - | 修复单张照片下载问题 | [004717a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/004717a)
  - | 修复发票导出问题 | [a34c1a7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a34c1a7)
  - | 修复发票管理不显示正确的预览图 | [bb1364b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bb1364b)
@@ -122,8 +123,8 @@
  - | 升级体验查看页面删除fix | [4070f8d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4070f8d)
  - | 单层风格联系客服情况fix | [0471b37](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0471b37)
  - | 去掉多余代码 | [70b2ab0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/70b2ab0)
+ - | 图片上传修改 | [efb099d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/efb099d)
  去掉权限校验,增加最后提交的子品类校验 | 去掉权限校验,增加最后提交的子品类校验 | [3cc34ba](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cc34ba)
- - | 修复券码作废问题 | [3ee9eca](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3ee9eca)
  - | 修复部分问题 | [a5210c5](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a5210c5)
  - | 修复金额不正确和默认手机号问题 | [08d8264](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/08d8264)
  - | 修复错误吗报错 | [e6da9b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e6da9b0)
