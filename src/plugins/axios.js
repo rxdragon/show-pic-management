@@ -11,7 +11,7 @@ import router from '@/router'
 axios.defaults.timeout = 15000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = false
 // 超时重新请求配置
 axios.defaults.retry = 4
 axios.defaults.retryDelay = 500

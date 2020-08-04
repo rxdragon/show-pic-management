@@ -3,6 +3,7 @@
 ### 🌟 新功能
 范围|描述|commitId
 --|--|--
+ - | dev api修改 | [f34d2f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f34d2f0)
  - | ui搭建完成 | [52ce88c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/52ce88c)
  - | 产品列表模块提交 | [7417c30](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7417c30)
  - | 优化订单页面跳转问题 | [75b8692](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/75b8692)
