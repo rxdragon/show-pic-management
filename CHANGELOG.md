@@ -122,6 +122,7 @@
  - | 修复显示问题 | [bcdb5c2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bcdb5c2)
  - | 修复查看用户详情问题 | [e93d9c7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e93d9c7)
  - | 修复注释代码 | [027e892](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/027e892)
+ - | 修复跨域问题 | [69504a3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/69504a3)
  - | 修复路径跳转问题 | [2910e79](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2910e79)
  - | 修复路由权限验证问题 | [bc3b5cf](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bc3b5cf)
  - | 修复跳转用户详情问题 | [823e0a0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/823e0a0)
@@ -147,10 +148,10 @@
  - | 更改打包路径 | [740c1f1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/740c1f1)
  - | 更改登录配置i | [84ffa60](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/84ffa60)
  - | 更新错误码 | [5ffa4a9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5ffa4a9)
- 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
  - | 正在配置时候 更换单层产品设置,取消掉设置界面 | [03b4596](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03b4596)
  - | 用户详情订单列表取消订单不显示详情操作 | [1ed4fef](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1ed4fef)
  - | 联调修复 | [d7ae477](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d7ae477)
+ 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
  去掉权限校验,增加最后提交的子品类校验 | 去掉权限校验,增加最后提交的子品类校验 | [3cc34ba](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cc34ba)
 
 
