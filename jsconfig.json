@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+        "@/*": ["src/*"],
+        "@assetsDir/*": ["src/assets/*"],
+        "@selectBox/*": ["src/components/SelectBox/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

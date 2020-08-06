@@ -1,11 +1,14 @@
 'use strict'
 
 import axios from 'axios'
+import router from '@/router'
+import ApiError from './ApiError.js'
+
 import { Message } from 'element-ui'
 import { errorCode } from './errorCode'
+
 import * as User from '@/api/user.js'
 import * as SessionTool from '@/utils/sessionTool.js'
-import router from '@/router'
 
 // axios 配置
 axios.defaults.timeout = 15000
@@ -68,16 +71,18 @@ axios.interceptors.response.use(
           return axios(config)
         })
       } else {
-        return Promise.reject(message)
+        return Promise.reject(new ApiError(message))
       }
     }
+
     // 普通的请求
     if (!error.response) {
       // 请求没有任何返回值：网络差，无服务
       const message = '网络错误，请稍后再试！'
       errorMessage(message)
-      return Promise.reject(message)
+      return Promise.reject(new ApiError(message))
     }
+
     // 没有权限
     if (error.error_code === 401) {
       SessionTool.removeSession()
@@ -89,14 +94,17 @@ axios.interceptors.response.use(
     let data = error.response.data
     let noData = !data
     let serverError = data && (!data.error_code || (data.error_code !== 401 && data.error_code < 1000))
+
+    // 服务器抛错
     if (noData || serverError) {
       const message =  '系统繁忙，请稍后再试：' + data.error_msg
       errorMessage(message)
-      return Promise.reject(message)
+      return Promise.reject(new ApiError(message))
     }
+
     const message = errorCode.getMsg(data)
     errorMessage(message)
-    return Promise.reject(message)
+    return Promise.reject(new ApiError(message))
   }
 )
 
