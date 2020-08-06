@@ -309,9 +309,7 @@ export default {
           this.form[type] = this.form.receiveInfo[type].substring(0, len)
         }
       })
-      if (type === 'phone') {
-        this.$refs.form.validateField('email')
-      }
+      if (type === 'phone') { this.$refs.form.validateField('email') }
     },
     // 邮箱验证
     onInputEmail (type, len) {

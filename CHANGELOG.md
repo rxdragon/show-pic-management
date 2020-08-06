@@ -1,4 +1,15 @@
-# 1.0.0 (2020-07-28)
+# 1.0.0 (2020-08-06)
+
+范围|描述|commitId
+--|--|--
+ - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
+ - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
+ - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
+ - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
+ - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
+ - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
+ - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
+
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -55,10 +66,10 @@
  - | 联调优惠券生成和管理 | [d03f1b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d03f1b0)
  - | 能用自闭和用自闭和 | [92eefa6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/92eefa6)
  - | 获取ps内存 | [a9477f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a9477f6)
+ 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
  - | 详情设置和其他设置暂存 | [d282988](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d282988)
  - | 限定人头和初始人头校验,校验重置调整 | [823e16a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/823e16a)
- 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
 
 
 ### 🎨 代码样式
@@ -75,8 +86,8 @@
  - | 更改全局less变量 | [03d1942](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03d1942)
  - | 更改文案 | [df0980e](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/df0980e)
  - | 更改样式 | [7014fe2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7014fe2)
- - | 更改样式 | [6a28f8c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6a28f8c)
  - | 更改样式 | [9483937](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9483937)
+ - | 更改样式 | [6a28f8c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6a28f8c)
  - | 枚举值规范 | [b20ca02](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b20ca02)
  - | 枚举值规范修改 | [da7b03c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/da7b03c)
  - | 样式更改 | [c5f050a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/c5f050a)
@@ -101,6 +112,7 @@
  - | 优化修复部分功能 | [d9f6a8d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d9f6a8d)
  - | 修图查询显示 | [85c5083](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/85c5083)
  - | 修复最小开票金额判断错误问题 | [7f210c9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7f210c9)
+ - | 修复券码作废问题 | [3ee9eca](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3ee9eca)
  - | 修复单张照片下载问题 | [004717a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/004717a)
  - | 修复发票导出问题 | [a34c1a7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a34c1a7)
  - | 修复发票管理不显示正确的预览图 | [bb1364b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bb1364b)
@@ -117,28 +129,28 @@
  - | 修复部分文案错误 | [425fe26](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/425fe26)
  - | 修复部分查询问题 | [ec5abc9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ec5abc9)
  - | 修复部分问题 | [af21495](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/af21495)
- - | 修复问题 | [3cb3d66](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cb3d66)
- - | 升级体验删除逻辑 | [e7dc220](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e7dc220)
- - | 升级体验查看页面删除fix | [4070f8d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4070f8d)
- - | 单层风格联系客服情况fix | [0471b37](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0471b37)
- - | 去掉多余代码 | [70b2ab0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/70b2ab0)
- 去掉权限校验,增加最后提交的子品类校验 | 去掉权限校验,增加最后提交的子品类校验 | [3cc34ba](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cc34ba)
- - | 修复券码作废问题 | [3ee9eca](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3ee9eca)
  - | 修复部分问题 | [a5210c5](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a5210c5)
  - | 修复金额不正确和默认手机号问题 | [08d8264](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/08d8264)
  - | 修复错误吗报错 | [e6da9b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e6da9b0)
+ - | 修复问题 | [3cb3d66](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cb3d66)
  - | 入参修改 | [923ea40](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/923ea40)
+ - | 升级体验删除逻辑 | [e7dc220](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e7dc220)
+ - | 升级体验查看页面删除fix | [4070f8d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4070f8d)
  - | 单层筛选时候,清空子品类 | [ffe4dc0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ffe4dc0)
+ - | 单层风格联系客服情况fix | [0471b37](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0471b37)
+ - | 去掉多余代码 | [70b2ab0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/70b2ab0)
+ - | 图片上传修改 | [efb099d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/efb099d)
  - | 增加上下线时间判断 | [b99ed2b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b99ed2b)
  - | 子品类配置返回清空 | [abbf877](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/abbf877)
  - | 更login跳转路径 | [5db076c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5db076c)
  - | 更改打包路径 | [740c1f1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/740c1f1)
  - | 更改登录配置i | [84ffa60](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/84ffa60)
  - | 更新错误码 | [5ffa4a9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5ffa4a9)
+ 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
  - | 正在配置时候 更换单层产品设置,取消掉设置界面 | [03b4596](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03b4596)
  - | 用户详情订单列表取消订单不显示详情操作 | [1ed4fef](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1ed4fef)
  - | 联调修复 | [d7ae477](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d7ae477)
- 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
+ 去掉权限校验,增加最后提交的子品类校验 | 去掉权限校验,增加最后提交的子品类校验 | [3cc34ba](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cc34ba)
 
 
 ### 📝 文档
@@ -190,15 +202,4 @@
  - | 更改xi更改x更改系统环境变量 | [3410805](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3410805)
  - | 更改测试预发地址 | [9a6eba9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9a6eba9)
  - | 更改环境变量 | [931b586](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/931b586)
-
-
-范围|描述|commitId
---|--|--
- - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
- - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
- - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
- - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
- - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
- - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
- - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
 
