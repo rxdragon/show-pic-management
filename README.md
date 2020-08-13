@@ -1,4 +1,4 @@
-# cloud-picture-centring
+# cloud-picture-centr
 
 ## 项目起始
 ```
