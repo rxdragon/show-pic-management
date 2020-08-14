@@ -188,8 +188,6 @@ export default {
       try {
         this.$loading()
         await this.searchData(page)
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }
@@ -254,8 +252,6 @@ export default {
         this.$newMessage.success('关单成功')
         this.resetCloseInfo()
         this.initPage()
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.submitCloseLoading = false
       }
@@ -274,8 +270,6 @@ export default {
       try {
         this.$loading()
         this.searchData()
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }
@@ -306,8 +300,6 @@ export default {
         const headerCellName = ['订单号', '下单时间', '照片数量', '金额', '状态', '用户账号', '用户姓名', '联系电话', '下单产品', '产品数量']
         const headerCellkeys = ['orderNum', 'paidAt', 'photoNum', 'totalFee', 'stateCN', 'clientAccount', 'clientName', 'clientPhone', 'productListString', 'productNum']
         exportExcel(data, excelName, headerCellName, headerCellkeys)
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }

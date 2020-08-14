@@ -109,23 +109,13 @@ export default {
           page: this.pager.page,
           pageSize: this.pager.pageSize
         }
-        if (this.timeSpan) {
-          req.cond.createdAtRange = getSeachTime(this.timeSpan)
-        }
-        if (this.searchValue) {
-          req.cond[this.seachType] = this.searchValue
-        }
-        if (this.accountSource) {
-          req.cond.from = this.accountSource
-        }
-        if (this.orderBy.key) {
-          req.orderBy = this.orderBy
-        }
+        if (this.timeSpan) { req.cond.createdAtRange = getSeachTime(this.timeSpan) }
+        if (this.searchValue) { req.cond[this.seachType] = this.searchValue }
+        if (this.accountSource) { req.cond.from = this.accountSource }
+        if (this.orderBy.key) { req.orderBy = this.orderBy }
         const data = await Clients.getOrderList(req)
         this.tableData = data.list
         this.pager.total = data.total
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }

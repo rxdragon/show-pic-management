@@ -244,8 +244,7 @@ export default {
     async validatePageForm () {
       try {
         await this.$refs.pageForm.validate()
-      } catch (error) {
-        console.error(error)
+      } catch {
         throw new Error('请填写活动优惠券配置')
       }
     }

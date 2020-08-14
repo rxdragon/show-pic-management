@@ -109,8 +109,6 @@ export default {
           this.getUserInfo(),
           this.getUserConsumeList(1)
         ])
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }
@@ -152,8 +150,6 @@ export default {
       try {
         this.$loading()
         await this.getUserConsumeList()
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }

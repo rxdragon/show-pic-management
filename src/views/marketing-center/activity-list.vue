@@ -145,9 +145,6 @@ export default {
         const data = await Activity.getActivityList(req)
         this.tableData = data.list
         this.pager.total = data.total
-      } catch (error) {
-        console.error(error)
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }

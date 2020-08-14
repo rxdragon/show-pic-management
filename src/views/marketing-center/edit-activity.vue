@@ -253,9 +253,6 @@ export default {
           name: photoName,
           url: data.pageForm.headerImg
         }]
-      } catch (error) {
-        console.error(error)
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }

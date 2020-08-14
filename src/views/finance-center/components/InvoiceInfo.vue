@@ -98,8 +98,6 @@ export default {
         await Invoice.voidInvoice(req)
         this.invoiceData.state = INVOICE_STATE.INVALID
         this.invoiceData.stateToCN = invalidToCN[INVOICE_STATE.INVALID]
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.cancellLoading = false
       }
@@ -117,8 +115,6 @@ export default {
           email: this.invoiceData.ticketEmail
         }
         await Invoice.resendInvoice(req)
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.resendLoading = false
       }

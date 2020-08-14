@@ -190,8 +190,6 @@ export default {
       try {
         this.$loading()
         await this.getCouponBatchCodeUseList(1)
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }
@@ -242,7 +240,7 @@ export default {
         this.searchCouponList()
       } catch (error) {
         this.$loadingClose()
-        throw new Error(error)
+        throw new this.$ApiError(error)
       }
     },
     /**
@@ -252,8 +250,6 @@ export default {
       try {
         this.$loading()
         this.getCouponBatchCodeUseList()
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }
@@ -275,8 +271,6 @@ export default {
         if (this.couponStates.length) { req.cond.couponStates = this.couponStates }
         const data = await Coupon.getCouponBatchCodeUseList(req)
         exportCouponExcel(this.couponBatchInfo.title, data.list)
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }

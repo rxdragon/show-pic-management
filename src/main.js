@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
+import ApiError from '@/plugins/ApiError.js'
 import * as filters from './filters' // 全局过滤器
 import './plugins/axios'
 import 'element-ui/lib/theme-chalk/display.css' // 栅格隐藏
@@ -26,6 +27,9 @@ Vue.config.productionTip = false
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
+
+// 增加自定义ApiError
+Vue.prototype.$ApiError = ApiError
 
 // 判断是否是生产环境
 Vue.prototype.$isDev = !process.env.VUE_APP_LOGIN_API.includes('k8s')
