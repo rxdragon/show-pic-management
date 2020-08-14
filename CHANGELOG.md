@@ -174,6 +174,7 @@
 --|--|--
  - | 更改ci配置 | [8fedb0b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8fedb0b)
  - | 更改入口文件 | [84d034c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/84d034c)
+ - | 更改抛错方式 | [8d90975](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8d90975)
  - | 更改提交钩子 | [0e88b7d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0e88b7d)
  - | 更改配置问题 | [9303262](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9303262)
 
