@@ -235,8 +235,6 @@ export default {
       try {
         this.orderListLoading = true
         await this.getCanInvoiceOrderList()
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.orderListLoading = false
       }

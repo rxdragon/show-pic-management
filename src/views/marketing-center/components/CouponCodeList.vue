@@ -27,8 +27,6 @@ export default {
       try {
         this.$loading()
         exportCouponExcel(this.couponName, this.couponList)
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }

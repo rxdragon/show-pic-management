@@ -98,8 +98,6 @@ export default {
           const orderPhotoList = this.orderData.orderPhotoList
           versionItem.hasPath = orderPhotoList.filter(item => item[versionItem.version]).length
         })
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }

@@ -1,4 +1,4 @@
-# 1.0.0 (2020-08-06)
+# 1.0.0 (2020-08-14)
 
 范围|描述|commitId
 --|--|--
@@ -47,6 +47,7 @@
  - | 新增产品和编辑产品时候增加丢失保存的二次提醒 | [622b887](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/622b887)
  - | 新增预览页面布局 | [462dd94](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/462dd94)
  - | 新建产品主干调试ok | [f5883d2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f5883d2)
+ - | 更改前端监控平台 | [e550e09](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e550e09)
  - | 更改打包配置 | [4b126f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4b126f6)
  - | 更改环境变量 | [b2cff3f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b2cff3f)
  - | 更改监控平台引入方式 | [15e8abd](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/15e8abd)
@@ -63,10 +64,10 @@
  - | 编辑仍有问题 | [0909974](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0909974)
  - | 老数据可能没有缩略图fix | [4ae56f1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4ae56f1)
  - | 联调产品列表排序问题 | [03b878c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03b878c)
+ 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 联调优惠券生成和管理 | [d03f1b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d03f1b0)
  - | 能用自闭和用自闭和 | [92eefa6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/92eefa6)
  - | 获取ps内存 | [a9477f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a9477f6)
- 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
  - | 详情设置和其他设置暂存 | [d282988](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d282988)
  - | 限定人头和初始人头校验,校验重置调整 | [823e16a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/823e16a)
@@ -121,6 +122,7 @@
  - | 修复显示问题 | [bcdb5c2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bcdb5c2)
  - | 修复查看用户详情问题 | [e93d9c7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e93d9c7)
  - | 修复注释代码 | [027e892](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/027e892)
+ - | 修复跨域问题 | [69504a3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/69504a3)
  - | 修复路径跳转问题 | [2910e79](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2910e79)
  - | 修复路由权限验证问题 | [bc3b5cf](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bc3b5cf)
  - | 修复跳转用户详情问题 | [823e0a0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/823e0a0)
@@ -146,10 +148,10 @@
  - | 更改打包路径 | [740c1f1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/740c1f1)
  - | 更改登录配置i | [84ffa60](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/84ffa60)
  - | 更新错误码 | [5ffa4a9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5ffa4a9)
- 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
  - | 正在配置时候 更换单层产品设置,取消掉设置界面 | [03b4596](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03b4596)
  - | 用户详情订单列表取消订单不显示详情操作 | [1ed4fef](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1ed4fef)
  - | 联调修复 | [d7ae477](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d7ae477)
+ 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
  去掉权限校验,增加最后提交的子品类校验 | 去掉权限校验,增加最后提交的子品类校验 | [3cc34ba](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cc34ba)
 
 
@@ -201,5 +203,6 @@
  - | 删除调试代码 | [5f54a55](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5f54a55)
  - | 更改xi更改x更改系统环境变量 | [3410805](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3410805)
  - | 更改测试预发地址 | [9a6eba9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9a6eba9)
+ - | 更改环境 | [d41b78b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d41b78b)
  - | 更改环境变量 | [931b586](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/931b586)
 

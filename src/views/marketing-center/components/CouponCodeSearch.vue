@@ -64,8 +64,6 @@ export default {
           code: this.couponMark
         }
         this.infoData = await Coupon.searchCouponCode(req)
-      } catch (error) {
-        throw new Error(error)
       } finally {
         setTimeout(() => {
           this.loading = false

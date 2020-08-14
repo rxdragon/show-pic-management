@@ -126,7 +126,7 @@ export default {
         this.searchData()
       } catch (error) {
         this.$loadingClose()
-        throw new Error(error)
+        throw new this.$ApiError(error)
       }
     },
     /**
@@ -154,8 +154,6 @@ export default {
         const data = await Coupon.getCouponBatchList(req)
         this.tableData = data.list
         this.pager.total = data.total
-      } catch (error) {
-        throw new Error(error)
       } finally {
         this.$loadingClose()
       }
