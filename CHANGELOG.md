@@ -1,4 +1,4 @@
-# 1.0.0 (2020-08-14)
+# 1.0.0 (2020-08-19)
 
 范围|描述|commitId
 --|--|--
@@ -161,6 +161,12 @@
  - | 更改打包跳转露肩 | [1be062b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1be062b)
  - | 更新产品文档 | [ed4467f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ed4467f)
  - | 注释更改 | [28f46da](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/28f46da)
+
+
+### 🔙 撤销
+范围|描述|commitId
+--|--|--
+ - | 更改配置文件 | [8683ec9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8683ec9)
 
 
 ### 🔧 测试
