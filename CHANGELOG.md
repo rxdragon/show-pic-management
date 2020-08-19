@@ -1,16 +1,5 @@
 # 1.0.0 (2020-08-19)
 
-范围|描述|commitId
---|--|--
- - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
- - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
- - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
- - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
- - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
- - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
- - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
-
-
 ### 🌟 新功能
 范围|描述|commitId
 --|--|--
@@ -161,6 +150,23 @@
  - | 更改打包跳转露肩 | [1be062b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1be062b)
  - | 更新产品文档 | [ed4467f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ed4467f)
  - | 注释更改 | [28f46da](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/28f46da)
+
+
+### 📦 持续集成
+范围|描述|commitId
+--|--|--
+ - | 更改环境变量 | [174332e](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/174332e)
+
+
+范围|描述|commitId
+--|--|--
+ - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
+ - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
+ - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
+ - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
+ - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
+ - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
+ - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
 
 
 ### 🔙 撤销
