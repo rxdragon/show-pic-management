@@ -13,13 +13,11 @@
 </template>
 
 <script>
-import { ACTIVITY_STATE, activityToCN } from '@/model/Enumerate.js'
+import { USER_FROM, userFromToCN } from '@/model/Enumerate.js'
 
 const seachState = [
-  ACTIVITY_STATE.WAITING,
-  ACTIVITY_STATE.STARTED,
-  ACTIVITY_STATE.FINISHED,
-  ACTIVITY_STATE.END_EARLY,
+  USER_FROM.SHOW_PIC,
+  USER_FROM.HIMO
 ]
 
 export default {
@@ -27,7 +25,7 @@ export default {
   data () {
     const stateOption = seachState.map(item => {
       return {
-        label: activityToCN[item],
+        label: userFromToCN[item],
         value: item
       }
     })
