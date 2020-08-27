@@ -72,7 +72,7 @@ export const OrderFromToCN = {
 }
 
 /**
- * @description 订单来源
+ * @description 用户来源
  */
 export const USER_FROM = {
   SHOW_PIC: 'show_pic',
