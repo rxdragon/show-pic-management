@@ -1,4 +1,4 @@
-# 1.0.0 (2020-08-27)
+# 1.0.0 (2020-08-31)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -154,17 +154,6 @@
  - | 注释更改 | [28f46da](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/28f46da)
 
 
-范围|描述|commitId
---|--|--
- - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
- - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
- - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
- - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
- - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
- - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
- - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
-
-
 ### 📦 持续集成
 范围|描述|commitId
 --|--|--
@@ -198,6 +187,7 @@
 --|--|--
  - | yangshi | [ecb14ea](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ecb14ea)
  - | 优化lodash | [d0d041d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d0d041d)
+ - | 优化交互体验 | [d960391](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d960391)
  - | 优化带阿妹 | [9987f02](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9987f02)
  - | 优化文案 | [3c52518](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3c52518)
  - | 优化文案显示 | [7f6ce16](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7f6ce16)
@@ -210,6 +200,17 @@
  - | 更改部分字段显示错误问题 | [d2b1bb4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d2b1bb4)
  - | 更新上传 | [e4c8755](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e4c8755)
  - | 自动更改更新时间 | [b5f84ce](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b5f84ce)
+
+
+范围|描述|commitId
+--|--|--
+ - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
+ - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
+ - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
+ - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
+ - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
+ - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
+ - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
 
 
 ### chore

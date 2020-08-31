@@ -1,5 +1,5 @@
 <template>
-  <div class="account-source-select">
+  <div class="activity-state-select">
     <el-select
       v-bind="$attrs"
       :popper-append-to-body="false"
@@ -13,24 +13,33 @@
 </template>
 
 <script>
+import { ACTIVITY_STATE, activityToCN } from '@/model/Enumerate.js'
+
+const seachState = [
+  ACTIVITY_STATE.WAITING,
+  ACTIVITY_STATE.STARTED,
+  ACTIVITY_STATE.FINISHED,
+  ACTIVITY_STATE.END_EARLY
+]
 
 export default {
-  name: 'AccountSourceSelect',
+  name: 'ActivityStateSelect',
   data () {
+    const stateOption = seachState.map(item => {
+      return {
+        label: activityToCN[item],
+        value: item
+      }
+    })
     return {
-      options: [
-        {
-          label: '未开始',
-          value: '1'
-        }
-      ]
+      options: stateOption
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-.account-source-select {
+.activity-state-select {
   width: 164px;
 }
 </style>
