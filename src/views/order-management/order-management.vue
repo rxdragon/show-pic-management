@@ -8,7 +8,7 @@
           <date-picker v-model="timeSpan" />
         </div>
         <div class="date-search search-item">
-          <el-input v-model.trim="orderSearchValue" placeholder="请输入内容" class="input-with-select">
+          <el-input @keyup.native.enter="initPage(1)" v-model.trim="orderSearchValue" placeholder="请输入内容" class="input-with-select">
             <el-select slot="prepend" v-model="orderSeachType" placeholder="请选择">
               <el-option label="订单号" value="orderNum" />
               <el-option label="顾客姓名" value="userName" />

@@ -36,7 +36,7 @@ export default class StreamModel {
     }
     this.baseRequires.eye = findRequire(REQUIRE.EYE).value || ''
     this.baseRequires.face = findRequire(REQUIRE.FACE).value || ''
-    this.baseRequires.pimples = findRequire(REQUIRE.PIMPLES).value || ''
+    this.baseRequires.pimples = Number(findRequire(REQUIRE.PIMPLES).value) || '' // 祛痣目前是返回string的'0','1'来表示true和false
     this.referenceDiagram = findRequire(REQUIRE.REFERENCE_IMG).value || ''
   }
 
