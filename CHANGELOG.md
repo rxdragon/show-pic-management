@@ -1,4 +1,4 @@
-# 1.0.0 (2020-08-31)
+# 1.0.0 (2020-09-13)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -112,6 +112,7 @@
  - | 修复显示问题 | [bcdb5c2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bcdb5c2)
  - | 修复查看用户详情问题 | [e93d9c7](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e93d9c7)
  - | 修复注释代码 | [027e892](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/027e892)
+ - | 修复状态不对 | [dc53386](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/dc53386)
  - | 修复用户管理信息 | [6d09725](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6d09725)
  - | 修复跨域问题 | [69504a3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/69504a3)
  - | 修复路径跳转问题 | [2910e79](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2910e79)
@@ -141,8 +142,9 @@
  - | 更新错误码 | [5ffa4a9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5ffa4a9)
  - | 正在配置时候 更换单层产品设置,取消掉设置界面 | [03b4596](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03b4596)
  - | 用户详情订单列表取消订单不显示详情操作 | [1ed4fef](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1ed4fef)
- - | 联调修复 | [d7ae477](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d7ae477)
+ - | 祛痣状态兼容展示 | [4eee4e4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4eee4e4)
  修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
+ - | 联调修复 | [d7ae477](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d7ae477)
  去掉权限校验,增加最后提交的子品类校验 | 去掉权限校验,增加最后提交的子品类校验 | [3cc34ba](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cc34ba)
 
 
@@ -152,6 +154,17 @@
  - | 更改打包跳转露肩 | [1be062b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1be062b)
  - | 更新产品文档 | [ed4467f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ed4467f)
  - | 注释更改 | [28f46da](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/28f46da)
+
+
+范围|描述|commitId
+--|--|--
+ - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
+ - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
+ - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
+ - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
+ - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
+ - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
+ - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
 
 
 ### 📦 持续集成
@@ -200,17 +213,6 @@
  - | 更改部分字段显示错误问题 | [d2b1bb4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d2b1bb4)
  - | 更新上传 | [e4c8755](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e4c8755)
  - | 自动更改更新时间 | [b5f84ce](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b5f84ce)
-
-
-范围|描述|commitId
---|--|--
- - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
- - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
- - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
- - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
- - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
- - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
- - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
 
 
 ### chore

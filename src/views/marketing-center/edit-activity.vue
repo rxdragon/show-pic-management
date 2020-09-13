@@ -362,7 +362,11 @@ export default {
           ...activityReq
         }
         const mainImg = _.get(this.shareForm, 'fileList[0].path')
-        req.shareConfig.mainImg = mainImg ? this.imgDomain + mainImg : ''
+        if (mainImg) {
+          req.shareConfig.mainImg = this.imgDomain + mainImg
+        } else {
+          delete req.shareConfig.mainImg
+        }
         await Activity.editActivity(req)
         this.$newMessage.success('修改成功')
         this.goBack()
