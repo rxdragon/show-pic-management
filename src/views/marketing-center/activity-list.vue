@@ -135,7 +135,7 @@ export default {
           pageSize: this.pager.pageSize
         }
         if (this.timeSpan) {
-          req.cond.createBeginTime = TimeUtil.startDayTime(this.timeSpan[0]),
+          req.cond.createBeginTime = TimeUtil.startDayTime(this.timeSpan[0])
           req.cond.createEndTime = TimeUtil.endDayTime(this.timeSpan[1])
         }
         if (this.acactivityState) { req.cond.status = this.acactivityState }

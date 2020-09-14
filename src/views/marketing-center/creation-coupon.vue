@@ -148,7 +148,7 @@ export default {
      * @description 初始化信息
      */
     resetPageData (cleanList = true) {
-      this.cacheTitle = '',
+      this.cacheTitle = ''
       this.couponForm = {
         name: '', // 优惠劵名称
         type: 'discount_coupon', // 优惠劵类型 discount_coupon 折扣 decrease_coupon 立减

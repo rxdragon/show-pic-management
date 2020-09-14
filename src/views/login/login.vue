@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <iframe ref="login" class="login_iframe" :src="ssoUrl" />
+    <iframe ref="login" title="login index" class="login_iframe" :src="ssoUrl" />
     <div id="loading-login">
       <div class="loading-logo">
         <img src="@/assets/logo.png" alt="Logo">
