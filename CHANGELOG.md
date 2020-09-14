@@ -1,4 +1,4 @@
-# 1.0.0 (2020-09-13)
+# 1.0.0 (2020-09-14)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -114,6 +114,7 @@
  - | 修复注释代码 | [027e892](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/027e892)
  - | 修复状态不对 | [dc53386](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/dc53386)
  - | 修复用户管理信息 | [6d09725](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6d09725)
+ - | 修复编辑时候传入图片 | [08feacf](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/08feacf)
  - | 修复跨域问题 | [69504a3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/69504a3)
  - | 修复路径跳转问题 | [2910e79](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2910e79)
  - | 修复路由权限验证问题 | [bc3b5cf](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bc3b5cf)
@@ -143,8 +144,8 @@
  - | 正在配置时候 更换单层产品设置,取消掉设置界面 | [03b4596](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03b4596)
  - | 用户详情订单列表取消订单不显示详情操作 | [1ed4fef](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1ed4fef)
  - | 祛痣状态兼容展示 | [4eee4e4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4eee4e4)
- 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
  - | 联调修复 | [d7ae477](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d7ae477)
+ 修复 | 修复选择单位后再选择个人会传递税号 | [2e5f349](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2e5f349)
  去掉权限校验,增加最后提交的子品类校验 | 去掉权限校验,增加最后提交的子品类校验 | [3cc34ba](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cc34ba)
 
 
