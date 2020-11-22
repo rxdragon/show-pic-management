@@ -1,4 +1,4 @@
-# 1.0.0 (2020-09-14)
+# 1.0.0 (2020-11-22)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -219,6 +219,7 @@
 ### chore
 范围|描述|commitId
 --|--|--
+ - | 优化代码 | [080d3e0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/080d3e0)
  - | 优化代码 | [396a4f2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/396a4f2)
  - | 删除调试代码 | [5f54a55](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5f54a55)
  - | 更改xi更改x更改系统环境变量 | [3410805](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3410805)

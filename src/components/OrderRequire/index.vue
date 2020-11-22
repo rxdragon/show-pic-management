@@ -1,6 +1,12 @@
 <template>
   <div class="order-require">
-    <div class="panel-title">修图信息</div>
+    <div class="panel-title">
+      修图信息
+      <div class="right-flow">
+        <!-- TODO 缺少判断显示修改按钮 -->
+        <amend-remark :order-id="orderInfo.id" :requires-info="requiresInfo" v-if="Object.keys(requiresInfo).length" />
+      </div>
+    </div>
     <div class="require-main">
       <div class="require-row">
         <div class="require-item">
@@ -23,6 +29,7 @@
         <div class="require-label">参考图：</div>
         <div class="require-value">
           <el-image
+            fit="contain"
             :src="requiresInfo.referenceDiagramCompress"
             :preview-src-list="[requiresInfo.referenceDiagramOriginal]"
           >
@@ -41,9 +48,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import * as DownPhoto from '@/utils/DownPhoto.js'
+import AmendRemark from './components/AmendRemark'
 
 export default {
   name: 'OrderRequire',
+  components: { AmendRemark },
   filters: {
     tagFilter (val) {
       const tagCN = {

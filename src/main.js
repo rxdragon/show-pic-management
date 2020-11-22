@@ -42,6 +42,15 @@ Vue.prototype.$loadingClose = () => {
   }, 400)
 }
 
+// 重新刷新
+Vue.prototype.$refresh = (VueComponentObj) => {
+  const view = VueComponentObj.$route
+  const { fullPath } = view
+  VueComponentObj.$router.replace({
+    path: '/redirect' + fullPath
+  })
+}
+
 new Vue({
   router,
   store,
