@@ -42,6 +42,7 @@
  - | 更改登录地址 | [5ad8dce](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5ad8dce)
  - | 更改监控平台引入方式 | [15e8abd](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/15e8abd)
  - | 更改配置 | [e632631](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e632631)
+ - | 更新代码信息 | [1c7e5ed](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1c7e5ed)
  - | 更新活动管理和活动框架的ui | [0b5b712](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0b5b712)
  - | 更新用户获取信息 | [a7a8bbd](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a7a8bbd)
  - | 更新获取产品列表 | [e8ade47](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e8ade47)
@@ -54,8 +55,8 @@
  - | 编辑仍有问题 | [0909974](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0909974)
  - | 老数据可能没有缩略图fix | [4ae56f1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4ae56f1)
  - | 联调产品列表排序问题 | [03b878c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03b878c)
- - | 联调优惠券生成和管理 | [d03f1b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d03f1b0)
  更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
+ - | 联调优惠券生成和管理 | [d03f1b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d03f1b0)
  - | 能用自闭和用自闭和 | [92eefa6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/92eefa6)
  - | 获取ps内存 | [a9477f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a9477f6)
  - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
@@ -157,6 +158,17 @@
  - | 注释更改 | [28f46da](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/28f46da)
 
 
+范围|描述|commitId
+--|--|--
+ - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
+ - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
+ - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
+ - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
+ - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
+ - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
+ - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
+
+
 ### 📦 持续集成
 范围|描述|commitId
 --|--|--
@@ -167,17 +179,6 @@
 范围|描述|commitId
 --|--|--
  - | 更改配置文件 | [8683ec9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8683ec9)
-
-
-范围|描述|commitId
---|--|--
- - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
- - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
- - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
- - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
- - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
- - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
- - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
 
 
 ### 🔧 测试

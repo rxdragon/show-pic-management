@@ -4,7 +4,11 @@
       修图信息
       <div class="right-flow">
         <!-- TODO 缺少判断显示修改按钮 -->
-        <amend-remark :order-id="orderInfo.id" :requires-info="requiresInfo" v-if="Object.keys(requiresInfo).length" />
+        <amend-remark
+          :order-id="orderInfo.id"
+          :requires-info="requiresInfo"
+          v-if="Object.keys(requiresInfo).length && streamState === STREAM_STATE.WAIT_RETOUCH"
+        />
       </div>
     </div>
     <div class="require-main">
@@ -47,6 +51,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { STREAM_STATE } from '@/model/Enumerate'
 import * as DownPhoto from '@/utils/DownPhoto.js'
 import AmendRemark from './components/AmendRemark'
 
@@ -68,12 +73,16 @@ export default {
   },
   data () {
     return {
+      STREAM_STATE
     }
   },
   computed: {
     ...mapGetters(['imgDomain']),
     requiresInfo () {
       return this.orderInfo.requiresData || {}
+    },
+    streamState () {
+      return this.orderInfo.streamState
     }
   },
   methods: {
