@@ -106,23 +106,19 @@ export default {
      * @description 更新反馈信息
      */
     async updateRequires () {
-      // TODO
       const req = {
         id: this.orderId,
         retouchClaim: {
-          eye: this.requiresData.eye,
-          face: this.requiresData.face,
-          pimples: this.requiresData.pimples,
+          1: this.requiresData.eye,
+          2: this.requiresData.face,
+          3: this.requiresData.pimples,
         }
       }
       // 添加备注
-      if (this.requiresData.retouchNote) {
-        req.retouchNote = this.requiresData.retouchNote
-      }
+      if (this.requiresData.retouchNote) { req.retouchNote = this.requiresData.retouchNote }
       // 添加照片
       const photoInfo = _.get(this.requiresData, 'fileList[0]') || {}
-      if (!Object.keys(photoInfo).length) { req.retouchClaim.referenceImg = '' }
-      if (photoInfo.name) { req.retouchClaim.referenceImg = this.imgDomain + photoInfo.path }
+      if (photoInfo.name) { req.retouchClaim[8] = photoInfo.path }
 
       try {
         this.loading = true
