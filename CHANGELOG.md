@@ -1,4 +1,4 @@
-# 1.0.0 (2020-11-23)
+# 1.0.0 (2020-11-26)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -130,6 +130,7 @@
  - | 修复金额不正确和默认手机号问题 | [08d8264](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/08d8264)
  - | 修复错误吗报错 | [e6da9b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e6da9b0)
  - | 修复问题 | [3cb3d66](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cb3d66)
+ - | 修改接口 | [512e804](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/512e804)
  - | 入参修改 | [923ea40](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/923ea40)
  - | 升级体验删除逻辑 | [e7dc220](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e7dc220)
  - | 升级体验查看页面删除fix | [4070f8d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4070f8d)

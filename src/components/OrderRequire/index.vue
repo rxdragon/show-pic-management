@@ -3,7 +3,6 @@
     <div class="panel-title">
       修图信息
       <div class="right-flow">
-        <!-- TODO 缺少判断显示修改按钮 -->
         <amend-remark
           :order-id="orderInfo.id"
           :requires-info="requiresInfo"
