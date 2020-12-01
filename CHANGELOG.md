@@ -1,4 +1,4 @@
-# 1.0.0 (2020-11-26)
+# 1.0.0 (2020-12-01)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -125,8 +125,8 @@
  - | 修复部分bug | [8b45b0e](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8b45b0e)
  - | 修复部分文案错误 | [425fe26](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/425fe26)
  - | 修复部分查询问题 | [ec5abc9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ec5abc9)
- - | 修复部分问题 | [a5210c5](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a5210c5)
  - | 修复部分问题 | [af21495](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/af21495)
+ - | 修复部分问题 | [a5210c5](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a5210c5)
  - | 修复金额不正确和默认手机号问题 | [08d8264](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/08d8264)
  - | 修复错误吗报错 | [e6da9b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e6da9b0)
  - | 修复问题 | [3cb3d66](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3cb3d66)
@@ -137,6 +137,7 @@
  - | 单层筛选时候,清空子品类 | [ffe4dc0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ffe4dc0)
  - | 单层风格联系客服情况fix | [0471b37](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0471b37)
  - | 去掉多余代码 | [70b2ab0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/70b2ab0)
+ - | 去除不必要文件 | [2f43358](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2f43358)
  - | 图片上传修改 | [efb099d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/efb099d)
  - | 增加上下线时间判断 | [b99ed2b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b99ed2b)
  - | 子品类配置返回清空 | [abbf877](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/abbf877)
