@@ -1,6 +1,6 @@
 <template>
   <div class="amend-remark">
-    <el-button type="primary" size="small">修改备注</el-button>
+    <el-button type="primary" size="small" @click="showDialog">修改备注</el-button>
     <!-- 模态框 -->
     <el-dialog
       :visible.sync="dialogVisible"
@@ -136,6 +136,9 @@ export default {
     beforeClose () {
       if (this.loading) return
       this.dialogVisible = false
+    },
+    showDialog () {
+      this.dialogVisible = true
     }
   }
 }

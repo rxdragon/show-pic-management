@@ -6,7 +6,7 @@
         <amend-remark
           :order-id="orderInfo.id"
           :requires-info="requiresInfo"
-          v-if="Object.keys(requiresInfo).length && streamState === STREAM_STATE.WAIT_RETOUCH"
+          v-if="Object.keys(requiresInfo).length && streamState === STREAM_STATE.WAIT_RETOUCH && orderFrom !== ORDER_FROM.BPO"
         />
       </div>
     </div>
@@ -50,7 +50,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { STREAM_STATE } from '@/model/Enumerate'
+import { STREAM_STATE, ORDER_FROM } from '@/model/Enumerate'
 import * as DownPhoto from '@/utils/DownPhoto.js'
 import AmendRemark from './components/AmendRemark'
 
@@ -72,6 +72,7 @@ export default {
   },
   data () {
     return {
+      ORDER_FROM,
       STREAM_STATE
     }
   },
@@ -79,6 +80,9 @@ export default {
     ...mapGetters(['imgDomain']),
     requiresInfo () {
       return this.orderInfo.requiresData || {}
+    },
+    orderFrom () {
+      return this.orderInfo.orderFrom
     },
     streamState () {
       return this.orderInfo.streamState
