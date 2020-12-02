@@ -43,7 +43,7 @@
           </el-form-item>
 
           <el-form-item label="修图备注：">
-            <el-input type="textarea" v-model="requiresData.desc" />
+            <el-input type="textarea" v-model="requiresData.retouchNote" />
           </el-form-item>
         </el-form>
       </div>
@@ -94,7 +94,7 @@ export default {
       name: '',
       path: this.requiresInfo.referenceDiagramCompress,
       percentage: 100,
-      raw: File,
+      raw: null,
       size: 17334127,
       status: "success",
       uid: '1',
