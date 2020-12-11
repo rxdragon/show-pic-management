@@ -1,4 +1,4 @@
-# 1.0.0 (2020-12-09)
+# 1.0.0 (2020-12-11)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -34,11 +34,11 @@
  - | 封面图规格更改 | [531fd4f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/531fd4f)
  - | 提交代码 | [0050ff1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0050ff1)
  - | 新增const的lint,图片token获取修改 | [8158953](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8158953)
+ - | 新增产品券 | [1245b12](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1245b12)
  - | 新增产品和编辑产品时候增加丢失保存的二次提醒 | [622b887](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/622b887)
  - | 新增预览页面布局 | [462dd94](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/462dd94)
  - | 新建产品主干调试ok | [f5883d2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f5883d2)
  - | 更改前端监控平台 | [e550e09](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e550e09)
- 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 更改打包配置 | [4b126f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4b126f6)
  - | 更改环境变量 | [b2cff3f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b2cff3f)
  - | 更改登录地址 | [5ad8dce](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5ad8dce)
@@ -58,6 +58,7 @@
  - | 老数据可能没有缩略图fix | [4ae56f1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4ae56f1)
  - | 联调产品列表排序问题 | [03b878c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03b878c)
  - | 联调优惠券生成和管理 | [d03f1b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d03f1b0)
+ 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 能用自闭和用自闭和 | [92eefa6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/92eefa6)
  - | 获取ps内存 | [a9477f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a9477f6)
  - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)

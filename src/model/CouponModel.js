@@ -14,6 +14,8 @@ export default class CouponModel {
   userId = '' // 使用者id
   userTel = '' // 绑定用户手机号
   userOrderNum = '' // 使用订单号
+  productLimit = [] // 适用产品
+  productLimitStr = '' // 适用产品中文
 
   constructor (couponData) {
     this.base = couponData
@@ -28,5 +30,14 @@ export default class CouponModel {
     this.userId = couponData.user_id || '-'
     this.userTel = _.get(couponData, 'userInfo.phone') || '-'
     this.userOrderNum = couponData.order_num || '-'
+
+    // TODO 适用产品
+    this.productLimit = _.get(couponData, 'coupon_batch.extend.couponInfo.extend.limit.productLimit') || []
+    this.productLimitStr = ''
+    if (this.productLimit.length) {
+      const allCouponLimitProducts = _.get(couponData, 'coupon_limit_products') || []
+      const allCouponLimitProductsStrArr = allCouponLimitProducts.map(item => item.name)
+      this.productLimitStr = allCouponLimitProductsStrArr.join('，')
+    }
   }
 }

@@ -213,7 +213,6 @@ export default {
         if (this.couponForm.type === 'discount_coupon' && (+this.couponForm.discountRange >= 10 || +this.couponForm.discountRange <= 0)) {
           return this.$newMessage.warning('请输入正确的折扣券')
         }
-        // TODO 添加适用产品
         const req = {
           title: this.couponForm.name,
           type: this.couponForm.type,
@@ -221,6 +220,10 @@ export default {
           value: this.couponForm.type === 'decrease_coupon' ? this.couponForm.erectMoney : this.couponForm.discountRange,
           limit: {},
           dateType: this.couponForm.effectivity.effectivityType
+        }
+        // 产品限制
+        if (this.couponForm.products.length) {
+          req.limit.productLimit = this.couponForm.products
         }
         // 减免上线
         if (this.couponForm.type === 'discount_coupon') {

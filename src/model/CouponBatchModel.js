@@ -30,6 +30,8 @@ export default class CouponBatchModel {
 
   orderMoneyLowerLimit = 0 // 满多少才可下单
   reductionUpperLimit = 0 // 减免上限
+  productLimit = '' // 适用产品
+  productLimitStr = '' // 适用产品中文
   discount = 0
 
   effectivityTime = '-' // 有效期
@@ -53,6 +55,17 @@ export default class CouponBatchModel {
     this.orderMoneyLowerLimit = _.get(couponBatchData, 'extend.couponInfo.extend.limit.orderMoneyLowerLimit') || 0
     this.orderMoneyLowerLimit = Number(this.orderMoneyLowerLimit)
     this.reductionUpperLimit = _.get(couponBatchData, 'extend.couponInfo.extend.limit.reductionUpperLimit') || 0
+
+    // 适用产品
+    // TODO 处理优惠券类型
+    this.productLimit = _.get(couponBatchData, 'extend.couponInfo.extend.limit.productLimit') || []
+    this.productLimitStr = ''
+    if (this.productLimit.length) {
+      const couponLimitProducts = _.get(couponBatchData, 'coupon_limit_products') || []
+      const strProductStr = couponLimitProducts.map(item => item.name)
+      this.productLimitStr = strProductStr.join('，')
+    }
+
     this.discount = _.get(couponBatchData, 'extend.couponInfo.discount') || 0
     this.getEffectivityTime()
   }

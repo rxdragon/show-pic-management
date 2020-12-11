@@ -54,6 +54,11 @@
               </el-tooltip>
             </div>
           </el-col>
+
+          <el-col :span="6">
+            <div class="label">适用产品：</div>
+            <div class="value">{{ couponBatchInfo.productLimitStr || '全部产品' }}</div>
+          </el-col>
         </el-row>
         <div class="remark">
           <div class="label">备注：</div>
