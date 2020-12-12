@@ -31,12 +31,13 @@ export default class CouponModel {
     this.userTel = _.get(couponData, 'userInfo.phone') || '-'
     this.userOrderNum = couponData.order_num || '-'
 
-    // TODO 适用产品
-    this.productLimit = _.get(couponData, 'coupon_batch.extend.couponInfo.extend.limit.productLimit') || []
+    // 适用产品
+    const couponLimitProducts = _.get(couponData, 'coupon_batch.extend.couponInfo.extend.limit.productLimitInfo') || []
+    this.productLimit = couponLimitProducts.map(item => item.id)
     this.productLimitStr = ''
+
     if (this.productLimit.length) {
-      const allCouponLimitProducts = _.get(couponData, 'coupon_limit_products') || []
-      const allCouponLimitProductsStrArr = allCouponLimitProducts.map(item => item.name)
+      const allCouponLimitProductsStrArr = couponLimitProducts.map(item => item.name)
       this.productLimitStr = allCouponLimitProductsStrArr.join('，')
     }
   }

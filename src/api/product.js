@@ -62,9 +62,7 @@ export function getProductList () {
  */
 export function getProductListNoClassify () {
   return axios({
-    // TODO
-    url: 'https://doc.pre.hzmantu.com/project_show_pic/release-1-7-1/project_show_pic/admin/common/product/getList',
-    // url: '/project_show_pic/admin/common/product/getList',
+    url: '/project_show_pic/admin/common/product/getList',
     method: 'GET',
   })
 }

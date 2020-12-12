@@ -57,11 +57,11 @@ export default class CouponBatchModel {
     this.reductionUpperLimit = _.get(couponBatchData, 'extend.couponInfo.extend.limit.reductionUpperLimit') || 0
 
     // 适用产品
-    // TODO 处理优惠券类型
-    this.productLimit = _.get(couponBatchData, 'extend.couponInfo.extend.limit.productLimit') || []
+    const couponLimitProducts = _.get(couponBatchData, 'extend.couponInfo.extend.limit.productLimitInfo') || []
+    this.productLimit = couponLimitProducts.map(item => Number(item.id))
     this.productLimitStr = ''
+
     if (this.productLimit.length) {
-      const couponLimitProducts = _.get(couponBatchData, 'coupon_limit_products') || []
       const strProductStr = couponLimitProducts.map(item => item.name)
       this.productLimitStr = strProductStr.join('，')
     }
