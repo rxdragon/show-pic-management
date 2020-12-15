@@ -9,7 +9,7 @@
 
         <!-- 适用产品 -->
         <el-form-item label="适用产品：" prop="products">
-          <product-select v-model="couponForm.products" />
+          <product-select :multiple-limit="1" v-model="couponForm.products" />
         </el-form-item>
 
         <!-- 优惠劵类型 -->
