@@ -17,6 +17,7 @@ export default class OrderModel {
   orderNum = '' // 订单号
   state = '' // 订单状态
   stateCN = '' // 订单状态中文
+  streamState = '' // 流水状态
 
   allPrice = 0 // 订单总金额
   discountsPrice = 0 // 订单优惠金额
@@ -91,6 +92,7 @@ export default class OrderModel {
     const orderItemSecondRetouchState = this.getOrderItemSecondRetouchState(orderItems)
     // 流水状态
     const streamState = this.getStreamState(orderItems)
+    this.streamState = this.getStreamState(orderItems)
 
     if (orderState === ORDER_STATE.CLOSED) return orderStateToCN[orderState]
     if (orderState === ORDER_STATE.COMPLETE) return orderStateToCN[orderState]
@@ -117,6 +119,7 @@ export default class OrderModel {
     const hasRetouching = orderItems.some(item => item.state === STREAM_STATE.RETOUCHING)
     if (hasAllComplete) return STREAM_STATE.COMPLETE
     if (hasRetouching || hasSomComplete) return STREAM_STATE.RETOUCHING
+
     return STREAM_STATE.WAIT_RETOUCH
   }
 }

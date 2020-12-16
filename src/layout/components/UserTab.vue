@@ -3,7 +3,10 @@
     <div v-if="$isDev" class="release-version">更新时间：{{ updateTime }}</div>
     <div class="user-avatar">
       <el-avatar :size="24" :src="avatarImg">
-        <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+        <img
+          alt="备份图"
+          src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"
+        />
       </el-avatar>
       <div class="user-name">{{ nickname || name }}</div>
       <el-button class="icon-button" icon="iconfont iconexport" @click="logout" />
