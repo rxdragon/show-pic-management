@@ -60,6 +60,12 @@
             </el-radio>
           </el-radio-group>
         </el-form-item>
+
+        <!-- 适用产品 -->
+        <el-form-item label="适用产品：" prop="products">
+          <product-select :multiple-limit="1" v-model="couponForm.products" />
+        </el-form-item>
+
         <el-form-item label="优惠劵类型：" prop="type">
           <el-select v-model="couponForm.type" placeholder="请选择优惠劵类型">
             <el-option label="立减劵" value="decrease_coupon"></el-option>
@@ -140,6 +146,7 @@ import UploadSharePhoto from './components/UploadSharePhoto'
 import ActivityH5Page from './components/ActivityH5Page'
 import ShareMessageModel from './components/ShareMessageModel'
 import getPageTitle from '@/utils/getPageTitle' // 获取页面title
+import ProductSelect from '@/components/SelectBox/ProductSelect'
 import { validateLimitCount, validateUseLimit, validateEffectivity } from '@/utils/validator.js'
 import { mapGetters } from 'vuex'
 import * as Activity from '@/api/activity.js'
@@ -170,7 +177,7 @@ const couponRules = {
 
 export default {
   name: 'EditActivity',
-  components: { DatePicker, UploadSharePhoto, ActivityH5Page, ShareMessageModel },
+  components: { DatePicker, UploadSharePhoto, ActivityH5Page, ShareMessageModel, ProductSelect },
   data () {
     return {
       pickerOptions: {
@@ -194,6 +201,7 @@ export default {
       },
       couponForm: {
         couponName: '',
+        products: [],
         circulation: '',
         limitCount: {
           limitType: '',
@@ -318,6 +326,10 @@ export default {
         // 每人限领数量
         if (this.couponForm.limitCount.limitType === 1) {
           req.couponConfig.limitCount = this.couponForm.limitCount.count
+        }
+        // 产品限制
+        if (this.couponForm.products.length) {
+          req.couponConfig.limit.productLimit = this.couponForm.products
         }
         // 减免上线
         if (this.couponForm.type === 'discount_coupon') {
