@@ -329,7 +329,7 @@ export default {
         }
         // 产品限制
         if (this.couponForm.products.length) {
-          req.limit.productLimit = this.couponForm.products
+          req.couponConfig.limit.productLimit = this.couponForm.products
         }
         // 减免上线
         if (this.couponForm.type === 'discount_coupon') {

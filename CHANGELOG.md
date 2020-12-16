@@ -19,6 +19,7 @@
  - | 增加富文本图片上传限制 | [1e0625f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1e0625f)
  - | 增加显示修改按钮判断条件 | [be12683](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/be12683)
  - | 增加权限和优化代码 | [2c26dac](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2c26dac)
+ - | 增加活动限制 | [2924369](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2924369)
  - | 增加消费次数显示 | [9756960](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9756960)
  - | 增加状态查询 | [0a952c3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0a952c3)
  - | 增加监控平台 | [2bfec46](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/2bfec46)
@@ -62,11 +63,11 @@
  - | 联调优惠券生成和管理 | [d03f1b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d03f1b0)
  - | 能用自闭和用自闭和 | [92eefa6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/92eefa6)
  - | 获取ps内存 | [a9477f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a9477f6)
- 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
  - | 详情设置和其他设置暂存 | [d282988](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d282988)
  - | 限制优惠券功能 | [97d8d65](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/97d8d65)
  - | 限定人头和初始人头校验,校验重置调整 | [823e16a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/823e16a)
+ 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
 
 
 ### 🎨 代码样式
