@@ -1,6 +1,6 @@
 <template>
   <div class="amend-remark">
-    <el-button type="primary" size="small">修改备注</el-button>
+    <el-button type="primary" size="small" @click="showDialog">修改备注</el-button>
     <!-- 模态框 -->
     <el-dialog
       :visible.sync="dialogVisible"
@@ -43,7 +43,7 @@
           </el-form-item>
 
           <el-form-item label="修图备注：">
-            <el-input type="textarea" v-model="requiresData.desc" />
+            <el-input type="textarea" v-model="requiresData.retouchNote" />
           </el-form-item>
         </el-form>
       </div>
@@ -94,7 +94,7 @@ export default {
       name: '',
       path: this.requiresInfo.referenceDiagramCompress,
       percentage: 100,
-      raw: File,
+      raw: null,
       size: 17334127,
       status: "success",
       uid: '1',
@@ -136,6 +136,9 @@ export default {
     beforeClose () {
       if (this.loading) return
       this.dialogVisible = false
+    },
+    showDialog () {
+      this.dialogVisible = true
     }
   }
 }
