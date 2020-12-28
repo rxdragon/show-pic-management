@@ -7,6 +7,7 @@
           preview
           fit="contain"
           :downing="false"
+          :fileData="photoItem.raw ? photoItem : null"
           :src="photoItem.path"
         />
         <div v-else-if="photoItem.status !== 'fail'" class="progress">

@@ -61,12 +61,14 @@ export const ORDER_FROM = {
   USER: 'user',
   SHOW_PIC: 'show_pic',
   HIMO: 'himo',
+  BPO: 'bpo',
   HIMO_KIDS: 'himo_kids'
 }
 
 export const OrderFromToCN = {
   [ORDER_FROM.USER]: '修修兽',
   [ORDER_FROM.SHOW_PIC]: '修修兽',
+  [ORDER_FROM.BPO]: '新华社',
   [ORDER_FROM.HIMO]: '海马体',
   [ORDER_FROM.HIMO_KIDS]: '海马体儿童',
 }
