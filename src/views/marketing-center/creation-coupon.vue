@@ -2,21 +2,31 @@
   <div class="creation-coupon">
     <main class="module-panel">
       <el-form ref="form" :model="couponForm" :rules="rules" label-width="110px">
+        <!-- 优惠劵名称 -->
         <el-form-item label="优惠劵名称：" prop="name">
           <el-input v-model="couponForm.name" maxlength="15" placeholder="请输入优惠劵名称" />
         </el-form-item>
+
+        <!-- 适用产品 -->
+        <el-form-item label="适用产品：" prop="products">
+          <product-select :multiple-limit="1" v-model="couponForm.products" />
+        </el-form-item>
+
+        <!-- 优惠劵类型 -->
         <el-form-item label="优惠劵类型：" prop="type">
           <el-select v-model="couponForm.type" placeholder="请选择优惠劵类型">
             <el-option label="立减劵" value="decrease_coupon"></el-option>
             <el-option label="折扣劵" value="discount_coupon"></el-option>
           </el-select>
         </el-form-item>
+
         <!-- 立减券 -->
         <template v-if="couponForm.type === 'decrease_coupon'">
           <el-form-item label="面额：" prop="erectMoney">
             <el-input v-numberOnly min="1" class="min-input" v-model="couponForm.erectMoney"/> 元
           </el-form-item>
         </template>
+
         <!-- 折扣卷 -->
         <template v-if="couponForm.type === 'discount_coupon'">
           <el-form-item label="折扣力度：" prop="discountRange">
@@ -28,10 +38,14 @@
               v-model="couponForm.discountRange"
             /> 折
           </el-form-item>
+
+          <!-- 减免上限 -->
           <el-form-item label="减免上限：" prop="discountMaxMoney">
             <el-input v-numberOnly min="1" class="min-input" v-model="couponForm.discountMaxMoney"/> 元
           </el-form-item>
         </template>
+
+        <!-- 使用门槛 -->
         <el-form-item label="使用门槛：" prop="useLimit">
           <el-radio-group v-model="couponForm.useLimit.usetype">
             <el-radio :label="0">无限制</el-radio>
@@ -40,6 +54,8 @@
             </el-radio>
           </el-radio-group>
         </el-form-item>
+
+        <!-- 总发行量 -->
         <el-form-item label="总发行量：" prop="circulation">
           <el-input-number
             :min="1"
@@ -49,6 +65,8 @@
             placeholder="请输入总发行量"
           /> 张
         </el-form-item>
+
+        <!-- 有效时间 -->
         <el-form-item label="有效时间：" prop="effectivity">
           <el-radio-group v-model="couponForm.effectivity.effectivityType">
             <el-radio label="limitless">无限制</el-radio>
@@ -68,6 +86,8 @@
             </el-radio>
           </el-radio-group>
         </el-form-item>
+
+        <!-- 备注(可选) -->
         <el-form-item label="备注(可选)：">
           <el-input
             type="textarea"
@@ -94,12 +114,13 @@
 
 <script>
 import CouponCodeList from './components/CouponCodeList'
+import ProductSelect from '@/components/SelectBox/ProductSelect'
 import * as Coupon from '@/api/coupon.js'
 import { validateUseLimit, validateEffectivity } from '@/utils/validator.js'
 
 export default {
   name: 'CreationCoupon',
-  components: { CouponCodeList },
+  components: { CouponCodeList, ProductSelect },
   data () {
     return {
       pickerOptions: {
@@ -121,6 +142,7 @@ export default {
       cacheTitle: '', // 缓存标题
       couponForm: {
         name: '', // 优惠劵名称
+        products: [], // 适用产品
         type: 'discount_coupon', // 优惠劵类型 discount_coupon 折扣 decrease_coupon 立减
         erectMoney: '', // 立减劵面额
         discountRange: '', // 折扣力度
@@ -151,6 +173,7 @@ export default {
       this.cacheTitle = ''
       this.couponForm = {
         name: '', // 优惠劵名称
+        products: [], // 适用产品
         type: 'discount_coupon', // 优惠劵类型 discount_coupon 折扣 decrease_coupon 立减
         erectMoney: '', // 立减劵面额
         discountRange: '', // 折扣力度
@@ -197,6 +220,10 @@ export default {
           value: this.couponForm.type === 'decrease_coupon' ? this.couponForm.erectMoney : this.couponForm.discountRange,
           limit: {},
           dateType: this.couponForm.effectivity.effectivityType
+        }
+        // 产品限制
+        if (this.couponForm.products.length) {
+          req.limit.productLimit = this.couponForm.products
         }
         // 减免上线
         if (this.couponForm.type === 'discount_coupon') {
@@ -258,11 +285,19 @@ export default {
         color: #606266;
       }
 
-      .el-input {
+      .el-select {
         width: 250px;
       }
 
-      .el-select {
+      .product-select {
+        width: 250px;
+
+        & /deep/ .el-select {
+          width: 250px;
+        }
+      }
+
+      .el-input {
         width: 250px;
       }
 
