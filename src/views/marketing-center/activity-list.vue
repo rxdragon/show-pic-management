@@ -15,7 +15,7 @@
         </div>
         <div class="search-item">
           <span>活动状态</span>
-          <account-source-select v-model="acactivityState" />
+          <activity-state-select v-model="acactivityState" />
         </div>
         <div class="search-button search-item">
           <el-button type="primary" size="small" @click="searchActivityList(1)">查 询</el-button>
@@ -91,7 +91,7 @@
 
 <script>
 import DatePicker from '@/components/DatePicker'
-import AccountSourceSelect from '@selectBox/AccountSourceSelect'
+import ActivityStateSelect from '@selectBox/ActivityStateSelect'
 import handleClipboard from '@/utils/clipboard.js'
 import getQRcode from '@/utils/getQRcode.js'
 import * as TimeUtil from '@/utils/timeUtil.js'
@@ -101,7 +101,7 @@ import { ACTIVITY_STATE } from '@/model/Enumerate'
 
 export default {
   name: 'ActivityList',
-  components: { DatePicker, AccountSourceSelect },
+  components: { DatePicker, ActivityStateSelect },
   data () {
     return {
       ACTIVITY_STATE,
@@ -135,7 +135,7 @@ export default {
           pageSize: this.pager.pageSize
         }
         if (this.timeSpan) {
-          req.cond.createBeginTime = TimeUtil.startDayTime(this.timeSpan[0]),
+          req.cond.createBeginTime = TimeUtil.startDayTime(this.timeSpan[0])
           req.cond.createEndTime = TimeUtil.endDayTime(this.timeSpan[1])
         }
         if (this.acactivityState) { req.cond.status = this.acactivityState }

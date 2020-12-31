@@ -4,9 +4,10 @@
       <transition name="el-zoom-in-center" mode="out-in">
         <photo-box
           v-if="photoItem.status === 'success' && photoItem.path"
-          original-photo
           preview
+          fit="contain"
           :downing="false"
+          :fileData="photoItem.raw ? photoItem : null"
           :src="photoItem.path"
         />
         <div v-else-if="photoItem.status !== 'fail'" class="progress">
@@ -44,7 +45,7 @@
         <i class="el-icon-plus" />
       </div>
     </el-upload>
-    <div class="upload-tips">
+    <div class="upload-tips" v-if="showtip">
       <div class="tip">提示：分享图不上传默认显示修修兽logo</div>
       <div class="tip">只能上传100px * 100px的照片</div>
     </div>
@@ -83,7 +84,9 @@ export default {
     event: 'change'
   },
   props: {
-    uploadPhoto: { type: Array, required: true }
+    uploadPhoto: { type: Array, required: true },
+    showtip: { type: Boolean, default: true },
+    verify: { type: Boolean, default: true }
   },
   data () {
     return {
@@ -108,6 +111,7 @@ export default {
      */
     async beforeUpload (file) {
       try {
+        if (!this.verify) return Promise.resolve()
         const data = await getImagePx(file)
         if (data.colorSpace !== 'SRGB') throw new Error('not SRGB 色彩空间')
         if (data.width !== 100 || data.height !== 100) throw new Error('请上传100px * 100px 的图片')

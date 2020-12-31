@@ -15,6 +15,7 @@
           <p><span class="label">劵码编号：</span>{{ infoData.code }}</p>
           <p><span class="label">优惠劵名称：</span>{{ infoData.couponBatchTitle }}</p>
           <p><span class="label">状态：</span>{{ infoData.stateCN }}</p>
+          <p><span class="label">适用产品：</span>{{ infoData.productLimitStr || '全部产品' }}</p>
           <p><span class="label">生成时间：</span>{{ infoData.creaetdAt }}</p>
           <p><span class="label">绑定时间：</span>{{ infoData.bindAt }}</p>
           <p><span class="label">使用时间：</span>{{ infoData.usedAt }}</p>
@@ -79,10 +80,12 @@ export default {
   margin-top: 12px;
 
   p {
+    display: flex;
     margin: 8px 0;
 
     .label {
       display: inline-block;
+      flex-shrink: 0;
       width: 100px;
       text-align: right;
     }

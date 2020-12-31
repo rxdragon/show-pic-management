@@ -1,6 +1,15 @@
 <template>
   <div class="order-require">
-    <div class="panel-title">修图信息</div>
+    <div class="panel-title">
+      修图信息
+      <div class="right-flow">
+        <amend-remark
+          :order-id="orderInfo.id"
+          :requires-info="requiresInfo"
+          v-if="Object.keys(requiresInfo).length && streamState === STREAM_STATE.WAIT_RETOUCH && orderFrom !== ORDER_FROM.BPO"
+        />
+      </div>
+    </div>
     <div class="require-main">
       <div class="require-row">
         <div class="require-item">
@@ -23,6 +32,7 @@
         <div class="require-label">参考图：</div>
         <div class="require-value">
           <el-image
+            fit="contain"
             :src="requiresInfo.referenceDiagramCompress"
             :preview-src-list="[requiresInfo.referenceDiagramOriginal]"
           >
@@ -40,10 +50,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { STREAM_STATE, ORDER_FROM } from '@/model/Enumerate'
 import * as DownPhoto from '@/utils/DownPhoto.js'
+import AmendRemark from './components/AmendRemark'
 
 export default {
   name: 'OrderRequire',
+  components: { AmendRemark },
   filters: {
     tagFilter (val) {
       const tagCN = {
@@ -59,12 +72,20 @@ export default {
   },
   data () {
     return {
+      ORDER_FROM,
+      STREAM_STATE
     }
   },
   computed: {
     ...mapGetters(['imgDomain']),
     requiresInfo () {
       return this.orderInfo.requiresData || {}
+    },
+    orderFrom () {
+      return this.orderInfo.orderFrom
+    },
+    streamState () {
+      return this.orderInfo.streamState
     }
   },
   methods: {

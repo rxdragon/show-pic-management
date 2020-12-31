@@ -1,7 +1,8 @@
 <template>
   <div class="photo-box">
     <div class="image-box">
-      <el-image :src="photoSrc" fit="cover" :preview-src-list="previewPhoto"></el-image>
+      <el-image v-if="!showCanvas" :src="photoSrc" :fit="fit" :preview-src-list="previewPhoto"></el-image>
+      <preview-canvas-img contain-photo v-else-if="showCanvas" :file="fileData" />
     </div>
     <div class="handle-box" v-if="downing" @click.stop="">
       <div class="version-name">{{ version | toVersionCN }}</div>
@@ -12,20 +13,30 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import PreviewCanvasImg from '@/components/PreviewCanvasImg'
 import * as DownPhoto from '@/utils/DownPhoto.js'
 
 export default {
   name: 'PhotoBox',
+  components: { PreviewCanvasImg },
   props: {
     src: { type: String, required: true },
     version: { type: String, default: '' },
     downing: { type: Boolean, default: true },
     originalPhoto: { type: Boolean },
-    preview: { type: Boolean }
+    preview: { type: Boolean },
+    fit: { type: String, default: 'cover' },
+    fileData: { type: Object, default: null },
+  },
+  data () {
+    return {
+      showCanvas: false
+    }
   },
   computed: {
     ...mapGetters(['imgDomain', 'imgCompressDomain']),
     photoSrc () {
+      if (this.fileData) return ''
       if (this.src.includes('http')) return this.src
       if (this.originalPhoto) {
         return this.imgDomain + this.src
@@ -36,6 +47,10 @@ export default {
     previewPhoto () {
       return this.preview ? [this.imgDomain + this.src] : []
     }
+  },
+  created () {
+    if (!this.fileData) return
+    this.showCanvas = true
   },
   methods: {
     /**

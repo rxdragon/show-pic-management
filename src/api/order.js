@@ -101,3 +101,15 @@ export function getOrderDetail (params) {
     return createData
   })
 }
+
+/**
+ * @description 更新修图信息
+ * @param {*} params 
+ */
+export function editRetouchClaim (params) {
+  return axios({
+    url: '/project_show_pic/admin/order/editRetouchClaim',
+    method: 'PUT',
+    data: params
+  })
+}

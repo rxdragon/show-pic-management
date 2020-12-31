@@ -40,6 +40,7 @@
             v-if="i === index"
             ref="img"
             class="el-image-viewer__img"
+            alt="原图"
             :key="url"
             :src="currentImg"
             :style="imgStyle"

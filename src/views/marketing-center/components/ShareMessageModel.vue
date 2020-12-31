@@ -12,7 +12,10 @@
     </div>
     <div class="user-portrait">
       <el-avatar :size="40" shape="square" :src="avatarImg">
-        <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+        <img
+          alt="备份图"
+          src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"
+        />
       </el-avatar>
     </div>
   </div>

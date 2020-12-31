@@ -29,7 +29,7 @@
         <div class="value">{{ ticketItem.value || '-' }}</div>
       </div>
       <div class="ticket-image" v-if="invoiceData.electronicInvoice">
-        <iframe :src="ticketImage" @click="showTicketImage" />
+        <iframe title="ticketImage" :src="ticketImage" @click="showTicketImage" />
       </div>
     </div>
     <div class="button-box">
@@ -51,7 +51,7 @@
       center
       width="860px"
     >
-      <iframe class="ticket-image-box" :src="ticketImage" />
+      <iframe title="ticketImage" class="ticket-image-box" :src="ticketImage" />
       <span slot="footer" class="dialog-footer">
         <el-button :loading="resendLoading" type="primary" @click="resendInvoice">重新发送</el-button>
       </span>
