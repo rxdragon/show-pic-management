@@ -90,16 +90,18 @@ export default {
     this.requiresData.pimples = Boolean(this.requiresInfo.baseRequires.pimples)
     this.requiresData.retouchNote = this.requiresInfo.retouchRemark
 
-    this.requiresData.fileList = [{
-      name: '',
-      path: this.requiresInfo.referenceDiagramCompress,
-      percentage: 100,
-      raw: null,
-      size: 17334127,
-      status: "success",
-      uid: '1',
-      uploadedName: PhotoTool.fileNameFormat(this.requiresInfo.referenceDiagramCompress)
-    }]
+    if (this.requiresInfo.referenceDiagram) {
+      this.requiresData.fileList = [{
+        name: '',
+        path: this.requiresInfo.referenceDiagramCompress,
+        percentage: 100,
+        raw: null,
+        size: 17334127,
+        status: "success",
+        uid: '1',
+        uploadedName: PhotoTool.fileNameFormat(this.requiresInfo.referenceDiagramCompress)
+      }]
+    }
   },
   methods: {
     /**
@@ -111,14 +113,20 @@ export default {
         retouchClaim: {
           1: this.requiresData.eye,
           2: this.requiresData.face,
-          3: this.requiresData.pimples,
+          3: this.requiresData.pimples
         }
       }
       // 添加备注
       if (this.requiresData.retouchNote) { req.retouchNote = this.requiresData.retouchNote }
       // 添加照片
       const photoInfo = _.get(this.requiresData, 'fileList[0]') || {}
-      if (photoInfo.name) { req.retouchClaim[8] = photoInfo.path }
+      if (photoInfo.name) {
+        req.retouchClaim[8] = photoInfo.path
+      } else if (!photoInfo.path) {
+        req.retouchClaim[8] = ''
+      } else {
+        req.retouchClaim[8] = this.requiresInfo.referenceDiagram
+      }
 
       try {
         this.loading = true
