@@ -42,7 +42,7 @@
             <upload-share-photo :showtip="false" :verify="false" v-model="requiresData.fileList" />
           </el-form-item>
 
-          <el-form-item label="修图备注：">
+          <el-form-item label="备注信息：">
             <el-input type="textarea" v-model="requiresData.retouchNote" />
           </el-form-item>
         </el-form>
