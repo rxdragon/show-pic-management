@@ -43,7 +43,7 @@
           </el-form-item>
 
           <el-form-item label="备注信息：">
-            <el-input type="textarea" v-model="requiresData.retouchNote" />
+            <el-input type="textarea" :maxlength="255" v-model="requiresData.note" />
           </el-form-item>
         </el-form>
       </div>
@@ -76,7 +76,7 @@ export default {
         eye: '', // 眼睛增大幅度
         face: '', // 瘦脸幅度
         pimples: '', // 是否去痣
-        retouchNote: '', // 修图备注
+        note: '', // 备注信息
         fileList: [] // 参考图
       },
     }
@@ -88,7 +88,7 @@ export default {
     this.requiresData.eye = this.requiresInfo.baseRequires.eye
     this.requiresData.face = this.requiresInfo.baseRequires.face
     this.requiresData.pimples = Boolean(this.requiresInfo.baseRequires.pimples)
-    this.requiresData.retouchNote = this.requiresInfo.retouchRemark
+    this.requiresData.note = this.requiresInfo.retouchRemark
 
     if (this.requiresInfo.referenceDiagram) {
       this.requiresData.fileList = [{
@@ -117,7 +117,7 @@ export default {
         }
       }
       // 添加备注
-      if (this.requiresData.retouchNote) { req.retouchNote = this.requiresData.retouchNote }
+      if (this.requiresData.note) { req.note = this.requiresData.note }
       // 添加照片
       const photoInfo = _.get(this.requiresData, 'fileList[0]') || {}
       if (photoInfo.name) {

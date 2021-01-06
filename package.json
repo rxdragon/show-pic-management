@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve --mode dev",
     "serve-release": "vue-cli-service serve --mode release",
+    "serve-pre": "vue-cli-service serve --mode pre",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "cz": "yarn log && git add . && git cz",

@@ -1,4 +1,4 @@
-# 1.0.0 (2021-01-04)
+# 1.0.0 (2021-01-06)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -110,6 +110,7 @@
  - | 产品简介改为30字,去掉多余的校验,排序成功后给与提示 | [3235c9b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3235c9b)
  - | 价格初识状态fix | [bd43876](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bd43876)
  - | 价格设置改为小数2位 | [ddab5b1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ddab5b1)
+ - | 优化修图字段 | [44850a9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44850a9)
  - | 优化修复部分功能 | [d9f6a8d](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d9f6a8d)
  - | 修图查询显示 | [85c5083](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/85c5083)
  - | 修复最小开票金额判断错误问题 | [7f210c9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/7f210c9)
@@ -131,8 +132,8 @@
  - | 修复路由权限验证问题 | [bc3b5cf](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bc3b5cf)
  - | 修复跳转用户详情问题 | [823e0a0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/823e0a0)
  - | 修复输入验证问题 | [91ab74b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/91ab74b)
- - | 修复部分bug | [5430434](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5430434)
  - | 修复部分bug | [8b45b0e](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8b45b0e)
+ - | 修复部分bug | [5430434](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5430434)
  - | 修复部分文案错误 | [425fe26](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/425fe26)
  - | 修复部分查询问题 | [ec5abc9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ec5abc9)
  - | 修复部分问题 | [af21495](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/af21495)
@@ -225,6 +226,7 @@
  - | 优化部分功能 | [f8e01c4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f8e01c4)
  - | 优惠照片对png的支持，增加占位图 | [f9c438b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f9c438b)
  - | 更改接口传参 | [bd3e7f8](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bd3e7f8)
+ - | 更改文案 | [0753418](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0753418)
  - | 更改部分字段显示错误问题 | [d2b1bb4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d2b1bb4)
  - | 更新上传 | [e4c8755](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e4c8755)
  - | 自动更改更新时间 | [b5f84ce](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b5f84ce)
