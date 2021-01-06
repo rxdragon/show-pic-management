@@ -1,4 +1,4 @@
-# 1.0.0 (2021-01-04)
+# 1.0.0 (2021-01-06)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -171,17 +171,6 @@
  - | 注释更改 | [28f46da](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/28f46da)
 
 
-范围|描述|commitId
---|--|--
- - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
- - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
- - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
- - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
- - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
- - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
- - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
-
-
 ### 📦 持续集成
 范围|描述|commitId
 --|--|--
@@ -192,6 +181,17 @@
 范围|描述|commitId
 --|--|--
  - | 更改配置文件 | [8683ec9](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8683ec9)
+
+
+范围|描述|commitId
+--|--|--
+ - | asd | [6cdc4f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/6cdc4f0)
+ - | cehsi | [10a16f3](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/10a16f3)
+ - | eslint fix | [9233e18](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/9233e18)
+ - | eslint fix | [e32e2e2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e32e2e2)
+ - | tempchenge | [e0439dc](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e0439dc)
+ - | 初始化 | [39f01db](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/39f01db)
+ - | Initial commit | [44ea1d1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/44ea1d1)
 
 
 ### 🔧 测试
@@ -225,6 +225,7 @@
  - | 优化部分功能 | [f8e01c4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f8e01c4)
  - | 优惠照片对png的支持，增加占位图 | [f9c438b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f9c438b)
  - | 更改接口传参 | [bd3e7f8](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/bd3e7f8)
+ - | 更改文案 | [0753418](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0753418)
  - | 更改部分字段显示错误问题 | [d2b1bb4](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d2b1bb4)
  - | 更新上传 | [e4c8755](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e4c8755)
  - | 自动更改更新时间 | [b5f84ce](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b5f84ce)
