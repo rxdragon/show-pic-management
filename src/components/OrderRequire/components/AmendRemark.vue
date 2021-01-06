@@ -43,7 +43,7 @@
           </el-form-item>
 
           <el-form-item label="备注信息：">
-            <el-input type="textarea" v-model="requiresData.note" />
+            <el-input type="textarea" :maxlength="255" v-model="requiresData.note" />
           </el-form-item>
         </el-form>
       </div>
