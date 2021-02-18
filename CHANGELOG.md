@@ -1,4 +1,4 @@
-# 1.0.0 (2021-01-06)
+# 1.0.0 (2021-02-18)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -16,6 +16,7 @@
  - | 图片token获取更加频繁,新建和选择产品时候清空检查的队列 | [ef539f0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/ef539f0)
  - | 基础设置部分提交 | [551ea4f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/551ea4f)
  - | 基础配置校验补齐 | [c06047a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/c06047a)
+ - | 增加修改备注最大长度 | [597ed2b](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/597ed2b)
  - | 增加最后提交时候的校验 | [3afec4f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/3afec4f)
  - | 增加富文本图片上传限制 | [1e0625f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1e0625f)
  - | 增加显示修改按钮判断条件 | [be12683](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/be12683)
@@ -63,13 +64,13 @@
  - | 编辑仍有问题 | [0909974](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/0909974)
  - | 老数据可能没有缩略图fix | [4ae56f1](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4ae56f1)
  - | 联调产品列表排序问题 | [03b878c](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/03b878c)
- 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 联调优惠券生成和管理 | [d03f1b0](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d03f1b0)
  - | 能用自闭和用自闭和 | [92eefa6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/92eefa6)
  - | 获取ps内存 | [a9477f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/a9477f6)
  - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
  - | 详情设置和其他设置暂存 | [d282988](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d282988)
  - | 限制优惠券功能 | [97d8d65](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/97d8d65)
+ 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 限定人头和初始人头校验,校验重置调整 | [823e16a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/823e16a)
 
 

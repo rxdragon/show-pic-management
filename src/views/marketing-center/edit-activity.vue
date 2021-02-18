@@ -46,7 +46,7 @@
         <el-form-item label="总发行张数：" prop="circulation">
           <el-input-number
             :min="1"
-            :max="1500"
+            :max="5000"
             v-model="couponForm.circulation"
             controls-position="right"
             placeholder="请输入总发行张数"
