@@ -43,6 +43,7 @@
  - | 新建产品主干调试ok | [f5883d2](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/f5883d2)
  - | 更改前端监控平台 | [e550e09](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/e550e09)
  - | 更改打包配置 | [4b126f6](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/4b126f6)
+ - | 更改显示为5000条优惠券 | [8c2e51e](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/8c2e51e)
  - | 更改环境变量 | [b2cff3f](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/b2cff3f)
  - | 更改登录地址 | [5ad8dce](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/5ad8dce)
  - | 更改监控平台引入方式 | [15e8abd](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/15e8abd)
@@ -70,8 +71,8 @@
  - | 订单详情接口 | [1cefc36](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/1cefc36)
  - | 详情设置和其他设置暂存 | [d282988](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/d282988)
  - | 限制优惠券功能 | [97d8d65](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/97d8d65)
- 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
  - | 限定人头和初始人头校验,校验重置调整 | [823e16a](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/823e16a)
+ 更新优化加载问题 | 更新优化首页加载 | [059d8fe](https://code.hzmantu.com/mantu-tech/fed/show-pic-management/commits/059d8fe)
 
 
 ### 🎨 代码样式
