@@ -42,6 +42,7 @@ module.exports = {
     config.plugin('define')
       .tap(args => {
         args[0].BUILD_TIME = +Date.now()
+        console.log(args[0].BUILD_TIME)
         return args
       })
   },
