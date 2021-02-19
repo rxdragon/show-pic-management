@@ -23,7 +23,6 @@ export default {
   name: 'UserTab',
   data () {
     const time = TimeUtil.formatTime(BUILD_TIME)
-    console.error(BUILD_TIME)
     return {
       updateTime: time
     }
