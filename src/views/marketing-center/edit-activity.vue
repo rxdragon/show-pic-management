@@ -44,13 +44,7 @@
           <el-input v-model.trim="couponForm.couponName" placeholder="请输入优惠券名称" />
         </el-form-item>
         <el-form-item label="总发行张数：" prop="circulation">
-          <el-input-number
-            :min="1"
-            :max="1500"
-            v-model="couponForm.circulation"
-            controls-position="right"
-            placeholder="请输入总发行张数"
-          /> 张
+          <el-input-number :min="1" v-model="couponForm.circulation" controls-position="right" placeholder="请输入总发行张数"/> 张
         </el-form-item>
         <el-form-item label="每人限领张数：" prop="limitCount">
           <el-radio-group v-model="couponForm.limitCount.limitType">

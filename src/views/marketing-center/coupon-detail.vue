@@ -270,7 +270,7 @@ export default {
             couponBatchId: this.couponBatchId
           },
           page: 1,
-          pageSize: 1500
+          pageSize: 5000
         }
         if (this.couponCode) { req.cond.couponCode = this.couponCode }
         if (this.couponStates.length) { req.cond.couponStates = this.couponStates }
